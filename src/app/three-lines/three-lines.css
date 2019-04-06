@@ -1,0 +1,20 @@
+.hline {
+  position: absolute;
+
+  width: 20px;
+  height: 3px;
+  margin-left: 22px;
+  background-color: #000;
+}
+
+#hline-1 {
+  margin-top: 19px;
+}
+
+#hline-2 {
+  margin-top: 26px;
+}
+
+#hline-3 {
+  margin-top: 33px;
+}

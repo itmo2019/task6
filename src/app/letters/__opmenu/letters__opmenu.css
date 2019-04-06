@@ -1,0 +1,43 @@
+.letters__opmenu {
+  position: absolute;
+
+  width: 540px;
+  height: 41px;
+  margin-left: 49px;
+}
+
+.letters__opmenuItem {
+  overflow: hidden;
+  max-height: 13px;
+  margin-top: 15px;
+
+  color: #cccccc;
+  float: left;
+  font-family: 'Helvetica Neue Bold', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+#forward {
+  max-width: 75px;
+  margin-left: 6px;
+}
+
+#delete {
+  max-width: 53px;
+  margin-left: 26px;
+}
+
+.letters__opmenuItem:hover {
+  background-color: grey;
+}
+
+#letters__spam {
+  max-width: 64px;
+  margin-left: 24px;
+}
+
+#read {
+  max-width: 71px;
+  margin-left: 25px;
+}
