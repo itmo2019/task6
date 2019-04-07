@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './letters__letter.css';
 import unread from '../../../images/Oval.png';
+import { contents } from '../content';
 
 export default class Letter extends Component {
   constructor(props) {
@@ -32,6 +33,8 @@ export default class Letter extends Component {
     document.getElementsByClassName('letters__cross')[0].style.display = 'block';
     const article = document.getElementsByClassName('letters__article')[0];
     article.style.display = 'block';
+    article.getElementsByTagName('h3')[0].innerHTML = this.props.theme;
+    article.getElementsByTagName('p')[0].innerHTML = contents[this.props.theme];
   }
 
   render() {

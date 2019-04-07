@@ -13,12 +13,16 @@ const themes = {
   Google: ['Google Play', 'GDrive']
 };
 
-const contents = {
+export const contents = {
   'Яндекс.Технологии': 'Мы расскажем вам про Яндекс.Технологии',
   'Яндекс.Музыка': 'Подписывайтесь на Яндекс.Музыку',
   'Яндекс.Дзен': 'Умная лента от Яндекс позволит Вам оставаться в курсе новостей',
   'Google Play': 'Would you like to know more about Google Play?',
-  GDrive: 'Here is a simple tutorial to get started with GDrive'
+  GDrive: 'Here is a simple tutorial to get started with GDrive',
+  'Доступ к аккаунту восстановлен': 'Поздравляем! Доступ к аккаунту наконец-то восстановлен',
+  'Как читать почту с мобиального':
+    'Для начала нужно установить мобильное приложение Яндекс.Почты, затем...',
+  'Соберите всю почту в этот ящик': 'Чем больше человечество использует интернет'
 };
 
 export function rndTheme(author) {
