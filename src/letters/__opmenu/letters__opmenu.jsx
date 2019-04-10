@@ -3,20 +3,6 @@ import React, { Component } from 'react';
 import './letters__opmenu.css';
 
 export default class LettersOpmenu extends Component {
-  static deleteOnclick() {
-    const lettersDiv = document.getElementsByClassName('letters__list')[0];
-    const toRemove = [];
-    for (let i = 0; i < lettersDiv.children.length; i++) {
-      const child = lettersDiv.children[i];
-      if (child.firstElementChild.checked) {
-        toRemove.push(child);
-      }
-    }
-    for (let i = 0; i < toRemove.length; i++) {
-      lettersDiv.removeChild(toRemove[i]);
-    }
-  }
-
   render() {
     return (
       <div className="letters__opmenu">
@@ -28,7 +14,7 @@ export default class LettersOpmenu extends Component {
           id="delete"
           title="Delete"
           className="letters__opmenuItem"
-          onClick={LettersOpmenu.deleteOnclick}
+          onClick={this.props.deleteOnclick}
         >
           Удалить
         </a>

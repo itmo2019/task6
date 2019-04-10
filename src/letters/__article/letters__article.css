@@ -1,7 +1,6 @@
 .letters__article {
   position: absolute;
 
-  display: none;
   overflow: hidden;
   width: inherit;
   max-width: 589px;

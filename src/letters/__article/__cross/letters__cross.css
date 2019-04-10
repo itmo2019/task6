@@ -1,8 +1,6 @@
 .letters__cross {
   position: absolute;
-  z-index: 2;
 
-  display: none;
-  margin-top: 50px;
+  margin-top: -80px;
   margin-left: 570px;
 }

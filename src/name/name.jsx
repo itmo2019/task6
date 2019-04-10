@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './name.css';
-import shape from '../../images/Shape.png';
+import shape from '../images/Shape.png';
 
 export default class Name extends Component {
   render() {
