@@ -1,0 +1,12 @@
+.item {
+    vertical-align: middle;
+    display: inline-block;
+    cursor: pointer;
+    color: #ccc;
+    font-size: 13px;
+    margin: auto 7px auto 7px;
+}
+
+.item-wrapper {
+    display: inline-block;
+}

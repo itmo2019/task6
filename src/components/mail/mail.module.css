@@ -1,0 +1,16 @@
+.mail {
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.checkbox + .mail-title-wrapper + .mail-article-wrapper {
+    display: none;
+}
+
+.checkbox:checked + .mail-title-wrapper,
+.checkbox {
+    display: none;
+}
+
+.checkbox:checked + .mail-title-wrapper + .mail-article-wrapper {
+    display: block;
+}

@@ -1,0 +1,23 @@
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.cross {
+    float: right;
+    cursor: pointer;
+    margin: 5px 5px auto auto;
+}
+
+.cross:hover {
+    background: #e0e0e0;
+}
+
+.mail-article {
+    padding: 10px;
+}

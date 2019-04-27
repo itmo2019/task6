@@ -1,0 +1,13 @@
+.float-img {
+    background: #fff;
+    float: left;
+    shape-outside: circle();
+}
+
+.p0 {
+    margin: 10px;
+}
+
+.footer {
+    text-align: right;
+}
