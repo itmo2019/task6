@@ -9,7 +9,9 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "@types/react": "16.8.14",
     "react": "16.8.6",
+    "react-cookies": "0.1.0",
     "react-dom": "16.8.6"
   },
   "devDependencies": {
