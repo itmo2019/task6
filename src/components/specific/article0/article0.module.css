@@ -1,5 +1,4 @@
 .float-img {
-    background: #fff;
     float: left;
     shape-outside: circle();
 }

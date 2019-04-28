@@ -11,6 +11,7 @@ import YandexAvatar from '../../resources/avatar.png';
 import OfflineReserve from '../../resources/OfflineReserve.json'
 
 import styles from './mails-maintenance.module.css';
+import { ThemeContext, IThemeContext } from '../app/app';
 
 interface IState { mailSet: IMail[] }
 
@@ -76,20 +77,24 @@ export default class MailsMaintenance extends React.Component {
             const contains = (str: string) => str.toLowerCase().indexOf(searchField) !== -1
             mailSet = mailSet.filter((mail: IMail) => [mail.sender, mail.title].some(contains))
         }
-        return  <div className={styles['mails-maintenance']}>
-                    <MailsHeader 
-                        callbacks={{
-                            deleteCallback: this.deleteSelected, 
-                            receiveCallback: this.receiveMail}} 
-                        selectCallback={this.toggleSelectAll} />
-                    {mailSet
-                        .slice(0, this.mailsPerPage)
-                        .map(props => <Mail {...props} />)}
-                    <div className={styles['pillar']}></div>
-                    <div className={styles['mails-footer-wrapper']}>
-                        <MailsFooter />
-                    </div>  
-                </div>
+        const className = styles['mails-maintenance']
+        const className0 = ' ' + styles['mails-maintenance_dark-theme']
+        return <ThemeContext.Consumer>{ (context: IThemeContext) =>
+                    <div className={className + (context.value ? className0 : '')}>
+                        <MailsHeader 
+                            callbacks={{
+                                deleteCallback: this.deleteSelected, 
+                                receiveCallback: this.receiveMail}} 
+                            selectCallback={this.toggleSelectAll} />
+                        {mailSet
+                            .slice(0, this.mailsPerPage)
+                            .map(props => <Mail {...props} />)}
+                        <div className={styles['pillar']}></div>
+                        <div className={styles['mails-footer-wrapper']}>
+                            <MailsFooter />
+                        </div>  
+                    </div>
+            }</ThemeContext.Consumer>
     }
 
     toggleSelectAll(checked: boolean) {

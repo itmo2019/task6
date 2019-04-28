@@ -12,6 +12,10 @@
     margin: auto auto 10px 0; 
 }
 
+.write-mail.write-mail_dark-theme {
+    background: #4a658d;
+}
+
 .item {
     overflow-wrap: break-word;
     cursor: pointer;
@@ -21,13 +25,21 @@
     min-height: 14px;
     text-indent: 10px;
 
-    color: #555555;
+    color: #555;
     padding: 4px 0;
     font-size: 11px;
+}
+
+.item.item_dark-theme {
+    color: #ddd;
 }
 
 .item:hover {
     font-weight: bold;
     border-radius: 3px;
     background-color: #cdd6e4;
+}
+
+.item.item_dark-theme:hover {
+    background-color: #555;
 }

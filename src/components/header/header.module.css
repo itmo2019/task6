@@ -1,7 +1,9 @@
 .header {
     padding: 11px 0 13px 0;
-
     overflow: hidden;
+
+    /* no explicit locating - meets BEM demands */
+    position: relative;
 }
 
 .logo-wrapper {
@@ -17,4 +19,11 @@
     height: 32px;
     width: 52%;
     margin: auto;
+}
+
+.theme-switcher {
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 5%;
 }

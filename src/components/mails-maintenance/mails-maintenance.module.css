@@ -8,6 +8,10 @@
     position: relative;
 }
 
+.mails-maintenance.mails-maintenance_dark-theme {
+    background-color: #222;
+}
+
 .pillar {
     height: 32px;
 }

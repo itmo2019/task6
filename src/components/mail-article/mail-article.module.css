@@ -18,6 +18,10 @@
     background: #e0e0e0;
 }
 
+.cross_dark-theme:hover {
+    background: #555;
+}
+
 .mail-article {
     padding: 10px;
 }

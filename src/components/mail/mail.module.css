@@ -2,6 +2,10 @@
     border-bottom: 1px solid #e2e2e2;
 }
 
+.mail.mail_dark-theme {
+    border-bottom: 1px solid #909090;
+}
+
 .checkbox + .mail-title-wrapper + .mail-article-wrapper {
     display: none;
 }
