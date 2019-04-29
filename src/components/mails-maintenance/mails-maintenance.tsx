@@ -106,24 +106,31 @@ export default class MailsMaintenance extends React.Component {
                     }
                     return {
                         searchedFor: searchField,
+                        filteredSet: null,
                         worker: setTimeout(() => {
                             that.props.setSearching(0)
-                            const yieldingWorker = (done: IMail[], stt: number, fin: number) => {
+                            const yieldingWorker = (done: number, stt: number, fin: number) => {
                                 const stp = (stt + 10000) < fin ? stt + 10000 : fin
                                 const res = state.mailSet
                                     .slice(stt, stp)
                                     .filter((mail: IMail) => [mail.sender, mail.title, mail.raw].some(contains))
                                     .slice(0, that.mailsPerPage)
-                                if (stp == fin || done.length >= that.mailsPerPage) {
+                                if (stp == fin || res.length + done >= that.mailsPerPage) {
                                     that.props.setSearching(1)
-                                    that.setState({filteredSet: done.concat(res), worker: null, searchedFor: searchField})
+                                    that.setState((state: IState) => {
+                                        const old = state.filteredSet || []
+                                        return {filteredSet: old.concat(res), worker: null, searchedFor: searchField}
+                                    })
                                 } else {
                                     that.props.setSearching(stp / that.state.mailSet.length)
-                                    const worker = setTimeout(() => yieldingWorker(done.concat(res), stp, fin))
-                                    that.setState({filteredSet: done.concat(res), worker: worker, searchedFor: searchField})
+                                    const worker = setTimeout(() => yieldingWorker(done + res.length, stp, fin))
+                                    that.setState((state: IState) => {
+                                        const old = state.filteredSet || []
+                                        return {filteredSet: old.concat(res), worker: worker, searchedFor: searchField}
+                                    })
                                 }
                             }
-                            yieldingWorker([], 0, that.state.mailSet.length)
+                            yieldingWorker(0, 0, that.state.mailSet.length)
                         }, 300)
                     }
                 })
@@ -241,7 +248,16 @@ export default class MailsMaintenance extends React.Component {
             article,
             new Set(['mail-title_from-delete']))
         const mailID: string = mail.mailID;
-        this.setState((state: IState) => {return {mailSet: [mail].concat(state.mailSet)}})
+        this.setState((state: IState) => {
+            let filteredSet = state.filteredSet
+            if (state.searchedFor) {
+                const contains = (str: string) => str.toLowerCase().indexOf(state.searchedFor.toLowerCase()) !== -1
+                if ([mail.sender, mail.title, mail.raw].some(contains)) {
+                    filteredSet = [mail].concat(filteredSet || [])
+                }
+            }
+            return {mailSet: [mail].concat(state.mailSet), filteredSet: filteredSet}
+        })
         setTimeout(() => this.modifyOne(mailID, (mail: IMail) => {
             mail.classList.add('mail-title_to-appear'); 
             return mail
