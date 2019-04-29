@@ -10,10 +10,17 @@ import Article1 from '../specific/article1';
 import YandexAvatar from '../../resources/avatar.png';
 import OfflineReserve from '../../resources/OfflineReserve.json'
 
-import styles from './mails-maintenance.module.css';
 import { ThemeContext, IThemeContext } from '../app/app';
+import { rawArticle0 } from '../specific/article0/article0';
 
-interface IState { mailSet: IMail[] }
+import styles from './mails-maintenance.module.css';
+
+interface IState { 
+    mailSet: IMail[], 
+    filteredSet: IMail[] | null
+    worker: NodeJS.Timeout | null, 
+    searchedFor: string 
+}
 
 export interface IMail {
     callbacks: { selected(checked: boolean): void },
@@ -23,6 +30,7 @@ export interface IMail {
     avatar: string | null,
     date: string,
     article: JSX.Element,
+    raw: string,
     classList: Set<string>,
     checked: boolean
 }
@@ -35,10 +43,10 @@ export default class MailsMaintenance extends React.Component {
     private mailCounter: number
     private requestsCounter: number
     
-    public readonly props: {searchField: string}
+    public readonly props: {searchField: string, setSearching: (x: number) => void}
     public state: IState
 
-    constructor(props: {searchField: string}) {
+    constructor(props: {searchField: string, setSearching: (x: number) => void}) {
         super(props)
         this.props = props
 
@@ -51,7 +59,7 @@ export default class MailsMaintenance extends React.Component {
         
         this.mailCounter = 0
         this.requestsCounter = 0
-
+        
         const that: any = this; // just local js magic
         ['newEmptyYandexMail', 'newYandexMail', 'deleteSelected', 'toggleSelectAll', 
          'constructMailOnPage', 'receiveMail', 'newMailTimeoutSetup', 'modifyFirst',
@@ -61,22 +69,85 @@ export default class MailsMaintenance extends React.Component {
 
         this.newMailTimeoutSetup(); 
 
-        this.state = { mailSet: [
-                                    this.newYandexMail(false, 'Яндекс.Паспорт', 'Доступ к аккаунту восстановлен', '6 авг', <Article0 />),
-                                    this.newEmptyYandexMail(false, 'Команда Яндекс.Почты', 'Как читать почту с мобильного', '6 июл'),
-                                    this.newEmptyYandexMail(true, 'Команда Яндекс.Почты', 'Как читать почту с мобильного', '6 июл'),
-                                    this.newEmptyYandexMail(true, 'Яндекс', 'Соберите всю почту в этот ящик', '6 июл')
-                                ]
+        let temp = [
+            this.newYandexMail(false, 'Яндекс.Паспорт', 'Доступ к аккаунту восстановлен', '6 авг', <Article0 />, rawArticle0),
+            this.newEmptyYandexMail(false, 'Команда Яндекс.Почты', 'Как читать почту с мобильного', '6 июл'),
+            this.newEmptyYandexMail(true, 'Команда Яндекс.Почты', 'Как читать почту с мобильного', '6 июл'),
+            this.newEmptyYandexMail(true, 'Яндекс', 'Соберите всю почту в этот ящик', '6 июл')
+        ]
+        // for benchmarking search:
+        while (temp.length < 1000000) {
+            console.log(temp.length)
+            temp = temp.concat(temp)
+        }             
+        temp = temp.concat([this.newEmptyYandexMail(false, 'Последнее письмо', 'Как читать почту с мобильного', '6 июл')])
+
+        this.state = { 
+            mailSet: temp,
+            filteredSet: null,
+            worker: null,
+            searchedFor: ''       
         }
     }
 
     render() {
-        let mailSet: IMail[] = this.state.mailSet
-        if (this.props.searchField) {
-            const searchField: string = this.props.searchField.toLowerCase()
-            const contains = (str: string) => str.toLowerCase().indexOf(searchField) !== -1
-            mailSet = mailSet.filter((mail: IMail) => [mail.sender, mail.title].some(contains))
+        const searchField: string = this.props.searchField.toLowerCase()
+        const contains = (str: string) => str.toLowerCase().indexOf(searchField) !== -1
+        const that: MailsMaintenance = this
+
+        if (searchField !== this.state.searchedFor) {
+            if (this.props.searchField) {
+
+                this.setState((state: IState) => {
+                    if (state.worker) {
+                        clearTimeout(state.worker)
+                    }
+                    // this.props.setSearching(false)
+                    return {
+                        searchedFor: searchField,
+                        worker: setTimeout(() => {
+                            that.props.setSearching(0)
+                            const yieldingWorker = (done: IMail[], stt: number, fin: number) => {
+                                const stp = (stt + 10000) < fin ? stt + 10000 : fin
+                                console.log(`${stt}-${stp}`)
+                                const res = state.mailSet
+                                    .slice(stt, stp)
+                                    .filter((mail: IMail) => [mail.sender, mail.title, mail.raw].some(contains))
+                                    .slice(0, that.mailsPerPage)
+                                if (stp == fin || done.length >= that.mailsPerPage) {
+                                    that.props.setSearching(1)
+                                    that.setState({filteredSet: done.concat(res), worker: null, searchedFor: searchField})
+                                } else {
+                                    that.props.setSearching(stp / that.state.mailSet.length)
+                                    const worker = setTimeout(() => yieldingWorker(res, stp, fin))
+                                    that.setState({filteredSet: done.concat(res), worker: worker, searchedFor: searchField})
+                                }
+                            }
+                            yieldingWorker([], 0, that.state.mailSet.length)
+                            /* setTimeout(() =>  {
+                                const res = state.mailSet.filter((mail: IMail) => [mail.sender, mail.title, mail.raw].some(contains)).slice(0, that.mailsPerPage)
+                                console.log('ending...')
+                                that.props.setSearching(false)
+                                that.setState({filteredSet: res, worker: null, searchedFor: searchField})
+                            }) */
+                        }, 300)
+                    }
+                })
+            } else {
+                this.setState((state: IState) => {
+                    if (state.worker) {
+                        clearTimeout(state.worker)
+                    }
+                    this.props.setSearching(1)
+                    return {
+                        filteredSet: null,
+                        worker: null,
+                        searchedFor: searchField
+                    }
+                })
+            }
         }
+        const mailSet = this.state.filteredSet || this.state.mailSet
         const className = styles['mails-maintenance']
         const className0 = ' ' + styles['mails-maintenance_dark-theme']
         return <ThemeContext.Consumer>{ (context: IThemeContext) =>
@@ -134,7 +205,7 @@ export default class MailsMaintenance extends React.Component {
         , 200)
     }
 
-    newMail(isRead: boolean, avatar: string | null, sender: string, title: string, date: string, article: JSX.Element, classList: Set<string>): IMail {
+    newMail(isRead: boolean, avatar: string | null, sender: string, title: string, date: string, article: JSX.Element, raw: string, classList: Set<string>): IMail {
         classList.add('mail-title')
         if (isRead) {
             classList.add('mail-title_read')
@@ -155,22 +226,25 @@ export default class MailsMaintenance extends React.Component {
             avatar: avatar,
             date: date,
             article: article,
+            raw: raw,
             classList: classList,
             checked: false
         }
     }
 
-    newYandexMail(isRead: boolean, sender: string, title: string, date: string, article: JSX.Element): IMail {
-        return this.newMail(isRead, YandexAvatar, sender, title, date, article, new Set())
+    newYandexMail(isRead: boolean, sender: string, title: string, date: string, article: JSX.Element, raw: string): IMail {
+        return this.newMail(isRead, YandexAvatar, sender, title, date, article, raw, new Set())
     }
 
     newEmptyYandexMail(isRead: boolean, sender: string, title: string, date: string): IMail {
-        return this.newYandexMail(isRead, sender, title, date, this.emptyArticle);
+        return this.newYandexMail(isRead, sender, title, date, this.emptyArticle, 
+            'Текст письма не завезли. Покупайте наших слонов!');
     }
 
     constructMailOnPage(title: string, article: string) {
         const mail: IMail = this.newMail(false, null, 'mysterious stranger', title, this.getDate(), 
             <Article1 body={article} />, 
+            article,
             new Set(['mail-title_from-delete']))
         const mailID: string = mail.mailID;
         this.setState((state: IState) => {return {mailSet: [mail].concat(state.mailSet)}})

@@ -8,6 +8,7 @@ import styles from './app.module.css';
 
 export interface ISearchProps {
     searchField: string,
+    searching: number,
     searchCallback(value: string): void
 }
 export interface IThemeContext {
@@ -35,7 +36,12 @@ export default class App extends React.Component {
     }
     getTheme = this._getTheme.bind(this)
     
-    public state: { searchField: string, theme: boolean } = { searchField: '', theme: this.getTheme() }
+    public state: { searchField: string, searching: number, theme: boolean } = { searchField: '', searching: 1.0, theme: this.getTheme() }
+
+    _setSearching(x: number) {
+        (this as App).setState({searching: x})
+    }
+    setSearching = this._setSearching.bind(this)
 
     render() {
         let className=styles['app'];
@@ -47,8 +53,11 @@ export default class App extends React.Component {
                         <div className={styles['container']}>
                             <Header  
                                 searchField={this.state.searchField} 
+                                searching={this.state.searching}
                                 searchCallback={(value: string) => this.setState({searchField: value})} />
-                            <MainPage searchField={this.state.searchField} />
+                            <MainPage 
+                                searchField={this.state.searchField}
+                                setSearching={this.setSearching} />
                         </div>
                     </div>
                 </ThemeContext.Provider>

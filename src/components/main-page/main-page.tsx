@@ -5,7 +5,7 @@ import MailsMaintenance from '../mails-maintenance';
 
 import styles from './main-page.module.css';
 
-function MainPage(props: {searchField: string}) {
+function MainPage(props: {searchField: string, setSearching: (x: number) => void}) {
   return    <div className={styles['main-page']}>
                 <div className={styles['menu-wrapper']}>
                     <Menu />
