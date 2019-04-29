@@ -76,11 +76,14 @@ export default class MailsMaintenance extends React.Component {
             this.newEmptyYandexMail(true, 'Яндекс', 'Соберите всю почту в этот ящик', '6 июл')
         ]
         // for benchmarking search:
-        while (temp.length < 1000000) {
-            console.log(temp.length)
+        while (temp.length < 10000) {
             temp = temp.concat(temp)
         }             
-        temp = temp.concat([this.newEmptyYandexMail(false, 'Последнее письмо', 'Как читать почту с мобильного', '6 июл')])
+        temp = temp.concat([this.newEmptyYandexMail(false, 'Кратное письмо', 'Контрольное письмо', '32 фев')])
+        while (temp.length < 1000000) {
+            temp = temp.concat(temp)
+        }
+        temp = temp.concat([this.newEmptyYandexMail(false, 'Последнее письмо', 'Контрольное письмо', '21 июн')])
 
         this.state = { 
             mailSet: temp,
@@ -97,19 +100,16 @@ export default class MailsMaintenance extends React.Component {
 
         if (searchField !== this.state.searchedFor) {
             if (this.props.searchField) {
-
                 this.setState((state: IState) => {
                     if (state.worker) {
                         clearTimeout(state.worker)
                     }
-                    // this.props.setSearching(false)
                     return {
                         searchedFor: searchField,
                         worker: setTimeout(() => {
                             that.props.setSearching(0)
                             const yieldingWorker = (done: IMail[], stt: number, fin: number) => {
                                 const stp = (stt + 10000) < fin ? stt + 10000 : fin
-                                console.log(`${stt}-${stp}`)
                                 const res = state.mailSet
                                     .slice(stt, stp)
                                     .filter((mail: IMail) => [mail.sender, mail.title, mail.raw].some(contains))
@@ -119,17 +119,11 @@ export default class MailsMaintenance extends React.Component {
                                     that.setState({filteredSet: done.concat(res), worker: null, searchedFor: searchField})
                                 } else {
                                     that.props.setSearching(stp / that.state.mailSet.length)
-                                    const worker = setTimeout(() => yieldingWorker(res, stp, fin))
+                                    const worker = setTimeout(() => yieldingWorker(done.concat(res), stp, fin))
                                     that.setState({filteredSet: done.concat(res), worker: worker, searchedFor: searchField})
                                 }
                             }
                             yieldingWorker([], 0, that.state.mailSet.length)
-                            /* setTimeout(() =>  {
-                                const res = state.mailSet.filter((mail: IMail) => [mail.sender, mail.title, mail.raw].some(contains)).slice(0, that.mailsPerPage)
-                                console.log('ending...')
-                                that.props.setSearching(false)
-                                that.setState({filteredSet: res, worker: null, searchedFor: searchField})
-                            }) */
                         }, 300)
                     }
                 })
