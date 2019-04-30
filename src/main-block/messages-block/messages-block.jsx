@@ -14,7 +14,7 @@ class MessagesBlock extends React.Component {
 
     this.state = {
       hiddenMessageText: this.props.hiddenMessageText,
-      messageIsOpen: this.props.messageIsOpen
+      messageIsOpen: false
     };
   }
 

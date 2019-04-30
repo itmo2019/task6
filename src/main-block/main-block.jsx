@@ -14,7 +14,6 @@ class MainBlock extends React.Component {
           selectCheckbox={this.props.selectCheckbox}
           deleteSelected={this.props.deleteSelected}
           messagesList={this.props.messagesList}
-          messageIsOpen={this.props.messageIsOpen}
           selectAllCheckbox={this.props.selectAllCheckbox}
         />
       </div>

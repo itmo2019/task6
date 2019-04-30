@@ -5,8 +5,8 @@ import './message.css';
 class Message extends React.Component {
   render() {
     const classAddition =
-      (this.props.message.toCreate ? ' to-create' : '') +
-      (this.props.message.toDelete ? ' to-delete' : '');
+      (this.props.message.unshrink ? ' unshrink' : '') +
+      (this.props.message.shrink ? ' shrink' : '');
     return (
       <div id={this.props.message.id} className={`message${classAddition}`}>
         <label

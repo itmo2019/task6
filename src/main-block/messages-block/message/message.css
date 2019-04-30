@@ -109,12 +109,12 @@
   float: right;
 }
 
-.to-create {
+.unshrink {
   height: 40px;
   opacity: 1;
 }
 
-.to-delete {
+.shrink {
   height: 0;
   opacity: 0;
 }
