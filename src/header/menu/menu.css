@@ -1,0 +1,15 @@
+.header__menu {
+  display: inline-block;
+  width: 20px;
+  height: 17px;
+  margin-top: -5px;
+  margin-right: 10px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.menu__stripe {
+  height: 2px;
+  margin-top: 4px;
+  background-color: #000;
+}

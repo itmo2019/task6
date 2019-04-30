@@ -1,0 +1,45 @@
+.messages-block {
+  display: inline-block;
+  width: 78%;
+  min-width: 600px;
+  height: 100%;
+  margin-right: 0;
+  margin-left: 2%;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+  vertical-align: top;
+}
+
+.checkbox {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#check-all {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.messages-list {
+  height: 100%;
+  min-height: 500px;
+
+  border-bottom: solid 1px #e2e2e2;
+}
+
+.messages-list__open {
+  display: block;
+}
+
+.messages-list__closed {
+  display: none;
+}

@@ -1,0 +1,38 @@
+.hidden-message {
+  position: relative;
+  z-index: 1;
+  top: 0;
+
+  display: none;
+  min-height: 500px;
+
+  border-bottom: solid 1px #e2e2e2;
+  background-color: #fff;
+}
+
+.hidden-message__open {
+  display: block;
+}
+
+.hidden-message__closed {
+  display: none;
+}
+
+.hidden-message__content {
+  overflow: auto;
+  padding: 20px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  white-space: normal;
+}
+
+.close-message {
+  margin-right: 5px;
+
+  border: 0;
+  color: #ccc;
+  cursor: pointer;
+  float: right;
+  font-size: 35px;
+  font-weight: 100;
+}
