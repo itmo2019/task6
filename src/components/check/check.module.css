@@ -1,0 +1,50 @@
+.check__box {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 0;
+  margin-top: 11px;
+  border-radius: 3px;
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+}
+
+.check__input {
+  position: absolute;
+  -webkit-appearance: none;
+}
+
+.check__box:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.check .check__box:after {
+  left: 5px;
+  top: 1px;
+  width: 3px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.check input:checked ~ .check__box {
+  background-color: #999999;
+}
+
+.check input:checked ~ .check__box:after {
+  display: block;
+}
+
+.check input:disabled:checked ~ .check__box {
+  background-color: #CCCCCC;
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.check input:disabled ~ .check__box {
+  border-color: rgba(0, 0, 0, 0.09);
+}

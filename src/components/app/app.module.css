@@ -1,0 +1,17 @@
+.app__header {
+  margin: 12px 18px;
+}
+
+.app__aside-menu {
+  display: inline-block;
+  margin-top: 8px;
+  margin-left: 18px;
+}
+
+.app__mail-box {
+  position: absolute;
+  display: inline-block;
+  margin-top: 8px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}

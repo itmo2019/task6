@@ -9,6 +9,10 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "@types/jest": "24.0.11",
+    "@types/node": "11.13.8",
+    "@types/react": "16.8.14",
+    "@types/react-dom": "16.8.4",
     "bem-cn": "3.0.1",
     "classnames": "2.2.6",
     "react": "16.8.6",
