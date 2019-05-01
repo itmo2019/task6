@@ -12,11 +12,14 @@ interface IMessage {
   date?: string;
   toggleMessages: () => void;
   letterID: number;
+  wasRead: boolean;
+  readMessage: (a: number) => void;
 }
 
 interface IMessageState {
   fadeOut: boolean;
   isTicked: boolean;
+  wasRead: boolean;
 }
 
 export class Message extends Component<IMessage, IMessageState> {
@@ -39,7 +42,8 @@ export class Message extends Component<IMessage, IMessageState> {
 
     this.state = {
       fadeOut: true,
-      isTicked: false
+      isTicked: false,
+      wasRead: props.wasRead
     };
   }
 
@@ -49,30 +53,6 @@ export class Message extends Component<IMessage, IMessageState> {
 
   public componentWillUnmount() {
     window.clearTimeout(this.timerID);
-  }
-
-  public getKey() {
-    return this.letterID;
-  }
-
-  public getContent() {
-    return this.content;
-  }
-
-  public getAvatar() {
-    return this.avatar;
-  }
-
-  public getSender() {
-    return this.sender;
-  }
-
-  public getTopic() {
-    return this.topic;
-  }
-
-  public getDate() {
-    return this.date;
   }
 
   private readonly content?: string;
@@ -96,6 +76,7 @@ export class Message extends Component<IMessage, IMessageState> {
   private readonly letterID: number;
 
   private readMessage() {
+    this.props.readMessage(this.letterID);
     this.parentToggling();
     if (this.fullMessage.current !== null) {
       this.fullMessage.current.setState({ isVisible: true });
@@ -144,6 +125,7 @@ export class Message extends Component<IMessage, IMessageState> {
           handleTick={this.tickMessage}
           fadeOut={this.state.fadeOut}
           isTicked={this.state.isTicked}
+          wasRead={this.state.wasRead}
         />
       </li>
     );

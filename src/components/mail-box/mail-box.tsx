@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 import classNames from 'classnames';
 import MultiRef from 'react-multi-ref';
 import loremIpsum from 'lorem-ipsum';
@@ -13,8 +13,76 @@ interface IMailBox {
 
 interface IMailBoxState {
   shownMessagesRefs: MultiRef<number, Message>;
-  shownMessages: Message[];
-  hiddenMessages: Message[];
+  shownMessages: MessageData[];
+  hiddenMessages: MessageData[];
+}
+
+interface IMessageData {
+  content?: string;
+  avatar?: string;
+  sender?: string;
+  topic?: string;
+  date?: string;
+  id: number;
+  wasRead?: boolean;
+}
+
+class MessageData {
+  public constructor(props: IMessageData) {
+    this.content = props.content;
+    this.avatar = props.avatar;
+    this.sender = props.sender;
+    this.topic = props.topic;
+    this.date = props.date;
+    this.id = props.id;
+    this.wasRead = props.wasRead === undefined ? false : props.wasRead;
+  }
+
+  private readonly content?: string;
+
+  private readonly avatar?: string;
+
+  private readonly sender?: string;
+
+  private readonly topic?: string;
+
+  private readonly date?: string;
+
+  private readonly id: number;
+
+  private wasRead: boolean;
+
+  public getId() {
+    return this.id;
+  }
+
+  public getContent() {
+    return this.content;
+  }
+
+  public getAvatar() {
+    return this.avatar;
+  }
+
+  public getSender() {
+    return this.sender;
+  }
+
+  public getTopic() {
+    return this.topic;
+  }
+
+  public getDate() {
+    return this.date;
+  }
+
+  public getWasRead() {
+    return this.wasRead;
+  }
+
+  public readMessage() {
+    this.wasRead = true;
+  }
 }
 
 class MyLoremIpsum {
@@ -122,6 +190,7 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
     this.removeMessages = this.removeMessages.bind(this);
     this.toggleMessages = this.toggleMessages.bind(this);
     this.addRandomly = this.addRandomly.bind(this);
+    this.readMessage = this.readMessage.bind(this);
 
     props.addNewMessage(this.addNewMessage);
     props.removeMessages(this.removeMessages);
@@ -157,13 +226,12 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
     });
   }
 
-  private generateMessage(): Message {
-    return new Message({
+  private generateMessage(): MessageData {
+    return new MessageData({
       sender: this.generateName(),
       topic: this.generateTopic(),
       content: this.generateFullMessage(),
-      letterID: this.letterID,
-      toggleMessages: this.toggleMessages
+      id: this.letterID
     });
   }
 
@@ -205,7 +273,7 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
 
   private removeMessages() {
     const unFiltered = this.state.shownMessages.filter(mes => {
-      const k = Math.round(mes.getKey());
+      const k = Math.round(mes.getId());
       const mesRef = this.state.shownMessagesRefs.map.get(k);
       if (mesRef === undefined) {
         return false;
@@ -214,7 +282,7 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
     });
 
     unFiltered.forEach(mes => {
-      const k = Math.round(mes.getKey());
+      const k = Math.round(mes.getId());
       const mesRef = this.state.shownMessagesRefs.map.get(k);
       if (mesRef === undefined) {
         return;
@@ -226,7 +294,7 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
       () =>
         this.setState(state => {
           const filtered = state.shownMessages.filter(mes => {
-            const k = Math.round(mes.getKey());
+            const k = Math.round(mes.getId());
             const mesRef = state.shownMessagesRefs.map.get(k);
             if (mesRef === undefined) {
               return false;
@@ -240,21 +308,31 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
     setTimeout(() => this.addOldMessages(unFiltered.length), 1000);
   }
 
+  private readMessage(id: number) {
+    for (const mes of this.state.shownMessages) {
+      if (mes.getId() === id) {
+        mes.readMessage();
+      }
+    }
+  }
+
   public render() {
     return (
       <ul className={classNames(styles.MailBox, this.props.className)}>
         {this.state.shownMessages.map(mes => {
           return (
             <Message
-              key={mes.getKey()}
-              letterID={mes.getKey()}
+              key={mes.getId()}
+              letterID={mes.getId()}
               sender={mes.getSender()}
               topic={mes.getTopic()}
               avatar={mes.getAvatar()}
               content={mes.getContent()}
               date={mes.getDate()}
               toggleMessages={this.toggleMessages}
-              ref={this.state.shownMessagesRefs.ref(mes.getKey())}
+              wasRead={mes.getWasRead()}
+              readMessage={this.readMessage}
+              ref={this.state.shownMessagesRefs.ref(mes.getId())}
             />
           );
         })}

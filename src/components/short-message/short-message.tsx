@@ -13,6 +13,7 @@ interface IShortMessage {
   className?: string;
   fadeOut?: boolean;
   isTicked?: boolean;
+  wasRead: boolean;
 }
 
 export interface IShortMessageState {
@@ -37,7 +38,7 @@ export class ShortMessage extends Component<IShortMessage, IShortMessageState> {
         : props.date;
     this.state = {
       isVisible: true,
-      wasRead: false
+      wasRead: props.wasRead
     };
     this.handleClick = props.handleClick;
     this.handleTick = props.handleTick;
