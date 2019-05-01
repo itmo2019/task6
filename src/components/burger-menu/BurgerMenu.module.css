@@ -1,0 +1,11 @@
+.BurgerMenu {
+  width: 20px;
+  cursor: pointer;
+}
+
+.BurgerMenu__Rect {
+  width: 100%;
+  height: 3px;
+  margin-top: 5px;
+  background-color: black;
+}

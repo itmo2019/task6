@@ -1,0 +1,43 @@
+.Footer {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  height: 31px;
+}
+
+.Footer__Box {
+  border-top: 1px solid #cccccc;
+}
+
+.Footer__Item {
+  display: inline-block;
+  overflow: hidden;
+
+  max-width: 30%;
+  padding: 8px 20px 0 0;
+
+  cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Footer__List {
+  overflow: hidden;
+
+  width: 100%;
+  height: inherit;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-align: right;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Footer__Text {
+  color: #9b9b9b;
+  font: 11px 'HelveticaNeueCyr', serif;
+  text-decoration: none;
+}

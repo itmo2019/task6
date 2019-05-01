@@ -1,0 +1,39 @@
+.Header {
+  display: block;
+  width: 100%;
+}
+
+.Header__MainLogo {
+  display: inline-block;
+  width: 153px;
+  height: 31px;
+
+  margin-left: 11px;
+
+  cursor: pointer;
+  vertical-align: top;
+}
+
+.Header__BurgerMenu {
+  display: inline-block;
+  width: 20px;
+
+  height: 30px;
+  padding-top: 2px;
+  vertical-align: top;
+}
+
+.Header__SearchBox {
+  display: inline-block;
+  width: 300px;
+  height: 32px;
+  margin-left: 114px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+  opacity: 0.5;
+  vertical-align: top;
+}
+
+.Header__SearchBox::-webkit-search-cancel-button {
+  margin-right: 10px;
+  opacity: 0.15;
+}

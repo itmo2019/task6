@@ -1,12 +1,21 @@
 body {
+  position: relative;
+
+  width: 97%;
+  min-width: 800px;
+  height: 97%;
+  min-height: 600px;
   padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  margin: 11px 20px 14px 22px;
+
+  background: #e5eaf0;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }

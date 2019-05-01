@@ -1,0 +1,51 @@
+.MailFrame__Actions {
+  height: 37px;
+  padding: 0;
+  margin: 0;
+
+  border-bottom: 1px solid #cccccc;
+  list-style-type: none;
+}
+
+.MailFrame__ActionsItem {
+  max-width: 15%;
+  padding-top: 11px;
+  margin-right: 26px;
+  cursor: pointer;
+  float: left;
+  white-space: nowrap;
+}
+
+.MailFrame__Button {
+  overflow: hidden;
+  max-width: 100%;
+  padding: 0;
+
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+
+.MailFrame__ActionsItem:first-child {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.MailFrame__Checkbox {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.MailFrame__Text {
+  color: #cccccc;
+  font: 13px 'HelveticaNeueCyr', serif;
+  text-decoration: none;
+}
+
+.MailFrame__MailBox {
+  position: absolute;
+  top: 37px;
+}
