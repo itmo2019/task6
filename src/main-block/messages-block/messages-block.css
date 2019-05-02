@@ -30,8 +30,9 @@
 }
 
 .messages-list {
-  height: 100%;
+  overflow: auto;
   min-height: 500px;
+  max-height: 1231px;
 
   border-bottom: solid 1px #e2e2e2;
 }

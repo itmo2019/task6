@@ -111,6 +111,7 @@ export class App extends Component {
           const message = newMessagesList[index];
           if (!message.shrink) {
             message.shrink = true;
+            message.unshrink = false;
             message.selected = false;
             newMessagesListActualSize--;
             newOverflowMessages.push(message);
