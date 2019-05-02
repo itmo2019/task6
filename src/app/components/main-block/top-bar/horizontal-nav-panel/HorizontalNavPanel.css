@@ -1,0 +1,21 @@
+.horizontal-nav-panel {
+  position: relative;
+  left: 20px;
+
+  margin: auto;
+  list-style-type: none;
+}
+
+.horizontal-nav-panel__item {
+  margin-right: 25px;
+  float: left;
+}
+
+.horizontal-nav-panel__button {
+  border-style: none;
+  background-color: #fff;
+  color: #ccc;
+  cursor: pointer;
+  font: 13px 'Helvetica Neue', sans-serif;
+  outline: none;
+}

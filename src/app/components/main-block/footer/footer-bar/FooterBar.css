@@ -1,0 +1,20 @@
+.footer-bar {
+  position: relative;
+
+  margin-top: 8px;
+  margin-right: 20px;
+  margin-bottom: 8px;
+  float: right;
+}
+
+.footer-bar__item {
+  display: inline-block;
+  margin-left: 25px;
+}
+
+.footer-link {
+  color: #9b9b9b;
+  cursor: pointer;
+  font-size: 11px;
+  text-decoration: none;
+}

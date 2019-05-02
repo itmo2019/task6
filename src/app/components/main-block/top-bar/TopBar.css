@@ -1,0 +1,20 @@
+.top-bar {
+  position: relative;
+
+  display: inline-block;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  border-bottom: solid 1px #e2e2e2;
+}
+
+.top-bar__checkbox {
+  position: relative;
+
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 2%;
+  float: left;
+}

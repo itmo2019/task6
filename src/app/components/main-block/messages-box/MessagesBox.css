@@ -1,0 +1,6 @@
+.messages-box {
+  position: relative;
+
+  display: block;
+  min-height: 500px;
+}

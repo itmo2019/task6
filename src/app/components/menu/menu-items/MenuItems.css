@@ -1,0 +1,33 @@
+.menu__items {
+  position: relative;
+
+  width: 90%;
+  height: 22px;
+  padding: 0;
+  font-family: 'Helvetica Neue', serif;
+  font-size: 11px;
+  line-height: 20px;
+  list-style-type: none;
+  vertical-align: middle;
+}
+
+.menu__item {
+  padding-left: 5px;
+  border-radius: 3px;
+}
+
+.menu__item_active {
+  background-color: #cdd6e4;
+  font-family: YandexSansBold, sans-serif;
+}
+
+.menu__item:hover {
+  background-color: #cdd6e4;
+}
+
+.menu-link {
+  display: block;
+  padding: 3px;
+  color: #707070;
+  text-decoration: none;
+}

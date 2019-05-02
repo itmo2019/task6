@@ -1,0 +1,15 @@
+.hamburger__single-strip {
+  height: 3px;
+  margin-top: 4px;
+  background-color: #000;
+}
+
+.hamburger {
+  display: inline-block;
+  width: 20px;
+  height: 17px;
+  margin-top: -5px;
+  margin-right: 5px;
+  cursor: pointer;
+  vertical-align: middle;
+}

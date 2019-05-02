@@ -1,0 +1,9 @@
+@font-face {
+  font-family: YandexSansThin;
+  src: url('./YandexSansText-Thin.ttf');
+}
+
+@font-face {
+  font-family: YandexSansBold;
+  src: url('./YandexSansText-Bold.ttf');
+}
