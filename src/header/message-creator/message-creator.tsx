@@ -2,7 +2,11 @@ import React from 'react';
 
 import './message-creator.css';
 
-class MessageCreator extends React.Component {
+interface InjectedProps {
+  newMailFunction: () => void;
+}
+
+class MessageCreator extends React.Component<InjectedProps> {
   render() {
     return (
       <button

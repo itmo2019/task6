@@ -2,7 +2,13 @@ import React from 'react';
 
 import './hidden-message.css';
 
-class HiddenMessage extends React.Component {
+interface InjectedProps {
+  closeMessage: any;
+  messageIsOpen: any;
+  hiddenMessageText: any;
+}
+
+class HiddenMessage extends React.Component<InjectedProps> {
   render() {
     const classAddition = this.props.messageIsOpen ? '__open' : '__closed';
     return (

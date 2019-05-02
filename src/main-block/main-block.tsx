@@ -1,10 +1,19 @@
 import React from 'react';
 
 import './main-block.css';
-import LeftMenu from './left-menu/left-menu';
-import MessagesBlock from './messages-block/messages-block';
+import LeftMenu from './left-menu';
+import MessagesBlock from './messages-block';
+import { MessageInterface } from '../app';
 
-class MainBlock extends React.Component {
+interface InjectedProps {
+  handleSelectAll: any;
+  selectCheckbox: any;
+  deleteSelected: any;
+  messagesList: MessageInterface[];
+  selectAllCheckbox: boolean;
+}
+
+class MainBlock extends React.Component<InjectedProps> {
   render() {
     return (
       <div className="mail-page__main-block">

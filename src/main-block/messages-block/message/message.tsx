@@ -2,7 +2,15 @@ import React from 'react';
 
 import './message.css';
 
-class Message extends React.Component {
+interface InjectedProps {
+  message: any;
+  openMessage: any;
+  selectCheckbox: any;
+  messageIndex: any;
+  key: any;
+}
+
+class Message extends React.Component<InjectedProps> {
   render() {
     const classAddition =
       (this.props.message.unshrink ? ' unshrink' : '') +

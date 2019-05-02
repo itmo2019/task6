@@ -2,7 +2,13 @@ import React from 'react';
 
 import './header.css';
 
-class Header extends React.Component {
+interface InjectedProps {
+  handleSelectAll: any;
+  deleteSelected: any;
+  selectAllCheckbox: any;
+}
+
+class Header extends React.Component<InjectedProps> {
   render() {
     return (
       <div className="messages-block-header">

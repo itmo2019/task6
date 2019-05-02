@@ -1,19 +1,36 @@
 import React from 'react';
 
 import './messages-block.css';
-import Header from './header/header';
-import HiddenMessage from './hidden-message/hidden-message';
-import Message from './message/message';
-import Footer from './footer/footer';
+import Header from './header';
+import HiddenMessage from './hidden-message';
+import Message from './message';
+import Footer from './footer';
+import { MessageInterface } from '../../app';
 
-class MessagesBlock extends React.Component {
-  constructor(props) {
+interface InjectedProps {
+  // TODO: fix props 'any'
+  handleSelectAll: any;
+  selectCheckbox: any;
+  deleteSelected: any;
+  messagesList: MessageInterface[];
+  selectAllCheckbox: boolean;
+}
+
+interface State {
+  hiddenMessageText: String,
+  messageIsOpen: boolean
+}
+
+class MessagesBlock extends React.Component<InjectedProps> {
+  public state: State;
+
+  constructor(props: InjectedProps) {
     super(props);
     this.openMessage = this.openMessage.bind(this);
     this.closeMessage = this.closeMessage.bind(this);
 
     this.state = {
-      hiddenMessageText: this.props.hiddenMessageText,
+      hiddenMessageText: '',
       messageIsOpen: false
     };
   }
@@ -24,7 +41,7 @@ class MessagesBlock extends React.Component {
     });
   }
 
-  openMessage(message) {
+  openMessage(message: MessageInterface) {
     this.setState({
       messageIsOpen: true,
       hiddenMessageText: message.hiddenText
@@ -46,7 +63,7 @@ class MessagesBlock extends React.Component {
           hiddenMessageText={this.state.hiddenMessageText}
         />
         <div className={`messages-list messages-list${messagesListClassAddition}`}>
-          {this.props.messagesList.map((message, messageIndex) => {
+          {this.props.messagesList.map((message: MessageInterface, messageIndex: number) => {
             return (
               <Message
                 message={message}

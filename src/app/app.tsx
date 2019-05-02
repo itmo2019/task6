@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 import './app.css';
 
-import Header from '../header/header';
-import MainBlock from '../main-block/main-block';
+import Header from '../header';
+import MainBlock from '../main-block';
 
-export interface Message {
+export interface MessageInterface {
   id: number,
   senderName: String,
   senderLogo: String,
@@ -17,15 +17,15 @@ export interface Message {
   unshrink: boolean
 }
 
-export interface State {
-  messagesList: Message[],
+interface State {
+  messagesList: MessageInterface[],
   selectAllCheckbox: boolean,
   messageIsOpen: boolean
 }
 
 export class App extends Component {
   private messagesPerPage: number;
-  private overflowMessages: Message[];
+  private overflowMessages: MessageInterface[];
   private timeoutUpper: number;
   private timeoutLower: number;
 
@@ -183,6 +183,7 @@ export class App extends Component {
             if (newOverflowMessages.length > 0) {
               const newMessage = newOverflowMessages.pop();
               if (newMessage === undefined) {
+                console.log('app.tsx.186')
                 continue;
               }
               let needToPush = true;
@@ -226,7 +227,7 @@ export class App extends Component {
     }, 1500);
   }
 
-  buildNewMessage(): Message {
+  buildNewMessage(): MessageInterface {
     const currentDate = new Date();
 
     const id = currentDate.getTime();
