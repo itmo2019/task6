@@ -3,9 +3,9 @@ import React from 'react';
 import './header.css';
 
 interface InjectedProps {
-  handleSelectAll: any;
-  deleteSelected: any;
-  selectAllCheckbox: any;
+  handleSelectAll: () => void;
+  deleteSelected: () => void;
+  selectAllCheckbox: boolean;
 }
 
 class Header extends React.Component<InjectedProps> {

@@ -1,13 +1,14 @@
 import React from 'react';
 
 import './message.css';
+import { MessageInterface } from '../../../app';
 
 interface InjectedProps {
-  message: any;
-  openMessage: any;
-  selectCheckbox: any;
-  messageIndex: any;
-  key: any;
+  message: MessageInterface;
+  openMessage: (message: MessageInterface) => void;
+  selectCheckbox: (messageIndex: number) => void;
+  messageIndex: number;
+  key: number;
 }
 
 class Message extends React.Component<InjectedProps> {
@@ -16,7 +17,7 @@ class Message extends React.Component<InjectedProps> {
       (this.props.message.unshrink ? ' unshrink' : '') +
       (this.props.message.shrink ? ' shrink' : '');
     return (
-      <div id={this.props.message.id} className={`message${classAddition}`}>
+      <div id={this.props.message.id.toString()} className={`message${classAddition}`}>
         <label
           className="select-message__checkbox-label"
           htmlFor={`checkbox-${this.props.message.id}`}

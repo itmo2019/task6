@@ -3,9 +3,9 @@ import React from 'react';
 import './hidden-message.css';
 
 interface InjectedProps {
-  closeMessage: any;
-  messageIsOpen: any;
-  hiddenMessageText: any;
+  closeMessage: () => void;
+  messageIsOpen: boolean;
+  hiddenMessageText: String;
 }
 
 class HiddenMessage extends React.Component<InjectedProps> {

@@ -6,9 +6,9 @@ import MessagesBlock from './messages-block';
 import { MessageInterface } from '../app';
 
 interface InjectedProps {
-  handleSelectAll: any;
-  selectCheckbox: any;
-  deleteSelected: any;
+  handleSelectAll: () => void;
+  selectCheckbox: (messageIndex: number) => void;
+  deleteSelected: () => void;
   messagesList: MessageInterface[];
   selectAllCheckbox: boolean;
 }
