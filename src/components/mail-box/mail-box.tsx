@@ -349,12 +349,16 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
   }
 
   public render() {
+    let maybeDialog = null;
+    if(this.state.askingForRemoving === true){
+      maybeDialog = <RemoveDialog
+        isVisible={this.state.askingForRemoving}
+        confirmedAction={this.confirmedRemoving}
+      />;
+    }
     return (
       <div>
-        <RemoveDialog
-          isVisible={this.state.askingForRemoving}
-          confirmedAction={this.confirmedRemoving}
-        />
+        {maybeDialog}
         <ul className={classNames(styles.MailBox, this.props.className)}>
           {this.state.shownMessages.map(mes => {
             return (

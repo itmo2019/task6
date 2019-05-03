@@ -1,5 +1,11 @@
 .RemoveDialog {
+  position: absolute;
+  top: 200px;
+  left: 300px;
   width: 300px;
+  background-color: white;
+  border: solid black 3px;
+  border-radius: 15px;
 }
 
 .RemoveDialog__Title {

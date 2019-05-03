@@ -4,36 +4,7 @@ import styles from './RemoveDialog.module.css';
 // import * as dialogPolyfill from "removeDialog-polyfill";
 // import dialogPolyfill = require('removeDialog-polyfill');
 
-// const dialogPolyfill = require('removeDialog-polyfill').default;
-
-// private getDialog() {
-//   const d = (
-//     <dialog id="dialog">
-//       <form method="dialog">
-//         <p>Do you agree with terms of use?</p>
-//         <textarea className="form-control" disabled>
-//             Lorem ipsum dolor sit amet,....
-//           </textarea>
-//         <button type="submit" value="yes">
-//           Yes
-//         </button>
-//         <button type="submit" value="no">
-//           No
-//         </button>
-//       </form>
-//     </dialog>
-//   );
-//   const dialog = document.querySelector('dialog');
-//   const showSelector = document.querySelector('#show') as HTMLElement;
-//   if (showSelector !== null) {
-//     showSelector.onclick = function() {
-//       if (dialog !== null) {
-//         dialog.show();
-//       }
-//     };
-//   }
-//   return d;
-// }
+const dialogPolyfill = require('dialog-polyfill').default;
 
 interface IRemoveDialog {
   className?: string;
@@ -107,6 +78,9 @@ export class RemoveDialog extends Component<IRemoveDialog, IRemoveDialogState> {
         className={styles.RemoveDialog}
         ref={ref => {
           this.dialog = ref;
+          if (ref !== null) {
+            dialogPolyfill.registerDialog(ref);
+          }
         }}
       >
         <h3 className={styles.RemoveDialog__Title}>
