@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import bemify from '../../utils/bemify';
 import styles from './check.module.css';
+import {ThemeContext} from "../../theme/theme-context";
 
 const b = bemify('check', styles);
 
@@ -53,11 +54,13 @@ class Check extends Component<Props, State> {
             className={b('input')}
             disabled={this.props.disabled}
           />
-          <span className={b('box')} />
+          <span className={b('box', {theme: this.context})} />
         </label>
       </div>
     );
   }
 }
+
+Check.contextType = ThemeContext;
 
 export default Check;

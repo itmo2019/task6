@@ -1,4 +1,20 @@
+.header {
+  padding-top: 12px;
+}
+
 .header__hamburger {
   display: inline-block;
   vertical-align: bottom;
+}
+
+.header__toggle {
+  position: absolute;
+  left: calc(100vw - 110px);
+  top: 15px;
+}
+
+@media all and (max-width: 790px) {
+  .header__toggle {
+    left: 680px;
+  }
 }

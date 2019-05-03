@@ -45,9 +45,10 @@ class Bemifier {
         if (this.module.hasOwnProperty(modifier)) {
           return this.module[modifier];
         } else {
-          throw new Error("Unexpected className: " + modifier);
+          return '';
+          // throw new Error("Unexpected className: " + modifier);
         }
-      });
+      }).filter(key => mods[key] !== '');
      return modifiers.join(' ');
   }
 
@@ -58,9 +59,9 @@ class Bemifier {
 
     const element = this.block + elements;
 
-    if (!this.module.hasOwnProperty(element)) {
-      throw new Error("Unexpected className: " + element);
-    }
+    // if (!this.module.hasOwnProperty(element)) {
+    //   throw new Error("Unexpected className: " + element);
+    // }
 
     const modifiers = args
       .filter(Bemifier.isBemMods)

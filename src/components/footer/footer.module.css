@@ -1,8 +1,15 @@
 .footer {
-  border-top: solid 1px #e2e2e2;
   height: 40px;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.footer_theme_light {
+  border-top: solid 1px #e2e2e2;
+}
+
+.footer_theme_dark {
+  border-top: solid 1px #636363;
 }
 
 .footer__menu {
@@ -22,12 +29,18 @@
   font-style: normal;
   font-stretch: normal;
   letter-spacing: normal;
-  color: #9b9b9b;
   border: none;
-  background-color: white;
   padding-left: 18px;
   padding-right: 0;
   text-decoration: none;
+}
+
+.footer__item_theme_light {
+  color: #9b9b9b;
+}
+
+.footer__item_theme_dark {
+  color: #f9f9f9;
 }
 
 .footer__item_author {

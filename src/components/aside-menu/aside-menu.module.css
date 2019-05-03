@@ -1,20 +1,28 @@
 .aside-menu__compose-button {
   width: 150px;
   height: 34px;
-  background-color: #6287bd;
   border-radius: 5px;
   font-family: HelveticaNeue, sans-serif;
   font-size: 12px;
-  color: #ffffff;
-  font-weight: 500;
   font-style: normal;
+  font-weight: 600;
+  line-height: 30px;
   letter-spacing: normal;
   border-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  line-height: 33px;
   display: block;
+}
+
+.aside-menu__compose-button_theme_light {
+  background-color: #6287bd;
+  color: #ffffff;
+}
+
+.aside-menu__compose-button_theme_dark {
+  background-color: #4B6169;
+  color: white;
 }
 
 .aside-menu__folder-list {
@@ -24,9 +32,7 @@
 .aside-menu__folder {
   width: 140px;
   font-size: 11px;
-  color: #707070;
   border: none;
-  background-color: #e5eaf0;
   display: block;
   overflow: hidden;
   white-space: nowrap;
@@ -39,9 +45,25 @@
   padding-bottom: 5px;
 }
 
-.aside-menu__folder_active {
+.aside-menu__folder_theme_light {
+  background-color: #e5eaf0;
+  color: #707070;
+}
+
+.aside-menu__folder_theme_dark {
+  background-color: #212121;
+  color: white;
+}
+
+.aside-menu__folder-list_theme_light > .aside-menu__folder_active {
   border-radius: 3px;
   background-color: #cdd6e4;
+}
+
+.aside-menu__folder-list_theme_dark > .aside-menu__folder_active {
+  border-radius: 3px;
+  background-color: #4B4B4B;
+  color: white;
 }
 
 .aside-menu__folder_main {

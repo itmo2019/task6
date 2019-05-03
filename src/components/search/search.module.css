@@ -5,7 +5,7 @@
   position: absolute;
   display: inline;
   margin-left: 114px;
-  opacity: 0.5;
+  opacity: 0.6;
   background-color: #ffffff;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
   padding-left: 15px;
@@ -25,14 +25,14 @@
   width: 250px;
   height: 25px;
   margin-left: 0;
-  opacity: 1.3;
+  opacity: 1;
   color: #000000;
 }
 
 .search__close {
   float: right;
   padding-right: 10px;
-  opacity: 0.55;
+  opacity: 0.8;
   color: #000000;
   font-size: 11px;
   line-height: 29px;

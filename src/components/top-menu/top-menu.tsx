@@ -2,6 +2,7 @@ import React, {Component, FunctionComponent, ReactElement} from 'react';
 import bemify from '../../utils/bemify';
 import styles from './top-menu.module.css';
 import Check from '../check/index';
+import {ThemeContext} from "../../theme/theme-context";
 
 const b = bemify('top-menu', styles);
 
@@ -9,8 +10,10 @@ const TopMenuItem: FunctionComponent<{
   children: string | ReactElement,
   onClick?: () => void
 }> = (props) => {
+  const theme = React.useContext(ThemeContext);
+
   return (
-    <span onClick={props.onClick} className={b('item')}>
+    <span onClick={props.onClick} className={b('item', {theme: theme})}>
       {props.children}
     </span>
   );
@@ -25,8 +28,10 @@ interface Props {
 
 class TopMenu extends Component<Props, {}> {
   render(): React.ReactNode {
+    const theme = this.context;
+
     return (
-      <div className={b()}>
+      <div className={b({theme: theme})}>
         <Check
           checked={this.props.checked}
           callback={this.props.checkAll}
@@ -42,5 +47,7 @@ class TopMenu extends Component<Props, {}> {
     );
   }
 }
+
+TopMenu.contextType = ThemeContext;
 
 export default TopMenu;

@@ -51,7 +51,9 @@ export default class MessageSender {
     const name: string = randomPage.parse.title;
     const text: string = parseText(randomPage.parse.text['*']);
     const today: Date = new Date();
-    const date: string = `${today.getHours()}:${today.getMinutes()}`;
+    const minutes: number = today.getMinutes();
+    const minsPrefix: string = Math.floor(minutes / 10) === 0 ? '0' : '';
+    const date: string = today.getHours() + ':' + minsPrefix + minutes;
     let avatarSrc: string = '';
     if (randomPage.parse.images.length > 0) {
       avatarSrc = imagePath + randomPage.parse.images[0];

@@ -6,6 +6,7 @@ import TopMenu from '../top-menu/index';
 import FullMessage, { FullMessageI } from '../full-message/index';
 import Message, { MessageI, MessageData } from '../message/index';
 import Footer from '../footer/index';
+import {ThemeContext} from "../../theme/theme-context";
 
 const b = bemify('mail-box', styles);
 
@@ -187,13 +188,15 @@ class MailBox extends Component<{}, State> {
       messages: [...this.state.messages].filter(msg => !(msg === message)),
       checkAll: false
     });
+
   }
 
   render(): React.ReactNode {
     const { messages, fullFlag, checkAll } = this.state;
+    const theme = this.context;
 
     return (
-      <main className={b()}>
+      <main className={b({theme: theme})}>
         <TopMenu
           checked={checkAll}
           checkAll={this.checkAll}
@@ -234,5 +237,7 @@ class MailBox extends Component<{}, State> {
     );
   }
 }
+
+MailBox.contextType = ThemeContext;
 
 export default MailBox;

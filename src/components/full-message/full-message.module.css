@@ -1,6 +1,13 @@
 .full-message {
   width: calc(100vw - 226px);
+}
+
+.full-message_theme_light {
   background-color: white;
+}
+
+.full-message_theme_dark {
+  background-color: rgb(46,46,46);
 }
 
 .full-message__content {
@@ -27,6 +34,14 @@
   cursor: pointer;
 }
 
+.full-message__close_theme_light {
+  color: black;
+}
+
+.full-message__close_theme_dark {
+  color: white;
+}
+
 .full-message__img {
   display: inline-block;
   shape-outside: circle(50%);
@@ -40,6 +55,14 @@
   text-align: justify;
 }
 
+.full-message__text_theme_light {
+  color: black;
+}
+
+.full-message__text_theme_dark {
+  color: white;
+}
+
 .full-message__header {
   width: 950px;
 }
@@ -51,10 +74,17 @@
 .full-message__date {
   font-family: Arial, sans-serif;
   font-size: 13px;
-  color: rgba(0,0,0,0.5);
   float: right;
   margin-right: 50px;
   margin-top: 10px;
+}
+
+.full-message__date_theme_light {
+  color: rgba(0,0,0,0.5);
+}
+
+.full-message__date_theme_dark {
+  color: white;
 }
 
 .full-message__sender-info {
@@ -70,7 +100,22 @@
   font-weight: 800;
 }
 
+.full-message__author_theme_light {
+  color: black;
+}
+
+.full-message__author_theme_dark {
+  color: white;
+}
+
 .full-message__email {
-  color: rgba(0,0,0,0.5);
   font-size: 12px;
+}
+
+.full-message__email_theme_light {
+  color: rgba(0,0,0,0.5);
+}
+
+.full-message__email_theme_dark {
+  color: #c7c7c7;
 }

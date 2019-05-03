@@ -3,6 +3,7 @@ import bemify from '../../utils/bemify';
 import styles from './message.module.css';
 import logo from './yandex-logo.png';
 import Check from '../check/index';
+import {ThemeContext} from "../../theme/theme-context";
 
 const b = bemify('message', styles);
 
@@ -60,11 +61,12 @@ class Message extends Component<Props, {}> {
     const { data, first, isRead, deleteAnim, checked, updateChecked } = this.props;
     const { avatarSrc, text, name, date } = data;
     const avatar: string = avatarSrc === '' ? logo : avatarSrc;
+    const theme = this.context;
 
     return (
       <li
         onAnimationEnd={evt => this.onAnimationEnd(evt)}
-        className={b({ new: first, deleted: deleteAnim })}
+        className={b({ new: first, deleted: deleteAnim, theme: theme })}
       >
         <div className={b('check')}>
           <Check callback={updateChecked} checked={checked} />
@@ -75,16 +77,16 @@ class Message extends Component<Props, {}> {
           id="open-message-label"
           className="open-message-label"
         >
-          <span className={b('content')}>
+          <span className={b('content', {theme: theme})}>
             <span className={b('sender')}>
               <img className={b('sender-picture')} alt="" src={avatar} width="30" height="30" />
-              <span className={b('sender-name', { notread: !isRead })}>{name}</span>
+              <span className={b('sender-name', { notread: !isRead }, {theme: theme})}>{name}</span>
             </span>
             <span className={b('read-mark', { read: isRead.toString() })} />
             <span className={b('text')}>
-              <span className={b('text-inner', { notread: !isRead })}>{text}</span>
+              <span className={b('text-inner', { notread: !isRead }, {theme: theme})}>{text}</span>
             </span>
-            <span className={b('date')}>
+            <span className={b('date', {theme: theme})}>
               <time dateTime="08-06">{date}</time>
             </span>
           </span>
@@ -93,5 +95,7 @@ class Message extends Component<Props, {}> {
     );
   }
 }
+
+Message.contextType = ThemeContext;
 
 export default Message;

@@ -1,3 +1,16 @@
+:global(body) :local(.app_theme_light) {
+  background-color: #e5eaf0;
+}
+
+:global(body) :local(.app_theme_dark) {
+  background-color: #212121;
+}
+
+.app {
+  height: 100vh;
+  padding-left: 8px;
+}
+
 .app__header {
   margin: 12px 18px;
 }

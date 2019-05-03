@@ -1,8 +1,15 @@
 .top-menu {
   padding: 11px 0;
   padding-left: 20px;
-  border-bottom: solid 1px #e2e2e2;
   height: 18px;
+}
+
+.top-menu_theme_light {
+  border-bottom: solid 1px #e2e2e2;
+}
+
+.top-menu_theme_dark {
+  border-bottom: solid 1px #717171;
 }
 
 .top-menu__button-list {
@@ -16,11 +23,17 @@
 .top-menu__item {
   font-family: HelveticaNeue, sans-serif;
   font-size: 13px;
-  color: #b2b2b2;
   vertical-align: middle;
   margin-right: 28px;
   border: none;
-  background-color: white;
   letter-spacing: 0.5px;
   cursor: pointer;
+}
+
+.top-menu__item_theme_light {
+  color: #b2b2b2;
+}
+
+.top-menu__item_theme_dark {
+  color: #f9f9f9;
 }

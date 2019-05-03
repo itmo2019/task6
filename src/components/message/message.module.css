@@ -3,7 +3,14 @@
   width: initial;
   height: 40px;
   padding-left: 20px;
+}
+
+.message_theme_light {
   border-bottom: solid 1px #e2e2e2;
+}
+
+.message_theme_dark {
+  border-bottom: solid 1px #717171;
 }
 
 .message__content {
@@ -40,11 +47,14 @@
   line-height: 39px;
   text-align: left;
   border: none;
-  background-color: white;
   vertical-align: middle;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.message__sender-name_theme_dark {
+  color: white;
 }
 
 .message__text-inner {
@@ -57,11 +67,14 @@
   font-size: 13px;
   text-align: left;
   border: none;
-  background-color: white;
   vertical-align: middle;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.message__text-inner_theme_dark {
+  color: white;
 }
 
 .message__text-inner_notread {
@@ -81,12 +94,20 @@
   border-radius: 50%;
 }
 
-.message__read-mark_read_false {
+.message__content_theme_light > .message__read-mark_read_false {
   background-color: #6287bd;
 }
 
-.message__read-mark_read_true {
+.message__content_theme_light > .message__read-mark_read_true {
   background-color: white;
+}
+
+.message__content_theme_dark > .message__read-mark_read_false {
+  background-color: #4890a5;
+}
+
+.message__content_theme_dark > .message__read-mark_read_true {
+  background-color: rgb(46,46,46);
 }
 
 .message__text {
@@ -101,7 +122,6 @@
   display: inline-block;
   text-align: right;
   font-family: HelveticaNeue, sans-serif;
-  color: #9b9b9b;
   font-size: 13px;
   font-weight: 100;
   padding-right: 20px;
@@ -110,6 +130,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.message__date_theme_light {
+  color: #9b9b9b;
+}
+
+.message__date_theme_dark {
+  color: white;
 }
 
 .message_new {
