@@ -6,6 +6,7 @@ import HiddenMessage from './hidden-message';
 import Message from './message';
 import Footer from './footer';
 import { MessageInterface } from '../../app';
+import { AutoSizer, List } from 'react-virtualized';
 
 interface InjectedProps {
   handleSelectAll: () => void;
@@ -61,20 +62,29 @@ class MessagesBlock extends React.Component<InjectedProps> {
           messageIsOpen={this.state.messageIsOpen}
           hiddenMessageText={this.state.hiddenMessageText}
         />
-        <div className={`messages-list messages-list${messagesListClassAddition}`}>
-          {this.props.messagesList.map((message: MessageInterface, messageIndex: number) => {
-            return (
-              <Message
-                message={message}
-                openMessage={this.openMessage}
-                selectCheckbox={this.props.selectCheckbox}
-                messageIndex={messageIndex}
-                key={message.id}
+        <div>
+          <AutoSizer className={`messages-list messages-list${messagesListClassAddition}`}>
+            {({ height, width }) => (
+              <List
+                height={height}
+                width={width}
+                rowCount={this.props.messagesList.length}
+                rowHeight={41}
+                rowRenderer={({ index, key, style }) =>
+                  <div key={key} style={style}>
+                    <Message
+                      message={this.props.messagesList[index]}
+                      openMessage={this.openMessage}
+                      selectCheckbox={this.props.selectCheckbox}
+                      messageIndex={index}
+                      key={this.props.messagesList[index].id}
+                    />
+                  </div>}
               />
-            );
-          })}
+            )}
+          </AutoSizer>
         </div>
-        <Footer />
+        <Footer/>
       </div>
     );
   }

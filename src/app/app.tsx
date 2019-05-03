@@ -47,7 +47,7 @@ export class App extends Component {
     this.selectCheckbox = this.selectCheckbox.bind(this);
     this.buildNewMessage = this.buildNewMessage.bind(this);
 
-    this.messagesPerPage = 30;
+    this.messagesPerPage = 1000;
     this.overflowMessages = [];
 
     this.senders = ['Петя', 'Вася', 'Маша'];
