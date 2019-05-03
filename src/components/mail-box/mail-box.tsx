@@ -7,6 +7,8 @@ import FullMessage, { FullMessageI } from '../full-message/index';
 import Message, { MessageI, MessageData } from '../message/index';
 import Footer from '../footer/index';
 import {ThemeContext} from "../../theme/theme-context";
+import { FixedSizeList as List } from 'react-window';
+import {IMessage} from "../message/message";
 
 const b = bemify('mail-box', styles);
 
@@ -14,7 +16,8 @@ interface State {
   messages: Array<MessageI>,
   fullFlag: boolean,
   fullMessage: FullMessageI,
-  checkAll: boolean
+  checkAll: boolean,
+  deleteAll: boolean
 }
 
 class MailBox extends Component<{}, State> {
@@ -31,6 +34,7 @@ class MailBox extends Component<{}, State> {
     this.updCheckMsg = this.updCheckMsg.bind(this);
     this.createMessage = this.createMessage.bind(this);
     this.deleteMsg = this.deleteMsg.bind(this);
+    this.receiveMessages = this.receiveMessages.bind(this);
 
     this.state = {
       messages: [
@@ -72,7 +76,8 @@ class MailBox extends Component<{}, State> {
         text: 'Новое сообщение',
         date: '6 авг'
       },
-      checkAll: false
+      checkAll: false,
+      deleteAll: false
     };
 
     const sender = new MessageSender(this.setMessage);
@@ -90,7 +95,26 @@ class MailBox extends Component<{}, State> {
       )
     );
     this.setState({
-      messages: newMessages
+      messages: newMessages,
+      checkAll: false
+    });
+  }
+
+  receiveMessages() {
+    let arr: Array<IMessage> = [];
+    for (let i = 0; i < 1000; i++) {
+      arr.push(this.createMessage(
+        /* avatar */ '',
+        'Яндекс',
+        i.toString(),
+        '6 авг',
+        /* sent */ true,
+        /* isRead */ true
+      ));
+    }
+
+    this.setState({
+      messages: [...this.state.messages].concat(arr)
     });
   }
 
@@ -128,9 +152,6 @@ class MailBox extends Component<{}, State> {
       },
       updateChecked: () => {
         this.updCheckMsg(message);
-      },
-      deleteMessage: () => {
-        this.deleteMsg(message);
       },
       readMessage: () => {
         MailBox.readMsg(message);
@@ -183,12 +204,22 @@ class MailBox extends Component<{}, State> {
     });
   }
 
-  deleteMsg(message: MessageI) {
+  deleteMsg() {
     this.setState({
-      messages: [...this.state.messages].filter(msg => !(msg === message)),
-      checkAll: false
+      deleteAll: true,
     });
+  }
 
+  shouldComponentUpdate(nextProps: any, nextState: any): any {
+    if (nextState.deleteAll) {
+      this.setState({
+        messages: [...this.state.messages].filter(msg => msg.checked === false),
+        checkAll: false,
+        deleteAll: false,
+      });
+      return true;
+    }
+    return true;
   }
 
   render(): React.ReactNode {
@@ -202,6 +233,7 @@ class MailBox extends Component<{}, State> {
           checkAll={this.checkAll}
           animateChecked={this.animateChecked}
           disableCheckbox={fullFlag}
+          receiveMessages={this.receiveMessages}
         />
         <div className={b('full-message', { closed: !fullFlag })}>
           <FullMessage data={this.state.fullMessage} closeMsg={this.closeMsg} />
@@ -209,24 +241,30 @@ class MailBox extends Component<{}, State> {
         <div className={b('message-list-scroll-container')}>
           <div className={b('message-list-container')}>
             <ul id="message-list" className={b('message-list')}>
-              {messages.map((message, index) => {
-                return (
-                  <Message
-                    data={message.data}
-                    sent={message.sent}
-                    isRead={message.isRead}
-                    checked={message.checked}
-                    deleteAnim={message.deleteAnim}
-                    key={message.key}
-                    first={index === 0 && !message.sent}
-                    updateChecked={message.updateChecked}
-                    deleteMessage={message.deleteMessage}
-                    updateSent={message.updateSent}
-                    readMessage={message.readMessage}
-                    openMsg={this.openMsg}
-                  />
-                );
-              })}
+              <List height={474}
+                    itemCount={messages.length}
+                    itemSize={41}
+                    width={"100%"}
+                    itemData={messages}>
+                {({ index, style, data }) => (
+                  <div style={style}>
+                    <Message
+                      data={data[index].data}
+                      sent={data[index].sent}
+                      isRead={data[index].isRead}
+                      checked={data[index].checked}
+                      deleteAnim={data[index].deleteAnim}
+                      key={data[index].key}
+                      first={index === 0 && !data[index].sent}
+                      updateChecked={data[index].updateChecked}
+                      updateSent={data[index].updateSent}
+                      readMessage={data[index].readMessage}
+                      openMsg={this.openMsg}
+                      deleteMessage={this.deleteMsg}
+                    />
+                  </div>
+                )}
+              </List>
             </ul>
           </div>
         </div>

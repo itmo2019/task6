@@ -36,7 +36,6 @@
 .mail-box__message-list-container {
   position: absolute;
   width: calc(100vw - 226px);
-  /*max-height: 1230px;*/
   overflow: hidden;
 }
 

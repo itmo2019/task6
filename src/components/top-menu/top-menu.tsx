@@ -23,7 +23,8 @@ interface Props {
   checked: boolean,
   checkAll: () => void,
   animateChecked: () => void,
-  disableCheckbox: boolean
+  disableCheckbox: boolean,
+  receiveMessages: () => void
 }
 
 class TopMenu extends Component<Props, {}> {
@@ -42,6 +43,7 @@ class TopMenu extends Component<Props, {}> {
           <TopMenuItem onClick={this.props.animateChecked}>Удалить</TopMenuItem>
           <TopMenuItem>Это спам!</TopMenuItem>
           <TopMenuItem>Прочитано</TopMenuItem>
+          <TopMenuItem onClick={this.props.receiveMessages}>Получить</TopMenuItem>
         </div>
       </div>
     );

@@ -11,7 +11,7 @@ export interface MessageData {
   avatarSrc: string,
   name: string,
   text: string,
-  date: string
+  date: string,
 }
 
 export interface IMessage {
@@ -22,16 +22,15 @@ export interface IMessage {
   deleteAnim: boolean,
   key: number,
   updateChecked: () => void,
-  deleteMessage: () => void
   updateSent: () => void,
-  readMessage: () => void
+  readMessage: () => void,
 }
 
 interface Props extends IMessage {
-  // data: MessageData,
   key: number,
   first: boolean,
-  openMsg: (newData: MessageData) => void
+  openMsg: (newData: MessageData) => void,
+  deleteMessage: () => void
 }
 
 class Message extends Component<Props, {}> {
