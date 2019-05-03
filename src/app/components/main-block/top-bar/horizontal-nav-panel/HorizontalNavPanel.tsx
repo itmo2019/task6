@@ -1,8 +1,12 @@
 import React from 'react';
 import styles from './HorizontalNavPanel.module.css';
 
-export class HorizontalNavPanel extends React.Component {
-  createNavigationPanelItem = (name, onClickFunction) => {
+interface IProps {
+    deleteMessages: () => void
+}
+
+export class HorizontalNavPanel extends React.Component<IProps> {
+  createNavigationPanelItem = (name: string, onClickFunction: (() => void) | undefined) => {
     return (
       <li className={styles.item}>
         <button

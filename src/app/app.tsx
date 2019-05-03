@@ -10,18 +10,38 @@ const maxMessageInterval = 10 * 60 * 1000;
 const timeMessageInterval = 5 * 60 * 1000;
 const maxMessagePerPage = 30;
 
+export interface IMessage {
+    id: string
+    theme: string
+    text: string
+    firstLetterSender: string
+    sender: string
+    date: string
+    isChecked: boolean
+    toCreate: boolean
+    toDelete: boolean
+    display: boolean
+}
+
+interface IState {
+    wasNormalInterval: boolean
+    messages: IMessage[]
+}
+
 export class App extends Component {
+  public state: IState;
+
   static createMessageValues(
-    id,
-    theme,
-    text,
-    firstLetterSender,
-    sender,
-    date,
-    isChecked,
-    toCreate,
-    toDelete,
-    display
+    id: string,
+    theme: string,
+    text: string,
+    firstLetterSender: string,
+    sender: string,
+    date: string,
+    isChecked: boolean,
+    toCreate: boolean,
+    toDelete: boolean,
+    display: boolean
   ) {
     return {
       id,
@@ -43,12 +63,12 @@ export class App extends Component {
     return today.toLocaleDateString('ru-RU', options);
   }
 
-  static getRandomArbitrary(min, max) {
+  static getRandomArbitrary(min: number, max: number) {
     return Math.random() * (max - min) + min;
   }
 
   static async generateMessage() {
-    const id = new Date().getTime();
+    const id = new Date().getTime().toString();
 
     const senderName = utils.getRandomSender();
     const [theme, text] = await utils.getRandomThemeAndText();
@@ -67,7 +87,7 @@ export class App extends Component {
     );
   }
 
-  constructor(props) {
+  constructor(props: Readonly<{}>) {
     super(props);
     this.state = {
       messages: [],
@@ -96,8 +116,8 @@ export class App extends Component {
     return randomTime;
   }
 
-  checkboxHandler = id => {
-    this.setState(prevState => {
+  checkboxHandler = (id: string) => {
+    this.setState((prevState: IState) => {
       const msgIndex = prevState.messages.findIndex(curMessage => curMessage.id.toString() === id);
       const newMessages = prevState.messages;
       newMessages[msgIndex].isChecked = !newMessages[msgIndex].isChecked;
@@ -105,8 +125,8 @@ export class App extends Component {
     });
   };
 
-  topBarCheckboxHandler = isChecked => {
-    this.setState(prevState => {
+  topBarCheckboxHandler = (isChecked: boolean) => {
+    this.setState((prevState: IState) => {
       const newMessages = prevState.messages;
       for (let i = 0; i < Math.min(prevState.messages.length, maxMessagePerPage); i++) {
         newMessages[i] = prevState.messages[i];
@@ -116,7 +136,7 @@ export class App extends Component {
     });
   };
 
-  showHiddenMessages = messagesList => {
+  showHiddenMessages = (messagesList: IMessage[]) => {
     let displayedNumber = 0;
     let i = 0;
     const showingMessagesList = messagesList;
@@ -148,7 +168,7 @@ export class App extends Component {
   async newMail() {
     const timeForMessage = this.getTimeForMessage();
     const newMessage = await App.generateMessage();
-    this.setState(prevState => {
+    this.setState((prevState: IState) => {
       const newMessages = prevState.messages;
       if (newMessages.length >= maxMessagePerPage) {
         for (let i = maxMessagePerPage - 1; i < newMessages.length; i++) {

@@ -1,13 +1,20 @@
 import React from 'react';
 import styles from './Message.module.css';
+import {IMessage} from "../../../../app";
 
-export class Message extends React.Component {
-  constructor(props) {
+interface IProps {
+    messageData: IMessage
+    checkboxHandler: (id: string) => void
+    openMessage: (message: string) => void
+}
+
+export class Message extends React.Component<IProps> {
+  constructor(props: IProps) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
+  handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const messageID = e.target.id;
     this.props.checkboxHandler(messageID);
   }
@@ -19,12 +26,12 @@ export class Message extends React.Component {
       (messageData.toDelete ? ` ${styles['to-delete']}` : '');
     return (
       <div
-        onKeyPress=""
+        onKeyPress={undefined}
         role="button"
         aria-hidden
         className={`${styles.message}${animation}`}
-        onClick={event => {
-          if (event.target.className !== styles.checkbox) {
+        onClick={(event: React.MouseEvent<HTMLElement>) => {
+          if ((event.target as HTMLInputElement).className !== styles.checkbox) {
             this.props.openMessage(messageData.text);
           }
         }}

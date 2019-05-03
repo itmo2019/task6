@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './MenuItems.module.css';
 
 export class MenuItems extends React.Component {
-  createMenuItem = name => {
+  createMenuItem = (name: string) => {
     return (
       <li className={styles.item}>
         <a className={styles.link} href="#name">

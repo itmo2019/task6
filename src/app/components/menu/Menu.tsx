@@ -2,7 +2,11 @@ import React from 'react';
 import styles from './Menu.module.css';
 import { MenuItems } from './menu-items/MenuItems';
 
-export class Menu extends React.Component {
+interface IProps {
+    newMail: () => void
+}
+
+export class Menu extends React.Component<IProps> {
   render() {
     return (
       <div className={styles.menu}>

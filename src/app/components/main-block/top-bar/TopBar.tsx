@@ -2,8 +2,18 @@ import React from 'react';
 import styles from './TopBar.module.css';
 import { HorizontalNavPanel } from './horizontal-nav-panel/HorizontalNavPanel';
 
-export class TopBar extends React.Component {
-  constructor(props) {
+interface IProps {
+    topBarCheckboxHandler: (val: boolean) => void
+    deleteMessages: () => void
+}
+
+interface IState {
+    topBarCheckboxChecked: boolean
+}
+
+export class TopBar extends React.Component<IProps> {
+  public state: IState;
+  constructor(props: IProps) {
     super(props);
     this.state = {
       topBarCheckboxChecked: false
@@ -11,7 +21,7 @@ export class TopBar extends React.Component {
     this.handleChangeTopBarCheckbox = this.handleChangeTopBarCheckbox.bind(this);
   }
 
-  handleChangeTopBarCheckbox(e) {
+  handleChangeTopBarCheckbox(e: React.ChangeEvent<HTMLInputElement>) {
     const isChecked = e.target.checked;
     this.props.topBarCheckboxHandler(isChecked);
     this.setState({ topBarCheckboxChecked: isChecked });

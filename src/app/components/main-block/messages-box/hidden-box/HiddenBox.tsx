@@ -1,12 +1,15 @@
 import React from 'react';
 import styles from './HiddenBox.module.css';
-
-export class HiddenBox extends React.Component {
+interface IProps {
+    closeMessage: () => void
+    messageText: string
+}
+export class HiddenBox extends React.Component<IProps> {
   render() {
     return (
       <div className="hidden-box">
         <div
-          onKeyPress=""
+          onKeyPress={undefined}
           role="button"
           aria-hidden
           className={styles['cancel-btn']}

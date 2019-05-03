@@ -2,9 +2,21 @@ import React from 'react';
 import styles from './MessagesBox.module.css';
 import { Message } from './message/Message';
 import { HiddenBox } from './hidden-box/HiddenBox';
+import {IMessage} from "../../../app";
 
-export class MessagesBox extends React.Component {
-  constructor(props) {
+interface IProps {
+    messages: IMessage[]
+    checkboxHandler: (id: string) => void
+}
+
+interface IState {
+    messageText: string
+    opened: boolean
+}
+
+export class MessagesBox extends React.Component<IProps> {
+  public state: IState;
+  constructor(props: IProps) {
     super(props);
     this.state = {
       messageText: '',
@@ -14,7 +26,7 @@ export class MessagesBox extends React.Component {
     this.closeMessage = this.closeMessage.bind(this);
   }
 
-  openMessage(message) {
+  openMessage(message: string) {
     this.setState({ opened: true, messageText: message });
   }
 
