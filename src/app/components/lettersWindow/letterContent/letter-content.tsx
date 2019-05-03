@@ -1,14 +1,20 @@
-import React from 'react';
+import * as React from 'react';
 
 import styles from './letter-content.module.css';
+import { ILetterInfo } from '../createLetter';
 
-export function LetterContent(props) {
+interface IProps {
+  info: ILetterInfo;
+  closeLetter: () => void;
+}
+
+export const LetterContent: React.FunctionComponent<IProps> = props => {
   return (
     <div className={styles.main}>
       <div
         className={styles.close}
         onClick={props.closeLetter}
-        onKeyPress={null}
+        onKeyPress={undefined}
         role="button"
         aria-hidden
       />
@@ -19,4 +25,4 @@ export function LetterContent(props) {
       <div className={styles.body}>{props.info.content}</div>
     </div>
   );
-}
+};

@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 
-import styles from './folders-menu.module.css';
+import * as styles from './folders-menu.module.css';
 
 export function FoldersMenu() {
   return (

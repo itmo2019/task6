@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import styles from './mail-body.module.css';
+import * as styles from './mail-body.module.css';
 
 import { FoldersMenu } from './foldersMenu/folders-menu';
 import { LettersWindow } from './lettersWindow/letters-window';

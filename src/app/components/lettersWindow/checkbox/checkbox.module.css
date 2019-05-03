@@ -1,10 +1,10 @@
-.checkbox__input {
+.input {
   position: absolute;
   left: -9999px;
   opacity: 0;
 }
 
-.checkbox__area {
+.area {
   display: inline-block;
   width: 52px;
   height: 100%;
@@ -13,14 +13,14 @@
   vertical-align: middle;
 }
 
-.checkbox__area::before {
+.area::before {
   display: inline-block;
   height: 100%;
   content: '';
   vertical-align: middle;
 }
 
-.checkbox__area-border {
+.area-border {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -30,6 +30,6 @@
   vertical-align: middle;
 }
 
-.checkbox__input:checked + .checkbox__area .checkbox__area-border {
+.input:checked + .area .area-border {
   background-image: url('../../../images/checkMark.svg');
 }

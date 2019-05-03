@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 
-import styles from './mail-header.module.css';
+import * as styles from './mail-header.module.css';
 
 import logoYandex from '../../images/yandexLogo.svg';
 import logoYandexService from '../../images/yandexServiceLogo.svg';

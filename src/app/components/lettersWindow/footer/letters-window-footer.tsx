@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 
 import styles from './letters-window-footer.module.css';
 
-export function LettersWindowFooter() {
+export const LettersWindowFooter: React.FunctionComponent<{}> = () => {
   return (
     <footer className={styles.main}>
       <a
@@ -31,4 +31,4 @@ export function LettersWindowFooter() {
       </a>
     </footer>
   );
-}
+};

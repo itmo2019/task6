@@ -1,6 +1,15 @@
-interface ILetter {
+export interface ILetterInfo {
+  author: string;
   theme: string;
-  body: string;
+  content: string;
+}
+
+export interface ILetter {
+  id: number;
+  bCheckbox: boolean;
+  bReaded: boolean;
+  bMarked: boolean;
+  info: ILetterInfo;
 }
 
 const names: string[] = [
@@ -11,7 +20,7 @@ const names: string[] = [
   'Федосов Давид'
 ];
 
-const letterExamples: ILetter[] = [
+const letterExamples = [
   {
     theme: 'Приемная компания',
     body:
@@ -88,9 +97,9 @@ const letterExamples: ILetter[] = [
 
 let counter = 0;
 
-export function CreateLetter(): object {
-  const randomName: string = names[Math.floor(Math.random() * names.length)];
-  const letter: ILetter = letterExamples[Math.floor(Math.random() * names.length)];
+export function CreateLetter(): ILetter {
+  const randomName = names[Math.floor(Math.random() * names.length)];
+  const letter = letterExamples[Math.floor(Math.random() * names.length)];
   return {
     id: counter++,
     bCheckbox: false,

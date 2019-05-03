@@ -19,12 +19,15 @@
   "devDependencies": {
     "@hellroot/eslint-config": "1.8.0",
     "@hellroot/stylelint-config": "1.1.0",
+    "awesome-typescript-loader": "5.2.1",
     "eslint": "5.12.0",
     "npm-run-all": "4.1.5",
     "prettier": "1.17.0",
     "react-scripts": "2.1.8",
+    "source-map-loader": "0.2.4",
     "stylelint": "10.0.1",
-    "typescript": "3.3.4000"
+    "typescript": "3.3.4000",
+    "webpack-cli": "3.3.1"
   },
   "scripts": {
     "dev": "react-scripts start",

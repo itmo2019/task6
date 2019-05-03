@@ -1,26 +1,35 @@
-import React from 'react';
+import * as React from 'react';
 
 import styles from './letter-view.module.css';
 
 import { Checkbox } from '../checkbox/checkbox';
+import { ILetter, ILetterInfo } from '../createLetter';
 
-export function LetterView(props) {
+interface IProps {
+  letter: ILetter;
+  showLetter: (letterInfo: ILetterInfo) => void;
+  clickOnSimpleCheckbox: (id?: number) => void;
+}
+
+export const LetterView: React.FunctionComponent<IProps> = props => {
   return (
     <div
       className={styles.main}
-      onClick={event =>
-        event.target.querySelector(`.${styles.author}`) !== null
-          ? props.showLetter(props.letter.info)
-          : null
-      }
-      onKeyPress={null}
+      onClick={event => {
+        const elem = event.target as HTMLElement;
+        if (elem.querySelector(`.${styles.author}`) !== null) {
+          props.showLetter(props.letter.info);
+        }
+      }}
+      onKeyPress={undefined}
       role="button"
       aria-hidden
     >
       <Checkbox
-        fooForSimple={props.clickOnSimpleCheckbox}
         id={props.letter.id}
         checked={props.letter.bCheckbox}
+        main={false}
+        foo={props.clickOnSimpleCheckbox}
       />
       <div className={styles.photo} />
       <div className={styles.author}>{props.letter.info.author}</div>
@@ -32,4 +41,4 @@ export function LetterView(props) {
       </div>
     </div>
   );
-}
+};
