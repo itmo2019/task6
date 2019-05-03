@@ -1,0 +1,33 @@
+.main {
+  height: 6.25%;
+}
+
+.main::before {
+  display: inline-block;
+  height: 100%;
+  content: '';
+  vertical-align: middle;
+}
+
+.button {
+  display: inline-block;
+  height: 100%;
+  padding: 0 10px;
+
+  border-style: none;
+  background-color: #fff;
+  color: #b6b6b6;
+  font: 13px 'Helvetica Neue', sans-serif;
+  letter-spacing: normal;
+  outline: none;
+  vertical-align: middle;
+}
+
+.button_activated {
+  color: #000;
+  cursor: pointer;
+}
+
+.button-activated:hover {
+  background-color: #f2f2f2;
+}

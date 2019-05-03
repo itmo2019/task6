@@ -1,0 +1,77 @@
+.main {
+  height: calc(100% - 1px);
+  cursor: pointer;
+  font: 15px 'Helvetica Neue', sans-serif;
+}
+
+.main::before {
+  display: inline-block;
+  height: 100%;
+  content: '';
+  vertical-align: middle;
+}
+
+.photo {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 16px;
+  background-image: url('../../../images/tempPhoto.png');
+  border-radius: 50%;
+  pointer-events: none;
+  vertical-align: middle;
+}
+
+.author {
+  display: inline-block;
+  overflow: hidden;
+  width: 180px;
+  height: 18px;
+  letter-spacing: normal;
+  pointer-events: none;
+  vertical-align: middle;
+}
+
+.readed {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 10px;
+  background: #6287bd;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.theme {
+  display: inline-block;
+  overflow: hidden;
+  width: 150px;
+  height: 18px;
+  letter-spacing: normal;
+  pointer-events: none;
+  vertical-align: middle;
+}
+
+.content {
+  display: inline-block;
+  overflow: hidden;
+  width: calc(100% - 610px);
+  height: 18px;
+  margin-left: 20px;
+  letter-spacing: normal;
+  opacity: 0.5;
+  pointer-events: none;
+  vertical-align: middle;
+}
+
+.data {
+  display: inline-block;
+  width: 100px;
+  height: 18px;
+  margin-left: 20px;
+  color: #9b9b9b;
+  letter-spacing: normal;
+  pointer-events: none;
+  text-align: right;
+  vertical-align: middle;
+}

@@ -1,0 +1,15 @@
+.letters-window {
+  display: inline-block;
+  width: calc(85% - 60px);
+  min-width: 590px;
+  height: 100%;
+  margin-left: 20px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 2px #000;
+}
+
+.start-transition-opacity {
+  opacity: 0;
+  transition: opacity 1s linear;
+}

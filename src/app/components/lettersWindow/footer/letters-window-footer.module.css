@@ -1,0 +1,23 @@
+.main {
+  width: 100%;
+  height: 6.25%;
+  text-align: right;
+}
+
+.main::before {
+  display: inline-block;
+  height: 100%;
+  content: '';
+  vertical-align: middle;
+}
+
+.link {
+  display: inline-block;
+  margin-right: 40px;
+  color: #ccc;
+  cursor: pointer;
+  font: 11px 'Helvetica Neue', sans-serif;
+  letter-spacing: normal;
+  text-decoration: none;
+  vertical-align: middle;
+}

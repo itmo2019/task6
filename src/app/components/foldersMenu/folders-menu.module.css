@@ -1,0 +1,54 @@
+.main {
+  display: inline-block;
+  width: 15%;
+  min-width: 150px;
+  margin-left: 20px;
+  vertical-align: top;
+}
+
+.button-write {
+  width: 100%;
+  height: 32px;
+
+  border-style: none;
+  background: #6287bd;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font: 12px 'Helvetica Neue', sans-serif;
+  outline: none;
+  text-align: center;
+}
+
+.folders-list {
+  margin-top: 10px;
+}
+
+.folders-list-button {
+  width: 100%;
+  height: 24px;
+  padding-left: 10px;
+
+  border: none;
+  background-color: #e5eaf0;
+  color: #707070;
+  cursor: pointer;
+  font: 13px 'Helvetica Neue', sans-serif;
+  outline: none;
+  text-align: left;
+}
+
+.folders-list-button:hover {
+  background: #d8e1ef;
+  border-radius: 4px;
+}
+
+.folders-list-button_selected {
+  background-color: #cdd6e4;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.folders-list-button_selected:hover {
+  background-color: #cdd6e4;
+}

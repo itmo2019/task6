@@ -1,0 +1,35 @@
+.checkbox__input {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
+
+.checkbox__area {
+  display: inline-block;
+  width: 52px;
+  height: 100%;
+  background-color: #fff;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.checkbox__area::before {
+  display: inline-block;
+  height: 100%;
+  content: '';
+  vertical-align: middle;
+}
+
+.checkbox__area-border {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 20px;
+  border-radius: 1px;
+  box-shadow: 0 0 0 1px #e2e2e2;
+  vertical-align: middle;
+}
+
+.checkbox__input:checked + .checkbox__area .checkbox__area-border {
+  background-image: url('../../../images/checkMark.svg');
+}
