@@ -1,0 +1,30 @@
+.RemoveDialog {
+  width: 300px;
+}
+
+.RemoveDialog__Title {
+  color: black;
+  font-family: 'HelveticaNeueCyr', serif;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.RemoveDialog__ConfirmButton {
+  width: 100px;
+  height: 25px;
+  margin-right: 20px;
+  background-color: #b22222;
+  color: #cccccc;
+  font-family: 'HelveticaNeueCyr', serif;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.RemoveDialog__CancelButton {
+  width: 100px;
+  height: 25px;
+  color: black;
+  font-family: 'HelveticaNeueCyr', serif;
+  font-size: 13px;
+  text-decoration: none;
+}

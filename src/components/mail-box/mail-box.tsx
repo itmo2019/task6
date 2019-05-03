@@ -4,6 +4,9 @@ import MultiRef from 'react-multi-ref';
 import loremIpsum from 'lorem-ipsum';
 import { Message } from '../message';
 import styles from './MailBox.module.css';
+import { Footer } from '../footer/footer';
+import { Header } from '../header/header';
+import { RemoveDialog } from '../removeDialog/removeDialog';
 
 interface IMailBox {
   addNewMessage: (f: () => void) => void;
@@ -15,6 +18,7 @@ interface IMailBoxState {
   shownMessagesRefs: MultiRef<number, Message>;
   shownMessages: MessageData[];
   hiddenMessages: MessageData[];
+  askingForRemoving: boolean;
 }
 
 interface IMessageData {
@@ -191,13 +195,18 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
     this.toggleMessages = this.toggleMessages.bind(this);
     this.addRandomly = this.addRandomly.bind(this);
     this.readMessage = this.readMessage.bind(this);
+    this.askRemoving = this.askRemoving.bind(this);
+    this.confirmedRemoving = this.confirmedRemoving.bind(this);
+
 
     props.addNewMessage(this.addNewMessage);
     props.removeMessages(this.removeMessages);
+
     this.state = {
       shownMessagesRefs: new MultiRef(),
       shownMessages: [],
-      hiddenMessages: []
+      hiddenMessages: [],
+      askingForRemoving: false
     };
     setTimeout(this.addRandomly, Math.floor(Math.random() * (10 * 60 * 1000 - 10 + 1) + 10));
   }
@@ -271,7 +280,13 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
     });
   }
 
-  private removeMessages() {
+  private askRemoving() {
+    this.setState({ askingForRemoving: true });
+    return true;
+  }
+
+  private confirmedRemoving() {
+    this.setState({ askingForRemoving: false });
     const unFiltered = this.state.shownMessages.filter(mes => {
       const k = Math.round(mes.getId());
       const mesRef = this.state.shownMessagesRefs.map.get(k);
@@ -308,6 +323,23 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
     setTimeout(() => this.addOldMessages(unFiltered.length), 1000);
   }
 
+  private removeMessages() {
+    const unFiltered = this.state.shownMessages.filter(mes => {
+      const k = Math.round(mes.getId());
+      const mesRef = this.state.shownMessagesRefs.map.get(k);
+      if (mesRef === undefined) {
+        return false;
+      }
+      return mesRef.state.isTicked;
+    });
+
+    if (unFiltered.length === 0) {
+      return;
+    }
+
+    this.askRemoving();
+  }
+
   private readMessage(id: number) {
     for (const mes of this.state.shownMessages) {
       if (mes.getId() === id) {
@@ -318,25 +350,31 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
 
   public render() {
     return (
-      <ul className={classNames(styles.MailBox, this.props.className)}>
-        {this.state.shownMessages.map(mes => {
-          return (
-            <Message
-              key={mes.getId()}
-              letterID={mes.getId()}
-              sender={mes.getSender()}
-              topic={mes.getTopic()}
-              avatar={mes.getAvatar()}
-              content={mes.getContent()}
-              date={mes.getDate()}
-              toggleMessages={this.toggleMessages}
-              wasRead={mes.getWasRead()}
-              readMessage={this.readMessage}
-              ref={this.state.shownMessagesRefs.ref(mes.getId())}
-            />
-          );
-        })}
-      </ul>
+      <div>
+        <RemoveDialog
+          isVisible={this.state.askingForRemoving}
+          confirmedAction={this.confirmedRemoving}
+        />
+        <ul className={classNames(styles.MailBox, this.props.className)}>
+          {this.state.shownMessages.map(mes => {
+            return (
+              <Message
+                key={mes.getId()}
+                letterID={mes.getId()}
+                sender={mes.getSender()}
+                topic={mes.getTopic()}
+                avatar={mes.getAvatar()}
+                content={mes.getContent()}
+                date={mes.getDate()}
+                toggleMessages={this.toggleMessages}
+                wasRead={mes.getWasRead()}
+                readMessage={this.readMessage}
+                ref={this.state.shownMessagesRefs.ref(mes.getId())}
+              />
+            );
+          })}
+        </ul>
+      </div>
     );
   }
 }
