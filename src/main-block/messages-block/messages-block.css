@@ -24,11 +24,6 @@
   cursor: pointer;
 }
 
-#check-all {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
 .messages-list {
   overflow: auto;
   min-height: 500px;

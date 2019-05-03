@@ -12,8 +12,9 @@ class HiddenMessage extends React.Component<InjectedProps> {
   render() {
     const classAddition = this.props.messageIsOpen ? '__open' : '__closed';
     return (
-      <div className={`hidden-message hidden-message${classAddition}`}>
+      <div className={`hidden-message hidden-message${classAddition}`} aria-hidden={!this.props.messageIsOpen} aria-live="polite">
         <button
+          aria-controls="hidden-message"
           type="button"
           className="close-message"
           onClick={() => {

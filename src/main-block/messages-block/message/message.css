@@ -21,6 +21,11 @@
   cursor: pointer;
   font-family: inherit;
   font-size: 100%;
+  outline: none;
+}
+
+.message-container:focus {
+  box-shadow: 0 0 0 2px #d9f7ff;
 }
 
 .message {

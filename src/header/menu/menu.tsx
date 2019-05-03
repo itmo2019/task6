@@ -4,7 +4,7 @@ import './menu.css';
 
 function Menu() {
   return (
-    <a className="header__menu" href="/" onClick={(click) => {
+    <a className="header__menu" href="#" onClick={(click) => {
       click.preventDefault();
     }}>
       <div className="menu__stripe" />

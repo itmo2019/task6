@@ -10,6 +10,7 @@ class MessageCreator extends React.Component<InjectedProps> {
   render() {
     return (
       <button
+        aria-controls="messages-list"
         className="header__message-creator"
         onClick={this.props.newMailFunction}
         type="button"

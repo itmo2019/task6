@@ -8,7 +8,7 @@ function YandexServiceLogo() {
   return (
     <div className="header__yandex-service-logo">
       <a className="yandex-service-logo__image-link" href="https://mail.yandex.ru/">
-        <img className="yandex-service-logo__image" src={YandexMail} alt="yandex" />
+        <img className="yandex-service-logo__image" src={YandexMail} alt="Логотип Яндекс почты" />
       </a>
     </div>
   );

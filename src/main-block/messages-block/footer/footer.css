@@ -1,9 +1,21 @@
 .footer {
+  width: 100%;
+  height: 34px;
+
+  border-top: solid 1px #e2e2e2;
+}
+
+.footer__links-list {
+  display: inline;
   padding: 5px 20px;
-  margin: auto 0 5px 0;
+  margin: 5px 0;
   float: right;
   font-family: 'Helvetica Neue', sans-serif;
   font-size: 11px;
+}
+
+.link-container {
+  display: inline;
 }
 
 .footer-link {
@@ -13,6 +25,11 @@
   margin-left: 20px;
   color: #ccc;
   cursor: pointer;
+  outline: none;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.footer-link:focus {
+  outline: 2px solid #d9f7ff;
 }

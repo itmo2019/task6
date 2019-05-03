@@ -51,7 +51,7 @@ class MessagesBlock extends React.Component<InjectedProps> {
   render() {
     const messagesListClassAddition = !this.state.messageIsOpen ? '__open' : '__closed';
     return (
-      <div className="messages-block">
+      <div className="messages-block" aria-haspopup="true">
         <Header
           handleSelectAll={this.props.handleSelectAll}
           deleteSelected={this.props.deleteSelected}
@@ -62,7 +62,7 @@ class MessagesBlock extends React.Component<InjectedProps> {
           messageIsOpen={this.state.messageIsOpen}
           hiddenMessageText={this.state.hiddenMessageText}
         />
-        <div>
+        <div className="messages-list-container" aria-hidden={this.state.messageIsOpen} aria-live="polite">
           <AutoSizer className={`messages-list messages-list${messagesListClassAddition}`}>
             {({ height, width }) => (
               <List
@@ -70,8 +70,9 @@ class MessagesBlock extends React.Component<InjectedProps> {
                 width={width}
                 rowCount={this.props.messagesList.length}
                 rowHeight={41}
-                rowRenderer={({ index, key, style }) =>
-                  <div key={key} style={style}>
+                rowRenderer={({ index, key, style }) => {
+                  // todo: try newStyle:CSSProperties = {}
+                  return <div key={key} style={style}>
                     <Message
                       message={this.props.messagesList[index]}
                       openMessage={this.openMessage}
@@ -79,7 +80,9 @@ class MessagesBlock extends React.Component<InjectedProps> {
                       messageIndex={index}
                       key={this.props.messagesList[index].id}
                     />
-                  </div>}
+                  </div>;
+                }
+                }
               />
             )}
           </AutoSizer>

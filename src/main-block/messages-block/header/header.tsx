@@ -12,16 +12,21 @@ class Header extends React.Component<InjectedProps> {
   render() {
     return (
       <div className="messages-block-header">
-        <input
-          type="checkbox"
-          className="checkbox"
-          id="check-all"
-          checked={this.props.selectAllCheckbox}
-          onChange={() => {
-            this.props.handleSelectAll();
-          }}
-        />
-        <button type="button" className="messages-block-header__action button-to-div">
+        <label
+          id="check-all-label"
+          htmlFor="check-all"
+        >
+          <input
+            type="checkbox"
+            className="checkbox"
+            id="check-all"
+            checked={this.props.selectAllCheckbox}
+            onChange={() => {
+              this.props.handleSelectAll();
+            }}
+          />
+        </label>
+        <button type="button" className="messages-block-header__action button-to-div" disabled={true}>
           Переслать
         </button>
         <button
@@ -34,10 +39,10 @@ class Header extends React.Component<InjectedProps> {
         >
           Удалить
         </button>
-        <button type="button" className="messages-block-header__action button-to-div">
+        <button type="button" className="messages-block-header__action button-to-div" disabled={true}>
           Это спам!
         </button>
-        <button type="button" className="messages-block-header__action button-to-div">
+        <button type="button" className="messages-block-header__action button-to-div" disabled={true}>
           Прочитано
         </button>
       </div>

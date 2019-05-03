@@ -13,6 +13,11 @@
 
   font: 15px 'Helvetica Neue', sans-serif;
   line-height: 2;
+  outline: none;
+}
+
+.header__search-bar:focus {
+  outline: 2px solid #d9f7ff;
 }
 
 .header__search-bar::placeholder {

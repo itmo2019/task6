@@ -8,6 +8,11 @@
 .yandex-service-logo__image-link {
   display: inline-block;
   cursor: pointer;
+  outline: none;
+}
+
+.yandex-service-logo__image-link:focus {
+  outline: 2px solid #d9f7ff;
 }
 
 .yandex-service-logo__image {
