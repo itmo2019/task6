@@ -1,5 +1,5 @@
 import React from 'react';
-import './Header.css';
+import styles from './Header.module.css';
 
 import yaLogo from './yandex-mail.png';
 import { Hamburger } from './hamburger/Hamburger';
@@ -10,7 +10,7 @@ export class Header extends React.Component {
     return (
       <div className="header">
         <Hamburger />
-        <img className="header__ya-logo" src={yaLogo} alt="yandex" />
+        <img className={styles['ya-logo']} src={yaLogo} alt="yandex" />
         <SearchBox />
       </div>
     );

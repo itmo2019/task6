@@ -7,12 +7,12 @@
   float: right;
 }
 
-.footer-bar__item {
+.item {
   display: inline-block;
   margin-left: 25px;
 }
 
-.footer-link {
+.link {
   color: #9b9b9b;
   cursor: pointer;
   font-size: 11px;

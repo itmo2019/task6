@@ -1,4 +1,4 @@
-.menu__items {
+.items {
   position: relative;
 
   width: 90%;
@@ -11,21 +11,21 @@
   vertical-align: middle;
 }
 
-.menu__item {
+.item {
   padding-left: 5px;
   border-radius: 3px;
 }
 
-.menu__item_active {
+.item_active {
   background-color: #cdd6e4;
   font-family: YandexSansBold, sans-serif;
 }
 
-.menu__item:hover {
+.item:hover {
   background-color: #cdd6e4;
 }
 
-.menu-link {
+.link {
   display: block;
   padding: 3px;
   color: #707070;

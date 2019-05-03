@@ -1,17 +1,17 @@
 import React from 'react';
-import './FooterBar.css';
+import styles from './FooterBar.module.css';
 
 export class FooterBar extends React.Component {
   render() {
     return (
-      <nav className="footer-bar">
-        <a className="footer-link footer-bar__item" href="#help">
+      <nav className={styles['footer-bar']}>
+        <a className={`${styles.link} ${styles.item}`} href="#help">
           Помощь и обратная связь
         </a>
-        <a className="footer-link footer-bar__item" href="#adv">
+        <a className={`${styles.link} ${styles.item}`} href="#adv">
           Реклама
         </a>
-        <a className="footer-link footer-bar__item" href="#yandex">
+        <a className={`${styles.link} ${styles.item}`} href="#yandex">
           &#9400; 2001—2018, Яндекc
         </a>
       </nav>

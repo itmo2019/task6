@@ -1,8 +1,8 @@
 import React from 'react';
-import './SearchBox.css';
+import styles from './SearchBox.module.css';
 
 export class SearchBox extends React.Component {
   render() {
-    return <input className="search-box" type="search" placeholder="Поиск" />;
+    return <input className={styles['search-box']} type="search" placeholder="Поиск" />;
   }
 }

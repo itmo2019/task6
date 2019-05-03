@@ -1,11 +1,11 @@
 import React from 'react';
-import './MenuItems.css';
+import styles from './MenuItems.module.css';
 
 export class MenuItems extends React.Component {
   createMenuItem = name => {
     return (
-      <li className="menu__item">
-        <a className="menu-link" href="#name">
+      <li className={styles.item}>
+        <a className={styles.link} href="#name">
           {name}
         </a>
       </li>
@@ -15,9 +15,9 @@ export class MenuItems extends React.Component {
   render() {
     const menuItemsNames = ['Отправленные', 'Удаленные', 'Спам', 'Черновики', 'Создать папку'];
     return (
-      <ul className="menu__items">
-        <li className="menu__item menu__item_active">
-          <a className="menu-link" href="#incomeMessages">
+      <ul className={styles.items}>
+        <li className={`${styles.item} ${styles.item_active}`}>
+          <a className={styles.link} href="#incomeMessages">
             Входящие
           </a>
         </li>

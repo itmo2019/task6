@@ -1,5 +1,5 @@
 .message {
-  height: 0px;
+  height: 0;
   padding-top: 5px;
   padding-bottom: 5px;
 
@@ -8,7 +8,7 @@
   transition: opacity 1s, height 1s;
 }
 
-.message__sender-img {
+.sender-img {
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -22,13 +22,13 @@
   vertical-align: middle;
 }
 
-.message__sender {
+.sender {
   display: inline-block;
   width: 250px;
   margin-right: 10px;
 }
 
-.message__theme {
+.theme {
   display: inline-block;
   overflow: hidden;
   width: calc(100% - 500px);
@@ -39,7 +39,7 @@
   white-space: nowrap;
 }
 
-.message__date {
+.date {
   position: relative;
   top: 5px;
   right: 20px;
@@ -51,7 +51,7 @@
   vertical-align: middle;
 }
 
-.message__checkbox {
+.checkbox {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -59,25 +59,12 @@
   vertical-align: middle;
 }
 
-.message__unread-circle {
+.unread-circle {
   display: inline-block;
   width: 10px;
   height: 10px;
   background: #6287bd;
   border-radius: 50%;
-}
-
-.hidden-box__content {
-  min-height: 500px;
-  margin: 5px;
-}
-
-.hidden-box__cancel-btn {
-  color: gray;
-  cursor: pointer;
-  float: right;
-  font-family: YandexSansThin, serif;
-  font-size: 30px;
 }
 
 .to-create {

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 
-import './app.css';
+import styles from './app.module.css';
 import { Header } from './components/header/Header';
 import { MainBlock } from './components/main-block/MainBlock';
 import { Menu } from './components/menu/Menu';
 import * as utils from './message-templates';
 
 const maxMessageInterval = 10 * 60 * 1000;
-const testMaxMessageInterval = 100;
 const timeMessageInterval = 5 * 60 * 1000;
 const maxMessagePerPage = 30;
 
@@ -172,7 +171,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div className="app">
+      <div className={styles.app}>
         <Header />
         <Menu newMail={this.newMail} />
         <MainBlock

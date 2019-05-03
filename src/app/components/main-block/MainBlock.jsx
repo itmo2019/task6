@@ -1,5 +1,5 @@
 import React from 'react';
-import './MainBlock.css';
+import styles from './MainBlock.module.css';
 import { TopBar } from './top-bar/TopBar';
 import { Footer } from './footer/Footer';
 import { MessagesBox } from './messages-box/MessagesBox';
@@ -7,7 +7,7 @@ import { MessagesBox } from './messages-box/MessagesBox';
 export class MainBlock extends React.Component {
   render() {
     return (
-      <div className="main-block">
+      <div className={styles['main-block']}>
         <TopBar
           deleteMessages={this.props.deleteMessages}
           topBarCheckboxHandler={this.props.topBarCheckboxHandler}

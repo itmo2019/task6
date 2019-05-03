@@ -7,7 +7,7 @@
   float: left;
 }
 
-.menu__button {
+.button {
   width: 90%;
   height: 35px;
 
@@ -20,6 +20,6 @@
   font-size: 12px;
 }
 
-.menu__button_action_add-message {
+.button_action_add-message {
   margin-top: 5px;
 }

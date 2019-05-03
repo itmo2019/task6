@@ -1,13 +1,13 @@
 import React from 'react';
-import './HorizontalNavPanel.css';
+import styles from './HorizontalNavPanel.module.css';
 
 export class HorizontalNavPanel extends React.Component {
   createNavigationPanelItem = (name, onClickFunction) => {
     return (
-      <li className="horizontal-nav-panel__item">
+      <li className={styles.item}>
         <button
           type="button"
-          className="horizontal-nav-panel__button menu-link"
+          className={`${styles.button} ${styles.link}`}
           onClick={onClickFunction}
         >
           {name}
@@ -24,7 +24,7 @@ export class HorizontalNavPanel extends React.Component {
       { name: 'Прочитано', function: undefined }
     ];
     return (
-      <ul className="horizontal-nav-panel">
+      <ul className={styles['horizontal-nav-panel']}>
         {navigationPanelValues.map(element =>
           this.createNavigationPanelItem(element.name, element.function)
         )}

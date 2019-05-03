@@ -6,16 +6,23 @@
   list-style-type: none;
 }
 
-.horizontal-nav-panel__item {
+.item {
   margin-right: 25px;
   float: left;
 }
 
-.horizontal-nav-panel__button {
+.button {
   border-style: none;
   background-color: #fff;
   color: #ccc;
   cursor: pointer;
   font: 13px 'Helvetica Neue', sans-serif;
   outline: none;
+}
+
+.link {
+  display: block;
+  padding: 3px;
+  color: #707070;
+  text-decoration: none;
 }

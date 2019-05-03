@@ -1,6 +1,7 @@
 import React from 'react';
-import './MessagesBox.css';
+import styles from './MessagesBox.module.css';
 import { Message } from './message/Message';
+import { HiddenBox } from './hidden-box/HiddenBox';
 
 export class MessagesBox extends React.Component {
   constructor(props) {
@@ -10,32 +11,24 @@ export class MessagesBox extends React.Component {
       opened: false
     };
     this.openMessage = this.openMessage.bind(this);
+    this.closeMessage = this.closeMessage.bind(this);
   }
 
   openMessage(message) {
     this.setState({ opened: true, messageText: message });
   }
 
+  closeMessage() {
+    this.setState({ opened: false });
+  }
+
   render() {
     return (
       <div>
         {this.state.opened === true ? (
-          <div className="hidden-box">
-            <div
-              onKeyPress=""
-              role="button"
-              aria-hidden
-              className="hidden-box__cancel-btn"
-              onClick={() => {
-                this.setState({ opened: false });
-              }}
-            >
-              X
-            </div>
-            <div className="hidden-box__content">{this.state.messageText}</div>
-          </div>
+          <HiddenBox closeMessage={this.closeMessage} messageText={this.state.messageText} />
         ) : (
-          <div className="messages-box">
+          <div className={styles['messages-box']}>
             {this.props.messages.map(messageData => (
               <Message
                 key={messageData.id}

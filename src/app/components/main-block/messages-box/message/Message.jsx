@@ -1,5 +1,5 @@
 import React from 'react';
-import './Message.css';
+import styles from './Message.module.css';
 
 export class Message extends React.Component {
   constructor(props) {
@@ -15,32 +15,33 @@ export class Message extends React.Component {
   render() {
     const { messageData } = this.props;
     const animation =
-      (messageData.toCreate ? ' to-create' : '') + (messageData.toDelete ? ' to-delete' : '');
+      (messageData.toCreate ? ` ${styles['to-create']}` : '') +
+      (messageData.toDelete ? ` ${styles['to-delete']}` : '');
     return (
       <div
         onKeyPress=""
         role="button"
         aria-hidden
-        className={`message${animation}`}
+        className={`${styles.message}${animation}`}
         onClick={event => {
-          if (event.target.className !== 'message__checkbox') {
+          if (event.target.className !== styles.checkbox) {
             this.props.openMessage(messageData.text);
           }
         }}
         style={messageData.display ? {} : { display: 'none' }}
       >
         <input
-          className="message__checkbox"
+          className={styles.checkbox}
           type="checkbox"
           checked={messageData.isChecked}
           id={messageData.id}
           onChange={this.handleChange}
         />
-        <div className="message__sender-img">{messageData.firstLetterSender}</div>
-        <div className="message__sender">{messageData.sender}</div>
-        <span className="message__unread-circle" />
-        <div className="message__theme">{messageData.theme}</div>
-        <div className="message__date">{messageData.date}</div>
+        <div className={styles['sender-img']}>{messageData.firstLetterSender}</div>
+        <div className={styles.sender}>{messageData.sender}</div>
+        <span className={styles['unread-circle']} />
+        <div className={styles.theme}>{messageData.theme}</div>
+        <div className={styles.date}>{messageData.date}</div>
       </div>
     );
   }

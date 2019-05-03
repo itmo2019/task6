@@ -1,0 +1,12 @@
+.content {
+  min-height: 500px;
+  margin: 5px;
+}
+
+.cancel-btn {
+  color: gray;
+  cursor: pointer;
+  float: right;
+  font-family: YandexSansThin, serif;
+  font-size: 30px;
+}

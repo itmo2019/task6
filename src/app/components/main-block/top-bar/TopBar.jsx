@@ -1,5 +1,5 @@
 import React from 'react';
-import './TopBar.css';
+import styles from './TopBar.module.css';
 import { HorizontalNavPanel } from './horizontal-nav-panel/HorizontalNavPanel';
 
 export class TopBar extends React.Component {
@@ -19,9 +19,9 @@ export class TopBar extends React.Component {
 
   render() {
     return (
-      <div className="top-bar">
+      <div className={styles['top-bar']}>
         <input
-          className="top-bar__checkbox"
+          className={styles.checkbox}
           type="checkbox"
           checked={this.state.topBarCheckboxChecked}
           onChange={this.handleChangeTopBarCheckbox}
