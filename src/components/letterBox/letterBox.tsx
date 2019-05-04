@@ -246,7 +246,7 @@ export default class LetterBox extends Component<Props, State> {
         className={styles.letter}
         authorLogo={letter.authorLogo}
         authorName={letter.authorName}
-        topic={index + ' ' + letter.topic}
+        topic={letter.topic}
         date={letter.date}
         isUnread={letter.isUnread}
         isChecked={letter.isChecked}
