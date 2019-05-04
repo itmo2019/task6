@@ -17,6 +17,9 @@ class Header extends React.Component<InjectedProps> {
           htmlFor="check-all"
         >
           <input
+            role="checkbox"
+            aria-checked={this.props.selectAllCheckbox}
+            aria-label={'Выделить все сообщения'}
             type="checkbox"
             className="checkbox"
             id="check-all"

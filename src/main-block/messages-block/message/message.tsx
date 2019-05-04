@@ -23,6 +23,9 @@ class Message extends React.Component<InjectedProps> {
           htmlFor={`checkbox-${this.props.message.id}`}
         >
           <input
+            role="checkbox"
+            aria-checked={this.props.message.selected}
+            aria-label={'Выделить текущее сообщение'}
             checked={this.props.message.selected}
             type="checkbox"
             className="select-message__checkbox checkbox"
@@ -37,13 +40,17 @@ class Message extends React.Component<InjectedProps> {
         <button
           type="button"
           className="message-container"
+          aria-label={'Сообщение от ' + this.props.message.senderName +
+          '. Тема: ' + this.props.message.subject +
+          '. Дата: ' + this.props.message.date +
+          '. Кнопка - открыть текущее сообщение'}
           onClick={() => {
             this.props.openMessage(this.props.message);
           }}
         >
           <div className="message-info__sender-logo">{this.props.message.senderLogo}</div>
           <div className="message-info__sender bold">{this.props.message.senderName}</div>
-          <div className="message-info__mark unread-mark" />
+          <div className="message-info__mark unread-mark"/>
           <div className="message-info__subject bold">{this.props.message.subject}</div>
           <div className="message-info__date-container">
             <div className="date-container__date">{this.props.message.date}</div>
