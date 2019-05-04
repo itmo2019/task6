@@ -1,25 +1,29 @@
 .menu {
-  position: relative;
-  top: 15px;
+  display: inline-block;
 
   width: 150px;
   height: 100vh;
-  float: left;
+  margin-top: 15px;
+  margin-left: 22px;
 }
 
 .button {
   width: 90%;
   height: 35px;
-
-  border-color: #6287bd;
-  background-color: #6287bd;
   border-radius: 4px;
-  box-shadow: 0 2px 4px #6287bd;
   color: #ffffff;
   cursor: pointer;
   font-size: 12px;
 }
 
-.button_action_add-message {
-  margin-top: 5px;
+.dark {
+  border-color: #54585e;
+  background-color: #54585e;
+  box-shadow: 0 2px 4px #54585e;
+}
+
+.light {
+  border-color: #6287bd;
+  background-color: #6287bd;
+  box-shadow: 0 2px 4px #6287bd;
 }

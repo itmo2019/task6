@@ -1,3 +1,11 @@
+:global(body) :local(.light) {
+  background-color: #e5eaf0;
+}
+
+:global(body) :local(.dark) {
+  background-color: #212121;
+}
+
 .app {
   min-width: 900px;
   min-height: 100%;

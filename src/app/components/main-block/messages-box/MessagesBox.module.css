@@ -4,3 +4,11 @@
   display: block;
   min-height: 500px;
 }
+
+.dark {
+  color: white;
+}
+
+.light {
+  color: black;
+}

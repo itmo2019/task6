@@ -1,7 +1,10 @@
 .ya-logo {
   display: inline-block;
-  width: 150px;
-  height: 25px;
-  transform: scaleY(1.5);
-  vertical-align: middle;
+  height: 30px;
+  vertical-align: bottom;
+}
+
+.header {
+  margin-right: 22px;
+  margin-left: 22px;
 }

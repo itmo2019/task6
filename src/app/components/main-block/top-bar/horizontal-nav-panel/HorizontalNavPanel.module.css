@@ -26,3 +26,13 @@
   color: #707070;
   text-decoration: none;
 }
+
+.dark {
+  background-color: #2b2c2b;
+  color: white;
+}
+
+.light {
+  background-color: white;
+  color: #707070;
+}

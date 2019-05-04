@@ -4,6 +4,7 @@ import { TopBar } from './top-bar/TopBar';
 import { Footer } from './footer/Footer';
 import { MessagesBox } from './messages-box/MessagesBox';
 import { IMessage } from "../../app";
+import { ThemeContext, themes } from "../../../theme/theme-context";
 
 interface PropsType {
     topBarCheckboxHandler: (isChecked: boolean) => void
@@ -14,8 +15,10 @@ interface PropsType {
 
 export class MainBlock extends React.Component<PropsType> {
   render() {
+    const theme = this.context;
+    const colorStyle = theme === themes.light ? styles.light : styles.dark;
     return (
-      <div className={styles['main-block']}>
+      <div className={`${styles['main-block']} ${colorStyle}`}>
         <TopBar
           deleteMessages={this.props.deleteMessages}
           topBarCheckboxHandler={this.props.topBarCheckboxHandler}
@@ -26,3 +29,5 @@ export class MainBlock extends React.Component<PropsType> {
     );
   }
 }
+
+MainBlock.contextType = ThemeContext;

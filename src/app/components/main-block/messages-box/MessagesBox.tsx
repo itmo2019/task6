@@ -3,6 +3,7 @@ import styles from './MessagesBox.module.css';
 import { Message } from './message/Message';
 import { HiddenBox } from './hidden-box/HiddenBox';
 import {IMessage} from "../../../app";
+import {ThemeContext, themes} from "../../../../theme/theme-context";
 
 interface IProps {
     messages: IMessage[]
@@ -35,12 +36,13 @@ export class MessagesBox extends React.Component<IProps> {
   }
 
   render() {
+      const colorStyle = this.context === themes.light ? styles.light : styles.dark;
     return (
       <div>
         {this.state.opened === true ? (
           <HiddenBox closeMessage={this.closeMessage} messageText={this.state.messageText} />
         ) : (
-          <div className={styles['messages-box']}>
+          <div className={`${styles['messages-box']} ${colorStyle}`}>
             {this.props.messages.map(messageData => (
               <Message
                 key={messageData.id}
@@ -55,3 +57,5 @@ export class MessagesBox extends React.Component<IProps> {
     );
   }
 }
+
+MessagesBox.contextType = ThemeContext;

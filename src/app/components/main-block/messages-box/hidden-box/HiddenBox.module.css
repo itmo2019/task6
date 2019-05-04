@@ -3,6 +3,14 @@
   margin: 5px;
 }
 
+.dark {
+  color: white;
+}
+
+.light {
+  color: #1c1c1c;
+}
+
 .cancel-btn {
   color: gray;
   cursor: pointer;

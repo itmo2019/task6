@@ -5,6 +5,7 @@ import { Header } from './components/header/Header';
 import { MainBlock } from './components/main-block/MainBlock';
 import { Menu } from './components/menu/Menu';
 import * as utils from './message-templates';
+import { ThemeProvider, themes } from "../theme/theme-context";
 
 const maxMessageInterval = 10 * 60 * 1000;
 const timeMessageInterval = 5 * 60 * 1000;
@@ -26,6 +27,7 @@ export interface IMessage {
 interface IState {
     wasNormalInterval: boolean
     messages: IMessage[]
+    theme: themes
 }
 
 export class App extends Component {
@@ -87,21 +89,32 @@ export class App extends Component {
     );
   }
 
-  constructor(props: Readonly<{}>) {
+  constructor(props: {}) {
     super(props);
     this.state = {
       messages: [],
-      wasNormalInterval: true
+      wasNormalInterval: true,
+        theme: themes.light
     };
     this.newMail = this.newMail.bind(this);
     this.deleteMessages = this.deleteMessages.bind(this);
     App.generateMessage = App.generateMessage.bind(this);
     this.getTimeForMessage = this.getTimeForMessage.bind(this);
     this.showHiddenMessages = this.showHiddenMessages.bind(this);
+    this.toggleTheme = this.toggleTheme.bind(this);
     setTimeout(() => {
       this.newMail();
     }, App.getRandomArbitrary(10, maxMessageInterval));
   }
+
+    toggleTheme = () => {
+        this.setState((state: IState) => ({
+            theme:
+                state.theme === themes.dark
+                    ? themes.light
+                    : themes.dark,
+        }));
+    };
 
   getTimeForMessage() {
     let randomTime = App.getRandomArbitrary(10, maxMessageInterval);
@@ -190,17 +203,20 @@ export class App extends Component {
   }
 
   render() {
+      const colorStyle = this.state.theme === themes.light ? styles.light : styles.dark;
     return (
-      <div className={styles.app}>
-        <Header />
-        <Menu newMail={this.newMail} />
-        <MainBlock
-          messages={this.state.messages}
-          deleteMessages={this.deleteMessages}
-          checkboxHandler={this.checkboxHandler}
-          topBarCheckboxHandler={this.topBarCheckboxHandler}
-        />
-      </div>
+        <ThemeProvider value={this.state.theme}>
+            <div className={`${styles.app} ${colorStyle}`}>
+                <Header changeTheme={this.toggleTheme}/>
+                <Menu newMail={this.newMail} />
+                <MainBlock
+                    messages={this.state.messages}
+                    deleteMessages={this.deleteMessages}
+                    checkboxHandler={this.checkboxHandler}
+                    topBarCheckboxHandler={this.topBarCheckboxHandler}
+                />
+            </div>
+        </ThemeProvider>
     );
   }
 }

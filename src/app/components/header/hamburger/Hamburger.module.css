@@ -1,7 +1,6 @@
 .single-strip {
   height: 3px;
   margin-top: 4px;
-  background-color: #000;
 }
 
 .hamburger {
@@ -12,4 +11,12 @@
   margin-right: 5px;
   cursor: pointer;
   vertical-align: middle;
+}
+
+.dark {
+  background-color: white;
+}
+
+.light {
+  background-color: #000;
 }
