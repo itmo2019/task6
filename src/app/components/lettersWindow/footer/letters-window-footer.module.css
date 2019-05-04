@@ -14,10 +14,19 @@
 .link {
   display: inline-block;
   margin-right: 40px;
-  color: #ccc;
-  cursor: pointer;
+  color: #b6b6b6;
   font: 11px 'Helvetica Neue', sans-serif;
   letter-spacing: normal;
   text-decoration: none;
   vertical-align: middle;
+}
+
+.link-light:hover {
+  color: #000;
+  cursor: pointer;
+}
+
+.link-dark:hover {
+  color: #fff;
+  cursor: pointer;
 }

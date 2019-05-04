@@ -15,7 +15,6 @@
   padding: 0 10px;
 
   border-style: none;
-  background-color: #fff;
   color: #b6b6b6;
   font: 13px 'Helvetica Neue', sans-serif;
   letter-spacing: normal;
@@ -23,11 +22,28 @@
   vertical-align: middle;
 }
 
-.button-activated {
+.button-light {
+  background: #fff;
+}
+
+.button-dark {
+  background: #595b5d;
+}
+
+.button-activated-light {
   color: #000;
   cursor: pointer;
 }
 
-.button-activated:hover {
-  background-color: #f2f2f2;
+.button-activated-dark {
+  color: #fff;
+  cursor: pointer;
+}
+
+.button-activated-light:hover {
+  background: #f2f2f2;
+}
+
+.button-activated-dark:hover {
+  background: #a3aab4;
 }

@@ -7,14 +7,22 @@ import { Checkbox } from '../checkbox/checkbox';
 interface IProps {
   bToolbar: boolean;
   bMainCheckbox: boolean;
+  bLight: boolean;
   clickOnMainCheckbox: () => void;
   markSelectedLetters: () => void;
 }
 
 export const LettersWindowHeader: React.FunctionComponent<IProps> = props => {
-  const classNameForButtons = `${styles.button} ${
-    props.bToolbar ? styles['button-activated'] : ''
+  let classNameForButtons: string = `${styles.button} ${
+    props.bLight ? styles['button-light'] : styles['button-dark']
   }`;
+  if (props.bToolbar) {
+    if (props.bLight) {
+      classNameForButtons += ` ${styles['button-activated-light']}`;
+    } else {
+      classNameForButtons += ` ${styles['button-activated-dark']}`;
+    }
+  }
 
   return (
     <header className={styles.main}>

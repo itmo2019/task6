@@ -11,13 +11,21 @@
   height: 32px;
 
   border-style: none;
-  background: #6287bd;
   border-radius: 4px;
-  color: #fff;
   cursor: pointer;
   font: 12px 'Helvetica Neue', sans-serif;
   outline: none;
   text-align: center;
+}
+
+.button-write-light {
+  background: #6287bd;
+  color: #fff;
+}
+
+.button-write-dark {
+  background-color: #e5eaf0;
+  color: #000;
 }
 
 .folders-list {
@@ -30,25 +38,45 @@
   padding-left: 10px;
 
   border: none;
-  background-color: #e5eaf0;
-  color: #707070;
+  border-radius: 4px;
   cursor: pointer;
   font: 13px 'Helvetica Neue', sans-serif;
   outline: none;
   text-align: left;
 }
 
-.folders-list-button:hover {
-  background: #d8e1ef;
-  border-radius: 4px;
+.folders-list-button-light {
+  background: #e5eaf0;
+  color: #707070;
 }
 
-.folders-list-button_selected {
-  background-color: #cdd6e4;
-  border-radius: 4px;
+.folders-list-button-light:hover {
+  background: #d8e1ef;
+}
+
+.folders-list-button-dark {
+  background: #515355;
+  color: #fff;
+}
+
+.folders-list-button-dark:hover {
+  background: #a3aab4;
+}
+
+.folders-list-button_selected-light {
+  background: #cdd6e4;
   font-weight: bold;
 }
 
-.folders-list-button_selected:hover {
-  background-color: #cdd6e4;
+.folders-list-button_selected-light:hover {
+  background: #cdd6e4;
+}
+
+.folders-list-button_selected-dark {
+  background: #9aa0aa;
+  font-weight: bold;
+}
+
+.folders-list-button_selected-dark:hover {
+  background: #9aa0aa;
 }

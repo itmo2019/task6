@@ -69,9 +69,16 @@
   width: 100px;
   height: 18px;
   margin-left: 20px;
-  color: #9b9b9b;
   letter-spacing: normal;
   pointer-events: none;
   text-align: right;
   vertical-align: middle;
+}
+
+.font-light {
+  color: #000;
+}
+
+.font-dark {
+  color: #fff;
 }

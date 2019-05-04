@@ -7,6 +7,7 @@ import { Line } from '../line/line';
 import { ILetter, ILetterInfo } from '../createLetter';
 
 interface IProps {
+  bLight: boolean;
   oneLetter: ILetter;
   key: number;
   clickOnSimpleCheckbox: (id?: number) => void;
@@ -27,6 +28,7 @@ export class LetterWithLine extends React.Component<IProps, {}> {
         }`}
       >
         <LetterView
+          bLight={this.props.bLight}
           letter={this.props.oneLetter}
           showLetter={this.props.showLetter}
           clickOnSimpleCheckbox={this.props.clickOnSimpleCheckbox}

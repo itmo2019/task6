@@ -31,8 +31,24 @@
 .close {
   width: 16px;
   height: 16px;
-  background: url(../../../images/cross.svg);
-  background-size: cover;
   cursor: pointer;
   float: right;
+}
+
+.close-light {
+  background: url(../../../images/crossBlack.svg);
+  background-size: cover;
+}
+
+.close-dark {
+  background: url(../../../images/crossWhite.svg);
+  background-size: cover;
+}
+
+.font-light {
+  color: #000;
+}
+
+.font-dark {
+  color: #fff;
 }

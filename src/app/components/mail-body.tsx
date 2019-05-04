@@ -5,11 +5,15 @@ import * as styles from './mail-body.module.css';
 import { FoldersMenu } from './foldersMenu/folders-menu';
 import { LettersWindow } from './lettersWindow/letters-window';
 
-export function MailBody() {
+interface IProps {
+  bLight: boolean;
+}
+
+export const MailBody: React.FunctionComponent<IProps> = props => {
   return (
     <main className={styles.main}>
-      <FoldersMenu />
-      <LettersWindow />
+      <FoldersMenu bLight={props.bLight} />
+      <LettersWindow bLight={props.bLight} />
     </main>
   );
-}
+};

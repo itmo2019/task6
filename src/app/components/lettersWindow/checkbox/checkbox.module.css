@@ -8,7 +8,7 @@
   display: inline-block;
   width: 52px;
   height: 100%;
-  background-color: #fff;
+
   cursor: pointer;
   vertical-align: middle;
 }
@@ -25,6 +25,7 @@
   width: 16px;
   height: 16px;
   margin-left: 20px;
+  background-color: #fff;
   border-radius: 1px;
   box-shadow: 0 0 0 1px #e2e2e2;
   vertical-align: middle;

@@ -4,7 +4,15 @@
   min-width: 590px;
   height: 100%;
   margin-left: 20px;
-  background: #fff;
   border-radius: 3px;
+}
+
+.main-light {
+  background: #fff;
   box-shadow: 0 0 2px #000;
+}
+
+.main-dark {
+  background: #595b5d;
+  box-shadow: 0 0 2px #fff;
 }
