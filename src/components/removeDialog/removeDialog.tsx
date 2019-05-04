@@ -76,7 +76,9 @@ export class RemoveDialog extends Component<IRemoveDialog, IRemoveDialogState> {
         ref={ref => {
           this.dialog = ref;
           if (ref !== null) {
-            dialogPolyfill.registerDialog(ref);
+            if (dialogPolyfill !== undefined) {
+              dialogPolyfill.registerDialog(ref);
+            }
           }
         }}
       >

@@ -6,6 +6,6 @@ import { MailBox } from './mail-box';
 it('renders without crashing', () => {
   const div = document.createElement('div');
 
-  ReactDOM.render(<MailBox addNewMessage={() => {}} removeMessages={() => {}} />, div);
+  ReactDOM.render(<MailBox addNewMessage={() => {}} removeMessages={() => {}} addManyMessages={() => {}} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
