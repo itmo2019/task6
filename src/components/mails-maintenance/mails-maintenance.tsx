@@ -17,9 +17,9 @@ import styles from './mails-maintenance.module.css';
 
 interface IState { 
     mailSet: IMail[], 
-    filteredSet: IMail[] | null
+    filteredSet: IMail[] | null,
     worker: NodeJS.Timeout | null, 
-    searchedFor: string 
+    searchedFor: string
 }
 
 export interface IMail {
@@ -106,7 +106,7 @@ export default class MailsMaintenance extends React.Component {
                     }
                     return {
                         searchedFor: searchField,
-                        filteredSet: null,
+                        filteredSet: [],
                         worker: setTimeout(() => {
                             that.props.setSearching(0)
                             const yieldingWorker = (done: number, stt: number, fin: number) => {
