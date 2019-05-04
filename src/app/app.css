@@ -1,27 +1,8 @@
-.app {
-  text-align: center;
-}
+.main {
+  position: static;
 
-.app-header {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-  color: #fff;
-  font-size: calc(10px + 2vmin);
-}
-
-.app-link {
-  color: #61dafb;
-}
-
-@keyframes app-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  width: 800px;
+  height: 600px;
+  /*background-color: #f0f8ff;*/
+  background-color: rgb(229, 234, 240);
 }
