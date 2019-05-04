@@ -1,0 +1,18 @@
+.box {
+  width: 20px;
+  height: 17px;
+}
+
+.hr {
+  width: 20px;
+  height: 2px;
+  margin-top: 4px;
+}
+
+.hr_theme_light {
+  background-color: #393a3b;
+}
+
+.hr_theme_dark {
+  background-color: #f6f6f6;
+}

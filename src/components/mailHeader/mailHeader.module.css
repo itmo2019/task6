@@ -1,0 +1,44 @@
+.box {
+  position: relative;
+
+  height: 32px;
+  letter-spacing: -1em;
+}
+
+.menu,
+.logo,
+.rightBox {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.menu {
+  margin-top: -6px;
+}
+
+.logo {
+  margin-left: 11px;
+}
+
+.search {
+  position: absolute;
+  right: 179px;
+  left: 0;
+}
+
+.linkBlock {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 50px;
+}
+
+.rightBox {
+  position: absolute;
+  right: 20px;
+  left: 184px;
+
+  min-width: 420px;
+  margin-left: 114px;
+}

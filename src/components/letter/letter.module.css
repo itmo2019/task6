@@ -1,0 +1,139 @@
+.box {
+  position: relative;
+  top: -42px;
+
+  height: 0;
+  transition: height 0.5s, top 0.5s;
+}
+
+.box_hasAddAnimation {
+  top: 0;
+
+  height: 42px;
+}
+
+.box_hasRemoveAnimation {
+  z-index: 0 !important;
+  top: -42px;
+
+  height: 0;
+}
+
+.line {
+  position: relative;
+
+  height: 20px;
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 13px;
+}
+
+.line_theme_light {
+  background-color: #fff;
+}
+
+.line_theme_dark {
+  background-color: #1d1d1d;
+  color: #9b9b9b;
+}
+
+.line_unread.line_theme_light {
+  color: #000;
+  font-weight: 700;
+}
+
+.line_unread.line_theme_dark {
+  color: #fff;
+}
+
+.item {
+  display: inline-block;
+  overflow: hidden;
+  list-style-type: none;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.item:first-child {
+  vertical-align: initial;
+}
+
+.item:last-child {
+  font-weight: initial;
+}
+
+.author {
+  width: 30px;
+  height: 30px;
+  margin: -5px 0 0 10px;
+}
+
+.author_hasLogo {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+}
+
+.author_noLogo {
+  width: 100%;
+  height: 100%;
+  background-color: #f33;
+  border-radius: 100px;
+  color: #fff;
+  font: 500 18px Helvetica Neue Light, sans-serif;
+  line-height: 30px;
+  text-align: center;
+}
+
+.authorName {
+  width: 160px;
+  margin: 0 0 5px 10px;
+}
+
+.readMark {
+  width: 10px;
+  height: 10px;
+  margin: 0 0 5px 5px;
+}
+
+.readMark_unread {
+  background-color: #6287bd;
+  border-radius: 100px;
+}
+
+.topic {
+  position: absolute;
+  top: 13px;
+  right: 70px;
+  left: 281px;
+
+  overflow: hidden;
+  min-width: 220px;
+}
+
+.topic_isOpen {
+  font: 700 30px Helvetica Neue, sans-serif;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.body {
+  margin-top: 30px;
+}
+
+.date {
+  position: absolute;
+  top: 13px;
+  right: 20px;
+  color: #9b9b9b;
+  text-align: right;
+}
+
+.linkOpen {
+  position: absolute;
+  top: -2px;
+  right: 0;
+  bottom: 2px;
+  left: 45px;
+  cursor: pointer;
+}

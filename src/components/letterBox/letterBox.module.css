@@ -1,0 +1,58 @@
+.box {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  bottom: 4px;
+  left: 177px;
+
+  overflow: hidden;
+  min-width: 700px;
+  min-height: 350px;
+  margin: 0 10px 10px;
+  border-radius: 3px;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.box_theme_light {
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.34);
+  color: #000;
+}
+
+.box_theme_dark {
+  background-color: #1d1d1d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.34);
+  color: #fff;
+}
+
+.hr {
+  margin: 0;
+  opacity: 0.4;
+}
+
+.supportLine {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.letterList {
+  position: absolute;
+  top: 40px;
+  bottom: 25px;
+
+  overflow: auto;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.bb {
+  position: relative;
+}
+
+.letter {
+  z-index: 1;
+  list-style-type: none;
+}

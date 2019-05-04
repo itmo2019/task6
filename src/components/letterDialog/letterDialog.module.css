@@ -1,0 +1,30 @@
+.box {
+  position: absolute;
+  top: 40px;
+  bottom: 25px;
+
+  overflow: auto;
+  width: 100%;
+  background-color: inherit;
+  visibility: hidden;
+}
+
+.content {
+  padding: 20px;
+  font-family: sans-serif;
+  font-size: 14px;
+  white-space: normal;
+}
+
+.exit {
+  margin: -5px 5px 0 0;
+  color: #808080;
+  cursor: pointer;
+  float: right;
+  font-size: 35px;
+}
+
+.box_isVisible {
+  z-index: 2;
+  visibility: visible;
+}
