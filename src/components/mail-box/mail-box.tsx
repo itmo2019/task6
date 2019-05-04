@@ -1,24 +1,28 @@
-import React, { Component, RefObject } from 'react';
+import React, { Component, createRef, RefObject } from 'react';
 import classNames from 'classnames';
 import MultiRef from 'react-multi-ref';
 import loremIpsum from 'lorem-ipsum';
+import Deque from 'double-ended-queue';
+import { FixedSizeList as List } from 'react-window';
 import { Message } from '../message';
 import styles from './MailBox.module.css';
-import { Footer } from '../footer/footer';
-import { Header } from '../header/header';
 import { RemoveDialog } from '../removeDialog/removeDialog';
+import { FullMessage } from '../full-message/full-message';
 
 interface IMailBox {
   addNewMessage: (f: () => void) => void;
   removeMessages: (f: () => void) => void;
+  addManyMessages: (f: () => void) => void;
   className?: string;
 }
 
 interface IMailBoxState {
   shownMessagesRefs: MultiRef<number, Message>;
-  shownMessages: MessageData[];
-  hiddenMessages: MessageData[];
+  shownMessages: Deque<MessageData>;
+  hiddenMessages: Deque<MessageData>;
   askingForRemoving: boolean;
+  showFullMessage: boolean;
+  fullMessageText: string;
 }
 
 interface IMessageData {
@@ -29,6 +33,7 @@ interface IMessageData {
   date?: string;
   id: number;
   wasRead?: boolean;
+  isTicked?: boolean;
 }
 
 class MessageData {
@@ -40,6 +45,7 @@ class MessageData {
     this.date = props.date;
     this.id = props.id;
     this.wasRead = props.wasRead === undefined ? false : props.wasRead;
+    this.isTicked = props.isTicked === undefined ? false : props.isTicked;
   }
 
   private readonly content?: string;
@@ -56,12 +62,14 @@ class MessageData {
 
   private wasRead: boolean;
 
+  private isTicked: boolean;
+
   public getId() {
     return this.id;
   }
 
-  public getContent() {
-    return this.content;
+  public getContent(): string {
+    return this.content === undefined ? '' : this.content;
   }
 
   public getAvatar() {
@@ -86,6 +94,14 @@ class MessageData {
 
   public readMessage() {
     this.wasRead = true;
+  }
+
+  public getIsTicked() {
+    return this.isTicked;
+  }
+
+  public tickMessage() {
+    this.isTicked = !this.isTicked;
   }
 }
 
@@ -186,28 +202,33 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
 
   private letterID = 0;
 
-  private MAX_LETTERS_NUMBER = 4;
+  private MAX_LETTERS_NUMBER = 1000;
 
   public constructor(props: IMailBox) {
     super(props);
     this.addNewMessage = this.addNewMessage.bind(this);
     this.removeMessages = this.removeMessages.bind(this);
-    this.toggleMessages = this.toggleMessages.bind(this);
+    this.addManyMessages = this.addManyMessages.bind(this);
     this.addRandomly = this.addRandomly.bind(this);
     this.readMessage = this.readMessage.bind(this);
+    this.tickMessage = this.tickMessage.bind(this);
     this.askRemoving = this.askRemoving.bind(this);
     this.confirmedRemoving = this.confirmedRemoving.bind(this);
-
+    this.closeMessage = this.closeMessage.bind(this);
 
     props.addNewMessage(this.addNewMessage);
     props.removeMessages(this.removeMessages);
+    props.addManyMessages(this.addManyMessages);
 
     this.state = {
       shownMessagesRefs: new MultiRef(),
-      shownMessages: [],
-      hiddenMessages: [],
-      askingForRemoving: false
+      shownMessages: new Deque<MessageData>(),
+      hiddenMessages: new Deque<MessageData>(),
+      askingForRemoving: false,
+      fullMessageText: '',
+      showFullMessage: false
     };
+
     setTimeout(this.addRandomly, Math.floor(Math.random() * (10 * 60 * 1000 - 10 + 1) + 10));
   }
 
@@ -229,12 +250,6 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
     return text.join(' ');
   }
 
-  private toggleMessages() {
-    this.state.shownMessagesRefs.map.forEach(mes => {
-      mes.toggleMessage();
-    });
-  }
-
   private generateMessage(): MessageData {
     return new MessageData({
       sender: this.generateName(),
@@ -250,9 +265,11 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
       this.letterID++;
       state.shownMessages.unshift(message);
       if (state.shownMessages.length > this.MAX_LETTERS_NUMBER) {
-        const copy = state.shownMessages[state.shownMessages.length - 1];
-        state.hiddenMessages.push(copy);
-        state.shownMessages.pop();
+        const copy = state.shownMessages.peekBack();
+        if (copy !== undefined) {
+          state.hiddenMessages.push(copy);
+          state.shownMessages.pop();
+        }
       }
       return { shownMessages: state.shownMessages };
     });
@@ -272,9 +289,11 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
       const need = Math.min(numRemoved, this.state.hiddenMessages.length);
       let i;
       for (i = 0; i < need; i++) {
-        const copy = this.state.hiddenMessages[this.state.hiddenMessages.length - 1];
-        state.shownMessages.push(copy);
-        state.hiddenMessages.pop();
+        const copy = this.state.hiddenMessages.peekBack();
+        if (copy !== undefined) {
+          state.shownMessages.push(copy);
+          state.hiddenMessages.pop();
+        }
       }
       return { shownMessages: state.shownMessages };
     });
@@ -287,7 +306,7 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
 
   private confirmedRemoving() {
     this.setState({ askingForRemoving: false });
-    const unFiltered = this.state.shownMessages.filter(mes => {
+    const unFiltered = this.state.shownMessages.toArray().filter(mes => {
       const k = Math.round(mes.getId());
       const mesRef = this.state.shownMessagesRefs.map.get(k);
       if (mesRef === undefined) {
@@ -308,15 +327,15 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
     setTimeout(
       () =>
         this.setState(state => {
-          const filtered = state.shownMessages.filter(mes => {
+          const filtered = state.shownMessages.toArray().filter(mes => {
             const k = Math.round(mes.getId());
             const mesRef = state.shownMessagesRefs.map.get(k);
             if (mesRef === undefined) {
-              return false;
+              return true;
             }
             return !mesRef.state.isTicked;
           });
-          return { shownMessages: filtered };
+          return { shownMessages: new Deque(filtered) };
         }),
       1000
     );
@@ -324,7 +343,7 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
   }
 
   private removeMessages() {
-    const unFiltered = this.state.shownMessages.filter(mes => {
+    const unFiltered = this.state.shownMessages.toArray().filter(mes => {
       const k = Math.round(mes.getId());
       const mesRef = this.state.shownMessagesRefs.map.get(k);
       if (mesRef === undefined) {
@@ -341,42 +360,76 @@ export class MailBox extends Component<IMailBox, IMailBoxState> {
   }
 
   private readMessage(id: number) {
-    for (const mes of this.state.shownMessages) {
+    for (const mes of this.state.shownMessages.toArray()) {
       if (mes.getId() === id) {
         mes.readMessage();
+        this.setState({ showFullMessage: true });
+        this.setState({ fullMessageText: mes.getContent() });
       }
     }
   }
 
+  private tickMessage(id: number) {
+    for (const mes of this.state.shownMessages.toArray()) {
+      if (mes.getId() === id) {
+        mes.tickMessage();
+      }
+    }
+  }
+
+  private addManyMessages() {
+    for (let i = 0; i < 1000; i++) {
+      this.addNewMessage();
+    }
+  }
+
+  private closeMessage() {
+    this.setState({ showFullMessage: false });
+  }
+
   public render() {
+    if (this.state.showFullMessage) {
+      return <FullMessage text={this.state.fullMessageText} closeMessage={this.closeMessage} />;
+    }
+
     let maybeDialog = null;
-    if(this.state.askingForRemoving === true){
-      maybeDialog = <RemoveDialog
-        isVisible={this.state.askingForRemoving}
-        confirmedAction={this.confirmedRemoving}
-      />;
+    if (this.state.askingForRemoving) {
+      maybeDialog = (
+        <RemoveDialog
+          isVisible={this.state.askingForRemoving}
+          confirmedAction={this.confirmedRemoving}
+        />
+      );
     }
     return (
       <div>
         {maybeDialog}
         <ul className={classNames(styles.MailBox, this.props.className)}>
-          {this.state.shownMessages.map(mes => {
-            return (
-              <Message
-                key={mes.getId()}
-                letterID={mes.getId()}
-                sender={mes.getSender()}
-                topic={mes.getTopic()}
-                avatar={mes.getAvatar()}
-                content={mes.getContent()}
-                date={mes.getDate()}
-                toggleMessages={this.toggleMessages}
-                wasRead={mes.getWasRead()}
-                readMessage={this.readMessage}
-                ref={this.state.shownMessagesRefs.ref(mes.getId())}
-              />
-            );
-          })}
+          <List
+            height={500}
+            itemCount={this.state.shownMessages.length}
+            itemSize={40}
+            width="100%"
+            itemData={this.state.shownMessages}
+          >
+            {({ index, style, data }) => (
+              <div style={style}>
+                <Message
+                  letterID={data.get(index).getId()}
+                  sender={data.get(index).getSender()}
+                  topic={data.get(index).getTopic()}
+                  avatar={data.get(index).getAvatar()}
+                  content={data.get(index).getContent()}
+                  date={data.get(index).getDate()}
+                  wasRead={data.get(index).getWasRead()}
+                  readMessage={this.readMessage}
+                  tickMessage={this.tickMessage}
+                  isTicked={data.get(index).getIsTicked()}
+                  ref={this.state.shownMessagesRefs.ref(data.get(index).getId())}
+                />
+              </div>
+            )}
+          </List>
         </ul>
       </div>
     );

@@ -14,7 +14,7 @@
 }
 
 .ShortMessage.FadeOut {
-  opacity: 0;
+  opacity: 0.5;
 }
 
 .ShortMessage__UnreadDot {

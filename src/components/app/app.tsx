@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { HeadProvider, Title, Link, Meta } from 'react-head';
 import { Helmet } from 'react-helmet';
 
 import styles from './App.module.css';
@@ -12,13 +11,14 @@ export class App extends Component {
     return (
       <div>
         <Helmet>
+          <base href="/" />
           <title>Яндекс.Почта</title>
           <link
-            rel="stylesheet"
+            // rel="stylesheet"
             type="text/css"
             href="/node_modules/dialog-polyfill/dist/dialog-polyfill.css"
           />
-          <script src="/node_modules/dialog-polyfill/dist/dialog-polyfill.js" />
+          <script type="text/jsx" src="/node_modules/dialog-polyfill/dist/dialog-polyfill.js" />
         </Helmet>
 
         <Header className={styles.AppHeader} />

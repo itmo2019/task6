@@ -12,7 +12,6 @@ interface IFullMessage {
 interface IFullMessageState {
   closeMessage?: () => void;
   text?: string;
-  isVisible: boolean;
 }
 
 export class FullMessage extends Component<IFullMessage, IFullMessageState> {
@@ -20,15 +19,13 @@ export class FullMessage extends Component<IFullMessage, IFullMessageState> {
     super(props);
     this.state = {
       closeMessage: props.closeMessage,
-      text: props.text,
-      isVisible: false
+      text: props.text
     };
   }
 
   public render() {
-    const isDisplayed = this.state.isVisible ? '' : styles.FullMessage_NonDisplayed;
     return (
-      <div className={classNames(styles.FullMessage, this.props.className, isDisplayed)}>
+      <div className={classNames(styles.FullMessage, this.props.className)}>
         <button
           className={styles.FullMessage__CloseButton}
           type="button"

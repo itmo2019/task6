@@ -60,12 +60,15 @@ export class ShortMessage extends Component<IShortMessage, IShortMessageState> {
     const fade = this.props.fadeOut ? styles.FadeOut : '';
     const isDisplayed = this.state.isVisible ? '' : styles.ShortMessage_NonDisplayed;
     const wasRead = this.state.wasRead ? '' : styles.ShortMessage_Unread;
+    const isTicked = this.props.isTicked === true;
+
     return (
       <div className={classNames(styles.ShortMessage, this.props.className, isDisplayed, fade)}>
         <input
           className={styles.ShortMessage__Checkbox}
           type="checkbox"
           onClick={this.handleTick}
+          defaultChecked={isTicked}
         />
         <img
           className={styles.ShortMessage__Avatar}

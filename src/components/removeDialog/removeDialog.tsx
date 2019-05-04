@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import styles from './RemoveDialog.module.css';
-// import * from 'removeDialog-polyfill';
-// import * as dialogPolyfill from "removeDialog-polyfill";
-// import dialogPolyfill = require('removeDialog-polyfill');
 
 const dialogPolyfill = require('dialog-polyfill').default;
 
@@ -26,7 +23,7 @@ export class RemoveDialog extends Component<IRemoveDialog, IRemoveDialogState> {
     this.confirm = this.confirm.bind(this);
     this.showHideCallback = this.showHideCallback.bind(this);
     this.state = {
-      isVisible: false
+      isVisible: props.isVisible
     };
   }
 

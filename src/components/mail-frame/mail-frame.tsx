@@ -11,6 +11,7 @@ interface IMailFrame {
 interface IMailFrameState {
   addNewMessage?: () => void;
   removeMessages?: () => void;
+  addManyMessages?: () => void;
 }
 
 interface IActionsItem {
@@ -49,7 +50,8 @@ export class MailFrame extends Component<IMailFrame, IMailFrameState> {
     super(props);
     this.state = {
       addNewMessage: undefined,
-      removeMessages: undefined
+      removeMessages: undefined,
+      addManyMessages: undefined
     };
   }
 
@@ -61,6 +63,10 @@ export class MailFrame extends Component<IMailFrame, IMailFrameState> {
     this.setState({ removeMessages: f });
   };
 
+  private setAddManyMessages = (f: () => void) => {
+    this.setState({addManyMessages: f});
+  }
+
   public render() {
     return (
       <div className={classNames(this.props.className)}>
@@ -71,9 +77,10 @@ export class MailFrame extends Component<IMailFrame, IMailFrameState> {
           <ActionsItem text="Удалить" onClick={this.state.removeMessages} />
           <ActionsItem text="Это спам!" />
           <ActionsItem text="Прочитано" />
+          <ActionsItem text="Получить 1000 писем" onClick={this.state.addManyMessages} />
         </ul>
 
-        <MailBox addNewMessage={this.setAddNewMessage} removeMessages={this.setRemoveMessage} />
+        <MailBox addNewMessage={this.setAddNewMessage} removeMessages={this.setRemoveMessage} addManyMessages={this.setAddManyMessages}/>
         <Footer />
       </div>
     );
