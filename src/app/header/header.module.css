@@ -1,0 +1,85 @@
+.title {
+  display: inline-block;
+  width: 153px;
+  height: 31px;
+  margin-top: 12px;
+  margin-left: 11px;
+}
+
+.logo {
+  height: 31px;
+}
+
+.menu {
+  display: inline-block;
+  margin-top: 14px;
+  margin-left: 22px;
+  vertical-align: top;
+}
+
+.navigation {
+  display: inline-block;
+  width: 181px;
+  margin-left: 19px;
+  font-family: HelveticaNeue, serif;
+  vertical-align: top;
+}
+
+.className {
+  height: 56px;
+}
+
+.rectangle {
+  width: 20px;
+  height: 2px;
+  margin-top: 5px;
+  background-color: #000000;
+}
+
+.search {
+  display: inline-block;
+  width: calc(100% - 499px);
+  min-width: 301px;
+  height: 32px;
+  margin-top: 11px;
+  margin-left: 114px;
+  background-color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+  opacity: 0.5;
+  vertical-align: top;
+}
+
+.searchInput {
+  display: inline-block;
+  width: calc(100% - 25px);
+  min-width: 276px;
+  height: 32px;
+  padding-left: 16px;
+
+  border-style: none;
+  background: none;
+  color: #000000;
+  font-family: Yandex Sans, serif;
+  font-size: 15px;
+  line-height: 2.13;
+  outline: none;
+  vertical-align: middle;
+}
+
+.searchInput::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.searchCancelButton {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+
+  border-style: none;
+  -webkit-appearance: none;
+  background: url(../../images/cross-symbol.png) no-repeat;
+  background-size: 9px;
+  cursor: pointer;
+  outline: none;
+  vertical-align: middle;
+}

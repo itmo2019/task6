@@ -1,0 +1,34 @@
+.className {
+  width: 100%;
+  min-width: 574px;
+  min-height: 415px;
+}
+
+.closeImg {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-top: 10px;
+  margin-left: 10px;
+  opacity: 0.15;
+  vertical-align: top;
+}
+
+.myArticle {
+  display: inline-block;
+  width: calc(100% - 50px);
+  min-width: 520px;
+  margin-left: 20px;
+  font-size: 13px;
+}
+
+.text {
+  font-family: Arial, serif;
+}
+
+.image {
+  width: 140px;
+  margin-right: 1px;
+  float: left;
+  shape-outside: circle(50%);
+}
