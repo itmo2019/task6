@@ -83,14 +83,6 @@ export default class LetterBox extends Component<Props, State> {
     this.setState({ isCheckAll: value });
   };
 
-  get1000Letters = () => {
-    const letterCount = 300;
-     this.MAX_MAIL_LIST_SIZE = letterCount;
-    for (let i = 0; i < letterCount; i++) {
-      this.newMail();
-    }
-  };
-
   getRandomLetter = () => {
     const authorName = this.letterGenerator.getAuthorName();
     return {
@@ -229,8 +221,7 @@ export default class LetterBox extends Component<Props, State> {
         value: 'Прочитано',
         onClick: this.handleUnmarkButtonClick,
         isActive: selectLetterCount > 0
-      },
-      { type: 'button', value: 'Получить 1000', onClick: this.get1000Letters, isActive: true}
+      }
       ];
 
   toolbarItems: IToolbarItem[] = [];
