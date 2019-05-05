@@ -35,7 +35,7 @@ export class Message extends React.Component<IProps> {
             this.props.openMessage(messageData.text);
           }
         }}
-        style={messageData.display ? {} : { display: 'none' }}
+        style={messageData.display ? {} : { display: 'none' , height: '0px' }}
       >
         <input
           className={styles.checkbox}

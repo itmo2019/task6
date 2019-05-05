@@ -32,8 +32,8 @@ export class Header extends React.Component<IProps> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            startDate: now,
-            endDate: now,
+            startDate: null,
+            endDate: null,
             focusedInput: null
         };
     }
@@ -41,8 +41,11 @@ export class Header extends React.Component<IProps> {
     handleDatesChange = ({ startDate, endDate }: { startDate: Moment | null, endDate: Moment | null }): void => {
         this.setState({ startDate, endDate });
         console.log(startDate + " " + endDate);
-        if (startDate === null || endDate === null) return;
-        this.props.filterMessagesByDate(startDate.toDate(), endDate.toDate())
+        if (startDate === null || endDate === null) {
+            this.props.filterMessagesByDate(new Date(1970, 0, 1), new Date(2100, 0, 1));
+        } else {
+            this.props.filterMessagesByDate(startDate.toDate(), endDate.toDate());
+        }
     };
 
     render() {

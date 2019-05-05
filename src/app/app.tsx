@@ -110,7 +110,6 @@ export class App extends Component {
   addDefaultMessagesForTestingCalendar() {
     const newMessages = this.state.messages;
     for (let i = 0; i < 10; i++) {
-      console.log(i);
       const curMessage = App.createMessageValues(i.toString(), `theme${i}`, `text${i}`, `S`,
           `Sender${i}`, new Date(2019, 3, i + 25), false, false, false, true);
         newMessages.unshift(curMessage);
@@ -136,8 +135,8 @@ export class App extends Component {
   filterMessagesByDate(startDate: Date, endDate: Date) {
     const messagesList = this.state.messages;
     for (let i = 0; i < messagesList.length; i++) {
-      const curDate = messagesList[i].date.getDate();
-      if (curDate >= startDate.getDate() && curDate <= endDate.getDate()) {
+      const curDate = messagesList[i].date.valueOf();
+      if (curDate >= startDate.valueOf() && curDate <= endDate.valueOf()) {
         messagesList[i].display = true;
       } else {
         messagesList[i].display = false;
