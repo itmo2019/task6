@@ -15,6 +15,7 @@
     "@types/react-dates": "17.1.5",
     "@types/react-dom": "16.8.4",
     "react": "16.8.6",
+    "react-dates": "20.1.0",
     "react-dom": "16.8.6"
   },
   "devDependencies": {
