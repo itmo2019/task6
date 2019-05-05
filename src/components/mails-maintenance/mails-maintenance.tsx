@@ -19,7 +19,8 @@ interface IState {
     mailSet: IMail[], 
     filteredSet: IMail[] | null,
     worker: NodeJS.Timeout | null, 
-    searchedFor: string
+    searchedFor: string,
+    lastScanned: number | null
 }
 
 export interface IMail {
@@ -63,7 +64,7 @@ export default class MailsMaintenance extends React.Component {
         const that: any = this; // just local js magic
         ['newEmptyYandexMail', 'newYandexMail', 'deleteSelected', 'toggleSelectAll', 
          'constructMailOnPage', 'receiveMail', 'newMailTimeoutSetup', 'modifyFirst',
-         'modifyAll', 'modifyOne'].forEach(func => {
+         'modifyAll', 'modifyOne', 'yieldingWorker'].forEach(func => {
              that[func] = that[func].bind(that)
          })
 
@@ -89,13 +90,43 @@ export default class MailsMaintenance extends React.Component {
             mailSet: temp,
             filteredSet: null,
             worker: null,
-            searchedFor: ''       
+            searchedFor: '',
+            lastScanned: null     
+        }
+    }
+
+    predicate(searchField: string): (mail: IMail) => boolean {
+        return (mail: IMail) => [mail.sender, mail.title, mail.raw].some(
+            (str: string) => str.toLowerCase().indexOf(searchField) !== -1
+        )
+    }
+
+    yieldingWorker(searchField: string, state: IState, done: number, stt: number, fin: number) {
+        const stp = (stt + 10000) < fin ? stt + 10000 : fin
+        const res = state.mailSet
+            .slice(stt, stp)
+            .filter(this.predicate(searchField))
+            .slice(0, this.mailsPerPage)
+        if (stp == fin || res.length + done >= this.mailsPerPage) {
+            this.props.setSearching(1)
+            this.setState((state: IState) => {
+                const old = state.filteredSet || []
+                return {filteredSet: old.concat(res), worker: null, searchedFor: searchField, lastScanned: stp === fin ? null : stp}
+            })
+        } else {
+            this.props.setSearching(stp / this.state.mailSet.length)
+            this.setState((state: IState) => {
+                const old = state.filteredSet || []
+                const worker = setTimeout(() => this.yieldingWorker(searchField, state, done + res.length, stp, fin))
+                return {filteredSet: old.concat(res), worker: worker, searchedFor: searchField, lastScanned: stp}
+            })
         }
     }
 
     render() {
         const searchField: string = this.props.searchField.toLowerCase()
         const contains = (str: string) => str.toLowerCase().indexOf(searchField) !== -1
+        const predicate = (mail : IMail) => [mail.sender, mail.title, mail.raw].some(contains)
         const that: MailsMaintenance = this
 
         if (searchField !== this.state.searchedFor) {
@@ -104,33 +135,17 @@ export default class MailsMaintenance extends React.Component {
                     if (state.worker) {
                         clearTimeout(state.worker)
                     }
+                    const isPref : boolean = searchField.startsWith(state.searchedFor)
                     return {
                         searchedFor: searchField,
-                        filteredSet: [],
+                        filteredSet: isPref ? (state.filteredSet || []).filter(predicate) : [],
                         worker: setTimeout(() => {
                             that.props.setSearching(0)
-                            const yieldingWorker = (done: number, stt: number, fin: number) => {
-                                const stp = (stt + 10000) < fin ? stt + 10000 : fin
-                                const res = state.mailSet
-                                    .slice(stt, stp)
-                                    .filter((mail: IMail) => [mail.sender, mail.title, mail.raw].some(contains))
-                                    .slice(0, that.mailsPerPage)
-                                if (stp == fin || res.length + done >= that.mailsPerPage) {
-                                    that.props.setSearching(1)
-                                    that.setState((state: IState) => {
-                                        const old = state.filteredSet || []
-                                        return {filteredSet: old.concat(res), worker: null, searchedFor: searchField}
-                                    })
-                                } else {
-                                    that.props.setSearching(stp / that.state.mailSet.length)
-                                    const worker = setTimeout(() => yieldingWorker(done + res.length, stp, fin))
-                                    that.setState((state: IState) => {
-                                        const old = state.filteredSet || []
-                                        return {filteredSet: old.concat(res), worker: worker, searchedFor: searchField}
-                                    })
-                                }
+                            if (isPref) {
+                                that.yieldingWorker(searchField, state, (state.filteredSet || []).length, state.lastScanned || 0, that.state.mailSet.length)
+                            } else {
+                                that.yieldingWorker(searchField, state, 0, 0, that.state.mailSet.length)
                             }
-                            yieldingWorker(0, 0, that.state.mailSet.length)
                         }, 300)
                     }
                 })
@@ -143,6 +158,7 @@ export default class MailsMaintenance extends React.Component {
                     return {
                         filteredSet: null,
                         worker: null,
+                        lastScanned: null,
                         searchedFor: searchField
                     }
                 })
@@ -170,20 +186,29 @@ export default class MailsMaintenance extends React.Component {
     }
 
     toggleSelectAll(checked: boolean) {
-        this.modifyFirst(this.mailsPerPage, (mails: IMail[]) => mails.map((mail: IMail) => {
+        this.modifyFirst(this.mailsPerPage, (mail: IMail) => {
             mail.checked = checked 
             return mail
-        }))
+        })
     }
 
     modifyAll(action: (mails: IMail[]) => IMail[]) {
-        this.setState((state: IState) => {return {mailSet: action(state.mailSet)}})
+        this.setState((state: IState) => {
+            const result: any = {mailSet: action(state.mailSet)}
+            if (state.filteredSet) {
+                result.filteredSet = action(state.filteredSet)
+            }
+            return result
+        })
     }
-    modifyFirst(n: number, action: (mails: IMail[]) => IMail[]) {
-        this.setState((state: IState) => {return {mailSet: action(state.mailSet
-                                                    .slice(0, n))
-                                                 // .action(func)  
-                                                    .concat(state.mailSet.slice(n))}})
+    modifyFirst(n: number, action: (mails: IMail) => IMail) {
+        this.setState((state: IState) => {
+            const act = (x: IMail[]) => x.slice(0, n).map(action).concat(x.slice(n))
+            if (state.filteredSet) {
+                return {filteredSet: act(state.filteredSet)}
+            }
+            return {mailSet: act(state.mailSet)}
+        })
     }
     modifyOne(id: string, func: (mail: IMail) => IMail) {
         const defaultElm = (mail: IMail) => mail
@@ -201,9 +226,23 @@ export default class MailsMaintenance extends React.Component {
             }
             return mail
         }))
-        setTimeout(() => 
-            this.modifyAll(this.mailFilter((mail: IMail) => !mail.checked))
-        , 200)
+        setTimeout(() => this.setState((state : IState) => {
+            if (state.worker) {
+                clearTimeout(state.worker)
+            }
+            let newScanned: number | null = state.lastScanned
+            let index: number = 0
+            const resMailSet: IMail[] = state.mailSet.filter((mail: IMail) => {
+                if (mail.checked && state.lastScanned && index < state.lastScanned && newScanned) {newScanned--}
+                index++
+                return !mail.checked
+            })
+            const resFiltered = state.filteredSet ? state.filteredSet.filter((mail: IMail) => !mail.checked) : null
+            const worker = ((resFiltered||[]).length < (state.filteredSet||[]).length) 
+                ? setTimeout(this.yieldingWorker, 0, state.searchedFor, state, (resFiltered||[]).length, newScanned, state.mailSet.length) 
+                : null
+            return { mailSet: resMailSet, filteredSet: resFiltered, worker: worker, lastScanned: newScanned }
+        }), 200)
     }
 
     newMail(isRead: boolean, avatar: string | null, sender: string, title: string, date: string, article: JSX.Element, raw: string, classList: Set<string>): IMail {
