@@ -1,0 +1,34 @@
+.letter-enter {
+  height: 40px;
+  background-color: #61a2e7;
+}
+
+.letter-enter-done {
+  height: 40px;
+  background-color: #fff !important;
+}
+
+.letter-enter.letter-enter-active {
+  background-color: #fff;
+  transition: background-color 2s ease-in;
+}
+
+.letter-exit {
+  height: 40px;
+  background-color: #fff;
+}
+
+.letter-exit.letter-exit-active {
+  overflow: hidden;
+  height: 0;
+
+  border: unset;
+  transition: height 0.5s ease-in;
+}
+
+.letter-exit-done {
+  overflow: hidden;
+  height: 0;
+
+  border: unset;
+}
