@@ -106,7 +106,7 @@ export function CreateLetter(): ILetter {
     bReaded: false,
     bMarked: false,
     info: {
-      author: randomName,
+      author: `${randomName} (${counter.toString(10)})`,
       theme: letter.theme,
       content: letter.body
     }

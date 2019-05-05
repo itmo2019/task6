@@ -10,6 +10,7 @@ import { CreateLetter, ILetter, ILetterInfo } from './createLetter';
 
 interface IProps {
   bLight: boolean;
+  searchValue: string;
 }
 
 interface IState {
@@ -20,6 +21,15 @@ interface IState {
 }
 
 export class LettersWindow extends React.Component<IProps, IState> {
+  private static filterLetters(letter: ILetter, searchValue: string): boolean {
+    const { info } = letter;
+    return (
+      info.author.includes(searchValue) ||
+      info.theme.includes(searchValue) ||
+      info.content.includes(searchValue)
+    );
+  }
+
   private stack: ILetter[] = [];
 
   private maxLettersOnPage: number = 5;
@@ -33,6 +43,7 @@ export class LettersWindow extends React.Component<IProps, IState> {
     this.clickOnMainCheckbox = this.clickOnMainCheckbox.bind(this);
     this.markSelectedLetters = this.markSelectedLetters.bind(this);
     this.removeLetters = this.removeLetters.bind(this);
+    this.doSearch = this.doSearch.bind(this);
     this.state = {
       bMainCheckbox: false,
       bToolbar: false,
@@ -154,7 +165,24 @@ export class LettersWindow extends React.Component<IProps, IState> {
     }));
   }
 
+  private doSearch(): ILetter[] {
+    const { searchValue } = this.props;
+    const lettersFromState = this.state.letters.filter(letter =>
+      LettersWindow.filterLetters(letter, searchValue)
+    );
+    const lettersFromStack = this.stack.filter(letter =>
+      LettersWindow.filterLetters(letter, searchValue)
+    );
+    return lettersFromState.concat(lettersFromStack.reverse());
+  }
+
   public render() {
+    let renderedLetters: ILetter[];
+    if (this.props.searchValue === '') {
+      renderedLetters = this.state.letters;
+    } else {
+      renderedLetters = this.doSearch();
+    }
     return (
       <div
         className={`${styles.main} ${
@@ -171,7 +199,7 @@ export class LettersWindow extends React.Component<IProps, IState> {
         <Line />
         <LettersWindowBody
           bLight={this.props.bLight}
-          letters={this.state.letters}
+          letters={renderedLetters}
           showingLetterContent={this.state.showingLetterContent}
           showLetter={this.showLetter}
           closeLetter={this.closeLetter}

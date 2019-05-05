@@ -6,9 +6,11 @@ import logoYandexWhite from '../../images/yandexLogoWhite.svg';
 import logoYandexBlack from '../../images/yandexLogoBlack.svg';
 import logoYandexServiceWhite from '../../images/yandexServiceLogoWhite.svg';
 import logoYandexServiceBlack from '../../images/yandexServiceLogoBlack.svg';
+import { SearchInput } from './searchInput/search-input';
 
 interface IProps {
   bLight: boolean;
+  updateSearchInput: (value: string) => void;
   switchTheme: () => void;
 }
 
@@ -42,15 +44,7 @@ export const MailHeader: React.FunctionComponent<IProps> = props => {
         </a>
       </div>
       <div className={styles['search-container']}>
-        <input
-          className={`${styles['search-container__search']} ${
-            props.bLight
-              ? styles['search-container__search-light']
-              : styles['search-container__search-dark']
-          }`}
-          type="search"
-          placeholder="Поиск"
-        />
+        <SearchInput bLight={props.bLight} updateSearchInput={props.updateSearchInput} />
       </div>
       <button
         className={`${styles['switch-button']} ${

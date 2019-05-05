@@ -1,0 +1,49 @@
+.search {
+  min-width: 500px;
+  height: 100%;
+  padding-right: 10px;
+  padding-left: 16px;
+
+  border-style: none;
+  font: 15px 'Helvetica Neue', sans-serif;
+}
+
+.search::-webkit-input-placeholder {
+  font: 15px 'Helvetica Neue', sans-serif;
+}
+
+.search::-webkit-search-cancel-button {
+  display: block;
+  width: 10px;
+  height: 10px;
+  -webkit-appearance: none;
+  background-size: contain;
+}
+
+.search-light {
+  background-color: #f2f4f7;
+  box-shadow: inset 0 0 0 1px #d9dbde;
+  color: #000;
+}
+
+.search-light::-webkit-input-placeholder {
+  color: #727477;
+}
+
+.search-light::-webkit-search-cancel-button {
+  background-image: url('../../../images/crossBlack.svg');
+}
+
+.search-dark {
+  background-color: #595b5d;
+  box-shadow: inset 0 0 0 1px #606265;
+  color: #fff;
+}
+
+.search-dark::-webkit-input-placeholder {
+  color: #fff;
+}
+
+.search-dark::-webkit-search-cancel-button {
+  background-image: url('../../../images/crossWhite.svg');
+}

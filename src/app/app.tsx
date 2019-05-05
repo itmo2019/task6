@@ -7,20 +7,31 @@ import { MailBody } from './components/mail-body';
 
 interface IState {
   bLight: boolean;
+  searchValue: string;
 }
 
 export class App extends React.Component<{}, IState> {
   public constructor(props: {}) {
     super(props);
     this.switchTheme = this.switchTheme.bind(this);
+    this.updateSearchInput = this.updateSearchInput.bind(this);
     this.state = {
-      bLight: true
+      bLight: true,
+      searchValue: ''
     };
   }
 
   public switchTheme() {
     this.setState(state => ({
-      bLight: !state.bLight
+      bLight: !state.bLight,
+      searchValue: state.searchValue
+    }));
+  }
+
+  public updateSearchInput(newValue: string) {
+    this.setState(state => ({
+      bLight: state.bLight,
+      searchValue: newValue
     }));
   }
 
@@ -31,8 +42,12 @@ export class App extends React.Component<{}, IState> {
           this.state.bLight ? styles.lightBackground : styles.darkBackground
         }`}
       >
-        <MailHeader bLight={this.state.bLight} switchTheme={this.switchTheme} />
-        <MailBody bLight={this.state.bLight} />
+        <MailHeader
+          bLight={this.state.bLight}
+          updateSearchInput={this.updateSearchInput}
+          switchTheme={this.switchTheme}
+        />
+        <MailBody bLight={this.state.bLight} searchValue={this.state.searchValue} />
       </div>
     );
   }
