@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import styles from './app.module.css';
-import { Header } from './components/header/Header';
-import { MainBlock } from './components/main-block/MainBlock';
-import { Menu } from './components/menu/Menu';
+import {Header} from './components/header/Header';
+import {MainBlock} from './components/main-block/MainBlock';
+import {Menu} from './components/menu/Menu';
 import * as utils from './message-templates';
-import { ThemeProvider, themes } from "../theme/theme-context";
+import {ThemeProvider, themes} from "../theme/theme-context";
 
 const maxMessageInterval = 10 * 60 * 1000;
 const timeMessageInterval = 5 * 60 * 1000;
@@ -17,7 +17,7 @@ export interface IMessage {
     text: string
     firstLetterSender: string
     sender: string
-    date: string
+    date: Date
     isChecked: boolean
     toCreate: boolean
     toDelete: boolean
@@ -39,7 +39,7 @@ export class App extends Component {
     text: string,
     firstLetterSender: string,
     sender: string,
-    date: string,
+    date: Date,
     isChecked: boolean,
     toCreate: boolean,
     toDelete: boolean,
@@ -60,9 +60,7 @@ export class App extends Component {
   }
 
   static getGeneratedDate() {
-    const today = new Date();
-    const options = { month: 'long', day: 'numeric' };
-    return today.toLocaleDateString('ru-RU', options);
+    return new Date();
   }
 
   static getRandomArbitrary(min: number, max: number) {
@@ -102,19 +100,51 @@ export class App extends Component {
     this.getTimeForMessage = this.getTimeForMessage.bind(this);
     this.showHiddenMessages = this.showHiddenMessages.bind(this);
     this.toggleTheme = this.toggleTheme.bind(this);
+    this.filterMessagesByDate = this.filterMessagesByDate.bind(this);
+    //setTimeout(() => {this.addDefaultMessagesForTestingCalendar()}, 100);
     setTimeout(() => {
       this.newMail();
     }, App.getRandomArbitrary(10, maxMessageInterval));
   }
 
-    toggleTheme = () => {
-        this.setState((state: IState) => ({
-            theme:
-                state.theme === themes.dark
-                    ? themes.light
-                    : themes.dark,
+  addDefaultMessagesForTestingCalendar() {
+    const newMessages = this.state.messages;
+    for (let i = 0; i < 10; i++) {
+      console.log(i);
+      const curMessage = App.createMessageValues(i.toString(), `theme${i}`, `text${i}`, `S`,
+          `Sender${i}`, new Date(2019, 3, i + 25), false, false, false, true);
+        newMessages.unshift(curMessage);
+        setTimeout(() => {
+            curMessage.toCreate = true;
+            this.setState({
+                messages: newMessages
+            });
+        }, 10);
+    }
+    this.setState({messages: newMessages});
+  }
+
+  toggleTheme = () => {
+    this.setState((state: IState) => ({
+        theme:
+            state.theme === themes.dark
+                ? themes.light
+                : themes.dark,
         }));
     };
+
+  filterMessagesByDate(startDate: Date, endDate: Date) {
+    const messagesList = this.state.messages;
+    for (let i = 0; i < messagesList.length; i++) {
+      const curDate = messagesList[i].date.getDate();
+      if (curDate >= startDate.getDate() && curDate <= endDate.getDate()) {
+        messagesList[i].display = true;
+      } else {
+        messagesList[i].display = false;
+      }
+    }
+    this.setState({messages: messagesList})
+  }
 
   getTimeForMessage() {
     let randomTime = App.getRandomArbitrary(10, maxMessageInterval);
@@ -207,7 +237,7 @@ export class App extends Component {
     return (
         <ThemeProvider value={this.state.theme}>
             <div className={`${styles.app} ${colorStyle}`}>
-                <Header changeTheme={this.toggleTheme}/>
+                <Header changeTheme={this.toggleTheme} filterMessagesByDate={this.filterMessagesByDate}/>
                 <Menu newMail={this.newMail} />
                 <MainBlock
                     messages={this.state.messages}

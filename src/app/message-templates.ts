@@ -1,6 +1,6 @@
 const senders = ['Championat.com', 'Sportbox', 'Матч ТВ', 'Eurosport'];
 
-export function getRandomIndex(arraySize) {
+export function getRandomIndex(arraySize: number) {
   return Math.floor(Math.random() * arraySize);
 }
 

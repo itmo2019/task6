@@ -48,7 +48,7 @@ export class Message extends React.Component<IProps> {
         <div className={styles.sender}>{messageData.sender}</div>
         <span className={styles['unread-circle']} />
         <div className={styles.theme}>{messageData.theme}</div>
-        <div className={styles.date}>{messageData.date}</div>
+        <div className={styles.date}>{messageData.date.toLocaleDateString('ru-RU', { month: 'long', day: 'numeric' })}</div>
       </div>
     );
   }
