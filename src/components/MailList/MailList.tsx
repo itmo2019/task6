@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Letter } from '../Letter/Letter';
+import { FixedSizeList } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
-import style from './MailList.module.css';
 import { ILetter } from '../app';
 
 interface MailListProps {
@@ -9,16 +10,32 @@ interface MailListProps {
   toggleLetter: (id: number) => void;
 }
 
-export const MailList = ({ letters, toggleLetter }: MailListProps) => {
-  return (
-    <ul className={style.mailList} id="mail-list">
-      {letters.map(letter => {
-        if (letter.new) {
-          return <Letter letter={letter} toggleLetter={toggleLetter} key={letter.key} />;
-        }
+const renderItem = ({ index, style, data }: {index: number, style: any, data: MailListProps}) => {
+  const letter = data.letters[index];
+  return <Letter letter={letter} toggleLetter={data.toggleLetter} key={letter.key} passedStyle={style}/>;
+};
 
-        return <Letter letter={letter} toggleLetter={toggleLetter} key={letter.key} />;
-      })}
-    </ul>
+function itemKey(index: number, data: MailListProps) {
+  return data.letters[index].key
+}
+
+export const MailList = ({ letters, toggleLetter }: MailListProps) => {
+
+  return (
+    <AutoSizer>
+      {({ height, width }) => (
+        <FixedSizeList
+          itemSize={40}
+          height={height}
+          itemCount={letters.length}
+          width={width}
+          itemData={{ letters, toggleLetter }}
+          itemKey={itemKey}
+          overscanCount={20}>
+          {renderItem}
+        </FixedSizeList>
+      )}
+    </AutoSizer>
   );
 };
+

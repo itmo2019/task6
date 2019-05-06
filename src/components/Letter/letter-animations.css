@@ -14,21 +14,22 @@
 }
 
 .letter-exit {
-  height: 40px;
   background-color: #fff;
+  left: 0;
+  opacity: 1;
 }
 
 .letter-exit.letter-exit-active {
   overflow: hidden;
-  height: 0;
-
+  left: 200px;
   border: unset;
-  transition: height 0.5s ease-in;
+  opacity: 0;
+  transition: all 0.5s ease-out;
 }
 
 .letter-exit-done {
   overflow: hidden;
-  height: 0;
-
   border: unset;
+  opacity: 0;
+  left: 200px;
 }

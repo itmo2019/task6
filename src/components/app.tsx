@@ -99,6 +99,7 @@ export class App extends Component<{}, AppState> {
   deleteSelected = () => {
     const deletedKeys = this.state.letters.filter(x => !!x.selected).map(x => x.key);
     this.setState(({ letters }) => {
+      console.log("delete");
       const after = letters.map(({ selected, ...rest }) => {
         if (selected) {
           return {
@@ -117,7 +118,7 @@ export class App extends Component<{}, AppState> {
         const newLetters = letters.filter(({ key }) => !deletedKeys.includes(key));
         return { letters: newLetters };
       });
-    }, 2000);
+    }, 500);
   };
 
   newMail = () => {
@@ -133,14 +134,38 @@ export class App extends Component<{}, AppState> {
         date: `${Math.floor(28 * Math.random() + 1)} ${months[Math.floor(Math.random() * 12)]}`,
         new: true
       };
+      setTimeout(() => newLetter.new = false, 500);
       return {
         letters: [newLetter, ...oldLetters]
       };
     });
   };
 
+  newBatchMail = () => {
+    const newLetters: ILetter[] = [];
+    for (let i = 0; i < 1000; i++) {
+      const sample = data[i % data.length];
+      const newLetter = {
+        key: Math.random() * 2100000000,
+        author: sample.name,
+        title: sample.phrase,
+        unread: Math.random() < 0.5,
+        icon: sample.name[0],
+        color: `#${(((1 << 24) * Math.random()) | 0).toString(16)}`,
+        date: `${Math.floor(28 * Math.random() + 1)} ${months[Math.floor(Math.random() * 12)]}`,
+        new: true
+      };
+      newLetters.push(newLetter)
+    }
+    setTimeout(() => {
+      newLetters.forEach(x => x.new = false);
+    }, 500);
+    this.setState(({ letters: [...oldLetters] }) => ({ letters: [...newLetters, ...oldLetters] }))
+  };
+
   toggleLetter = (id: number) => {
     this.setState(({ letters }) => {
+      console.log("toggle letter");
       return {
         letters: letters.map(({ key, selected, ...rest }) => {
           if (key === id) {
@@ -163,7 +188,7 @@ export class App extends Component<{}, AppState> {
   render() {
     return (
       <div>
-        <Menu newMail={this.newMail} />
+        <Menu newMail={this.newMail} newBatchMail={this.newBatchMail} />
         <Main
           letters={this.state.letters}
           deleteSelected={this.deleteSelected}

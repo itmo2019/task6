@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import style from './Letter.module.css';
@@ -11,25 +11,25 @@ import { ILetter } from '../app';
 interface LetterProps {
   letter: ILetter;
   toggleLetter: (id: number) => void;
+  passedStyle: any;
 }
 
 interface LetterState {
   mounted: boolean
 }
 
-export class Letter extends Component<LetterProps, LetterState> {
+export class Letter extends PureComponent<LetterProps, LetterState> {
   readonly state = { mounted: !this.props.letter.new };
 
   componentDidMount() {
     this.setState({ mounted: true })
   }
 
-  componentWillUnmount() {
-    this.setState({ mounted: false })
-  }
-
-  shouldComponentUpdate(nextProps: Readonly<LetterProps>, nextState: Readonly<LetterState>): boolean {
-    return this.props.letter !== nextProps.letter || nextState.mounted !== this.state.mounted;
+  componentWillReceiveProps(nextProps: Readonly<LetterProps>, nextContext: any): void {
+    if (nextProps.letter.deleted) {
+      console.log(nextProps.letter.deleted);
+      this.setState({ mounted: false })
+    }
   }
 
   render() {
@@ -75,9 +75,12 @@ export class Letter extends Component<LetterProps, LetterState> {
     );
 
     let letterJSX;
+
+    const { left, ...passedStyle } = this.props.passedStyle;
+
     if (letter.story) {
       letterJSX = (
-        <li className={liClassList.join(' ')} key={letter.key}>
+        <li style={{...passedStyle}} className={liClassList.join(' ')} key={letter.key}>
           <label className={style.specialLetter} htmlFor="show">
             {innerJsx}
           </label>
@@ -85,7 +88,7 @@ export class Letter extends Component<LetterProps, LetterState> {
       );
     } else {
       letterJSX = (
-        <li className={liClassList.join(' ')} key={letter.key}>
+        <li style={{...passedStyle}} className={liClassList.join(' ')} key={letter.key}>
           {innerJsx}
         </li>
       );
@@ -95,7 +98,9 @@ export class Letter extends Component<LetterProps, LetterState> {
       <CSSTransition
         in={this.state.mounted}
         classNames="letter"
-        timeout={{ enter: 2000, exit: 500 }}
+        onEnter={() => this.props.letter.new = false}
+        onExit={() => console.info("fuck me")}
+        timeout={{ enter: 2000, exit: 50000 }}
         key={letter.key}
       >
         {letterJSX}

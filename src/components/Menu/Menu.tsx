@@ -6,9 +6,10 @@ import logo from '../../images/logoYandex.png';
 
 interface MenuProps {
   newMail: () => void;
+  newBatchMail: () => void;
 }
 
-export const Menu = ({ newMail }: MenuProps) => {
+export const Menu = ({ newMail, newBatchMail }: MenuProps) => {
   return (
     <div className={style.menu}>
       <div className={style.header}>
@@ -18,6 +19,7 @@ export const Menu = ({ newMail }: MenuProps) => {
         </div>
       </div>
       <MenuButton action={newMail} special name="Новое письмо" />
+      <MenuButton action={newBatchMail} special name="1000 новых писем" />
       <MenuButton name="Входящие" current />
       <MenuButton name="Отправленные" />
       <MenuButton name="Удалённые" />
