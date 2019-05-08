@@ -9,7 +9,6 @@ interface InjectedProps {
   openMessage: (message: MessageInterface) => void;
   selectCheckbox: (messageIndex: number) => void;
   messageIndex: number;
-  key: number;
 }
 
 class Message extends React.Component<InjectedProps> {

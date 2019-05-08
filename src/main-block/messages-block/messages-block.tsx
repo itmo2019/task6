@@ -115,13 +115,12 @@ class MessagesBlock extends React.Component<InjectedProps> {
                 rowHeight={41}
                 className={styles.virtualizedList}
                 rowRenderer={({ index, key, style }) => {
-                  return <div key={key} style={style}>
+                  return <div key={this.props.messagesList[index].id} style={style}>
                     <Message
                       message={this.props.messagesList[index]}
                       openMessage={this.openMessage}
                       selectCheckbox={this.selectCheckbox}
                       messageIndex={index}
-                      key={this.props.messagesList[index].id}
                     />
                   </div>;
                 }

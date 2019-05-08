@@ -30,7 +30,7 @@
 
 .message {
   overflow: hidden;
-  height: 0;
+  height: 40px;
 
   border-bottom: solid 0 #e2e2e2;
   font-family: 'Helvetica Neue', sans-serif;
@@ -115,13 +115,10 @@
 }
 
 .unshrink {
-  height: 40px;
-
   border-bottom: solid 1px #e2e2e2;
   opacity: 1;
 }
 
 .shrink {
-  height: 0;
   opacity: 0;
 }
