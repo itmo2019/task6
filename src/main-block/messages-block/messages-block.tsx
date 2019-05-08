@@ -73,6 +73,7 @@ class MessagesBlock extends React.Component<InjectedProps> {
                 width={width}
                 rowCount={messagesCount}
                 rowHeight={41}
+                style={{ outline: '2px solid #d9f7ff' }}
                 rowRenderer={({ index, key, style }) => {
                   return <div key={key} style={style}>
                     <Message
