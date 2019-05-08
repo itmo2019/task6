@@ -14,6 +14,7 @@ interface InjectedProps {
   deleteSelected: () => void;
   messagesList: MessageInterface[];
   selectAllCheckbox: boolean;
+  messagesPerPage: number;
 }
 
 interface State {
@@ -50,6 +51,8 @@ class MessagesBlock extends React.Component<InjectedProps> {
 
   render() {
     const messagesListClassAddition = !this.state.messageIsOpen ? '__open' : '__closed';
+    const messagesCount = this.props.messagesList.length < this.props.messagesPerPage ?
+      this.props.messagesList.length : this.props.messagesPerPage;
     return (
       <div className="messages-block" aria-haspopup="true">
         <Header
@@ -68,10 +71,9 @@ class MessagesBlock extends React.Component<InjectedProps> {
               <List
                 height={height}
                 width={width}
-                rowCount={this.props.messagesList.length}
+                rowCount={messagesCount}
                 rowHeight={41}
                 rowRenderer={({ index, key, style }) => {
-                  // todo: try newStyle:CSSProperties = {}
                   return <div key={key} style={style}>
                     <Message
                       message={this.props.messagesList[index]}

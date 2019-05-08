@@ -25,7 +25,6 @@ interface State {
 
 export class App extends Component {
   private messagesPerPage: number;
-  private overflowMessages: MessageInterface[];
   private timeoutUpper: number;
   private timeoutLower: number;
 
@@ -48,7 +47,6 @@ export class App extends Component {
     this.buildNewMessage = this.buildNewMessage.bind(this);
 
     this.messagesPerPage = 1000;
-    this.overflowMessages = [];
 
     this.senders = ['Петя', 'Вася', 'Маша'];
     this.subjects = ['Привет из России', 'Hello from England', 'Bonjour de France'];
@@ -97,35 +95,6 @@ export class App extends Component {
   newMail() {
     this.setState((prevState: State) => {
       const newMessagesList = prevState.messagesList;
-      const newOverflowMessages = this.overflowMessages;
-
-      let newMessagesListActualSize = 0;
-      for (let index = 0; index < newMessagesList.length; index++) {
-        if (!newMessagesList[index].shrink) {
-          newMessagesListActualSize++;
-        }
-      }
-
-      while (newMessagesListActualSize >= this.messagesPerPage) {
-        for (let index = newMessagesList.length - 1; index >= 0; index--) {
-          const message = newMessagesList[index];
-          if (!message.shrink) {
-            message.shrink = true;
-            message.unshrink = false;
-            message.selected = false;
-            newMessagesListActualSize--;
-            newOverflowMessages.push(message);
-            setTimeout(() => {
-              const removeIndex = newMessagesList.indexOf(message);
-              if (removeIndex > -1 && newMessagesList[removeIndex].shrink) {
-                newMessagesList.splice(removeIndex, 1);
-                message.shrink = false;
-              }
-            }, 1500);
-            break;
-          }
-        }
-      }
       const newMessage = this.buildNewMessage();
 
       newMessagesList.unshift(newMessage);
@@ -137,7 +106,6 @@ export class App extends Component {
         });
       }, 50);
 
-      this.overflowMessages = newOverflowMessages;
       return {
         messagesList: newMessagesList
       };
@@ -148,9 +116,7 @@ export class App extends Component {
     this.setState((prevState: State) => {
       const newMessagesList = prevState.messagesList;
       for (let i = 0; i < newMessagesList.length; i++) {
-        if (!newMessagesList[i].shrink) {
-          newMessagesList[i].selected = !prevState.selectAllCheckbox;
-        }
+        newMessagesList[i].selected = !prevState.selectAllCheckbox;
       }
 
       return {
@@ -172,60 +138,13 @@ export class App extends Component {
 
   deleteSelectedMessages() {
     this.setState((prevState: State) => {
-      const newMessagesList = prevState.messagesList;
-      const newOverflowMessages = this.overflowMessages;
+      const newMessagesList = prevState.messagesList.filter(message => !message.selected);
 
-      for (let index = 0; index < newMessagesList.length; index++) {
-        const message = newMessagesList[index];
-        if (message.selected) {
-          if (!message.shrink) {
-            message.shrink = true;
-            message.unshrink = false;
-            if (newOverflowMessages.length > 0) {
-              const newMessage = newOverflowMessages.pop();
-              if (newMessage === undefined) {
-                console.log('app.tsx.186')
-                continue;
-              }
-              let needToPush = true;
-              for (let i = 0; i < newMessagesList.length; i++) {
-                if (newMessagesList[i].id === newMessage.id) {
-                  needToPush = false;
-                  break;
-                }
-              }
-              newMessage.shrink = false;
-              if (!needToPush) {
-                newMessage.unshrink = true;
-              } else {
-                newMessage.unshrink = false;
-                setTimeout(() => {
-                  newMessage.unshrink = true;
-                  this.setState({
-                    messagesList: newMessagesList
-                  });
-                }, 50);
-                newMessagesList.push(newMessage);
-              }
-            }
-          }
-        }
-      }
-
-      this.overflowMessages = newOverflowMessages;
       return {
         selectAllCheckbox: false,
         messagesList: newMessagesList
       };
     });
-
-    setTimeout(() => {
-      this.setState((prevState: State) => {
-        return {
-          messagesList: prevState.messagesList.filter(message => !message.shrink)
-        };
-      });
-    }, 1500);
   }
 
   buildNewMessage(): MessageInterface {
@@ -263,6 +182,7 @@ export class App extends Component {
           deleteSelected={this.deleteSelectedMessages}
           messagesList={this.state.messagesList}
           selectAllCheckbox={this.state.selectAllCheckbox}
+          messagesPerPage={this.messagesPerPage}
         />
       </div>
     );

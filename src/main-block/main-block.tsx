@@ -11,6 +11,7 @@ interface InjectedProps {
   deleteSelected: () => void;
   messagesList: MessageInterface[];
   selectAllCheckbox: boolean;
+  messagesPerPage: number;
 }
 
 class MainBlock extends React.Component<InjectedProps> {
@@ -24,6 +25,7 @@ class MainBlock extends React.Component<InjectedProps> {
           deleteSelected={this.props.deleteSelected}
           messagesList={this.props.messagesList}
           selectAllCheckbox={this.props.selectAllCheckbox}
+          messagesPerPage={this.props.messagesPerPage}
         />
       </div>
     );
