@@ -9,17 +9,16 @@ import { MessageInterface } from '../../app';
 import { AutoSizer, List } from 'react-virtualized';
 
 interface InjectedProps {
-  handleSelectAll: () => void;
-  selectCheckbox: (messageIndex: number) => void;
   deleteSelected: () => void;
   messagesList: MessageInterface[];
-  selectAllCheckbox: boolean;
   messagesPerPage: number;
 }
 
 interface State {
   hiddenMessageText: String,
-  messageIsOpen: boolean
+  messageIsOpen: boolean,
+  selectAllCheckbox: boolean,
+  messagesList: MessageInterface[]
 }
 
 class MessagesBlock extends React.Component<InjectedProps> {
@@ -30,9 +29,14 @@ class MessagesBlock extends React.Component<InjectedProps> {
     this.openMessage = this.openMessage.bind(this);
     this.closeMessage = this.closeMessage.bind(this);
 
+    this.handleSelectAll = this.handleSelectAll.bind(this);
+    this.selectCheckbox = this.selectCheckbox.bind(this);
+
     this.state = {
       hiddenMessageText: '',
-      messageIsOpen: false
+      messageIsOpen: false,
+      selectAllCheckbox: false,
+      messagesList: this.props.messagesList
     };
   }
 
@@ -49,16 +53,43 @@ class MessagesBlock extends React.Component<InjectedProps> {
     });
   }
 
+  handleSelectAll() {
+    this.setState((prevState: State) => {
+      const newMessagesList = prevState.messagesList;
+      for (let i = 0; i < newMessagesList.length; i++) {
+        newMessagesList[i].selected = !prevState.selectAllCheckbox;
+      }
+
+      return {
+        selectAllCheckbox: !prevState.selectAllCheckbox,
+        messagesList: newMessagesList
+      };
+    });
+  }
+
+  selectCheckbox(messageIndex: number) {
+    this.setState((prevState: State) => {
+      const newMessagesList = prevState.messagesList;
+      newMessagesList[messageIndex].selected = !newMessagesList[messageIndex].selected;
+      return {
+        messagesList: newMessagesList
+      };
+    });
+  }
+
   render() {
+    this.state.messagesList = this.props.messagesList;
+    this.state.selectAllCheckbox = this.state.messagesList.some(message => message.selected);
+
     const messagesListClassAddition = !this.state.messageIsOpen ? '__open' : '__closed';
     const messagesCount = this.props.messagesList.length < this.props.messagesPerPage ?
       this.props.messagesList.length : this.props.messagesPerPage;
     return (
       <div className={styles['messages-block']} aria-haspopup="true">
         <Header
-          handleSelectAll={this.props.handleSelectAll}
+          handleSelectAll={this.handleSelectAll}
           deleteSelected={this.props.deleteSelected}
-          selectAllCheckbox={this.props.selectAllCheckbox}
+          selectAllCheckbox={this.state.selectAllCheckbox}
         />
         <HiddenMessage
           closeMessage={this.closeMessage}
@@ -79,7 +110,7 @@ class MessagesBlock extends React.Component<InjectedProps> {
                     <Message
                       message={this.props.messagesList[index]}
                       openMessage={this.openMessage}
-                      selectCheckbox={this.props.selectCheckbox}
+                      selectCheckbox={this.selectCheckbox}
                       messageIndex={index}
                       key={this.props.messagesList[index].id}
                     />

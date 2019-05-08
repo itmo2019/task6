@@ -19,7 +19,6 @@ export interface MessageInterface {
 
 interface State {
   messagesList: MessageInterface[],
-  selectAllCheckbox: boolean,
   messageIsOpen: boolean
 }
 
@@ -38,12 +37,10 @@ export class App extends Component {
   constructor(props: Readonly<{}>) {
     super(props);
     this.newMail = this.newMail.bind(this);
-    this.handleSelectAll = this.handleSelectAll.bind(this);
     this.deleteSelectedMessages = this.deleteSelectedMessages.bind(this);
 
     this.createAndRandom = this.createAndRandom.bind(this);
     this.newRandomMessage = this.newRandomMessage.bind(this);
-    this.selectCheckbox = this.selectCheckbox.bind(this);
     this.buildNewMessage = this.buildNewMessage.bind(this);
 
     this.messagesPerPage = 1000;
@@ -70,7 +67,6 @@ export class App extends Component {
 
     this.state = {
       messagesList: [],
-      selectAllCheckbox: false,
       messageIsOpen: false
     };
   }
@@ -112,36 +108,11 @@ export class App extends Component {
     });
   }
 
-  handleSelectAll() {
-    this.setState((prevState: State) => {
-      const newMessagesList = prevState.messagesList;
-      for (let i = 0; i < newMessagesList.length; i++) {
-        newMessagesList[i].selected = !prevState.selectAllCheckbox;
-      }
-
-      return {
-        selectAllCheckbox: !prevState.selectAllCheckbox,
-        messagesList: newMessagesList
-      };
-    });
-  }
-
-  selectCheckbox(messageIndex: number) {
-    this.setState((prevState: State) => {
-      const newMessagesList = prevState.messagesList;
-      newMessagesList[messageIndex].selected = !newMessagesList[messageIndex].selected;
-      return {
-        messagesList: newMessagesList
-      };
-    });
-  }
-
   deleteSelectedMessages() {
     this.setState((prevState: State) => {
       const newMessagesList = prevState.messagesList.filter(message => !message.selected);
 
       return {
-        selectAllCheckbox: false,
         messagesList: newMessagesList
       };
     });
@@ -177,11 +148,8 @@ export class App extends Component {
       <div className={styles.app}>
         <Header newMailFunction={this.newMail}/>
         <MainBlock
-          handleSelectAll={this.handleSelectAll}
-          selectCheckbox={this.selectCheckbox}
           deleteSelected={this.deleteSelectedMessages}
           messagesList={this.state.messagesList}
-          selectAllCheckbox={this.state.selectAllCheckbox}
           messagesPerPage={this.messagesPerPage}
         />
       </div>
