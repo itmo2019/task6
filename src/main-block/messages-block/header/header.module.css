@@ -34,13 +34,25 @@
   outline: 2px solid #d9f7ff;
 }
 
-#check-all {
+.checkbox {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.checkbox#check-all {
   margin-top: 12px;
   margin-right: 10px;
   margin-left: 20px;
 }
 
-#check-all-label {
+.checkbox#check-all-label {
   display: inline-block;
   width: 46px;
   height: 40px;

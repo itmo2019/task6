@@ -12,18 +12,6 @@
   vertical-align: top;
 }
 
-.checkbox {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #fff;
-
-  border-radius: 3px;
-  cursor: pointer;
-}
-
 .messages-list {
   overflow: auto;
   min-height: 500px;

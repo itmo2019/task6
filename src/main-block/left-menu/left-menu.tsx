@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { ReactComponentElement } from 'react';
 
-import './left-menu.css';
+import styles from './left-menu.module.css';
 import FoldersList from './folders-list/folders-list';
 
-function LeftMenu() {
-  return (
-    <div className="main-block__left-menu">
-      <div className="left-menu__write-letter">Написать</div>
-      <FoldersList />
-    </div>
-  );
+class LeftMenu extends React.Component {
+  render() {
+    return (
+      <div className={styles['main-block__left-menu']}>
+        <div className={styles['left-menu__write-letter']}>Написать</div>
+        <FoldersList />
+      </div>
+    );
+  }
 }
 
 export default LeftMenu;

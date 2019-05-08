@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './app.css';
+import styles from './app.module.css';
 
 import Header from '../header';
 import MainBlock from '../main-block';
@@ -174,7 +174,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div className="app">
+      <div className={styles.app}>
         <Header newMailFunction={this.newMail}/>
         <MainBlock
           handleSelectAll={this.handleSelectAll}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './messages-block.css';
+import styles from './messages-block.module.css';
 import Header from './header';
 import HiddenMessage from './hidden-message';
 import Message from './message';
@@ -54,7 +54,7 @@ class MessagesBlock extends React.Component<InjectedProps> {
     const messagesCount = this.props.messagesList.length < this.props.messagesPerPage ?
       this.props.messagesList.length : this.props.messagesPerPage;
     return (
-      <div className="messages-block" aria-haspopup="true">
+      <div className={styles['messages-block']} aria-haspopup="true">
         <Header
           handleSelectAll={this.props.handleSelectAll}
           deleteSelected={this.props.deleteSelected}
@@ -66,7 +66,7 @@ class MessagesBlock extends React.Component<InjectedProps> {
           hiddenMessageText={this.state.hiddenMessageText}
         />
         <div className="messages-list-container" aria-hidden={this.state.messageIsOpen} aria-live="polite">
-          <AutoSizer className={`messages-list messages-list${messagesListClassAddition}`}>
+          <AutoSizer className={styles['messages-list'] + " " + styles[`messages-list${messagesListClassAddition}`]}>
             {({ height, width }) => (
               <List
                 height={height}

@@ -1,15 +1,15 @@
 import React from 'react';
 
-import './menu.css';
+import styles from './menu.module.css';
 
 function Menu() {
   return (
-    <a className="header__menu" href="#" onClick={(click) => {
+    <a className={styles.header__menu} href="#" onClick={(click) => {
       click.preventDefault();
     }}>
-      <div className="menu__stripe" />
-      <div className="menu__stripe" />
-      <div className="menu__stripe" />
+      <div className={styles.menu__stripe} />
+      <div className={styles.menu__stripe} />
+      <div className={styles.menu__stripe} />
     </a>
   );
 }

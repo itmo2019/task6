@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './header.css';
+import styles from './header.module.css';
 
 import Menu from './menu/menu';
 import YandexServiceLogo from './yandex-service-logo/yandex-service-logo';
@@ -14,7 +14,7 @@ interface InjectedProps {
 class Header extends React.Component<InjectedProps> {
   render() {
     return (
-      <header className="mail-page-header">
+      <header className={styles['mail-page-header']}>
         <Menu />
         <YandexServiceLogo />
         <SearchBar />

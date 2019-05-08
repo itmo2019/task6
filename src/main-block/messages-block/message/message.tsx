@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './message.css';
+import styles from './message.module.css';
 import { MessageInterface } from '../../../app';
 
 interface InjectedProps {
@@ -14,12 +14,12 @@ interface InjectedProps {
 class Message extends React.Component<InjectedProps> {
   render() {
     const classAddition =
-      (this.props.message.unshrink ? ' unshrink' : '') +
-      (this.props.message.shrink ? ' shrink' : '');
+      (this.props.message.unshrink ? 'unshrink' : '') +
+      (this.props.message.shrink ? 'shrink' : '');
     return (
-      <div id={this.props.message.id.toString()} className={`message${classAddition}`}>
+      <div id={this.props.message.id.toString()} className={styles['message'] + " " + styles[classAddition]}>
         <label
-          className="select-message__checkbox-label"
+          className={styles['select-message__checkbox-label']}
           htmlFor={`checkbox-${this.props.message.id}`}
         >
           <input
@@ -28,7 +28,7 @@ class Message extends React.Component<InjectedProps> {
             aria-label={'Выделить текущее сообщение'}
             checked={this.props.message.selected}
             type="checkbox"
-            className="select-message__checkbox checkbox"
+            className={styles['select-message__checkbox'] + " " + styles['checkbox']}
             id={`checkbox-${this.props.message.id}`}
             onChange={event => {
               event.nativeEvent.stopImmediatePropagation();
@@ -39,7 +39,7 @@ class Message extends React.Component<InjectedProps> {
 
         <button
           type="button"
-          className="message-container"
+          className={styles['message-container']}
           aria-label={'Сообщение от ' + this.props.message.senderName +
           '. Тема: ' + this.props.message.subject +
           '. Дата: ' + this.props.message.date +
@@ -48,12 +48,12 @@ class Message extends React.Component<InjectedProps> {
             this.props.openMessage(this.props.message);
           }}
         >
-          <div className="message-info__sender-logo">{this.props.message.senderLogo}</div>
-          <div className="message-info__sender bold">{this.props.message.senderName}</div>
-          <div className="message-info__mark unread-mark"/>
-          <div className="message-info__subject bold">{this.props.message.subject}</div>
-          <div className="message-info__date-container">
-            <div className="date-container__date">{this.props.message.date}</div>
+          <div className={styles['message-info__sender-logo']}>{this.props.message.senderLogo}</div>
+          <div className={styles['message-info__sender'] + " " + styles.bold}>{this.props.message.senderName}</div>
+          <div className={styles['message-info__mark'] + " " + styles['unread-mark']}/>
+          <div className={styles['message-info__subject'] + " " + styles.bold}>{this.props.message.subject}</div>
+          <div className={styles['message-info__date-container']}>
+            <div className={styles['date-container__date']}>{this.props.message.date}</div>
           </div>
         </button>
       </div>

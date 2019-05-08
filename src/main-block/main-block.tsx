@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './main-block.css';
+import styles from './main-block.module.css';
 import LeftMenu from './left-menu';
 import MessagesBlock from './messages-block';
 import { MessageInterface } from '../app';
@@ -17,7 +17,7 @@ interface InjectedProps {
 class MainBlock extends React.Component<InjectedProps> {
   render() {
     return (
-      <div className="mail-page__main-block">
+      <div className={styles['mail-page__main-block']}>
         <LeftMenu />
         <MessagesBlock
           handleSelectAll={this.props.handleSelectAll}
