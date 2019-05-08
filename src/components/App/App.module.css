@@ -1,0 +1,11 @@
+.app {
+  font-family: 'HelveticaNeue', sans-serif;
+}
+
+.app--light {
+  background-color: var(--accent-background);
+}
+
+.app--dark {
+  background-color: var(--accent-background--dark);
+}

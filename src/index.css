@@ -2,6 +2,31 @@ body {
   min-width: 760px;
   height: 100vh;
   margin: 0;
-  background-color: #e5eaf0;
   font-family: 'HelveticaNeue', sans-serif;
+}
+
+:root {
+  --primary: '#000';
+  --primary-background: '#fff';
+  --secondary: '#707070';
+  --secondary-highlighted: '#505050';
+  --secondary-highlighted-background: '#cdd6e4';
+  --tertiary: '#ccc';
+  --accent: '#6287bd';
+  --accent-active: '#50709d';
+  --accent-background: '#e5eaf0';
+  --separator: '#e2e2e2';
+  --checkbox-border: rgba(0, 0, 0, 0.15);
+
+  --primary--dark: '#fff';
+  --primary-background--dark: '#2a2b2e';
+  --secondary--dark: '#000';
+  --secondary-highlighted--dark: '#505050';
+  --secondary-highlighted-background--dark: '#cdd6e4';
+  --tertiary--dark: '#eee';
+  --accent--dark: '#314766';
+  --accent-active--dark: '#50709d';
+  --accent-background--dark: '#111';
+  --separator--dark: '#e2e2e2';
+  --checkbox-border--dark: rgba(0, 0, 0, 0.43);
 }

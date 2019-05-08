@@ -4,6 +4,9 @@ import { data, months } from './data';
 import { Menu } from './Menu/Menu';
 import { Main } from './Main/Main'
 import { Color } from 'csstype';
+import { getThemed, Theme, ThemeContext } from './theme';
+
+import style from './App.module.css';
 
 export interface ILetter {
   key: number;
@@ -22,6 +25,7 @@ export interface ILetter {
 
 interface AppState {
   letters: ILetter[]
+  theme: Theme;
 }
 
 export class App extends Component<{}, AppState> {
@@ -58,7 +62,8 @@ export class App extends Component<{}, AppState> {
           title: 'Заклинание',
           date: '5 мар'
         }
-      ]
+      ],
+      theme: (theme => theme ? theme : 'dark')(localStorage.getItem('theme') as Theme)
     };
 
   componentDidMount() {
@@ -85,20 +90,20 @@ export class App extends Component<{}, AppState> {
 
   toggleAll = () => {
     const cur = this.allSelected();
-    this.setState(({ letters }) => {
+    this.setState(({ letters, theme }) => {
       const allSelected = letters.map(({ selected, ...fields }) => {
         return {
           selected: !cur,
           ...fields
         };
       });
-      return { letters: allSelected };
+      return { letters: allSelected, theme };
     });
   };
 
   deleteSelected = () => {
     const deletedKeys = this.state.letters.filter(x => !!x.selected).map(x => x.key);
-    this.setState(({ letters }) => {
+    this.setState(({ letters, theme }) => {
       console.log("delete");
       const after = letters.map(({ selected, ...rest }) => {
         if (selected) {
@@ -111,19 +116,19 @@ export class App extends Component<{}, AppState> {
           ...rest
         };
       });
-      return { letters: after };
+      return { letters: after, theme };
     });
     setTimeout(() => {
-      this.setState(({ letters }) => {
+      this.setState(({ letters, theme }) => {
         const newLetters = letters.filter(({ key }) => !deletedKeys.includes(key));
-        return { letters: newLetters };
+        return { letters: newLetters, theme };
       });
     }, 500);
   };
 
   newMail = () => {
     const sample = data[Math.floor(Math.random() * data.length)];
-    this.setState(({ letters: [...oldLetters] }) => {
+    this.setState(({ letters: [...oldLetters], theme }) => {
       const newLetter = {
         key: Math.random() * 2100000000,
         author: sample.name,
@@ -136,7 +141,7 @@ export class App extends Component<{}, AppState> {
       };
       setTimeout(() => newLetter.new = false, 500);
       return {
-        letters: [newLetter, ...oldLetters]
+        letters: [newLetter, ...oldLetters], theme
       };
     });
   };
@@ -160,11 +165,13 @@ export class App extends Component<{}, AppState> {
     setTimeout(() => {
       newLetters.forEach(x => x.new = false);
     }, 500);
-    this.setState(({ letters: [...oldLetters] }) => ({ letters: [...newLetters, ...oldLetters] }))
+    this.setState(({ letters: [...oldLetters], theme }) => ({
+        letters: [...newLetters, ...oldLetters], theme
+    }))
   };
 
   toggleLetter = (id: number) => {
-    this.setState(({ letters }) => {
+    this.setState(({ letters, theme }) => {
       console.log("toggle letter");
       return {
         letters: letters.map(({ key, selected, ...rest }) => {
@@ -180,23 +187,37 @@ export class App extends Component<{}, AppState> {
             selected,
             ...rest
           };
-        })
+        }),
+        theme
       };
     });
   };
 
+  toggleTheme = () => {
+    this.setState(({ theme, ...rest }) => {
+      const newTheme = theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', newTheme);
+      return {
+        ...rest,
+        theme: newTheme
+      }
+    })
+  };
+
   render() {
     return (
-      <div>
-        <Menu newMail={this.newMail} newBatchMail={this.newBatchMail} />
-        <Main
-          letters={this.state.letters}
-          deleteSelected={this.deleteSelected}
-          toggleLetter={this.toggleLetter}
-          toggleAll={this.toggleAll}
-          allSelected={this.allSelected()}
-        />
-      </div>
+      <ThemeContext.Provider value={this.state.theme}>
+        <div className={getThemed(style.app, style, this.state.theme)}>
+          <Menu newMail={this.newMail} newBatchMail={this.newBatchMail} toggleTheme={this.toggleTheme} />
+          <Main
+            letters={this.state.letters}
+            deleteSelected={this.deleteSelected}
+            toggleLetter={this.toggleLetter}
+            toggleAll={this.toggleAll}
+            allSelected={this.allSelected()}
+          />
+        </div>
+      </ThemeContext.Provider>
     );
   }
 }
