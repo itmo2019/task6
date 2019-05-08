@@ -27,3 +27,11 @@
 .messages-list__closed {
   display: none;
 }
+
+.virtualizedList {
+  outline: none;
+}
+
+.virtualizedList:focus {
+  outline: 2px solid #d9f7ff;
+}
