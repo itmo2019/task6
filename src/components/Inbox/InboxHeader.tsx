@@ -1,7 +1,11 @@
 import * as React from 'react';
+import { useContext } from 'react';
+
+import { InboxHeaderButton } from './InboxHeaderButton';
+import { getThemed, ThemeContext } from '../theme';
 
 import style from './Inbox.module.css';
-import { InboxHeaderButton } from './InboxHeaderButton';
+
 
 interface InboxHeaderProps {
   deleteSelected: () => void;
@@ -9,11 +13,13 @@ interface InboxHeaderProps {
   allSelected: boolean
 }
 
+
 export const InboxHeader = ({ toggleAll, deleteSelected, allSelected }: InboxHeaderProps) => {
+  const theme = useContext(ThemeContext);
   return (
-    <div className={style.header}>
+    <div className={getThemed(style.header, style, theme)}>
       <input
-        className={style.headerCheckbox}
+        className={getThemed(style.headerCheckbox, style, theme)}
         type="checkbox"
         checked={allSelected}
         onChange={toggleAll}

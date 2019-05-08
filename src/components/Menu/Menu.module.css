@@ -15,14 +15,12 @@
   border: none;
   background: none;
   border-radius: 3px;
-  color: #707070;
   font-family: HelveticaNeue-Medium, sans-serif;
   font-size: 11px;
   text-align: start;
 }
 
 .button:hover {
-  background-color: #cdd6e4;
   cursor: pointer;
 }
 
@@ -32,9 +30,7 @@
   margin-bottom: 3px;
 
   border: none;
-  background-color: #cdd6e4;
   border-radius: 3px;
-  color: #555555;
   font-family: HelveticaNeue-Bold, sans-serif;
   font-size: 11px;
   text-align: start;
@@ -50,9 +46,7 @@
   margin-bottom: 8px;
 
   border: none;
-  background-color: #6287bd;
   border-radius: 3px;
-  color: #ffffff;
   font-family: HelveticaNeue-Medium, sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -63,8 +57,6 @@
 }
 
 .buttonSpecial:active {
-  border-top: solid 2px #50709d;
-  border-left: solid 2px #50709d;
   cursor: pointer;
 }
 
@@ -81,4 +73,56 @@
 .picture {
   width: 152px;
   height: 30px;
+}
+
+.picture--dark {
+  filter: invert(100%);
+}
+
+.button--light {
+  color: var(--secondary);
+}
+
+.button--dark {
+  color: var(--secondary--dark);
+}
+
+.button--light:hover {
+  background-color: var(--secondary-highlighted-background);
+  color: var(--secondary-highlighted);
+}
+
+.button--dark:hover {
+  background-color: var(--secondary-highlighted-background--dark);
+  color: var(--secondary-highlighted--dark);
+}
+
+.buttonSpecial--light {
+  background-color: var(--accent);
+  color: var(--primary-background);
+}
+
+.buttonSpecial--dark {
+  background-color: var(--accent--dark);
+  color: var(--primary-background--dark);
+}
+
+.buttonSpecial--light:active {
+  border-top: solid 2px var(--accent-active);
+  border-left: solid 2px var(--accent-active);
+}
+
+.buttonCurrent--light {
+  background-color: var(--secondary-highlighted-background);
+  color: var(--secondary-highlighted);
+}
+
+.buttonCurrent--dark {
+  background-color: var(--secondary-highlighted-background--dark);
+  color: var(--secondary-highlighted--dark);
+}
+
+.buttonSpecial--dark:active {
+  border-top: solid 2px var(--accent-active--dark);
+  border-left: solid 2px var(--accent-active--dark);
 }

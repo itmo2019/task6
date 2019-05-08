@@ -1,13 +1,17 @@
 import * as React from 'react';
+import { useContext } from 'react';
+
+import { getThemed, ThemeContext } from '../theme';
 
 import style from './Inbox.module.css';
-import christmas from '../../images/christmas.jpg';
+import christmas from './images/christmas.jpg';
 
 export const Story = () => {
+  const theme = useContext(ThemeContext);
   return (
-    <div className={style.story}>
-      <label className={style.closeStoryButton} htmlFor="show">&times;</label>
-      <img alt="Венок" className={style.storyCirclePicture} src={christmas}/>
+    <div className={getThemed(style.story, style, theme)}>
+      <label className={getThemed(style.closeStoryButton, style, theme)} htmlFor="show">&times;</label>
+      <img alt="Венок" className={getThemed(style.storyCirclePicture, style, theme)} src={christmas}/>
         Рождественский венок — типичное украшение в домах в предрождественское время в форме венка из еловых
         веток с
         четырьмя свечами, закрепляемое вертикально или устанавливаемое на стол. В первое из четырёх воскресений

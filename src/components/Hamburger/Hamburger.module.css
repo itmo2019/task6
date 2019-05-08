@@ -10,5 +10,12 @@
   height: 2px;
   min-height: 2px;
   margin-bottom: 5px;
-  background-color: #000;
+}
+
+.slice--light {
+  background-color: var(--primary);
+}
+
+.slice--dark {
+  background-color: var(--primary--dark);
 }

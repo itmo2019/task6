@@ -1,8 +1,10 @@
 import * as React from 'react';
 
-import style from './Main.module.css';
 import { Inbox, InboxProps } from '../Inbox/Inbox';
 import { Finder } from '../Finder/Finder';
+
+import style from './Main.module.css';
+
 
 export const Main = ({ ...props }: InboxProps) => {
   return (

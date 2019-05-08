@@ -1,3 +1,87 @@
+import { Color } from 'csstype';
+
+export interface ILetter {
+  key: number;
+  story?: boolean;
+  icon?: string;
+  author: string;
+  title: string;
+  date: string;
+  unread?: boolean;
+  selected?: boolean;
+  avatar?: string;
+  new?: boolean;
+  deleted?: boolean;
+  color?: Color;
+}
+
+export function generate1000Letters(): ILetter[] {
+  const newLetters: ILetter[] = [];
+  for (let i = 0; i < 1000; i++) {
+    const sample = data[i % data.length];
+    const newLetter = {
+      key: Math.random() * 2100000000,
+      author: sample.name,
+      title: sample.phrase,
+      unread: Math.random() < 0.5,
+      icon: sample.name[0],
+      color: `#${(((1 << 24) * Math.random()) | 0).toString(16)}`,
+      date: `${Math.floor(28 * Math.random() + 1)} ${months[Math.floor(Math.random() * 12)]}`,
+      new: true
+    };
+    newLetters.push(newLetter)
+  }
+  return newLetters
+}
+
+export function generateLetter(): ILetter {
+  const sample = data[Math.floor(Math.random() * data.length)];
+  return {
+    key: Math.random() * 2100000000,
+    author: sample.name,
+    title: sample.phrase,
+    unread: Math.random() < 0.5,
+    icon: sample.name[0],
+    color: `#${(((1 << 24) * Math.random()) | 0).toString(16)}`,
+    date: `${Math.floor(28 * Math.random() + 1)} ${months[Math.floor(Math.random() * 12)]}`,
+    new: true
+  };
+}
+
+export const initialStateLetters = [
+  {
+    key: 0,
+    story: true,
+    icon: 'Я',
+    unread: true,
+    author: 'Яндекс.Паспорт',
+    title: 'Доступ восстановлен',
+    date: '9 мар'
+  },
+  {
+    key: 1,
+    avatar: '../images/avatar.JPG',
+    author: 'Мама',
+    title: 'Рецепт борща',
+    date: '9 мар'
+  },
+  {
+    key: 2,
+    icon: 'И',
+    unread: true,
+    author: 'Иванов Иван',
+    title:
+      'Дипломная работа на тему "Социально педагогическая работа по развитию социальной активности старшеклассников в условиях общеобразовательного учреждения"',
+    date: '7 мар'
+  },
+  {
+    key: 3,
+    author: 'Абракадабра',
+    title: 'Заклинание',
+    date: '5 мар'
+  }
+];
+
 export const months = [
   'янв',
   'фев',

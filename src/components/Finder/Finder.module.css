@@ -14,14 +14,28 @@
   border: none;
   background-color: inherit;
   border-radius: 3px;
-  color: #bcbcbc;
   font-size: 16px;
   text-align: start;
 }
 
+.buttonClose--light {
+  color: var(--secondary);
+}
+
+.buttonClose--dark {
+  color: var(--secondary--dark);
+}
+
 .buttonClose:hover {
-  color: #dadada;
   cursor: pointer;
+}
+
+.buttonClose--light:hover {
+  color: var(--secondary-highlighted);
+}
+
+.buttonClose--dark:hover {
+  color: var(--secondary-highlighted--dark);
 }
 
 .input {
@@ -32,9 +46,19 @@
   padding-right: 20px;
   padding-left: 4px;
   margin-left: 30%;
-  background-color: #ffffff;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
-  color: #a5a5a5;
   font-size: 16px;
   opacity: 0.5;
+}
+
+.input--light {
+  border: solid 1px var(--secondary);
+  background-color: var(--primary-background);
+  color: var(--secondary);
+}
+
+.input--dark {
+  border: solid 1px var(--secondary--dark);
+  background-color: var(--primary-background--dark);
+  color: var(--secondary--dark);
 }

@@ -1,12 +1,16 @@
-import * as React from 'react'
+import * as React from 'react';
 import { PureComponent } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import style from './Letter.module.css';
-import avatar from '../../images/avatar.jpg';
+import { ILetter } from '../App/App';
+
+import { getThemed, Theme, ThemeContext } from '../theme';
+
 import './letter-animations.css';
 
-import { ILetter } from '../app';
+import style from './Letter.module.css';
+import avatar from './images/avatar.jpg';
+
 
 interface LetterProps {
   letter: ILetter;
@@ -14,21 +18,27 @@ interface LetterProps {
   passedStyle: any;
 }
 
+
 interface LetterState {
   mounted: boolean
 }
 
+
 export class Letter extends PureComponent<LetterProps, LetterState> {
+  static contextType = ThemeContext;
+  context!: Theme;
+
   readonly state = { mounted: !this.props.letter.new };
 
+
   componentDidMount() {
-    this.setState({ mounted: true })
+    this.setState({ mounted: true });
   }
 
   componentWillReceiveProps(nextProps: Readonly<LetterProps>, nextContext: any): void {
     if (nextProps.letter.deleted) {
       console.log(nextProps.letter.deleted);
-      this.setState({ mounted: false })
+      this.setState({ mounted: false });
     }
   }
 
@@ -36,12 +46,13 @@ export class Letter extends PureComponent<LetterProps, LetterState> {
     const letter = this.props.letter;
     const { icon } = letter;
     const indicatorClassList = [style.unreadIndicator];
-    const liClassList = [style.letter];
+    const theme = this.context;
+    const liClassList = [getThemed(style.letter, style, theme)];
     if (letter.unread) {
-      indicatorClassList.push(style.unreadIndicator_active);
+      indicatorClassList.push(getThemed(style.unreadIndicator_active, style, theme));
       liClassList.push(style.unread);
     }
-    let iconJSX;
+    let iconJSX: any;
     if (icon) {
       const color = letter.color ? letter.color : '#ff3333';
       iconJSX = (
@@ -61,7 +72,7 @@ export class Letter extends PureComponent<LetterProps, LetterState> {
     const innerJsx = (
       <div>
         <input
-          className={style.checkbox}
+          className={getThemed(style.checkbox, style, theme)}
           type="checkbox"
           onChange={toggleThisLetter}
           checked={letter.selected ? letter.selected : false}
@@ -70,7 +81,7 @@ export class Letter extends PureComponent<LetterProps, LetterState> {
         <div className={style.author}>{letter.author}</div>
         <div className={indicatorClassList.join(' ')}/>
         <div className={style.title}>{letter.title}</div>
-        <div className={style.date}>{letter.date}</div>
+        <div className={getThemed(style.date, style, theme)}>{letter.date}</div>
       </div>
     );
 
@@ -80,7 +91,7 @@ export class Letter extends PureComponent<LetterProps, LetterState> {
 
     if (letter.story) {
       letterJSX = (
-        <li style={{...passedStyle}} className={liClassList.join(' ')} key={letter.key}>
+        <li style={{ ...passedStyle }} className={liClassList.join(' ')} key={letter.key}>
           <label className={style.specialLetter} htmlFor="show">
             {innerJsx}
           </label>
@@ -88,7 +99,7 @@ export class Letter extends PureComponent<LetterProps, LetterState> {
       );
     } else {
       letterJSX = (
-        <li style={{...passedStyle}} className={liClassList.join(' ')} key={letter.key}>
+        <li style={{ ...passedStyle }} className={liClassList.join(' ')} key={letter.key}>
           {innerJsx}
         </li>
       );
@@ -97,10 +108,16 @@ export class Letter extends PureComponent<LetterProps, LetterState> {
     return (
       <CSSTransition
         in={this.state.mounted}
-        classNames="letter"
+        classNames={{
+          enter: 'letter-enter--' + theme,
+          enterActive: 'letter-enter-active',
+          enterDone: 'letter-enter-done--' + theme,
+          exit: 'letter-exit',
+          exitActive: 'letter-exit-active',
+          exitDone: 'letter-exit-done'
+        }}
         onEnter={() => this.props.letter.new = false}
-        onExit={() => console.info("fuck me")}
-        timeout={{ enter: 2000, exit: 50000 }}
+        timeout={{ enter: 2000, exit: 500 }}
         key={letter.key}
       >
         {letterJSX}

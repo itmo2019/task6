@@ -1,5 +1,10 @@
 import * as React from 'react';
+import { useContext } from 'react';
+
+import { getThemed, ThemeContext } from '../theme';
+
 import css from './Menu.module.css';
+
 
 interface MenuButtonProps {
   name: string;
@@ -7,6 +12,7 @@ interface MenuButtonProps {
   special?: boolean;
   action?: () => void;
 }
+
 
 export const MenuButton = ({ name, current, special, action }: MenuButtonProps) => {
   let style;
@@ -18,8 +24,10 @@ export const MenuButton = ({ name, current, special, action }: MenuButtonProps) 
     style = css.button;
   }
 
+  const theme = useContext(ThemeContext);
+
   return (
-    <button className={style} type="button" onClick={action}>
+    <button className={getThemed(style, css, theme)} type="button" onClick={action}>
       {name}
     </button>
   );
