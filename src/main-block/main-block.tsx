@@ -6,9 +6,9 @@ import MessagesBlock from './messages-block';
 import { MessageInterface } from '../app';
 
 interface InjectedProps {
-  deleteSelected: () => void;
   messagesList: MessageInterface[];
   messagesPerPage: number;
+  updateList: (newList: MessageInterface[]) => void;
 }
 
 class MainBlock extends React.Component<InjectedProps> {
@@ -17,9 +17,9 @@ class MainBlock extends React.Component<InjectedProps> {
       <div className={styles['mail-page__main-block']}>
         <LeftMenu />
         <MessagesBlock
-          deleteSelected={this.props.deleteSelected}
           messagesList={this.props.messagesList}
           messagesPerPage={this.props.messagesPerPage}
+          updateList={this.props.updateList}
         />
       </div>
     );

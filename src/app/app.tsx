@@ -37,11 +37,10 @@ export class App extends Component {
   constructor(props: Readonly<{}>) {
     super(props);
     this.newMail = this.newMail.bind(this);
-    this.deleteSelectedMessages = this.deleteSelectedMessages.bind(this);
-
     this.createAndRandom = this.createAndRandom.bind(this);
     this.newRandomMessage = this.newRandomMessage.bind(this);
     this.buildNewMessage = this.buildNewMessage.bind(this);
+    this.updateList = this.updateList.bind(this);
 
     this.messagesPerPage = 1000;
 
@@ -108,16 +107,6 @@ export class App extends Component {
     });
   }
 
-  deleteSelectedMessages() {
-    this.setState((prevState: State) => {
-      const newMessagesList = prevState.messagesList.filter(message => !message.selected);
-
-      return {
-        messagesList: newMessagesList
-      };
-    });
-  }
-
   buildNewMessage(): MessageInterface {
     const currentDate = new Date();
 
@@ -143,14 +132,22 @@ export class App extends Component {
     };
   }
 
+  updateList(newList: MessageInterface[]) {
+    this.setState(() => {
+      return {
+        messagesList: newList
+      }
+    })
+  }
+
   render() {
     return (
       <div className={styles.app}>
         <Header newMailFunction={this.newMail}/>
         <MainBlock
-          deleteSelected={this.deleteSelectedMessages}
           messagesList={this.state.messagesList}
           messagesPerPage={this.messagesPerPage}
+          updateList={this.updateList}
         />
       </div>
     );

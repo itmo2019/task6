@@ -9,9 +9,9 @@ import { MessageInterface } from '../../app';
 import { AutoSizer, List } from 'react-virtualized';
 
 interface InjectedProps {
-  deleteSelected: () => void;
   messagesList: MessageInterface[];
   messagesPerPage: number;
+  updateList: (newList: MessageInterface[]) => void;
 }
 
 interface State {
@@ -31,6 +31,8 @@ class MessagesBlock extends React.Component<InjectedProps> {
 
     this.handleSelectAll = this.handleSelectAll.bind(this);
     this.selectCheckbox = this.selectCheckbox.bind(this);
+
+    this.deleteSelectedMessages = this.deleteSelectedMessages.bind(this);
 
     this.state = {
       hiddenMessageText: '',
@@ -77,6 +79,13 @@ class MessagesBlock extends React.Component<InjectedProps> {
     });
   }
 
+  deleteSelectedMessages() {
+    this.setState((prevState: State) => {
+      const newMessagesList = prevState.messagesList.filter(message => !message.selected);
+      this.props.updateList(newMessagesList);
+    });
+  }
+
   render() {
     this.state.messagesList = this.props.messagesList;
     this.state.selectAllCheckbox = this.state.messagesList.some(message => message.selected);
@@ -88,7 +97,7 @@ class MessagesBlock extends React.Component<InjectedProps> {
       <div className={styles['messages-block']} aria-haspopup="true">
         <Header
           handleSelectAll={this.handleSelectAll}
-          deleteSelected={this.props.deleteSelected}
+          deleteSelected={this.deleteSelectedMessages}
           selectAllCheckbox={this.state.selectAllCheckbox}
         />
         <HiddenMessage
