@@ -28,6 +28,18 @@
   display: none;
 }
 
+.checkbox {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+
+  border-radius: 3px;
+  cursor: pointer;
+}
+
 .virtualizedList {
   outline: none;
 }

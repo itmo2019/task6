@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styles from './header.module.css';
+import checkboxStyle from '../messages-block.module.css'
 
 interface InjectedProps {
   handleSelectAll: () => void;
@@ -21,7 +22,7 @@ class Header extends React.Component<InjectedProps> {
             aria-checked={this.props.selectAllCheckbox}
             aria-label={'Выделить все сообщения'}
             type="checkbox"
-            className={styles.checkbox}
+            className={checkboxStyle.checkbox}
             id={styles['check-all']}
             checked={this.props.selectAllCheckbox}
             onChange={() => {

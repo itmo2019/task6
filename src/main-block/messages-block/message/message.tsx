@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styles from './message.module.css';
+import checkboxStyle from '../messages-block.module.css'
 import { MessageInterface } from '../../../app';
 
 interface InjectedProps {
@@ -28,7 +29,7 @@ class Message extends React.Component<InjectedProps> {
             aria-label={'Выделить текущее сообщение'}
             checked={this.props.message.selected}
             type="checkbox"
-            className={styles['select-message__checkbox'] + " " + styles['checkbox']}
+            className={styles['select-message__checkbox'] + " " + checkboxStyle.checkbox}
             id={`checkbox-${this.props.message.id}`}
             onChange={event => {
               event.nativeEvent.stopImmediatePropagation();
