@@ -1,3 +1,8 @@
 {
-  "extends": ["@hellroot/stylelint-config"]
+  "extends": ["@hellroot/stylelint-config"],
+  "rules": {
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": ["global"]
+    }]
+  }
 }

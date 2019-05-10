@@ -1,0 +1,8 @@
+.app {
+  width: available;
+  min-width: 950px;
+  min-height: 100%;
+  margin-right: 22px;
+  margin-left: 22px;
+  font-family: 'Helvetica Neue', sans-serif;
+}

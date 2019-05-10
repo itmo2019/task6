@@ -1,0 +1,49 @@
+.messages-block {
+  display: inline-block;
+  width: 78%;
+  min-width: 600px;
+  height: 100%;
+  margin-right: 0;
+  margin-left: 2%;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+  vertical-align: top;
+}
+
+.messages-list {
+  overflow: auto;
+  min-height: 500px;
+  max-height: 1231px;
+
+  border-bottom: solid 1px #e2e2e2;
+}
+
+.messages-list__open {
+  display: block;
+}
+
+.messages-list__closed {
+  display: none;
+}
+
+.checkbox {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.virtualizedList {
+  outline: none;
+}
+
+.virtualizedList:focus {
+  outline: 2px solid #d9f7ff;
+}

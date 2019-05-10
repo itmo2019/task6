@@ -1,0 +1,124 @@
+.select-message__checkbox {
+  margin-top: 12px;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+
+.select-message__checkbox-label {
+  display: inline-block;
+  width: 46px;
+  height: 40px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.message-container {
+  width: calc(100% - 46px - 3px);
+  padding: 0;
+  padding-right: 3px;
+
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 100%;
+  outline: none;
+}
+
+.message-container:focus {
+  box-shadow: 0 0 0 2px #d9f7ff;
+}
+
+.message {
+  overflow: hidden;
+  height: 40px;
+
+  border-bottom: solid 0 #e2e2e2;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  opacity: 0;
+  text-overflow: ellipsis;
+  transition: opacity 1.5s, height 1.5s, border-bottom-width 1.5s;
+  white-space: nowrap;
+  will-change: transform, height, opacity;
+}
+
+.message-info__sender-logo {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: #f33;
+
+  border-radius: 100px;
+  color: #fff;
+  line-height: 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.message-info__sender {
+  display: inline-block;
+  overflow: hidden;
+  width: 175px;
+  margin-left: 10px;
+  color: #000;
+  line-height: 30px;
+  text-align: left;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+
+  white-space: nowrap;
+}
+
+.message-info__mark {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.unread-mark {
+  background-color: #6287bd;
+  border-radius: 100px;
+}
+
+.message-info__subject {
+  display: inline-block;
+  overflow: hidden;
+  width: calc(100% - 325px);
+  color: #000;
+  text-align: left;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.message-info__date-container {
+  display: inline-block;
+  overflow: hidden;
+  width: 70px;
+  margin-right: 10px;
+  margin-left: 0;
+  color: #9b9b9b;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.date-container__date {
+  float: right;
+}
+
+.unshrink {
+  border-bottom: solid 1px #e2e2e2;
+  opacity: 1;
+}
+
+.shrink {
+  opacity: 0;
+}

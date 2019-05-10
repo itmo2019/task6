@@ -1,0 +1,53 @@
+.messages-block-header {
+  overflow: auto;
+  height: 40px;
+
+  border-bottom: solid 1px #e2e2e2;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.messages-block-header__action {
+  display: inline-block;
+  width: auto;
+
+  margin-left: 15px;
+  color: #ccc;
+  cursor: pointer;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.button-to-div {
+  padding: 0;
+
+  border: 0;
+  font-family: inherit;
+  font-size: 100%;
+  outline: none;
+}
+
+.button-to-div:focus {
+  outline: 2px solid #d9f7ff;
+}
+
+#check-all:global {
+  margin-top: 12px;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+
+#check-all-label:global {
+  display: inline-block;
+  width: 46px;
+  height: 40px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
