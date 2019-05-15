@@ -4,13 +4,13 @@ import cx from 'classnames';
 
 import styles from './letterDialog.module.css';
 
-type Props = {
-  isVisible: boolean,
-  onExitClick: () => void,
-  children: JSX.Element[]
+interface IProps {
+  isVisible: boolean;
+  onExitClick: () => void;
+  children: JSX.Element[];
 }
 
-const LetterDialog = (props: Props) => {
+const LetterDialog = (props: IProps) => {
   console.log('LetterDialog');
   const { isVisible, onExitClick, children } = props;
   const dialogClassName = cx(styles.box, {
@@ -27,9 +27,7 @@ const LetterDialog = (props: Props) => {
   );
 };
 
-const checkPropsChange = (props: Props, nextProps: Props) =>
-  nextProps.isVisible !== props.isVisible ||
-  nextProps.children !== props.children;
+const checkPropsChange = (props: IProps, nextProps: IProps) =>
+  nextProps.isVisible !== props.isVisible || nextProps.children !== props.children;
 
 export default shouldUpdate(checkPropsChange)(LetterDialog);
-

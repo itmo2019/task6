@@ -1,14 +1,14 @@
+import React from 'react';
 import cx from 'classnames';
 import pure from 'recompose/pure';
 import styles from './letter.module.css';
-import React from 'react';
 
-type LetterItemProps = {
-  className?: string,
-  children?: any
+interface ILetterItemProps {
+  className?: string;
+  children?: any;
 }
 
-const LetterItem = (props: LetterItemProps) => {
+const LetterItem = (props: ILetterItemProps) => {
   console.log('LetterItem');
   const { className, children } = props;
   const itemClassName = cx(styles.item, className);

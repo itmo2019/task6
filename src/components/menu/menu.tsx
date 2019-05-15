@@ -4,16 +4,16 @@ import cx from 'classnames';
 
 import styles from './menu.module.css';
 
-type Props = {
-  className?: string,
-  theme: string
+interface IProps {
+  className?: string;
+  theme: string;
 }
 
-const Menu = (props: Props) => {
+const Menu = (props: IProps) => {
   console.log('Menu');
   const { className, theme } = props;
   const menuClassName = cx(styles.box, className);
-  const hrClassName = cx(styles.hr, styles['hr_theme_' + theme]);
+  const hrClassName = cx(styles.hr, styles[`hr_theme_${theme}`]);
 
   return (
     <div className={menuClassName}>
@@ -24,7 +24,6 @@ const Menu = (props: Props) => {
   );
 };
 
-const checkPropsChange = (props: Props, nextProps: Props) =>
-  nextProps.theme !== props.theme;
+const checkPropsChange = (props: IProps, nextProps: IProps) => nextProps.theme !== props.theme;
 
 export default shouldUpdate(checkPropsChange)(Menu);

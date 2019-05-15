@@ -5,28 +5,30 @@ import ILetter from './ILetter';
 
 import styles from './letterBox.module.css';
 
-type Props = {
-  filterText: string,
-  letters: ILetter[],
-  mapper: (letter: ILetter, index: number) => JSX.Element,
-  theme: string,
-  listMaxSize: number,
-  changeFilterProgress: (value: number) => void
+interface IProps {
+  filterText: string;
+  letters: ILetter[];
+  mapper: (letter: ILetter, index: number) => JSX.Element;
+  theme: string;
+  listMaxSize: number;
+  changeFilterProgress: (value: number) => void;
 }
 
 const filterPredicate = (filterText: string, letter: ILetter) => {
-  return letter.authorName.toLowerCase().includes(filterText) ||
+  return (
+    letter.authorName.toLowerCase().includes(filterText) ||
     letter.topic.toLowerCase().includes(filterText) ||
-    letter.body.toLowerCase().includes(filterText);
+    letter.body.toLowerCase().includes(filterText)
+  );
 };
 
 function filterAndMapLetters(
   arr: ILetter[],
   predicate: (val: ILetter) => boolean,
   mapper: (val: ILetter, index: number) => JSX.Element,
-  maxSize: number,
+  maxSize: number
 ) {
-  let result = [];
+  const result = [];
   for (let i = 0; i < arr.length; i++) {
     if (predicate(arr[i])) {
       result.push(mapper(arr[i], i));
@@ -38,23 +40,19 @@ function filterAndMapLetters(
   return result;
 }
 
-const LetterList = (props: Props) => {
-  const { filterText, letters, mapper, listMaxSize} = props;
+const LetterList = (props: IProps) => {
+  const { filterText, letters, mapper, listMaxSize } = props;
   const listLetters = filterAndMapLetters(
     letters,
     letter => filterPredicate(filterText, letter),
     mapper,
     listMaxSize
-    );
-
-  return (
-    <ul className={styles.letterList}>
-      {listLetters}
-    </ul>
   );
+
+  return <ul className={styles.letterList}>{listLetters}</ul>;
 };
 
-const checkPropsChange = (props: Props, nextProps: Props) =>
+const checkPropsChange = (props: IProps, nextProps: IProps) =>
   nextProps.filterText !== props.filterText ||
   nextProps.letters !== props.letters ||
   nextProps.theme !== props.theme;

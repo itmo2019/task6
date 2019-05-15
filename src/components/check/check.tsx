@@ -4,12 +4,12 @@ import cx from 'classnames';
 
 import styles from './check.module.css';
 
-type Props = {
-  isChecked: boolean,
-  onChange?: () => void
+interface IProps {
+  isChecked: boolean;
+  onChange?: () => void;
 }
 
-const Check = (props: Props) => {
+const Check = (props: IProps) => {
   // console.log('Check');
   const { isChecked, onChange } = props;
   const boxClassName = cx(styles.box, {

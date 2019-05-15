@@ -6,15 +6,15 @@ import MailMain from '../mailMain/mailMain';
 
 import styles from './mail.module.css';
 
-type State = {
-  theme: string,
-  filterText: string,
-  filterProgress: number
-};
+interface IState {
+  theme: string;
+  filterText: string;
+  filterProgress: number;
+}
 
 const cookies = new Cookies();
 
-export default class Mail extends Component<{}, State> {
+export default class Mail extends Component<{}, IState> {
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -33,7 +33,6 @@ export default class Mail extends Component<{}, State> {
     this.setState(state => {
       const theme = state.theme === 'light' ? 'dark' : 'light';
       cookies.set('theme', theme, { path: '/' });
-      //cookie.save('theme', theme);
       return { theme };
     });
   };
@@ -56,14 +55,22 @@ export default class Mail extends Component<{}, State> {
   render() {
     console.log('MailApp');
     const { theme, filterText, filterProgress } = this.state;
-    const boxClassName = cx(styles.box, styles['box_theme_' + theme]);
+    const boxClassName = cx(styles.box, styles[`box_theme_${theme}`]);
     return (
       <div className={boxClassName}>
-        <MailHeader theme={theme} filterText={filterText} changeFilterText={this.changeFilterText}
-          clearFilterText={this.clearFilterText} onThemeBtnClick={this.handleThemeBtnClick}
-          filterProgress={filterProgress} />
-        <MailMain theme={theme} filterText={filterText}
-                  changeFilterProgress={this.changeFilterProgress}/>
+        <MailHeader
+          theme={theme}
+          filterText={filterText}
+          changeFilterText={this.changeFilterText}
+          clearFilterText={this.clearFilterText}
+          onThemeBtnClick={this.handleThemeBtnClick}
+          filterProgress={filterProgress}
+        />
+        <MailMain
+          theme={theme}
+          filterText={filterText}
+          changeFilterProgress={this.changeFilterProgress}
+        />
       </div>
     );
   }

@@ -4,8 +4,8 @@ import cx from 'classnames';
 
 import styles from './supportLine.module.css';
 
-type Props = {
-  theme: string
+interface IProps {
+  theme: string;
 }
 
 const items = [
@@ -15,13 +15,16 @@ const items = [
   { key: 4, title: 'Яндекс', href: 'https://yandex.ru' }
 ];
 
-const SupportLine = (props: Props) => {
+const SupportLine = (props: IProps) => {
   console.log('SupportLine');
   const { theme } = props;
 
   const listItems = items.map(item => {
-    const itemClassName = cx(styles.item, styles['item_theme_' + theme],
-      item.href === undefined ? styles.item_type_text : styles.item_type_link);
+    const itemClassName = cx(
+      styles.item,
+      styles[`item_theme_${theme}`],
+      item.href === undefined ? styles.item_type_text : styles.item_type_link
+    );
 
     return item.href === undefined ? (
       <div key={item.key} className={itemClassName}>
@@ -37,7 +40,6 @@ const SupportLine = (props: Props) => {
   return <div className={styles.itemLine}>{listItems}</div>;
 };
 
-const checkPropsChange = (props: Props, nextProps: Props) =>
-  nextProps.theme !== props.theme;
+const checkPropsChange = (props: IProps, nextProps: IProps) => nextProps.theme !== props.theme;
 
 export default shouldUpdate(checkPropsChange)(SupportLine);

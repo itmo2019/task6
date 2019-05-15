@@ -8,15 +8,15 @@ import yaLogo from '../resources/images/authors-logo/ya-logo.png';
 
 import letterStyles from '../components/letter/letter.module.css';
 
-interface LetterGenerator {
-  getTopic: () => string,
-  getDate: () => JSX.Element,
-  getAuthorName: () => string,
-  getAuthorLogo: (authorName: string) => JSX.Element,
-  getLetterBody: () => string
+interface ILetterGenerator {
+  getTopic: () => string;
+  getDate: () => JSX.Element;
+  getAuthorName: () => string;
+  getAuthorLogo: (authorName: string) => JSX.Element;
+  getLetterBody: () => string;
 }
 
-const LetterGenerator = function LetterGenerator(this: LetterGenerator) {
+const LetterGenerator = (function LetterGenerator(this: ILetterGenerator) {
   const nounWords = [
     'собака',
     'кошка',
@@ -148,6 +148,6 @@ const LetterGenerator = function LetterGenerator(this: LetterGenerator) {
   this.getLetterBody = () => {
     return getLetter();
   };
-} as any as { new (): LetterGenerator; };
+} as any) as { new (): ILetterGenerator };
 
 export default LetterGenerator;

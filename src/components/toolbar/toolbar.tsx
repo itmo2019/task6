@@ -7,15 +7,15 @@ import IToolbarItem from './toolBarItem';
 
 import styles from './toolbar.module.css';
 
-type Props = {
-  children: IToolbarItem[],
-  theme: string
+interface IProps {
+  children: IToolbarItem[];
+  theme: string;
 }
 
 function renderSwitch(item: IToolbarItem, theme: string) {
   switch (item.type) {
     case 'button': {
-      const btnClassName = cx(styles.button, styles['button_theme_' + theme], {
+      const btnClassName = cx(styles.button, styles[`button_theme_${theme}`], {
         [styles.button_isActive]: item.isActive
       });
       return (
@@ -29,11 +29,14 @@ function renderSwitch(item: IToolbarItem, theme: string) {
   }
 }
 
-const Toolbar = (props: Props) => {
+const Toolbar = (props: IProps) => {
   // console.log('Toolbar');
   const { children, theme } = props;
-  const listItems = children.map((item, index) =>
-    <li key={index} className={styles.item}>{renderSwitch(item, theme)}</li>);
+  const listItems = children.map((item, index) => (
+    <li key={index} className={styles.item}>
+      {renderSwitch(item, theme)}
+    </li>
+  ));
 
   return <ul className={styles.box}>{listItems}</ul>;
 };

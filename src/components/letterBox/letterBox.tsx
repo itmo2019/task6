@@ -16,23 +16,23 @@ import IToolbarItem from '../toolbar/toolBarItem';
 import letterStyles from '../letter/letter.module.css';
 import styles from './letterBox.module.css';
 
-type Props = {
-  className?: string,
-  theme: string,
-  filterText: string,
-  changeFilterProgress: (value: number) => void
+interface IProps {
+  className?: string;
+  theme: string;
+  filterText: string;
+  changeFilterProgress: (value: number) => void;
 }
 
-type State = {
-  curPage: number,
-  letters: ILetter[],
-  isMailVisible: boolean,
-  mailContent: any,
-  isCheckAll: boolean,
-  selectLetterCount: number,
+interface IState {
+  curPage: number;
+  letters: ILetter[];
+  isMailVisible: boolean;
+  mailContent: any;
+  isCheckAll: boolean;
+  selectLetterCount: number;
 }
 
-export default class LetterBox extends Component<Props, State> {
+export default class LetterBox extends Component<IProps, IState> {
   static displayName = 'LetterBox';
 
   MIN_TIMER_ADD_MAIL = 300000;
@@ -53,7 +53,7 @@ export default class LetterBox extends Component<Props, State> {
 
   timerInnerID: NodeJS.Timeout = setTimeout(() => {}, 0);
 
-  constructor(props: Props) {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       curPage: 1,
@@ -61,7 +61,7 @@ export default class LetterBox extends Component<Props, State> {
       isMailVisible: false,
       mailContent: undefined,
       isCheckAll: false,
-      selectLetterCount: 0,
+      selectLetterCount: 0
     };
   }
 
@@ -204,29 +204,29 @@ export default class LetterBox extends Component<Props, State> {
     this.setState({ isMailVisible: false });
   };
 
-  getToolBarItems = (isCheckAll: boolean, selectLetterCount: number) =>
-    [
-      { type: 'checkbox', value: isCheckAll, onClick: this.handleCheckAllClick },
-      { type: 'button', value: 'Получить сообщение', onClick: this.newMail, isActive: true },
-      { type: 'button', value: 'Переслать', isActive: selectLetterCount > 0 },
-      {
-        type: 'button',
-        value: 'Удалить',
-        onClick: this.handleRemoveButtonClick,
-        isActive: selectLetterCount > 0
-      },
-      { type: 'button', value: 'Это спам!', isActive: selectLetterCount > 0 },
-      {
-        type: 'button',
-        value: 'Прочитано',
-        onClick: this.handleUnmarkButtonClick,
-        isActive: selectLetterCount > 0
-      }
-      ];
+  getToolBarItems = (isCheckAll: boolean, selectLetterCount: number) => [
+    { type: 'checkbox', value: isCheckAll, onClick: this.handleCheckAllClick },
+    { type: 'button', value: 'Получить сообщение', onClick: this.newMail, isActive: true },
+    { type: 'button', value: 'Переслать', isActive: selectLetterCount > 0 },
+    {
+      type: 'button',
+      value: 'Удалить',
+      onClick: this.handleRemoveButtonClick,
+      isActive: selectLetterCount > 0
+    },
+    { type: 'button', value: 'Это спам!', isActive: selectLetterCount > 0 },
+    {
+      type: 'button',
+      value: 'Прочитано',
+      onClick: this.handleUnmarkButtonClick,
+      isActive: selectLetterCount > 0
+    }
+  ];
 
   toolbarItems: IToolbarItem[] = [];
 
   oldSelectLetterCount: number | undefined = undefined;
+
   oldIsCheckAll: boolean | undefined = undefined;
 
   render() {
@@ -259,7 +259,7 @@ export default class LetterBox extends Component<Props, State> {
         handleMailCheckClick={this.handleMailCheckClick.bind(this, index)}
         theme={theme}
       />
-      );
+    );
 
     if (this.oldSelectLetterCount !== selectLetterCount || this.oldIsCheckAll !== isCheckAll) {
       this.toolbarItems = this.getToolBarItems(isCheckAll, selectLetterCount);
@@ -267,15 +267,13 @@ export default class LetterBox extends Component<Props, State> {
       this.oldIsCheckAll = isCheckAll;
     }
 
-    const letterBoxClassName = cx(styles.box, className, styles['box_theme_' + theme]);
+    const letterBoxClassName = cx(styles.box, className, styles[`box_theme_${theme}`]);
 
     return (
       <div className={letterBoxClassName}>
         <Toolbar theme={theme}>{this.toolbarItems}</Toolbar>
         <Hr />
-        <LetterDialog
-          isVisible={isMailVisible}
-          onExitClick={this.handleMailExitClick}>
+        <LetterDialog isVisible={isMailVisible} onExitClick={this.handleMailExitClick}>
           {mailContent}
         </LetterDialog>
         <LetterList
@@ -284,7 +282,8 @@ export default class LetterBox extends Component<Props, State> {
           mapper={letterMapper}
           theme={theme}
           changeFilterProgress={changeFilterProgress}
-          listMaxSize={this.MAX_MAIL_LIST_SIZE}/>
+          listMaxSize={this.MAX_MAIL_LIST_SIZE}
+        />
         <div className={styles.supportLine}>
           <Hr />
           <SupportLine theme={theme} />

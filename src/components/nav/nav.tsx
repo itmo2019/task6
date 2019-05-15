@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Props } from 'react';
 import shouldUpdate from 'recompose/shouldUpdate';
 import cx from 'classnames';
 import LinkBlock from '../linkBlock/linkBlock';
 
 import styles from './nav.module.css';
 
-type Props = {
-  className?: string,
-  theme: string
+interface IProps {
+  className?: string;
+  theme: string;
 }
 
 const items = [
@@ -19,12 +19,12 @@ const items = [
   { key: 6, link: '/public/index.html', title: 'Создать папку' }
 ];
 
-const Nav = (props: Props) => {
+const Nav = (props: IProps) => {
   console.log('Nav');
   const { className, theme } = props;
 
   const listItems = items.map(item => {
-    const itemClassName = cx(styles.item, styles['item_theme_' + theme], {
+    const itemClassName = cx(styles.item, styles[`item_theme_${theme}`], {
       [styles.item_select]: item.isSelect
     });
 
@@ -46,7 +46,6 @@ const Nav = (props: Props) => {
   );
 };
 
-const checkPropsChange = (props: Props, nextProps: Props) =>
-  nextProps.theme !== props.theme;
+const checkPropsChange = (props: IProps, nextProps: IProps) => nextProps.theme !== props.theme;
 
 export default shouldUpdate(checkPropsChange)(Nav);

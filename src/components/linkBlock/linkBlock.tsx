@@ -3,13 +3,13 @@ import cx from 'classnames';
 
 import styles from './linkBlock.module.css';
 
-type Props = {
-  className?: string
-  onClick?: () => void
-  title: string
+interface IProps {
+  className?: string;
+  onClick?: () => void;
+  title: string;
 }
 
-const LinkBlock = (props: Props) => {
+const LinkBlock = (props: IProps) => {
   console.log('LinkBlock');
   const { className, title, onClick } = props;
   const linkBlockClassName = cx(styles.box, className);
