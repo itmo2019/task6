@@ -27,8 +27,7 @@ interface IState {
 
 const now = moment();
 
-export class Header extends React.Component<IProps> {
-    public state: IState;
+export class Header extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {

@@ -11,8 +11,7 @@ interface IState {
     topBarCheckboxChecked: boolean
 }
 
-export class TopBar extends React.Component<IProps> {
-  public state: IState;
+export class TopBar extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {

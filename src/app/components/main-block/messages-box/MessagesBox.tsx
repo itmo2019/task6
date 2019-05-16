@@ -15,8 +15,7 @@ interface IState {
     opened: boolean
 }
 
-export class MessagesBox extends React.Component<IProps> {
-  public state: IState;
+export class MessagesBox extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {

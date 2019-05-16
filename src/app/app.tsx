@@ -30,9 +30,7 @@ interface IState {
     theme: themes
 }
 
-export class App extends Component {
-  public state: IState;
-
+export class App extends Component<{}, IState> {
   static createMessageValues(
     id: string,
     theme: string,
@@ -136,11 +134,7 @@ export class App extends Component {
     const messagesList = this.state.messages;
     for (let i = 0; i < messagesList.length; i++) {
       const curDate = messagesList[i].date.valueOf();
-      if (curDate >= startDate.valueOf() && curDate <= endDate.valueOf()) {
-        messagesList[i].display = true;
-      } else {
-        messagesList[i].display = false;
-      }
+      messagesList[i].display = curDate >= startDate.valueOf() && curDate <= endDate.valueOf();
     }
     this.setState({messages: messagesList})
   }
