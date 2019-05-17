@@ -1,8 +1,12 @@
 import React from 'react';
 import styles from './SearchBox.module.css';
+import {ThemeContext, themes} from "../../../../theme/theme-context";
 
 export class SearchBox extends React.Component {
   render() {
-    return <input className={styles['search-box']} type="search" placeholder="Поиск" />;
+    const colorStyle = this.context === themes.light ? styles.light : styles.dark;
+    return <input className={`${styles['search-box']} ${colorStyle}`} type="search" placeholder="Поиск" />;
   }
 }
+
+SearchBox.contextType = ThemeContext;
