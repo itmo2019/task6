@@ -2,7 +2,7 @@ export const title: string;
 export const logo: string;
 export const menu: string;
 export const navigation: string;
-export const className: string;
+export const header: string;
 export const rectangle: string;
 export const search: string;
 export const searchInput: string;

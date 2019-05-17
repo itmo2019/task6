@@ -1,7 +1,11 @@
-.className {
+.letter {
   width: 100%;
   min-width: 574px;
   min-height: 415px;
+}
+
+.hidden {
+  display: none;
 }
 
 .closeImg {

@@ -1,6 +1,6 @@
 export const unread: string;
 export const myCheckbox: string;
-export const className: string;
+export const letterHead: string;
 export const link: string;
 export const authorImage: string;
 export const authorName: string;
@@ -9,3 +9,4 @@ export const date: string;
 export const animatedAddLine: string;
 export const animatedDeleteLine: string;
 export const text: string;
+export const hidden: string;

@@ -7,7 +7,7 @@ interface LetterHeadProps {
   id: string,
   authorName: string,
   authorImage: string,
-  text: string[],
+  letterText: string[],
   headText: string,
   isVisible: boolean,
   isChecked: boolean,
@@ -16,21 +16,20 @@ interface LetterHeadProps {
   addAnimation: boolean,
   removeAddAnimation: (id: string) => void,
   deleteAnimation: boolean,
-  makeDelete: (id: string) => void,
   isRead: boolean
   setRead: (id: string) => void,
-  showLetter: () => void
+  showLetter: () => void,
+  headTagDate: string
+  headDate: string
 }
 
-export class LetterHead extends Component {
-
-  public readonly props: LetterHeadProps;
+export class LetterHead extends Component<LetterHeadProps> {
 
   constructor(props: LetterHeadProps) {
     super(props);
-    this.props = props;
 
     this.makeClassName = this.makeClassName.bind(this);
+    this.makeLinkClassName = this.makeLinkClassName.bind(this);
   }
 
   makeClassName() {
@@ -40,23 +39,27 @@ export class LetterHead extends Component {
       }, 1500);
       return styles.animatedAddLine;
     }
+
     if (this.props.deleteAnimation) {
-      setTimeout(() => {
-        this.props.makeDelete(this.props.id);
-      }, 1500);
       return styles.animatedDeleteLine;
     }
 
-    return styles.className;
+    if (!this.props.isVisible) {
+      return styles.hidden;
+    }
+
+    return styles.letterHead;
+  }
+
+  makeLinkClassName() {
+    return this.props.isRead ? styles.unread : styles.link;
   }
 
   render() {
     return (
       <li
-        id={this.props.id}
         className={this.makeClassName()}
         key={this.props.id}
-        style={{ display: this.props.isVisible ? 'inline' : 'none' }}
       >
         <label htmlFor={`${this.props.id}-checkbox`}>
           <input
@@ -69,12 +72,9 @@ export class LetterHead extends Component {
         </label>
         <a
           href="#"
-          className={
-            this.props.isRead ? styles.unread : styles.link
-          }
+          className={this.makeLinkClassName()}
           onClick={() => {
-            console.log(this.props.text);
-            this.props.setText(this.props.text);
+            this.props.setText(this.props.letterText);
             this.props.showLetter();
             this.props.setRead(this.props.id);
           }}
@@ -92,8 +92,8 @@ export class LetterHead extends Component {
             <p className={pageStyles.myText}>{this.props.headText}</p>
           </div>
           <div className={styles.date}>
-            <time dateTime="2019-03-07 18:01">
-              <p>7 мар</p>
+            <time dateTime={this.props.headTagDate}>
+              <p>{this.props.headDate}</p>
             </time>
           </div>
         </a>

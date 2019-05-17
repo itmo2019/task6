@@ -3,18 +3,20 @@ import React, { Component } from 'react';
 import * as styles from './messageMenu.module.css';
 import * as pageStyles from '../page/page.module.css';
 
-export class MessageMenu extends Component {
+interface MessageMenuProps {
+  deleteMessages: () => void
+}
 
-  public readonly props: {deleteMessages: () => void};
+export class MessageMenu extends Component<MessageMenuProps> {
 
-  constructor(props: { deleteMessages: () => void }) {
+
+  constructor(props: MessageMenuProps) {
     super(props);
-    this.props = props;
   }
 
   render() {
     return (
-      <ul className={styles.className}>
+      <ul className={styles.messageMenu}>
         <li className={styles.text}>
           <a href="." className={styles.link}>
             <p className={pageStyles.myText}>Переслать</p>

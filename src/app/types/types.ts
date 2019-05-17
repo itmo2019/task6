@@ -8,5 +8,7 @@ export interface LetterType {
   isVisible: boolean,
   isRead: boolean,
   addAnimation: boolean,
-  deleteAnimation: boolean
+  deleteAnimation: boolean,
+  headTagDate: string,
+  headDate: string
 }

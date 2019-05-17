@@ -240,6 +240,8 @@ const surnames: string[] = [
 
 const icons: string[] = [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10];
 
+const months: string[] = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+
 export function genText(): string[]  {
   const minParagraphCount: number = 1;
   const maxParagraphCount: number = 5;
@@ -310,3 +312,25 @@ export function genHeadText(): string {
 
   return string;
 }
+
+export const getHeadDate = (date: Date) => {
+  const month = date.getMonth();
+  const day = date.getDate();
+  return `${day} ${months[month]}`;
+};
+
+const addZero = (x: number) => {
+  if (x < 10) {
+    return `0${x}`;
+  }
+  return x.toString();
+};
+
+export const getDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  return `${year}-${addZero(month)}-${addZero(day)} ${addZero(hours)}:${addZero(minutes)}`;
+};

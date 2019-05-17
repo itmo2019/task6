@@ -5,7 +5,7 @@ import * as styles from './footer.module.css';
 export class Footer extends Component {
   render() {
     return (
-      <footer className={styles.className}>
+      <footer className={styles.footer}>
         <ul className={styles.menu}>
           <li className={styles.menuLink}>
             <a href="." className={styles.link}>

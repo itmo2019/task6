@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Header } from '../header/header';
 import { Nav } from './nav';
 import { Content } from '../content/content';
-import { genAuthorImage, genAuthorName, genHeadText, genText } from '../scripts/scripts';
+import { genAuthorImage, genAuthorName, genHeadText, genText, getDate, getHeadDate } from '../scripts/scripts';
 import { LetterType } from '../types/types';
 import styles from './page.module.css';
 
@@ -63,6 +63,10 @@ export class Page extends Component {
     const headText: string = genHeadText();
     const letterText: string[] = genText();
 
+    const date: Date = new Date();
+    const headTagDate: string = getDate(date);
+    const headDate: string = getHeadDate(date);
+
     const newChecked: {[id: string]: boolean} = this.state.checked;
     newChecked[id] = false;
     const newLetters = this.state.letters;
@@ -77,7 +81,9 @@ export class Page extends Component {
       isVisible: true,
       isRead: true,
       addAnimation: true,
-      deleteAnimation: false
+      deleteAnimation: false,
+      headTagDate: headTagDate,
+      headDate: headDate
     };
 
     newLetter.isVisible = this.isLetterHasText(this.state.searchText, newLetter);
@@ -102,6 +108,7 @@ export class Page extends Component {
     });
   };
 
+  //TODO: Поставить условие на поиск
   selectAll = () => {
     const newChecked: {[id: string]: boolean} = this.state.checked;
     for (let i = 0; i < Math.min(this.state.letters.length, MAX_LETTERS); i++) {
@@ -136,6 +143,8 @@ export class Page extends Component {
       letters: newLetters,
       isSelectAll: false
     });
+
+    setTimeout(this.makeDelete, 1500);
 
   };
 
@@ -195,18 +204,8 @@ export class Page extends Component {
   };
 
   makeDelete = (id: string) => {
-    const newLetters: LetterType[] = this.state.letters.filter(letter => letter.id !== id);
-    let count: number = 0;
-    for (let i: number = 0; i < newLetters.length; i++) {
-      if (count < MAX_LETTERS && this.isLetterHasText(this.state.searchText, newLetters[i])) {
-        newLetters[i].isVisible = true;
-        count++;
-      } else {
-        newLetters[i].isVisible = false;
-      }
-    }
-    this.setState({
-      letters: newLetters
+    this.setState((state: MyState) => {
+      return { letters: this.removeAllCheckedLetters(state.letters, state.checked) };
     });
   };
 
@@ -243,9 +242,25 @@ export class Page extends Component {
 
   };
 
+  removeAllCheckedLetters = (letters: LetterType[], checked: {[id: string]: boolean}) => {
+    const newLetters: LetterType[] = letters.filter(a => !checked[a.id]);
+
+    let count: number = 0;
+    for (let i: number = 0; i < newLetters.length; i++) {
+      if (count < MAX_LETTERS && this.isLetterHasText(this.state.searchText, newLetters[i])) {
+        newLetters[i].isVisible = true;
+        count++;
+      } else {
+        newLetters[i].isVisible = false;
+      }
+    }
+
+    return newLetters;
+  };
+
   render() {
     return (
-      <div className={styles.className}>
+      <div className={styles.page}>
         <Header setSearchText={this.setSearchText}/>
         <Nav newLetter={this.newLetter} />
         <Content
@@ -259,7 +274,6 @@ export class Page extends Component {
           setText={this.setText}
           setRead={this.setRead}
           removeAddAnimation={this.removeAddAnimation}
-          makeDelete={this.makeDelete}
         />
       </div>
     );

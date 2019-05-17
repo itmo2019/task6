@@ -1,4 +1,4 @@
-export const className: string;
+export const footer: string;
 export const menuLink: string;
 export const menuText: string;
 export const menu: string;

@@ -17,9 +17,13 @@
   background-clip: content-box;
 }
 
-.className {
+.letterHead {
   min-width: 574px;
   height: 40px;
+}
+
+.hidden {
+  display: none;
 }
 
 .link {
@@ -89,13 +93,13 @@
 }
 
 .animatedAddLine {
-  animation: add 2s linear;
-  composes: className;
+  animation: add 1.5s linear;
+  composes: letterHead;
 }
 
 .animatedDeleteLine {
-  animation: delete 2s linear;
-  composes: className;
+  animation: delete 1.5s linear;
+  composes: letterHead;
 }
 
 @keyframes add {

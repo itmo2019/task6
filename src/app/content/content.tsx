@@ -20,27 +20,19 @@ interface ContentProps {
   setText: (text: string[]) => void,
   setRead: (id: string) => void,
   removeAddAnimation: (id: string) => void,
-  makeDelete: (id: string) => void
 }
 
 interface ContentState {
   letterIsVisible: boolean,
-  lettersIsVisible: boolean
 }
 
-export class Content extends Component {
-
-  public readonly props: ContentProps;
-  public state: ContentState;
+export class Content extends Component<ContentProps, ContentState> {
 
   constructor(props: ContentProps) {
     super(props);
 
-    this.props = props;
-
     this.state = {
       letterIsVisible: false,
-      lettersIsVisible: true
     };
 
     this.showLetter = this.showLetter.bind(this);
@@ -50,20 +42,18 @@ export class Content extends Component {
   showLetter() {
     this.setState({
       letterIsVisible: true,
-      lettersIsVisible: false
     });
   }
 
   closeLetter() {
     this.setState({
       letterIsVisible: false,
-      lettersIsVisible: true
     });
   }
 
   render() {
     return (
-      <main id="main-content" className={styles.className}>
+      <main id="main-content" className={styles.content}>
         <label htmlFor="menu-checkbox">
           <input
             id="menu-checkbox"
@@ -83,8 +73,7 @@ export class Content extends Component {
           setText={this.props.setText}
           setRead={this.props.setRead}
           removeAddAnimation={this.props.removeAddAnimation}
-          makeDelete={this.props.makeDelete}
-          display={this.state.lettersIsVisible}
+          display={!this.state.letterIsVisible}
           showLetter={this.showLetter}
         />
         <Letter

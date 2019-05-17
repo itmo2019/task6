@@ -1,8 +1,12 @@
-.className {
+.letters {
   width: 100%;
   min-height: 415px;
   padding: 0;
   margin: 0;
   list-style-type: none;
   vertical-align: top;
+}
+
+.hidden {
+  display: none;
 }

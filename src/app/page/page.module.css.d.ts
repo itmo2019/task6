@@ -1,4 +1,4 @@
-export const className: string;
+export const page: string;
 export const navigation: string;
 export const navigationWriteButton: string;
 export const navigationWriteText: string;

@@ -1,2 +1,2 @@
-export const className: string;
+export const content: string;
 export const myCheckbox: string;

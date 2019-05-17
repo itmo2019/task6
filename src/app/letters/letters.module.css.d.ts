@@ -1,1 +1,2 @@
-export const className: string;
+export const letters: string;
+export const hidden: string;

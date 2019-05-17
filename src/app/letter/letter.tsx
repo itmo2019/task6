@@ -10,29 +10,27 @@ interface LetterProps {
   closeLetter: () => void
 }
 
-export class Letter extends Component {
-
-  public readonly props: LetterProps;
+export class Letter extends Component<LetterProps> {
   constructor(props: LetterProps) {
     super(props);
-    this.props = props;
+
+    this.makeClassName = this.makeClassName.bind(this);
   }
-  
+
+  makeClassName = () => {
+    return this.props.display ? styles.letter : styles.hidden
+  };
+
   render() {
     const letter = [];
     for (let i = 0; i < this.props.text.length; i++) {
       letter.push(<p className={styles.text}>{this.props.text[i]}</p>);
     }
     return (
-      <div
-        id="main-letter"
-        className={styles.className}
-        style={{ display: this.props.display ? 'inline-block' : 'none' }}
-      >
+      <div className={this.makeClassName()}>
         <article className={styles.myArticle}>{letter}</article>
         <a
           href="#"
-          id="close"
           onClick={() => {
             this.props.closeLetter();
           }}

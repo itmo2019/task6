@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 
 import * as styles from './header.module.css';
 
-const headerMail: string = require('../../images/header-mail.svg');
-const headerYandex: string = require('../../images/header-yandex.svg');
+const headerMail= require('../../images/header-mail.svg');
+const headerYandex = require('../../images/header-yandex.svg');
 
-export class Header extends Component {
+interface HeaderProps {
+  setSearchText: (text: string) => void
+}
 
-  public readonly props: {setSearchText: (text: string) => void};
-
-  constructor(props: {setSearchText: (text: string) => void}) {
+export class Header extends Component<HeaderProps> {
+  constructor(props:HeaderProps) {
     super(props);
-    this.props = props;
     this.search = this.search.bind(this);
   }
 
@@ -21,7 +21,7 @@ export class Header extends Component {
 
   render() {
     return (
-      <header className={styles.className}>
+      <header className={styles.header}>
         <div className={styles.menu}>
           <div className={styles.rectangle} />
           <div className={styles.rectangle} />
