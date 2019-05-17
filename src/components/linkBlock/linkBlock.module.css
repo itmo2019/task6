@@ -1,0 +1,19 @@
+.box {
+  width: 100%;
+  min-height: 32px;
+
+  border: none;
+  background-color: #6287bd;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  outline: none;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.box:hover {
+  background-color: #4c76b7;
+  cursor: pointer;
+}

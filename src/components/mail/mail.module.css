@@ -1,0 +1,19 @@
+.box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  padding: 8px 18px;
+  transition: background-color 0.15s;
+  white-space: nowrap;
+}
+
+.box_theme_light {
+  background-color: #e5eaf0;
+}
+
+.box_theme_dark {
+  background-color: #303030;
+}

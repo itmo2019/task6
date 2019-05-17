@@ -1,0 +1,22 @@
+.box {
+  width: 153px;
+  height: 31px;
+}
+
+.item_img_yandex {
+  position: relative;
+  left: -153px;
+
+  display: inline-block;
+  width: 83px;
+  height: 31px;
+}
+
+.item_img_mail {
+  position: relative;
+  left: -153px;
+
+  display: inline-block;
+  width: 70px;
+  height: 31px;
+}

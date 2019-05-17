@@ -1,0 +1,18 @@
+.box {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  padding: 7px 0 0 18px;
+
+  margin-top: 13px;
+}
+
+.nav,
+.letterBox {
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+}
