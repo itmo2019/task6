@@ -29,13 +29,12 @@ export class Message extends React.Component<IProps> {
         onKeyPress={undefined}
         role="button"
         aria-hidden
-        className={`${styles.message}${animation}`}
+        className={`${styles.message}${animation} ${messageData.display ? {} : styles["to-hide"]}`}
         onClick={(event: React.MouseEvent<HTMLElement>) => {
           if ((event.target as HTMLInputElement).className !== styles.checkbox) {
             this.props.openMessage(messageData.text);
           }
         }}
-        style={messageData.display ? {} : { display: 'none' , height: '0px' }}
       >
         <input
           className={styles.checkbox}
