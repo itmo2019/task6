@@ -17,6 +17,7 @@
   border-radius: 3px;
   font-family: HelveticaNeue-Medium, sans-serif;
   font-size: 11px;
+  font-weight: 600;
   text-align: start;
 }
 
@@ -33,6 +34,7 @@
   border-radius: 3px;
   font-family: HelveticaNeue-Bold, sans-serif;
   font-size: 11px;
+  font-weight: 600;
   text-align: start;
 }
 
