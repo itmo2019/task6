@@ -1,0 +1,20 @@
+.content {
+  min-height: 500px;
+  margin: 5px;
+}
+
+.dark {
+  color: white;
+}
+
+.light {
+  color: #1c1c1c;
+}
+
+.cancel-btn {
+  color: gray;
+  cursor: pointer;
+  float: right;
+  font-family: YandexSansThin, serif;
+  font-size: 30px;
+}

@@ -1,0 +1,29 @@
+.menu {
+  display: inline-block;
+
+  width: 150px;
+  height: 100vh;
+  margin-top: 15px;
+  margin-left: 22px;
+}
+
+.button {
+  width: 90%;
+  height: 35px;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.dark {
+  border-color: #54585e;
+  background-color: #54585e;
+  box-shadow: 0 2px 4px #54585e;
+}
+
+.light {
+  border-color: #6287bd;
+  background-color: #6287bd;
+  box-shadow: 0 2px 4px #6287bd;
+}

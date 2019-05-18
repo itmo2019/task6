@@ -1,0 +1,15 @@
+.messages-box {
+  position: relative;
+
+  display: block;
+  overflow: scroll;
+  height: 500px;
+}
+
+.dark {
+  color: white;
+}
+
+.light {
+  color: black;
+}

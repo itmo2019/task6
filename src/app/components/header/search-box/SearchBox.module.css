@@ -1,0 +1,27 @@
+.search-box {
+  position: relative;
+  left: 20%;
+
+  display: inline-block;
+  width: 35%;
+  padding-left: 10px;
+  margin-top: 10px;
+
+  border-width: 0;
+  background: rgb(242, 244, 247);
+  box-shadow: inset 0 0 0 1px rgb(217, 219, 222);
+  font-size: 15px;
+  line-height: 2.2;
+}
+
+.light {
+  background: rgb(242, 244, 247);
+}
+
+.dark::placeholder {
+  color: rgb(207, 207, 207);
+}
+
+.dark {
+  background: rgb(125, 125, 125);
+}

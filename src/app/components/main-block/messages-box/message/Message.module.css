@@ -1,0 +1,85 @@
+.message {
+  height: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  border-bottom: solid 1px #e2e2e2;
+  opacity: 0;
+  transition: opacity 1s, height 1s;
+}
+
+.sender-img {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  margin-left: 15px;
+  background-color: #f33;
+  border-radius: 100px;
+  color: #fff;
+  line-height: 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.sender {
+  display: inline-block;
+  width: 250px;
+  margin-right: 10px;
+}
+
+.theme {
+  display: inline-block;
+  overflow: hidden;
+  width: calc(100% - 500px);
+  margin-right: 10px;
+  margin-left: 10px;
+  text-overflow: ellipsis;
+  vertical-align: text-bottom;
+  white-space: nowrap;
+}
+
+.date {
+  position: relative;
+  top: 5px;
+  right: 20px;
+
+  display: inline-block;
+  color: #9b9b9b;
+  float: right;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+.checkbox {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 2%;
+  vertical-align: middle;
+}
+
+.unread-circle {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #6287bd;
+  border-radius: 50%;
+}
+
+.to-create {
+  height: 30px;
+  opacity: 1;
+}
+
+.to-delete {
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+}
+
+.to-hide {
+  display: none;
+  height: 0;
+}

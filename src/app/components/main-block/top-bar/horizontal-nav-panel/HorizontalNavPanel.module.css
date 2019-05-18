@@ -1,0 +1,38 @@
+.horizontal-nav-panel {
+  position: relative;
+  left: 20px;
+
+  margin: auto;
+  list-style-type: none;
+}
+
+.item {
+  margin-right: 25px;
+  float: left;
+}
+
+.button {
+  border-style: none;
+  background-color: #fff;
+  color: #ccc;
+  cursor: pointer;
+  font: 13px 'Helvetica Neue', sans-serif;
+  outline: none;
+}
+
+.link {
+  display: block;
+  padding: 3px;
+  color: #707070;
+  text-decoration: none;
+}
+
+.dark {
+  background-color: #2b2c2b;
+  color: white;
+}
+
+.light {
+  background-color: white;
+  color: #707070;
+}

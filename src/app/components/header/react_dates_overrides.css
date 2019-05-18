@@ -1,0 +1,51 @@
+.calendarWrapper {
+  display: inline-block;
+  margin-left: 350px;
+}
+
+.dark .DateRangePickerInput {
+  background-color: rgb(125, 125, 125);
+}
+
+.dark .DayPicker {
+  background-color: rgb(125, 125, 125);
+}
+
+.dark .DateInput_input {
+  background-color: rgb(125, 125, 125);
+  color: white;
+}
+
+.dark .DateInput_input::placeholder {
+  color: white;
+}
+
+.dark .CalendarDay__default {
+  background-color: rgb(207, 207, 207);
+}
+
+.dark .CalendarMonth {
+  background-color: rgb(125, 125, 125);
+}
+
+.dark .CalendarMonthGrid {
+  background-color: rgb(125, 125, 125);
+}
+
+.dark .DateRangePickerInput_calendarIcon_svg {
+  fill: white;
+}
+
+.dark .DayPicker_weekHeader {
+  color: white;
+}
+
+.dark .CalendarDay__selected_span {
+  background-color: #484848;
+}
+
+.dark .CalendarDay__selected,
+.CalendarDay__selected:active,
+.CalendarDay__selected:hover {
+  background-color: #484848;
+}

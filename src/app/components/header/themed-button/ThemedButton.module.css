@@ -1,0 +1,17 @@
+.button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  border-radius: 3px;
+  font-size: 15px;
+}
+
+.dark {
+  background-color: white;
+  color: #2b2c2b;
+}
+
+.light {
+  background-color: #2b2c2b;
+  color: white;
+}
