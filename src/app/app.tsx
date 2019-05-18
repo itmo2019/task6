@@ -6,6 +6,7 @@ import {MainBlock} from './components/main-block/MainBlock';
 import {Menu} from './components/menu/Menu';
 import * as utils from './message-templates';
 import {ThemeProvider, themes} from "../theme/theme-context";
+import {Moment} from "moment";
 
 const maxMessageInterval = 10 * 60 * 1000;
 const timeMessageInterval = 5 * 60 * 1000;
@@ -28,6 +29,9 @@ interface IState {
     wasNormalInterval: boolean
     messages: IMessage[]
     theme: themes
+    startDate: Moment | null,
+    endDate: Moment | null,
+    focusedInput: any
 }
 
 export class App extends Component<{}, IState> {
@@ -90,7 +94,10 @@ export class App extends Component<{}, IState> {
     this.state = {
       messages: [],
       wasNormalInterval: true,
-        theme: themes.light
+        theme: themes.light,
+        startDate: null,
+        endDate: null,
+        focusedInput: null
     };
     this.newMail = this.newMail.bind(this);
     this.deleteMessages = this.deleteMessages.bind(this);
@@ -99,7 +106,7 @@ export class App extends Component<{}, IState> {
     this.showHiddenMessages = this.showHiddenMessages.bind(this);
     this.toggleTheme = this.toggleTheme.bind(this);
     this.filterMessagesByDate = this.filterMessagesByDate.bind(this);
-    //setTimeout(() => {this.addDefaultMessagesForTestingCalendar()}, 100);
+    setTimeout(() => {this.addDefaultMessagesForTestingCalendar()}, 100);
     setTimeout(() => {
       this.newMail();
     }, App.getRandomArbitrary(10, maxMessageInterval));
@@ -211,6 +218,10 @@ export class App extends Component<{}, IState> {
           newMessages[i].display = false;
         }
       }
+      if (prevState.startDate != null && prevState.endDate != null) {
+          const curDate = newMessage.date.valueOf();
+          newMessage.display = curDate >= prevState.startDate.valueOf() && curDate <= prevState.endDate.valueOf();
+      }
       newMessages.unshift(newMessage);
       setTimeout(() => {
         newMessage.toCreate = true;
@@ -225,12 +236,28 @@ export class App extends Component<{}, IState> {
     }, timeForMessage);
   }
 
+    handleDatesChange = ({startDate, endDate}: { startDate: Moment | null, endDate: Moment | null }): void => {
+        this.setState({startDate, endDate});
+        console.log(startDate + " " + endDate);
+        if (startDate === null || endDate === null) {
+            this.filterMessagesByDate(new Date(1970, 0, 1), new Date(2100, 0, 1));
+        } else {
+            this.filterMessagesByDate(startDate.toDate(), endDate.toDate());
+        }
+    };
+
+    updateFocus = (focusedInput: any) => {
+        this.setState({focusedInput: focusedInput});
+    };
+
   render() {
       const colorStyle = this.state.theme === themes.light ? styles.light : styles.dark;
     return (
         <ThemeProvider value={this.state.theme}>
             <div className={`${styles.app} ${colorStyle}`}>
-                <Header changeTheme={this.toggleTheme} filterMessagesByDate={this.filterMessagesByDate}/>
+                <Header changeTheme={this.toggleTheme} handleDatesChange = {this.handleDatesChange}
+                        updateFocus = {this.updateFocus} startDate = {this.state.startDate}
+                        endDate = {this.state.endDate} focusedInput={this.state.focusedInput}/>
                 <Menu newMail={this.newMail} />
                 <MainBlock
                     messages={this.state.messages}
