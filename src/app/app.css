@@ -1,27 +1,29 @@
-.app {
-  text-align: center;
+@font-face {
+  font-family: YandexSansBold;
+  src: url(fonts/YandexSansDisplay-Bold.ttf);
 }
 
-.app-header {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-  color: #fff;
-  font-size: calc(10px + 2vmin);
+@font-face {
+  font-family: YandexSansThin;
+  src: url(/src/app/fonts/YandexSansDisplay-Thin.ttf);
 }
 
-.app-link {
-  color: #61dafb;
+@font-face {
+  font-family: HelveticaNeue;
+  src: url(/src/app/fonts/HelveticaNeueCyr-Medium.otf);
 }
 
-@keyframes app-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: HelveticaNeueLight;
+  src: url(/src/app/fonts/HelveticaNeueCyr-Light.otf);
+}
+
+body {
+  position: relative;
+
+  min-width: 750px;
+  max-width: 1600px;
+  padding: 0;
+  margin: 0 auto;
+  background: #e5eaf0;
 }

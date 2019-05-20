@@ -1,0 +1,25 @@
+.main-block__letter-content {
+  position: absolute;
+  top: 42px;
+
+  overflow: scroll;
+  width: 100%;
+  height: calc(100% - 70px);
+  padding: 0;
+  background: #ffffff;
+  color: #000000;
+  float: left;
+  font-family: "'HelveticaNeue'", sans-serif;
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.main-block__paragraph {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.close {
+  padding: 15px;
+  float: right;
+}

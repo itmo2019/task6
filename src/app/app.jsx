@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 
 import './app.css';
+import { Header } from './structure/header/header';
+import { Menu } from './structure/menu/menu';
+import { MainContent } from './structure/main-content/mainContent';
 
 export class App extends Component {
   render() {
     return (
       <div className="app">
-        <header className="app-header">
-          <p>
-            Edit <code>src/app/app.jsx</code> and save to reload.
-          </p>
-          <a
-            className="app-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Header />
+        <Menu />
+        <MainContent />
       </div>
     );
   }
