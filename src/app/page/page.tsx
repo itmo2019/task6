@@ -9,12 +9,12 @@ import {
   genHeadText,
   genText,
   getDate,
-  getHeadDate
+  getHeadDate,
+  generateLetters,
+  MAX_LETTERS
 } from '../scripts/scripts';
 import { ILetterType } from '../types/types';
 import styles from './page.module.css';
-
-const MAX_LETTERS = 30;
 
 interface IMyState {
   checked: { [id: string]: boolean };
@@ -24,21 +24,30 @@ interface IMyState {
   text: string[];
   searchText: string;
   theme: boolean;
+  searchFor: string;
+  worker: any;
+  filteredLetters: ILetterType[] | null;
+  generated: boolean;
 }
 
 export class Page extends React.Component<{}, IMyState> {
-  public state: Readonly<IMyState> = {
-    checked: {},
-    letters: [],
-    count: 0,
-    isSelectAll: false,
-    text: [],
-    searchText: '',
-    theme: false
-  };
-
   public constructor(props: {}) {
     super(props);
+    const { letters, checked } = generateLetters();
+
+    this.state = {
+      checked,
+      letters,
+      count: 0,
+      isSelectAll: false,
+      text: [],
+      searchText: '',
+      theme: false,
+      searchFor: '',
+      worker: null,
+      filteredLetters: null,
+      generated: false
+    };
 
     this.newLetter = this.newLetter.bind(this);
     this.deleteMails = this.deleteMails.bind(this);
@@ -48,7 +57,6 @@ export class Page extends React.Component<{}, IMyState> {
     this.markRead = this.markRead.bind(this);
     this.setRead = this.setRead.bind(this);
     this.removeAddAnimation = this.removeAddAnimation.bind(this);
-    this.makeDelete = this.makeDelete.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
     this.deleteLetter = this.deleteLetter.bind(this);
     this.removeLetterById = this.removeLetterById.bind(this);
@@ -61,6 +69,7 @@ export class Page extends React.Component<{}, IMyState> {
   }
 
   public newLetter = () => {
+    console.log('1');
     const id: string = `letter-id-${this.state.count}`;
 
     this.setState((state: Readonly<IMyState>) => {
@@ -95,19 +104,19 @@ export class Page extends React.Component<{}, IMyState> {
       headDate
     };
 
-    newLetter.isVisible = this.isLetterHasText(this.state.searchText, newLetter);
-    let count = 0;
-    if (newLetter.isVisible) {
-      count += 1;
-    }
-    for (let i = 0; i < newLetters.length; i++) {
-      if (count < MAX_LETTERS && this.isLetterHasText(this.state.searchText, newLetters[i])) {
-        newLetters[i].isVisible = true;
-        count++;
-      } else {
-        newLetters[i].isVisible = false;
-      }
-    }
+    // newLetter.isVisible = this.isLetterHasText(this.state.searchText, newLetter);
+    // let count = 0;
+    // if (newLetter.isVisible) {
+    //   count += 1;
+    // }
+    // for (let i = 0; i < newLetters.length; i++) {
+    //   if (count < MAX_LETTERS && this.isLetterHasText(this.state.searchText, newLetters[i])) {
+    //     newLetters[i].isVisible = true;
+    //     count++;
+    //   } else {
+    //     newLetters[i].isVisible = false;
+    //   }
+    // }
 
     this.setState((state: IMyState) => {
       return {
@@ -117,11 +126,17 @@ export class Page extends React.Component<{}, IMyState> {
     });
   };
 
-  // TODO: Поставить условие на поиск
   private readonly selectAll = () => {
     const newChecked: { [id: string]: boolean } = this.state.checked;
-    for (let i = 0; i < Math.min(this.state.letters.length, MAX_LETTERS); i++) {
-      newChecked[this.state.letters[i].id] = !this.state.isSelectAll;
+
+    if (this.state.filteredLetters !== null) {
+      for (let i = 0; i < Math.min(this.state.filteredLetters.length, MAX_LETTERS); i++) {
+        newChecked[this.state.filteredLetters[i].id] = !this.state.isSelectAll;
+      }
+    } else {
+      for (let i = 0; i < Math.min(this.state.letters.length, MAX_LETTERS); i++) {
+        newChecked[this.state.letters[i].id] = !this.state.isSelectAll;
+      }
     }
     this.setState((state: IMyState) => {
       return {
@@ -211,48 +226,10 @@ export class Page extends React.Component<{}, IMyState> {
     return f;
   };
 
-  private makeDelete = (id: string) => {
-    this.setState((state: IMyState) => {
-      return { letters: this.removeAllCheckedLetters(state.letters, state.checked) };
-    });
-  };
-
   private readonly setSearchText = (text: string) => {
-    const newLetters: ILetterType[] = this.state.letters;
-    let count = 0;
-
-    for (let i = 0; i < newLetters.length; i++) {
-      if (count < MAX_LETTERS && this.isLetterHasText(text, newLetters[i])) {
-        newLetters[i].isVisible = true;
-        count++;
-      } else {
-        newLetters[i].isVisible = false;
-      }
-    }
-
     this.setState({
-      letters: newLetters,
       searchText: text
     });
-  };
-
-  private removeAllCheckedLetters = (
-    letters: ILetterType[],
-    checked: { [id: string]: boolean }
-  ) => {
-    const newLetters: ILetterType[] = letters.filter(a => !checked[a.id]);
-
-    let count = 0;
-    for (let i = 0; i < newLetters.length; i++) {
-      if (count < MAX_LETTERS && this.isLetterHasText(this.state.searchText, newLetters[i])) {
-        newLetters[i].isVisible = true;
-        count++;
-      } else {
-        newLetters[i].isVisible = false;
-      }
-    }
-
-    return newLetters;
   };
 
   private newMail() {
@@ -271,21 +248,20 @@ export class Page extends React.Component<{}, IMyState> {
   private removeLetterById(letters: ILetterType[], id: string) {
     let newLetters: ILetterType[] = letters;
     newLetters = newLetters.filter((letter: ILetterType) => letter.id !== id);
-    let count = 0;
-    for (let i = 0; i < newLetters.length; i++) {
-      if (count < MAX_LETTERS && this.isLetterHasText(this.state.searchText, newLetters[i])) {
-        newLetters[i].isVisible = true;
-        count++;
-      } else {
-        newLetters[i].isVisible = false;
-      }
-    }
     return newLetters;
   }
 
   private deleteLetter(id: string) {
     this.setState((state: IMyState) => {
-      return { letters: this.removeLetterById(state.letters, id) };
+      const newLetters: ILetterType[] = this.removeLetterById(state.letters, id);
+      let newFilteredLetters: ILetterType[] | null = null;
+      if (state.filteredLetters !== null) {
+        newFilteredLetters = this.removeLetterById(state.filteredLetters, id);
+      }
+      return {
+        letters: newLetters,
+        filteredLetters: newFilteredLetters
+      };
     });
   }
 
@@ -299,6 +275,58 @@ export class Page extends React.Component<{}, IMyState> {
   private last: number;
 
   public render() {
+    const searchText: string = this.state.searchText.toLocaleUpperCase();
+
+    if (searchText !== this.state.searchFor) {
+      if (this.state.searchText !== '') {
+        this.setState((state: IMyState) => {
+          if (state.worker) {
+            clearTimeout(state.worker);
+          }
+
+          return {
+            searchFor: searchText,
+            worker: setTimeout(() => {
+              const lambdaWorker = (filtered: ILetterType[], from: number, size: number) => {
+                const to = Math.min(from + 1000, size);
+                const newLetters = state.letters
+                  .slice(from, to)
+                  .filter((letter: ILetterType) => this.isLetterHasText(searchText, letter));
+                if (to === size) {
+                  console.log('searchEnd');
+                  this.setState({
+                    filteredLetters: filtered.concat(newLetters),
+                    worker: null,
+                    searchFor: searchText
+                  });
+                } else {
+                  const worker = setTimeout(() => lambdaWorker(newLetters, to, size));
+                  this.setState({
+                    filteredLetters: filtered.concat(newLetters),
+                    worker,
+                    searchFor: searchText
+                  });
+                }
+              };
+              console.log('searchStart');
+              lambdaWorker([], 0, this.state.letters.length);
+            }, 500)
+          };
+        });
+      } else {
+        this.setState((state: IMyState) => {
+          if (state.worker) {
+            clearTimeout(state.worker);
+          }
+          return {
+            filteredLetters: null,
+            worker: null,
+            searchFor: searchText
+          };
+        });
+      }
+    }
+    const letters = this.state.filteredLetters || this.state.letters;
     return (
       <div className={styles.page}>
         <Header
@@ -309,7 +337,7 @@ export class Page extends React.Component<{}, IMyState> {
         <Nav newLetter={this.newLetter} theme={this.state.theme} />
         <Content
           deleteMails={this.deleteMails}
-          letters={this.state.letters}
+          letters={letters}
           selectAll={this.selectAll}
           isSelectAll={this.state.isSelectAll}
           checkboxChange={this.checkboxChange}
@@ -320,6 +348,7 @@ export class Page extends React.Component<{}, IMyState> {
           removeAddAnimation={this.removeAddAnimation}
           removeDeleteAnimation={this.deleteLetter}
           theme={this.state.theme}
+          searchText={this.state.searchText}
         />
       </div>
     );

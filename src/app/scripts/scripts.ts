@@ -1,3 +1,7 @@
+import { ILetterType } from '../types/types';
+
+export const MAX_LETTERS = 30;
+
 const icon1: string = require('../../images/icons/1.png');
 const icon2: string = require('../../images/icons/2.png');
 const icon3: string = require('../../images/icons/3.jpg');
@@ -240,33 +244,46 @@ const surnames: string[] = [
 
 const icons: string[] = [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10];
 
-const months: string[] = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+const months: string[] = [
+  'янв',
+  'фев',
+  'мар',
+  'апр',
+  'май',
+  'июн',
+  'июл',
+  'авг',
+  'сен',
+  'окт',
+  'ноя',
+  'дек'
+];
 
-export function genText(): string[]  {
-  const minParagraphCount: number = 1;
-  const maxParagraphCount: number = 5;
+export function genText(): string[] {
+  const minParagraphCount = 1;
+  const maxParagraphCount = 5;
 
-  const minSentenceCount: number = 1;
-  const maxSentenceCount: number = 10;
+  const minSentenceCount = 1;
+  const maxSentenceCount = 10;
 
-  const minPhraseCount: number = 2;
-  const maxPhraseCount: number = 20;
+  const minPhraseCount = 2;
+  const maxPhraseCount = 20;
 
   const paragraphCount: number = Math.floor(
     Math.random() * (maxParagraphCount - minParagraphCount) + minParagraphCount
   );
 
   const html: string[] = [];
-  for (let i: number = 0; i < paragraphCount; i++) {
-    let string: string = '';
+  for (let i = 0; i < paragraphCount; i++) {
+    let string = '';
     const sentenceCount: number = Math.floor(
       Math.random() * (maxSentenceCount - minSentenceCount) + minSentenceCount
     );
-    for (let j: number = 0; j < sentenceCount; j++) {
+    for (let j = 0; j < sentenceCount; j++) {
       const phraseCount: number = Math.floor(
         Math.random() * (maxPhraseCount - minPhraseCount) + minPhraseCount
       );
-      for (let k: number = 0; k < phraseCount; k++) {
+      for (let k = 0; k < phraseCount; k++) {
         let phrase: string = phrases[Math.floor(Math.random() * (phrases.length - 1))];
         if (k === 0) {
           phrase = phrase.charAt(0).toUpperCase() + phrase.substr(1, phrase.length - 1);
@@ -292,15 +309,15 @@ export function genAuthorImage(): string {
 }
 
 export function genHeadText(): string {
-  const minPhraseCount: number = 2;
-  const maxPhraseCount: number = 20;
+  const minPhraseCount = 2;
+  const maxPhraseCount = 20;
 
-  let string: string = '';
+  let string = '';
 
   const phraseCount: number = Math.floor(
     Math.random() * (maxPhraseCount - minPhraseCount) + minPhraseCount
   );
-  for (let k: number = 0; k < phraseCount; k++) {
+  for (let k = 0; k < phraseCount; k++) {
     let phrase: string = phrases[Math.floor(Math.random() * (phrases.length - 1))];
     if (k === 0) {
       phrase = phrase.charAt(0).toUpperCase() + phrase.substr(1, phrase.length - 1);
@@ -333,4 +350,41 @@ export const getDate = (date: Date) => {
   const hours = date.getHours();
   const minutes = date.getMinutes();
   return `${year}-${addZero(month)}-${addZero(day)} ${addZero(hours)}:${addZero(minutes)}`;
+};
+
+export const generateLetters = () => {
+  let letters: ILetterType[] = [];
+  const checked: { [id: string]: boolean } = {};
+
+  for (let i = 0; i < 10000; i++) {
+    const id = `id${i}`;
+    const authorName: string = genAuthorName();
+    const authorImage: string = genAuthorImage();
+    const headText: string = genHeadText();
+    const letterText: string[] = genText();
+
+    const date: Date = new Date();
+    const headTagDate: string = getDate(date);
+    const headDate: string = getHeadDate(date);
+    checked[id] = false;
+
+    const newLetter: ILetterType = {
+      id,
+      letterText,
+      authorName,
+      authorImage,
+      headText,
+      isChecked: false,
+      isVisible: true,
+      isRead: true,
+      addAnimation: true,
+      deleteAnimation: false,
+      headTagDate,
+      headDate
+    };
+
+    letters = [newLetter].concat(letters);
+  }
+
+  return { letters, checked };
 };

@@ -16,24 +16,68 @@ interface ILettersProps {
   display: boolean;
   showLetter: () => void;
   theme: boolean;
+  searchText: string;
 }
 
-export class Letters extends React.Component<ILettersProps> {
+interface ILettersState {
+  worker: any;
+  searchFor: string;
+  filteredLetters: ILetterType[] | null;
+}
+
+export class Letters extends React.Component<ILettersProps, ILettersState> {
   public constructor(props: ILettersProps) {
     super(props);
 
+    this.state = {
+      worker: null,
+      searchFor: '',
+      filteredLetters: null
+    };
+
     this.makeClassName = this.makeClassName.bind(this);
+    this.isLetterHasText = this.isLetterHasText.bind(this);
   }
 
   private makeClassName() {
     return this.props.display ? styles.letters : styles.hidden;
   }
 
+  private isLetterHasText = (text: string, letter: ILetterType) => {
+    if (text.length === 0) {
+      return true;
+    }
+    if (
+      letter.headText.toLocaleUpperCase().indexOf(text.toLocaleUpperCase()) !== -1 ||
+      letter.authorName.toLocaleUpperCase().indexOf(text.toLocaleUpperCase()) !== -1
+    ) {
+      return true;
+    }
+    let f = false;
+    for (let i = 0; i < letter.letterText.length && !f; i++) {
+      if (letter.letterText[i].toLocaleUpperCase().indexOf(text.toLocaleUpperCase()) !== -1) {
+        f = true;
+      }
+    }
+    return f;
+  };
+
+  // eslint-disable-next-line react/sort-comp
+  private static filterLetters(letters: ILetterType[]) {
+    let newLetters: ILetterType[] = letters;
+    newLetters = newLetters.map((letter: ILetterType, index: number) => {
+      letter.isVisible = index < 30;
+      return letter;
+    });
+    return newLetters;
+  }
+
   public render() {
+
     return (
       <ul className={this.makeClassName()}>
-        {this.props.letters.map((letter: ILetterType) => {
-          if (letter.isVisible) {
+        {this.props.letters.map((letter: ILetterType, index: number) => {
+          if (index < 30) {
             return (
               <LetterHead
                 {...letter}

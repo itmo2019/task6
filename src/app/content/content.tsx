@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import * as styles from './content.module.css';
 import * as pageStyles from '../page/page.module.css';
@@ -22,6 +22,7 @@ interface IContentProps {
   removeAddAnimation: (id: string) => void;
   removeDeleteAnimation: (id: string) => void;
   theme: boolean;
+  searchText: string;
 }
 
 interface IContentState {
@@ -33,7 +34,7 @@ export class Content extends React.Component<IContentProps, IContentState> {
     super(props);
 
     this.state = {
-      letterIsVisible: false
+      letterIsVisible: false,
     };
 
     this.showLetter = this.showLetter.bind(this);
@@ -88,6 +89,7 @@ export class Content extends React.Component<IContentProps, IContentState> {
           display={!this.state.letterIsVisible}
           showLetter={this.showLetter}
           theme={this.props.theme}
+          searchText={this.props.searchText}
         />
         <Letter
           text={this.props.text}
