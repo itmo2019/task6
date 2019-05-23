@@ -13,6 +13,7 @@ interface IProps {
   letters: LetterType[];
   checkedLetterIds: { [id: string]: boolean };
   onCheckboxChange: (id: string) => void;
+  searchText: string;
 }
 
 export class Content extends Component {
@@ -35,6 +36,7 @@ export class Content extends Component {
           letters={this.props.letters}
           checkedLetterIds={this.props.checkedLetterIds}
           onCheckboxChange={this.props.onCheckboxChange}
+          searchText={this.props.searchText}
         />
         <ContentFooter />
       </div>

@@ -128,11 +128,11 @@ export const generateAuthorNameWithAbbr = () => {
 };
 
 export const generateText = async () => {
-  // const paragraphsCount = generateRandomInt(3, 5);
+  const paragraphsCount = generateRandomInt(3, 5);
 
-  // const text = await fetch(
-  //   `https://baconipsum.com/api/?type=meat&formaat=json&paras=${paragraphsCount}`
-  // );
-  return ['asd'];
-  // return text.json();
+  const text = await fetch(
+    `https://baconipsum.com/api/?type=meat&formaat=json&paras=${paragraphsCount}`
+  );
+  // return ['asd'];
+  return text.json();
 };

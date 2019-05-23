@@ -9,6 +9,7 @@ interface IProps {
   letters: LetterType[];
   checkedLetterIds: { [id: string]: boolean };
   onCheckboxChange: (id: string) => void;
+  searchText: string;
 }
 
 interface IState {
@@ -17,11 +18,7 @@ interface IState {
 }
 
 export class MainContent extends Component {
-  public constructor(props: {
-    letters: LetterType[];
-    checkedLetterIds: { [id: string]: boolean };
-    onCheckboxChange: (id: string) => void;
-  }) {
+  public constructor(props: IProps) {
     super(props);
     this.props = props;
 
@@ -64,6 +61,7 @@ export class MainContent extends Component {
           openLetter={this.openLetter}
           checkedLetterIds={this.props.checkedLetterIds}
           onCheckboxChange={this.props.onCheckboxChange}
+          searchText={this.props.searchText}
         />
       </div>
     );

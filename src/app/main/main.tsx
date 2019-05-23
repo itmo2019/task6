@@ -14,6 +14,10 @@ import { LetterType } from '../types/types';
 
 const MAX_LETTERS = 30;
 
+interface IProps {
+  searchText: string;
+}
+
 interface IState {
   letters: LetterType[];
   isAllChecked: boolean;
@@ -27,8 +31,9 @@ function sleep(ms: number) {
 export class Main extends Component {
   private last: number = 300000;
 
-  public constructor(props: {}) {
+  public constructor(props: IProps) {
     super(props);
+    this.props = props;
 
     this.state = {
       letters: [],
@@ -151,6 +156,8 @@ export class Main extends Component {
     this.recursiveGenerateLetters();
   };
 
+  public readonly props: IProps;
+
   public render() {
     return (
       <main className={styles.main}>
@@ -162,6 +169,7 @@ export class Main extends Component {
           onCheckboxChange={this.onCheckboxChange}
           isAllChecked={this.state.isAllChecked}
           selectAll={this.selectAll}
+          searchText={this.props.searchText}
         />
       </main>
     );
