@@ -10,6 +10,7 @@ import {
   genText,
   getDate,
   getHeadDate,
+  generateLetters,
   MAX_LETTERS
 } from '../scripts/scripts';
 import { ILetterType } from '../types/types';
@@ -32,10 +33,10 @@ interface IMyState {
 export class Page extends React.Component<{}, IMyState> {
   public constructor(props: {}) {
     super(props);
-
+    const { letters, checked } = generateLetters();
     this.state = {
-      checked: {},
-      letters: [],
+      checked,
+      letters,
       count: 0,
       isSelectAll: false,
       text: [],
@@ -64,7 +65,7 @@ export class Page extends React.Component<{}, IMyState> {
     this.newMail = this.newMail.bind(this);
     this.changeTheme = this.changeTheme.bind(this);
     document.body.style.background = this.state.theme ? 'black' : '#e5eaf0';
-    this.newMail()
+    this.newMail();
   }
 
   public newLetter = () => {
@@ -86,7 +87,6 @@ export class Page extends React.Component<{}, IMyState> {
 
     const newChecked: { [id: string]: boolean } = this.state.checked;
     newChecked[id] = false;
-    const newLetters = this.state.letters;
 
     const newLetter: ILetterType = {
       id,
@@ -273,14 +273,15 @@ export class Page extends React.Component<{}, IMyState> {
             searchFor: searchText,
             worker: setTimeout(() => {
               const lambdaWorker = (filtered: ILetterType[], from: number, size: number) => {
-                const to = Math.min(from + 1000, size);
-                const newLetters = state.letters
-                  .slice(from, to)
-                  .filter((letter: ILetterType) => this.isLetterHasText(searchText, letter));
+                const to = Math.min(from + 30, size);
+                const newLetters = filtered.concat(
+                  state.letters
+                    .slice(from, to)
+                    .filter((letter: ILetterType) => this.isLetterHasText(searchText, letter))
+                );
                 if (to === size) {
-                  console.log('searchEnd');
                   this.setState({
-                    filteredLetters: filtered.concat(newLetters),
+                    filteredLetters: newLetters,
                     worker: null,
                     searchFor: searchText,
                     isSearch: false
@@ -288,13 +289,12 @@ export class Page extends React.Component<{}, IMyState> {
                 } else {
                   const worker = setTimeout(() => lambdaWorker(newLetters, to, size));
                   this.setState({
-                    filteredLetters: filtered.concat(newLetters),
+                    filteredLetters: newLetters,
                     worker,
                     searchFor: searchText
                   });
                 }
               };
-              console.log('searchStart');
               lambdaWorker([], 0, this.state.letters.length);
             }, 500),
             isSearch: true

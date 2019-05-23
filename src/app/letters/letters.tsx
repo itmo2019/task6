@@ -73,7 +73,6 @@ export class Letters extends React.Component<ILettersProps, ILettersState> {
   }
 
   public render() {
-
     return (
       <ul className={this.makeClassName()}>
         {this.props.letters.map((letter: ILetterType, index: number) => {
