@@ -82,6 +82,7 @@ export default class Letters extends Component<IProps, IState> {
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
+    this.selectAll = this.selectAll.bind(this);
   }
 
   public componentDidMount() {
@@ -91,6 +92,16 @@ export default class Letters extends Component<IProps, IState> {
       sum += 10 * getRandomInt(1, 600);
       setTimeout(this.newLetter, sum);
     }
+  }
+
+  private processFilter(s: string) {
+    if (s === "") {
+      for (let i = 0; i < this.state.letters.length; i++) {
+        
+      }
+      return;
+    }
+
   }
 
   private newLetter() {
@@ -183,6 +194,13 @@ export default class Letters extends Component<IProps, IState> {
       return styles.light;
     }
     return styles.dark;
+  }
+
+  private selectAll(checkbox: React.ChangeEvent<HTMLInputElement>) {
+    for (let i = 0; i < this.state.letters.length; i++) {
+      this.state.letters[i].checked = checkbox.target.checked;
+    }
+    this.setState({});
   }
 
   public render() {
