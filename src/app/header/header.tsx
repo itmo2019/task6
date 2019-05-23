@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
 import styles from './header.module.css';
-import logo from './images/yandex-mail-logo.svg';
 import { BurgerMenu } from './burgerMenu/burgerMenu';
 import { SearchInput } from './searchInput/searchInput';
+import { HeaderLogo } from './headerLogo/headerLogo';
+import { Switcher } from './switcher/switcher';
 
 interface IProps {
   searchFunction: (text: string) => void;
+  switchTheme: () => void;
+  isDark: boolean;
 }
 
 export class Header extends Component {
@@ -21,10 +24,9 @@ export class Header extends Component {
     return (
       <header className={styles.header}>
         <BurgerMenu />
-        <a href="https://mail.yandex.ru">
-          <img className={styles.header__yandexMailLogo} src={logo} alt="logo" />
-        </a>
-        <SearchInput searchFunction={this.props.searchFunction} />
+        <HeaderLogo isDark={this.props.isDark} />
+        <SearchInput searchFunction={this.props.searchFunction} isDark={this.props.isDark} />
+        <Switcher changeTheme={this.props.switchTheme} />
       </header>
     );
   }

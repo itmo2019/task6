@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import classNames from 'classnames';
 import styles from './content.module.css';
 import { ContentHeader } from './contentHeader/contentHeader';
 import { MainContent } from './mainContent';
@@ -14,6 +15,7 @@ interface IProps {
   checkedLetterIds: { [id: string]: boolean };
   onCheckboxChange: (id: string) => void;
   searchText: string;
+  isDark: boolean;
 }
 
 export class Content extends Component {
@@ -26,7 +28,12 @@ export class Content extends Component {
 
   public render() {
     return (
-      <div className={styles.content}>
+      <div
+        className={classNames(
+          styles.content,
+          this.props.isDark ? styles.content_darkTheme : styles.content_lightTheme
+        )}
+      >
         <ContentHeader
           isAllChecked={this.props.isAllChecked}
           selectAll={this.props.selectAll}

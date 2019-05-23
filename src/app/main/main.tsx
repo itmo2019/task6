@@ -16,6 +16,7 @@ const MAX_LETTERS = 30;
 
 interface IProps {
   searchText: string;
+  isDark: boolean;
 }
 
 interface IState {
@@ -170,6 +171,7 @@ export class Main extends Component {
           isAllChecked={this.state.isAllChecked}
           selectAll={this.selectAll}
           searchText={this.props.searchText}
+          isDark={this.props.isDark}
         />
       </main>
     );

@@ -1,3 +1,20 @@
 .app {
-  padding: 12px 22px;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: calc(100% - 24px);
+  min-width: fit-content;
+  height: calc(100% - 24px);
+  min-height: fit-content;
+  padding: 12px;
+}
+
+.app_lightTheme {
+  background-color: #e5eaf0;
+}
+
+.app_darkTheme {
+  background-color: #303030;
+  color: #ddd;
 }
