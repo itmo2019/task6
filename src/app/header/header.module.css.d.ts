@@ -14,3 +14,6 @@ export const searchDark: string;
 export const searchInputDark: string;
 export const changeThemeButtonDark: string;
 export const searchCancelButtonDark: string;
+export const spinner: string;
+export const spinnerDark: string;
+export const spinnerHidden: string;

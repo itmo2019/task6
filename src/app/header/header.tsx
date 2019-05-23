@@ -12,6 +12,7 @@ interface IHeaderProps {
   setSearchText: (text: string) => void;
   changeTheme: () => void;
   theme: boolean;
+  isSearch: boolean;
 }
 
 export class Header extends React.Component<IHeaderProps> {
@@ -26,6 +27,7 @@ export class Header extends React.Component<IHeaderProps> {
     this.getSearchInputClass = this.getSearchInputClass.bind(this);
     this.getSearchCancelButtonClass = this.getSearchCancelButtonClass.bind(this);
     this.getChangeThemeButtonClass = this.getChangeThemeButtonClass.bind(this);
+    this.getSpinnerClass = this.getSpinnerClass.bind(this);
   }
 
   private getHeaderYandex() {
@@ -60,6 +62,18 @@ export class Header extends React.Component<IHeaderProps> {
     this.props.setSearchText(event.target.value);
   }
 
+  private getSpinnerClass() {
+    if (this.props.isSearch) {
+      if (!this.props.theme) {
+        return styles.spinner;
+      } else {
+        return styles.spinnerDark;
+      }
+    } else {
+      return styles.spinnerHidden;
+    }
+  }
+
   public render() {
     return (
       <header className={styles.header}>
@@ -80,6 +94,7 @@ export class Header extends React.Component<IHeaderProps> {
             onChange={this.search}
           />
           <button className={this.getSearchCancelButtonClass()} type="button" />
+          <div className={this.getSpinnerClass()} />
         </div>
         <button
           className={this.getChangeThemeButtonClass()}

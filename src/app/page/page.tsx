@@ -27,17 +27,17 @@ interface IMyState {
   searchFor: string;
   worker: any;
   filteredLetters: ILetterType[] | null;
-  generated: boolean;
+  isSearch: boolean;
 }
 
 export class Page extends React.Component<{}, IMyState> {
   public constructor(props: {}) {
     super(props);
-    const { letters, checked } = generateLetters();
+    // const { letters, checked } = generateLetters();
 
     this.state = {
-      checked,
-      letters,
+      checked: {},
+      letters: [],
       count: 0,
       isSelectAll: false,
       text: [],
@@ -46,7 +46,7 @@ export class Page extends React.Component<{}, IMyState> {
       searchFor: '',
       worker: null,
       filteredLetters: null,
-      generated: false
+      isSearch: false
     };
 
     this.newLetter = this.newLetter.bind(this);
@@ -297,7 +297,8 @@ export class Page extends React.Component<{}, IMyState> {
                   this.setState({
                     filteredLetters: filtered.concat(newLetters),
                     worker: null,
-                    searchFor: searchText
+                    searchFor: searchText,
+                    isSearch: false
                   });
                 } else {
                   const worker = setTimeout(() => lambdaWorker(newLetters, to, size));
@@ -310,7 +311,8 @@ export class Page extends React.Component<{}, IMyState> {
               };
               console.log('searchStart');
               lambdaWorker([], 0, this.state.letters.length);
-            }, 500)
+            }, 500),
+            isSearch: true
           };
         });
       } else {
@@ -321,7 +323,8 @@ export class Page extends React.Component<{}, IMyState> {
           return {
             filteredLetters: null,
             worker: null,
-            searchFor: searchText
+            searchFor: searchText,
+            isSearch: false
           };
         });
       }
@@ -333,6 +336,7 @@ export class Page extends React.Component<{}, IMyState> {
           setSearchText={this.setSearchText}
           changeTheme={this.changeTheme}
           theme={this.state.theme}
+          isSearch={this.state.isSearch}
         />
         <Nav newLetter={this.newLetter} theme={this.state.theme} />
         <Content
