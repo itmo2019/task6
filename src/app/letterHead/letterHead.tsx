@@ -1,42 +1,45 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import * as styles from './letterHead.module.css';
 import * as pageStyles from '../page/page.module.css';
 
-interface LetterHeadProps {
-  id: string,
-  authorName: string,
-  authorImage: string,
-  letterText: string[],
-  headText: string,
-  isVisible: boolean,
-  isChecked: boolean,
-  checkboxChange: (id: string) => void,
-  setText: (text: string[]) => void,
-  addAnimation: boolean,
-  removeAddAnimation: (id: string) => void,
-  deleteAnimation: boolean,
-  isRead: boolean
-  setRead: (id: string) => void,
-  showLetter: () => void,
-  headTagDate: string
-  headDate: string
+interface ILetterHeadProps {
+  id: string;
+  authorName: string;
+  authorImage: string;
+  letterText: string[];
+  headText: string;
+  isVisible: boolean;
+  isChecked: boolean;
+  checkboxChange: (id: string) => void;
+  setText: (text: string[]) => void;
+  addAnimation: boolean;
+  removeAddAnimation: (id: string) => void;
+  removeDeleteAnimation: (id: string) => void;
+  deleteAnimation: boolean;
+  isRead: boolean;
+  setRead: (id: string) => void;
+  showLetter: () => void;
+  headTagDate: string;
+  headDate: string;
+  theme: boolean;
 }
 
-export class LetterHead extends Component<LetterHeadProps> {
-
-  constructor(props: LetterHeadProps) {
+export class LetterHead extends React.Component<ILetterHeadProps> {
+  public constructor(props: ILetterHeadProps) {
     super(props);
 
     this.makeClassName = this.makeClassName.bind(this);
     this.makeLinkClassName = this.makeLinkClassName.bind(this);
+    this.deleteAnimation = this.deleteAnimation.bind(this);
+    this.getAuthorNameClass = this.getAuthorNameClass.bind(this);
+    this.getTextClass = this.getTextClass.bind(this);
+    this.getDateClass = this.getDateClass.bind(this);
+    this.getLineClass = this.getLineClass.bind(this);
   }
 
-  makeClassName() {
+  private makeClassName() {
     if (this.props.addAnimation) {
-      setTimeout(() => {
-        this.props.removeAddAnimation(this.props.id);
-      }, 1500);
       return styles.animatedAddLine;
     }
 
@@ -51,16 +54,44 @@ export class LetterHead extends Component<LetterHeadProps> {
     return styles.letterHead;
   }
 
-  makeLinkClassName() {
-    return this.props.isRead ? styles.unread : styles.link;
+  private makeLinkClassName() {
+    if (this.props.isRead) {
+      if (!this.props.theme) {
+        return styles.unread;
+      }
+      return styles.unreadDark;
+    }
+    return styles.link;
   }
 
-  render() {
+  private deleteAnimation() {
+    if (this.props.addAnimation) {
+      this.props.removeAddAnimation(this.props.id);
+    }
+    if (this.props.deleteAnimation) {
+      this.props.removeDeleteAnimation(this.props.id);
+    }
+  }
+
+  private getAuthorNameClass() {
+    return !this.props.theme ? styles.authorName : styles.authorNameDark;
+  }
+
+  private getTextClass() {
+    return !this.props.theme ? styles.text : styles.textDark;
+  }
+
+  private getDateClass() {
+    return !this.props.theme ? styles.date : styles.dateDark;
+  }
+
+  private getLineClass() {
+    return !this.props.theme ? pageStyles.line : pageStyles.lineDark;
+  }
+
+  public render() {
     return (
-      <li
-        className={this.makeClassName()}
-        key={this.props.id}
-      >
+      <li className={this.makeClassName()} onAnimationEnd={this.deleteAnimation}>
         <label htmlFor={`${this.props.id}-checkbox`}>
           <input
             id={`${this.props.id}-checkbox`}
@@ -79,25 +110,21 @@ export class LetterHead extends Component<LetterHeadProps> {
             this.props.setRead(this.props.id);
           }}
         >
-          <img
-            className={styles.authorImage}
-            src={this.props.authorImage}
-            alt="author logo"
-          />
-          <div className={styles.authorName}>
+          <img className={styles.authorImage} src={this.props.authorImage} alt="author logo" />
+          <div className={this.getAuthorNameClass()}>
             <p className={pageStyles.myText}>{this.props.authorName}</p>
           </div>
           <div className={styles.read} />
-          <div className={styles.text}>
+          <div className={this.getTextClass()}>
             <p className={pageStyles.myText}>{this.props.headText}</p>
           </div>
-          <div className={styles.date}>
+          <div className={this.getDateClass()}>
             <time dateTime={this.props.headTagDate}>
               <p>{this.props.headDate}</p>
             </time>
           </div>
         </a>
-        <div className={pageStyles.line} />
+        <div className={this.getLineClass()} />
       </li>
     );
   }

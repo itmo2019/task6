@@ -6,6 +6,11 @@
   font-family: HelveticaNeue, serif;
 }
 
+.footerDark {
+  border-top: solid 2px #222222;
+  composes: footer;
+}
+
 .menuText {
   font-size: 11px;
   font-weight: normal;
@@ -25,10 +30,10 @@
 }
 
 .link {
-  color: #9b9b9b;
+  color: #bbbbbb;
   composes: myLink from '../page/page.module.css';
 }
 
 .myCopy {
-  color: #9b9b9b;
+  color: #bbbbbb;
 }

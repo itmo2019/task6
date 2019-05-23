@@ -1,7 +1,6 @@
 .page {
   min-width: 800px;
   min-height: 600px;
-  margin: 0 auto;
 }
 
 .myText {
@@ -31,6 +30,11 @@
   outline: none;
 }
 
+.navigationWriteButtonDark {
+  background-color: #333333;
+  composes: navigationWriteButton;
+}
+
 .navigationWriteText {
   display: inline;
   padding-top: 7px;
@@ -46,10 +50,19 @@
   margin-top: 0;
 }
 
+.navigationContentDark {
+  composes: navigationContent;
+}
+
 .navigationContentCurrent {
   background-color: #cdd6e4;
   border-radius: 3px;
   composes: navigationContent;
+}
+
+.navigationContentCurrentDark {
+  background-color: #666666;
+  composes: navigationContentCurrent;
 }
 
 .navigationContent:hover {
@@ -57,6 +70,14 @@
   height: 22px;
   margin-top: 0;
   background-color: #cdd6e4;
+  border-radius: 3px;
+}
+
+.navigationContentDark:hover {
+  width: 147px;
+  height: 22px;
+  margin-top: 0;
+  background-color: #666666;
   border-radius: 3px;
 }
 
@@ -71,10 +92,20 @@
   font-weight: 500;
 }
 
+.navigationTextDark {
+  composes: navigationText;
+  color: #cccccc;
+}
+
 .navigationTextCurrent {
   color: black;
   composes: navigationText;
   font-weight: bold;
+}
+
+.navigationTextCurrentDark {
+  color: #ffffff;
+  composes: navigationTextCurrent;
 }
 
 .myInput {
@@ -89,6 +120,12 @@
 
   border: solid 1px #e2e2e2;
   background-color: #e5eaf0;
+}
+
+.lineDark {
+  composes: line;
+  border: solid 1px #222222;
+  background-color: #222222;
 }
 
 .navigationList {

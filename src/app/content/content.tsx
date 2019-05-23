@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import * as styles from './content.module.css';
 import * as pageStyles from '../page/page.module.css';
@@ -7,53 +7,64 @@ import { MessageMenu } from '../messageMenu/messageMenu';
 import { Letters } from '../letters/letters';
 import { Letter } from '../letter/letter';
 import { Footer } from '../footer/footer';
-import {LetterType} from '../types/types';
+import { ILetterType } from '../types/types';
 
-interface ContentProps {
-  deleteMails: () => void,
-  letters: LetterType[],
-  selectAll: () => void,
-  isSelectAll: boolean,
-  checkboxChange: (id: string) => void,
-  checked: {[id: string]: boolean},
-  text: string[],
-  setText: (text: string[]) => void,
-  setRead: (id: string) => void,
-  removeAddAnimation: (id: string) => void,
+interface IContentProps {
+  deleteMails: () => void;
+  letters: ILetterType[];
+  selectAll: () => void;
+  isSelectAll: boolean;
+  checkboxChange: (id: string) => void;
+  checked: { [id: string]: boolean };
+  text: string[];
+  setText: (text: string[]) => void;
+  setRead: (id: string) => void;
+  removeAddAnimation: (id: string) => void;
+  removeDeleteAnimation: (id: string) => void;
+  theme: boolean;
 }
 
-interface ContentState {
-  letterIsVisible: boolean,
+interface IContentState {
+  letterIsVisible: boolean;
 }
 
-export class Content extends Component<ContentProps, ContentState> {
-
-  constructor(props: ContentProps) {
+export class Content extends React.Component<IContentProps, IContentState> {
+  public constructor(props: IContentProps) {
     super(props);
 
     this.state = {
-      letterIsVisible: false,
+      letterIsVisible: false
     };
 
     this.showLetter = this.showLetter.bind(this);
     this.closeLetter = this.closeLetter.bind(this);
+    this.getContentClass = this.getContentClass.bind(this);
+    this.getLineClass = this.getLineClass.bind(this);
   }
 
-  showLetter() {
+  private showLetter() {
     this.setState({
-      letterIsVisible: true,
+      letterIsVisible: true
     });
   }
 
-  closeLetter() {
+  private closeLetter() {
     this.setState({
-      letterIsVisible: false,
+      letterIsVisible: false
     });
   }
 
-  render() {
+  private getContentClass() {
+    return !this.props.theme ? styles.content : styles.contentDark;
+  }
+
+  private getLineClass() {
+    return !this.props.theme ? pageStyles.line : pageStyles.lineDark;
+  }
+
+  public render() {
     return (
-      <main id="main-content" className={styles.content}>
+      <main id="main-content" className={this.getContentClass()}>
         <label htmlFor="menu-checkbox">
           <input
             id="menu-checkbox"
@@ -64,7 +75,7 @@ export class Content extends Component<ContentProps, ContentState> {
           />
         </label>
         <MessageMenu deleteMessages={this.props.deleteMails} />
-        <div className={pageStyles.line} />
+        <div className={this.getLineClass()} />
 
         <Letters
           letters={this.props.letters}
@@ -73,15 +84,18 @@ export class Content extends Component<ContentProps, ContentState> {
           setText={this.props.setText}
           setRead={this.props.setRead}
           removeAddAnimation={this.props.removeAddAnimation}
+          removeDeleteAnimation={this.props.removeDeleteAnimation}
           display={!this.state.letterIsVisible}
           showLetter={this.showLetter}
+          theme={this.props.theme}
         />
         <Letter
           text={this.props.text}
           display={this.state.letterIsVisible}
           closeLetter={this.closeLetter}
+          theme={this.props.theme}
         />
-        <Footer />
+        <Footer theme={this.props.theme} />
       </main>
     );
   }

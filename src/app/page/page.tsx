@@ -1,40 +1,44 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import { Header } from '../header/header';
 import { Nav } from './nav';
 import { Content } from '../content/content';
-import { genAuthorImage, genAuthorName, genHeadText, genText, getDate, getHeadDate } from '../scripts/scripts';
-import { LetterType } from '../types/types';
+import {
+  genAuthorImage,
+  genAuthorName,
+  genHeadText,
+  genText,
+  getDate,
+  getHeadDate
+} from '../scripts/scripts';
+import { ILetterType } from '../types/types';
 import styles from './page.module.css';
 
 const MAX_LETTERS = 30;
 
-interface MyState {
-  checked: {[id: string]: boolean},
-  letters: LetterType[],
-  count: number,
-  isSelectAll: boolean,
-  text: string[],
-  searchText: string
+interface IMyState {
+  checked: { [id: string]: boolean };
+  letters: ILetterType[];
+  count: number;
+  isSelectAll: boolean;
+  text: string[];
+  searchText: string;
+  theme: boolean;
 }
 
-export class Page extends Component {
+export class Page extends React.Component<{}, IMyState> {
+  public state: Readonly<IMyState> = {
+    checked: {},
+    letters: [],
+    count: 0,
+    isSelectAll: false,
+    text: [],
+    searchText: '',
+    theme: false
+  };
 
-  public state: MyState;
-
-  public last: number;
-
-  constructor(props: any) {
+  public constructor(props: {}) {
     super(props);
-
-    this.state = {
-      checked: {},
-      letters: [],
-      count: 0,
-      isSelectAll: false,
-      text: [],
-      searchText: ''
-    };
 
     this.newLetter = this.newLetter.bind(this);
     this.deleteMails = this.deleteMails.bind(this);
@@ -46,15 +50,20 @@ export class Page extends Component {
     this.removeAddAnimation = this.removeAddAnimation.bind(this);
     this.makeDelete = this.makeDelete.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
+    this.deleteLetter = this.deleteLetter.bind(this);
+    this.removeLetterById = this.removeLetterById.bind(this);
+
     this.last = 0;
 
     this.newMail = this.newMail.bind(this);
+    this.changeTheme = this.changeTheme.bind(this);
+    document.body.style.background = this.state.theme ? 'black' : '#e5eaf0';
   }
 
-  newLetter = () => {
+  public newLetter = () => {
     const id: string = `letter-id-${this.state.count}`;
 
-    this.setState((state: MyState) => {
+    this.setState((state: Readonly<IMyState>) => {
       return { count: state.count + 1 };
     });
 
@@ -67,11 +76,11 @@ export class Page extends Component {
     const headTagDate: string = getDate(date);
     const headDate: string = getHeadDate(date);
 
-    const newChecked: {[id: string]: boolean} = this.state.checked;
+    const newChecked: { [id: string]: boolean } = this.state.checked;
     newChecked[id] = false;
     const newLetters = this.state.letters;
 
-    const newLetter: LetterType = {
+    const newLetter: ILetterType = {
       id,
       letterText,
       authorName,
@@ -82,16 +91,16 @@ export class Page extends Component {
       isRead: true,
       addAnimation: true,
       deleteAnimation: false,
-      headTagDate: headTagDate,
-      headDate: headDate
+      headTagDate,
+      headDate
     };
 
     newLetter.isVisible = this.isLetterHasText(this.state.searchText, newLetter);
-    let count: number = 0;
+    let count = 0;
     if (newLetter.isVisible) {
       count += 1;
     }
-    for (let i: number = 0; i < newLetters.length; i++) {
+    for (let i = 0; i < newLetters.length; i++) {
       if (count < MAX_LETTERS && this.isLetterHasText(this.state.searchText, newLetters[i])) {
         newLetters[i].isVisible = true;
         count++;
@@ -100,7 +109,7 @@ export class Page extends Component {
       }
     }
 
-    this.setState((state: MyState) => {
+    this.setState((state: IMyState) => {
       return {
         letters: [newLetter].concat(state.letters),
         checked: newChecked
@@ -108,13 +117,13 @@ export class Page extends Component {
     });
   };
 
-  //TODO: Поставить условие на поиск
-  selectAll = () => {
-    const newChecked: {[id: string]: boolean} = this.state.checked;
+  // TODO: Поставить условие на поиск
+  private readonly selectAll = () => {
+    const newChecked: { [id: string]: boolean } = this.state.checked;
     for (let i = 0; i < Math.min(this.state.letters.length, MAX_LETTERS); i++) {
       newChecked[this.state.letters[i].id] = !this.state.isSelectAll;
     }
-    this.setState((state: MyState) => {
+    this.setState((state: IMyState) => {
       return {
         isSelectAll: !state.isSelectAll,
         checked: newChecked
@@ -122,17 +131,17 @@ export class Page extends Component {
     });
   };
 
-  checkboxChange = (id: string) => {
-    const newChecked: {[id: string]: boolean} = this.state.checked;
+  private readonly checkboxChange = (id: string) => {
+    const newChecked: { [id: string]: boolean } = this.state.checked;
     newChecked[id] = !newChecked[id];
     this.setState({
       checked: newChecked
     });
   };
 
-  deleteMails = () => {
-    const newLetters: LetterType[] = this.state.letters.map(letter => {
-      const newLetter: LetterType = letter;
+  private readonly deleteMails = () => {
+    const newLetters: ILetterType[] = this.state.letters.map(letter => {
+      const newLetter: ILetterType = letter;
       if (this.state.checked[newLetter.id]) {
         newLetter.deleteAnimation = true;
       }
@@ -144,36 +153,35 @@ export class Page extends Component {
       isSelectAll: false
     });
 
-    setTimeout(this.makeDelete, 1500);
-
+    // setTimeout(this.makeDelete, 1500);
   };
 
-  setText = (text: string[]) => {
+  private readonly setText = (text: string[]) => {
     this.setState({
       text
     });
   };
 
-  markRead = (id: string, val: LetterType) => {
-    const val1: LetterType = val;
+  private readonly markRead = (id: string, val: ILetterType) => {
+    const val1: ILetterType = val;
     if (val1.id === id) {
       val1.isRead = false;
     }
     return val1;
   };
 
-  setRead = (id: string) => {
-    const newLetters: LetterType[] = this.state.letters;
-    const letters1: LetterType[] = newLetters.map(value => this.markRead(id, value));
+  private readonly setRead = (id: string) => {
+    const newLetters: ILetterType[] = this.state.letters;
+    const letters1: ILetterType[] = newLetters.map(value => this.markRead(id, value));
     this.setState({
       letters: letters1
     });
   };
 
-  removeAddAnimation = (id: string) => {
-    const letters1: LetterType[] = this.state.letters;
-    const newLetters: LetterType[] = letters1.map(value => {
-      const tmp: LetterType = value;
+  private readonly removeAddAnimation = (id: string) => {
+    const letters1: ILetterType[] = this.state.letters;
+    const newLetters: ILetterType[] = letters1.map(value => {
+      const tmp: ILetterType = value;
       if (tmp.id === id) {
         tmp.addAnimation = false;
       }
@@ -184,49 +192,36 @@ export class Page extends Component {
     });
   };
 
-  isLetterHasText = (text: string, letter: LetterType) => {
+  private isLetterHasText = (text: string, letter: ILetterType) => {
     if (text.length === 0) {
       return true;
-    } else {
-      if (letter.headText.toLocaleUpperCase().indexOf(text.toLocaleUpperCase()) !== -1
-        || letter.authorName.toLocaleUpperCase().indexOf(text.toLocaleUpperCase()) !== -1) {
-        return true;
-      } else {
-        let f: boolean = false;
-        for (let i: number = 0; i < letter.letterText.length && !f; i++) {
-          if (letter.letterText[i].toLocaleUpperCase().indexOf(text.toLocaleUpperCase()) !== -1) {
-            f = true;
-          }
-        }
-        return f;
+    }
+    if (
+      letter.headText.toLocaleUpperCase().indexOf(text.toLocaleUpperCase()) !== -1 ||
+      letter.authorName.toLocaleUpperCase().indexOf(text.toLocaleUpperCase()) !== -1
+    ) {
+      return true;
+    }
+    let f = false;
+    for (let i = 0; i < letter.letterText.length && !f; i++) {
+      if (letter.letterText[i].toLocaleUpperCase().indexOf(text.toLocaleUpperCase()) !== -1) {
+        f = true;
       }
     }
+    return f;
   };
 
-  makeDelete = (id: string) => {
-    this.setState((state: MyState) => {
+  private makeDelete = (id: string) => {
+    this.setState((state: IMyState) => {
       return { letters: this.removeAllCheckedLetters(state.letters, state.checked) };
     });
   };
 
-  newMail() {
-    this.newLetter();
-    const fiveMinute: number = 300000;
-    const maxTime: number = 600000;
-    const minTime: number = 10;
-    const time: number = Math.max(
-      fiveMinute - this.last,
-      Math.floor(Math.random() * (maxTime - minTime) + minTime)
-    );
-    this.last = time;
-    setTimeout(this.newMail, time);
-  }
+  private readonly setSearchText = (text: string) => {
+    const newLetters: ILetterType[] = this.state.letters;
+    let count = 0;
 
-  setSearchText = (text: string) => {
-    const newLetters: LetterType[] = this.state.letters;
-    let count: number = 0;
-
-    for (let i: number = 0; i < newLetters.length; i++) {
+    for (let i = 0; i < newLetters.length; i++) {
       if (count < MAX_LETTERS && this.isLetterHasText(text, newLetters[i])) {
         newLetters[i].isVisible = true;
         count++;
@@ -239,14 +234,16 @@ export class Page extends Component {
       letters: newLetters,
       searchText: text
     });
-
   };
 
-  removeAllCheckedLetters = (letters: LetterType[], checked: {[id: string]: boolean}) => {
-    const newLetters: LetterType[] = letters.filter(a => !checked[a.id]);
+  private removeAllCheckedLetters = (
+    letters: ILetterType[],
+    checked: { [id: string]: boolean }
+  ) => {
+    const newLetters: ILetterType[] = letters.filter(a => !checked[a.id]);
 
-    let count: number = 0;
-    for (let i: number = 0; i < newLetters.length; i++) {
+    let count = 0;
+    for (let i = 0; i < newLetters.length; i++) {
       if (count < MAX_LETTERS && this.isLetterHasText(this.state.searchText, newLetters[i])) {
         newLetters[i].isVisible = true;
         count++;
@@ -258,11 +255,58 @@ export class Page extends Component {
     return newLetters;
   };
 
-  render() {
+  private newMail() {
+    this.newLetter();
+    const fiveMinute = 300000;
+    const maxTime = 600000;
+    const minTime = 10;
+    const time: number = Math.max(
+      fiveMinute - this.last,
+      Math.floor(Math.random() * (maxTime - minTime) + minTime)
+    );
+    this.last = time;
+    setTimeout(this.newMail, time);
+  }
+
+  private removeLetterById(letters: ILetterType[], id: string) {
+    let newLetters: ILetterType[] = letters;
+    newLetters = newLetters.filter((letter: ILetterType) => letter.id !== id);
+    let count = 0;
+    for (let i = 0; i < newLetters.length; i++) {
+      if (count < MAX_LETTERS && this.isLetterHasText(this.state.searchText, newLetters[i])) {
+        newLetters[i].isVisible = true;
+        count++;
+      } else {
+        newLetters[i].isVisible = false;
+      }
+    }
+    return newLetters;
+  }
+
+  private deleteLetter(id: string) {
+    this.setState((state: IMyState) => {
+      return { letters: this.removeLetterById(state.letters, id) };
+    });
+  }
+
+  private changeTheme() {
+    this.setState((state: IMyState) => {
+      document.body.style.background = state.theme ? '#e5eaf0' : 'black';
+      return { theme: !state.theme };
+    });
+  }
+
+  private last: number;
+
+  public render() {
     return (
       <div className={styles.page}>
-        <Header setSearchText={this.setSearchText}/>
-        <Nav newLetter={this.newLetter} />
+        <Header
+          setSearchText={this.setSearchText}
+          changeTheme={this.changeTheme}
+          theme={this.state.theme}
+        />
+        <Nav newLetter={this.newLetter} theme={this.state.theme} />
         <Content
           deleteMails={this.deleteMails}
           letters={this.state.letters}
@@ -274,6 +318,8 @@ export class Page extends Component {
           setText={this.setText}
           setRead={this.setRead}
           removeAddAnimation={this.removeAddAnimation}
+          removeDeleteAnimation={this.deleteLetter}
+          theme={this.state.theme}
         />
       </div>
     );

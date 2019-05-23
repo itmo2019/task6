@@ -1,11 +1,25 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import * as styles from './footer.module.css';
 
-export class Footer extends Component {
-  render() {
+interface IFooterProps {
+  theme: boolean;
+}
+
+export class Footer extends React.Component<IFooterProps> {
+  public constructor(props: IFooterProps) {
+    super(props);
+
+    this.getFooterClass = this.getFooterClass.bind(this);
+  }
+
+  private getFooterClass() {
+    return !this.props.theme ? styles.footer : styles.footerDark;
+  }
+
+  public render() {
     return (
-      <footer className={styles.footer}>
+      <footer className={this.getFooterClass()}>
         <ul className={styles.menu}>
           <li className={styles.menuLink}>
             <a href="." className={styles.link}>

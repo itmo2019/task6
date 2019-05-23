@@ -10,3 +10,7 @@ export const animatedAddLine: string;
 export const animatedDeleteLine: string;
 export const text: string;
 export const hidden: string;
+export const authorNameDark: string;
+export const unreadDark: string;
+export const textDark: string;
+export const dateDark: string;

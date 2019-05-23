@@ -36,7 +36,13 @@
   background-color: #000000;
 }
 
+.rectangleDark {
+  background-color: #ffffff;
+  composes: rectangle;
+}
+
 .search {
+  color: white;
   display: inline-block;
   width: calc(100% - 499px);
   min-width: 301px;
@@ -47,6 +53,13 @@
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
   opacity: 0.5;
   vertical-align: top;
+}
+
+.searchDark {
+  background-color: #555555;
+  box-shadow: inset 0 0 0 1px #333333;
+  opacity: 1;
+  composes: search;
 }
 
 .searchInput {
@@ -66,8 +79,25 @@
   vertical-align: middle;
 }
 
+.searchInputDark {
+  color: #ffffff;
+  composes: searchInput;
+}
+
 .searchInput::-webkit-search-cancel-button {
   -webkit-appearance: none;
+}
+
+.searchInput::-webkit-input-placeholder {
+  color: black;
+}
+
+.searchInputDark::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.searchInputDark::-webkit-input-placeholder {
+  color: white;
 }
 
 .searchCancelButton {
@@ -82,4 +112,41 @@
   cursor: pointer;
   outline: none;
   vertical-align: middle;
+}
+
+.searchCancelButtonDark {
+  composes: searchCancelButton;
+  background: url(../../images/cross-symbol-dark.png) no-repeat;
+  background-size: 9px;
+}
+
+.changeThemeButton {
+  width: 80px;
+  height: 32px;
+
+  border: none;
+  -webkit-appearance: none;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #333333;
+  outline: none;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 11px;
+  float: right;
+  margin-right: 26px;
+}
+
+.changeThemeButtonText {
+  display: inline;
+  padding-top: 7px;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.changeThemeButtonDark {
+  background-color: #6287bd;
+  composes: changeThemeButton;
 }

@@ -1,30 +1,42 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import * as styles from './letter.module.css';
 
-const close: string = require('../../images/cross-symbol.png');
-
-interface LetterProps {
-  text: string[],
-  display: boolean,
-  closeLetter: () => void
+interface ILetterProps {
+  text: string[];
+  display: boolean;
+  closeLetter: () => void;
+  theme: boolean;
 }
 
-export class Letter extends Component<LetterProps> {
-  constructor(props: LetterProps) {
+const close: string = require('../../images/cross-symbol.png');
+const closeDark: string = require('../../images/cross-symbol-dark.png');
+
+export class Letter extends React.Component<ILetterProps> {
+  public constructor(props: ILetterProps) {
     super(props);
 
     this.makeClassName = this.makeClassName.bind(this);
+    this.getTextClass = this.getTextClass.bind(this);
+    this.getCloseImg = this.getCloseImg.bind(this);
   }
 
-  makeClassName = () => {
-    return this.props.display ? styles.letter : styles.hidden
+  private getTextClass() {
+    return !this.props.theme ? styles.text : styles.textDark;
+  }
+
+  private getCloseImg() {
+    return !this.props.theme ? close : closeDark;
+  }
+
+  private readonly makeClassName = () => {
+    return this.props.display ? styles.letter : styles.hidden;
   };
 
-  render() {
+  public render(): React.ReactNode {
     const letter = [];
     for (let i = 0; i < this.props.text.length; i++) {
-      letter.push(<p className={styles.text}>{this.props.text[i]}</p>);
+      letter.push(<p className={this.getTextClass()}>{this.props.text[i]}</p>);
     }
     return (
       <div className={this.makeClassName()}>
@@ -35,7 +47,7 @@ export class Letter extends Component<LetterProps> {
             this.props.closeLetter();
           }}
         >
-          <img className={styles.closeImg} src={close} alt="close" />
+          <img className={styles.closeImg} src={this.getCloseImg()} alt="close" />
         </a>
       </div>
     );

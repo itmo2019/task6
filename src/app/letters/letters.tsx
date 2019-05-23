@@ -1,37 +1,38 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import * as styles from './letters.module.css';
 
 import { LetterHead } from '../letterHead/letterHead';
-import { LetterType } from '../types/types';
+import { ILetterType } from '../types/types';
 
-interface LettersProps {
-  letters: LetterType[],
-  checkboxChange: (id: string) => void,
-  checked: {[id: string]: boolean},
-  setText: (text: string[]) => void,
-  setRead: (id: string) => void,
-  removeAddAnimation: (id: string) => void,
-  display: boolean
-  showLetter: () => void
+interface ILettersProps {
+  letters: ILetterType[];
+  checkboxChange: (id: string) => void;
+  checked: { [id: string]: boolean };
+  setText: (text: string[]) => void;
+  setRead: (id: string) => void;
+  removeAddAnimation: (id: string) => void;
+  removeDeleteAnimation: (id: string) => void;
+  display: boolean;
+  showLetter: () => void;
+  theme: boolean;
 }
 
-export class Letters extends Component<LettersProps> {
-
-  constructor(props: LettersProps) {
+export class Letters extends React.Component<ILettersProps> {
+  public constructor(props: ILettersProps) {
     super(props);
 
     this.makeClassName = this.makeClassName.bind(this);
   }
 
-  makeClassName() {
+  private makeClassName() {
     return this.props.display ? styles.letters : styles.hidden;
   }
 
-  render() {
+  public render() {
     return (
       <ul className={this.makeClassName()}>
-        {this.props.letters.map(letter => {
+        {this.props.letters.map((letter: ILetterType) => {
           if (letter.isVisible) {
             return (
               <LetterHead
@@ -43,6 +44,8 @@ export class Letters extends Component<LettersProps> {
                 removeAddAnimation={this.props.removeAddAnimation}
                 setRead={this.props.setRead}
                 showLetter={this.props.showLetter}
+                removeDeleteAnimation={this.props.removeDeleteAnimation}
+                theme={this.props.theme}
               />
             );
           }

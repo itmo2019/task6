@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import { Page } from './page/page';
 
-export class App extends Component {
-  render() {
-    return (
-      <Page />
-    );
+export class App extends React.Component {
+  public render() {
+    return <Page />;
   }
 }
