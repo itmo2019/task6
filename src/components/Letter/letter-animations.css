@@ -1,0 +1,49 @@
+.letter-enter--light {
+  background-color: var(--accent);
+}
+
+.letter-enter--dark {
+  background-color: var(--accent--dark);
+}
+
+.letter-enter-done--light {
+  background-color: var(--primary-background) !important;
+}
+
+.letter-enter-done--dark {
+  background-color: var(--primary-background--dark) !important;
+}
+
+.letter-enter--light.letter-enter-active {
+  background-color: var(--primary-background);
+  transition: background-color 2s ease-in;
+}
+
+.letter-enter--dark.letter-enter-active {
+  background-color: var(--primary-background--dark);
+  transition: background-color 2s ease-in;
+}
+
+.letter-exit {
+  left: 0;
+  opacity: 1;
+}
+
+.letter-exit.letter-exit-active {
+  left: 200px;
+
+  overflow: hidden;
+
+  border: unset;
+  opacity: 0;
+  transition: all 0.5s ease-out;
+}
+
+.letter-exit-done {
+  left: 200px;
+
+  overflow: hidden;
+
+  border: unset;
+  opacity: 0;
+}

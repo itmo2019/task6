@@ -1,0 +1,71 @@
+.finder {
+  width: 100%;
+  height: 36px;
+  padding: 14px 0;
+}
+
+.buttonClose {
+  width: 10px;
+  padding-left: 0;
+  margin: auto auto auto -25px;
+
+  border: none;
+  background-color: inherit;
+  border-radius: 3px;
+  font-size: 24px;
+  text-align: start;
+  transform: translateY(2px);
+}
+
+.buttonClose--light {
+  color: var(--tertiary);
+}
+
+.buttonClose--dark {
+  color: var(--tertiary--dark);
+}
+
+.buttonClose:hover {
+  cursor: pointer;
+}
+
+.buttonClose--light:hover {
+  color: var(--secondary);
+}
+
+.buttonClose--dark:hover {
+  color: var(--secondary--dark);
+}
+
+.input {
+  position: relative;
+
+  width: 40%;
+  height: 32px;
+  padding-right: 30px;
+  padding-left: 16px;
+  margin-left: 30%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+.input--light::placeholder {
+  color: var(--secondary);
+}
+
+.input--dark::placeholder {
+  color: var(--secondary--dark);
+}
+
+.input--light {
+  border: solid 1px var(--tertiary);
+  background-color: var(--primary-background);
+  color: var(--secondary);
+}
+
+.input--dark {
+  border: solid 1px var(--tertiary--dark);
+  background-color: var(--primary-background--dark);
+  color: var(--secondary--dark);
+}
