@@ -1,0 +1,139 @@
+.letter {
+  width: 100%;
+  height: 41px;
+
+  border-bottom: solid 2px #e2e2e2;
+}
+
+.letter_defaultLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.letter__checkbox {
+  position: relative;
+
+  width: 18px;
+  height: 18px;
+  padding: 2px;
+  margin-top: 12px;
+  margin-left: 2%;
+
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  -webkit-appearance: none;
+  border-radius: 3px;
+  color: #fff;
+  float: left;
+}
+
+.letter__checkbox:checked {
+  background-clip: content-box;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.letter__authorLogo {
+  position: relative;
+
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+  margin-left: 1%;
+
+  background-color: #f33;
+  border-radius: 50%;
+  float: left;
+}
+
+.letter__authorAbbr {
+  margin-top: 3px;
+  color: #fff;
+  font-family: YandexSansThin, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.letter__text {
+  position: relative;
+
+  overflow: hidden;
+  margin-top: 15px;
+  float: left;
+
+  font-family: HelveticaNeue, sans-serif;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.letter__author {
+  width: 27%;
+  min-width: 50px;
+  margin-top: 15px;
+  margin-left: 2%;
+}
+
+.boldText {
+  font-weight: bold;
+}
+
+.letter__newLetterFlag {
+  position: relative;
+
+  width: 10px;
+  height: 10px;
+  margin-top: 15px;
+  margin-left: 1%;
+
+  border-radius: 100%;
+  float: left;
+}
+
+.letter__newLetterFlagEnabled {
+  background-color: #6287bd;
+}
+
+.letter__subject {
+  width: 45%;
+  min-width: 80px;
+  margin-left: 2%;
+}
+
+.letter__time {
+  position: relative;
+
+  margin-top: 15px;
+  margin-right: 1%;
+  float: right;
+  font-family: HelveticaNeue, sans-serif;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.letter__animatedAddLetter {
+  animation: add-new-letter 1s linear;
+}
+
+@keyframes add-new-letter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 100%;
+  }
+}
+
+.letter__animatedDeleteLetter {
+  animation: delete-letter 1s linear;
+}
+
+@keyframes delete-letter {
+  from {
+    opacity: 100%;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,26 @@
+.letterPage {
+  width: 94%;
+  padding: 1% 3%;
+  margin: 0;
+  background-color: #fff;
+}
+
+.letterPage__text {
+  font-size: 20px;
+}
+
+.letterPage__pageCloseButton {
+  position: relative;
+  float: right;
+  font-size: 30px;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+.letterPage__pageCloseButton:visited {
+  color: inherit;
+}
+
+.letterPage__pageCloseButton:visited:hover {
+  color: inherit;
+}

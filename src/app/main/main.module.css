@@ -1,0 +1,7 @@
+.main {
+  display: inline-block;
+  width: 100%;
+  min-width: 800px;
+  height: calc(100% - 31px);
+  padding-top: 13px;
+}

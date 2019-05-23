@@ -1,0 +1,10 @@
+.contentFooter__text {
+  position: relative;
+
+  margin-top: 12px;
+  margin-right: 2%;
+  float: right;
+  font-family: HelveticaNeueLight, sans-serif;
+  font-size: 12px;
+  opacity: 0.5;
+}

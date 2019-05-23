@@ -1,0 +1,15 @@
+.menu__newLetterButton {
+  width: 100%;
+  height: 32px;
+
+  border: #6287bd;
+  background-color: #6287bd;
+  border-radius: 3px;
+}
+
+.menu__newLetterButtonText {
+  color: #fff;
+  font-family: HelveticaNeue, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}

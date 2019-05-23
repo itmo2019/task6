@@ -1,0 +1,22 @@
+.contentHeaderMenu__button {
+  display: inline-block;
+  overflow: hidden;
+  margin-left: 3%;
+  font-family: HelveticaNeue, sans-serif;
+  font-size: 12px;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+.contentHeaderMenu__button_defaultLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contentHeaderMenu__button_defaultLink:visited {
+  color: inherit;
+}
+
+.contentHeaderMenu__button_defaultLink:visited:hover {
+  color: inherit;
+}

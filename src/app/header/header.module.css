@@ -1,0 +1,12 @@
+.header {
+  display: inline-block;
+  width: 100%;
+  min-width: 800px;
+  height: 32px;
+}
+
+.header__yandexMailLogo {
+  display: inline-block;
+  width: 153px;
+  margin-left: 11px;
+}
