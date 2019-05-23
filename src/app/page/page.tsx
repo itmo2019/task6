@@ -10,7 +10,6 @@ import {
   genText,
   getDate,
   getHeadDate,
-  generateLetters,
   MAX_LETTERS
 } from '../scripts/scripts';
 import { ILetterType } from '../types/types';
@@ -33,7 +32,6 @@ interface IMyState {
 export class Page extends React.Component<{}, IMyState> {
   public constructor(props: {}) {
     super(props);
-    // const { letters, checked } = generateLetters();
 
     this.state = {
       checked: {},
@@ -66,6 +64,7 @@ export class Page extends React.Component<{}, IMyState> {
     this.newMail = this.newMail.bind(this);
     this.changeTheme = this.changeTheme.bind(this);
     document.body.style.background = this.state.theme ? 'black' : '#e5eaf0';
+    this.newMail()
   }
 
   public newLetter = () => {
@@ -103,20 +102,6 @@ export class Page extends React.Component<{}, IMyState> {
       headTagDate,
       headDate
     };
-
-    // newLetter.isVisible = this.isLetterHasText(this.state.searchText, newLetter);
-    // let count = 0;
-    // if (newLetter.isVisible) {
-    //   count += 1;
-    // }
-    // for (let i = 0; i < newLetters.length; i++) {
-    //   if (count < MAX_LETTERS && this.isLetterHasText(this.state.searchText, newLetters[i])) {
-    //     newLetters[i].isVisible = true;
-    //     count++;
-    //   } else {
-    //     newLetters[i].isVisible = false;
-    //   }
-    // }
 
     this.setState((state: IMyState) => {
       return {
