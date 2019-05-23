@@ -4,7 +4,7 @@ import { Component } from 'react';
 import { Menu } from '../Menu/Menu';
 import { Main } from '../Main/Main';
 
-import { generate1000Letters, generateLetter, ILetter, initialStateLetters } from './App';
+import { generate1000Letters, generateLetter, ILetter, initialStateLetters, startSendingRandomLetters } from './App';
 import { getThemed, Theme, ThemeContext } from '../theme';
 
 // @ts-ignore
@@ -24,22 +24,7 @@ export class App extends Component<{}, AppState> {
     };
 
   componentDidMount() {
-    const this2 = this;
-    (function sendEmails([time1, time2]: [number, number]) {
-      const minute = (x: number) => x * 60 * 1000;
-      const ms = (x: number) => x;
-
-      let delay = Math.random() * minute(10) + ms(10);
-      console.log("New email will be delivered in " + delay / 60 / 1000 + " minutes");
-      const time3 = new Date().getTime() + delay;
-      if (time3 - time1 < minute(5)) {
-        delay = minute(5);
-      }
-      setTimeout(() => {
-        this2.newMail();
-        sendEmails([time2, new Date().getTime()]);
-      }, delay);
-    })([0, 0]);
+    startSendingRandomLetters(() => this.newMail())
   }
 
   allSelected = () => {

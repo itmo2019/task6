@@ -35,6 +35,24 @@ export function generate1000Letters(): ILetter[] {
   return newLetters
 }
 
+export function startSendingRandomLetters(newMailFn: () => void) {
+  (function sendEmails([time1, time2]: [number, number]) {
+    const minute = (x: number) => x * 60 * 1000;
+    const ms = (x: number) => x;
+
+    let delay = Math.random() * minute(10) + ms(10);
+    console.log("New email will be delivered in " + delay / 60 / 1000 + " minutes");
+    const time3 = new Date().getTime() + delay;
+    if (time3 - time1 < minute(5)) {
+      delay = minute(5);
+    }
+    setTimeout(() => {
+      newMailFn();
+      sendEmails([time2, new Date().getTime()]);
+    }, delay);
+  })([0, 0])
+}
+
 export function generateLetter(): ILetter {
   const sample = data[Math.floor(Math.random() * data.length)];
   return {
