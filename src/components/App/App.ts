@@ -13,6 +13,7 @@ export interface ILetter {
   new?: boolean;
   deleted?: boolean;
   color?: Color;
+  mounted?: Boolean
 }
 
 export function generate1000Letters(): ILetter[] {

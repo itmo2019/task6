@@ -14,13 +14,12 @@ import avatar from './images/avatar.jpg';
 
 interface LetterProps {
   letter: ILetter;
-  toggleLetter: (id: number) => void;
   passedStyle: any;
 }
 
-
 interface LetterState {
-  mounted: boolean
+  selected: Boolean
+  mounted: Boolean
 }
 
 
@@ -28,18 +27,27 @@ export class Letter extends PureComponent<LetterProps, LetterState> {
   static contextType = ThemeContext;
   context!: Theme;
 
-  readonly state = { mounted: !this.props.letter.new };
+  readonly state = { mounted: !this.props.letter.new, selected: !!this.props.letter.selected };
 
-
-  componentDidMount() {
-    this.setState({ mounted: true });
+  static getDerivedStateFromProps(props: LetterProps, state: LetterState): LetterState {
+    return {
+      selected: !!props.letter.selected,
+      mounted: props.letter.deleted ? false : state.mounted
+    }
   }
 
-  componentWillReceiveProps(nextProps: Readonly<LetterProps>, nextContext: any): void {
-    if (nextProps.letter.deleted) {
-      console.log(nextProps.letter.deleted);
-      this.setState({ mounted: false });
-    }
+  toggleLetter = () => {
+    this.props.letter.selected = !this.state.selected;
+    this.setState(({ selected, ...rest }) => {
+        return {
+          selected: !selected,
+          ...rest
+        };
+    });
+  };
+
+  componentDidMount() {
+    this.setState(({ mounted, ...rest }) => ({ mounted: true, ...rest }));
   }
 
   render() {
@@ -67,15 +75,13 @@ export class Letter extends PureComponent<LetterProps, LetterState> {
         </div>
       );
     }
-    const toggleThisLetter = () => this.props.toggleLetter(letter.key);
-
     const innerJsx = (
       <div>
         <input
           className={getThemed(style.checkbox, style, theme)}
           type="checkbox"
-          onChange={toggleThisLetter}
-          checked={letter.selected ? letter.selected : false}
+          onChange={this.toggleLetter}
+          checked={this.state.selected}
         />
         {iconJSX}
         <div className={style.author}>{letter.author}</div>

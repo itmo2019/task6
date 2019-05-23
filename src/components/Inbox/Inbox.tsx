@@ -16,11 +16,10 @@ export interface InboxProps {
   letters: ILetter[];
   deleteSelected: () => void;
   toggleAll: () => void;
-  toggleLetter: (id: number) => void;
   allSelected: boolean
 }
 
-export const Inbox = ({ letters, deleteSelected, toggleAll, toggleLetter, allSelected }: InboxProps) => {
+export const Inbox = ({ letters, deleteSelected, toggleAll, allSelected }: InboxProps) => {
   const theme = useContext(ThemeContext);
   return (
     <div className={getThemed(style.inbox, style, theme)}>
@@ -32,7 +31,7 @@ export const Inbox = ({ letters, deleteSelected, toggleAll, toggleLetter, allSel
       <input className={getThemed(style.showStoryCheckbox, style, theme)} id="show" type="checkbox" />
       <Story />
       <div className={style.wrapper}>
-        <MailList letters={letters} toggleLetter={toggleLetter} />
+        <MailList letters={letters}/>
       </div>
       <InboxFooter />
     </div>

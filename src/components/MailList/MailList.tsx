@@ -8,14 +8,12 @@ import { ILetter } from '../App/App';
 
 
 interface MailListProps {
-  letters: ILetter[];
-  toggleLetter: (id: number) => void;
+  letters: ILetter[]
 }
-
 
 const renderItem = ({ index, style, data }: {index: number, style: any, data: MailListProps}) => {
   const letter = data.letters[index];
-  return <Letter letter={letter} toggleLetter={data.toggleLetter} key={letter.key} passedStyle={style} />;
+  return <Letter letter={letter} key={letter.key} passedStyle={style} />;
 };
 
 function itemKey(index: number, data: MailListProps) {
@@ -23,7 +21,7 @@ function itemKey(index: number, data: MailListProps) {
 }
 
 
-export const MailList = ({ letters, toggleLetter }: MailListProps) => {
+export const MailList = ({ letters }: MailListProps) => {
 
   return (
     <AutoSizer>
@@ -33,7 +31,7 @@ export const MailList = ({ letters, toggleLetter }: MailListProps) => {
           height={height}
           itemCount={letters.length}
           width={width}
-          itemData={{ letters, toggleLetter }}
+          itemData={{ letters }}
           itemKey={itemKey}
           overscanCount={20}
           style={{overflowX: 'hidden', overflowY: 'auto'}}

@@ -103,29 +103,6 @@ export class App extends Component<{}, AppState> {
     }))
   };
 
-  toggleLetter = (id: number) => {
-    this.setState(({ letters, theme }) => {
-      console.log("toggle letter");
-      return {
-        letters: letters.map(({ key, selected, ...rest }) => {
-          if (key === id) {
-            return {
-              key,
-              selected: !selected,
-              ...rest
-            };
-          }
-          return {
-            key,
-            selected,
-            ...rest
-          };
-        }),
-        theme
-      };
-    });
-  };
-
   toggleTheme = () => {
     this.setState(({ theme, ...rest }) => {
       const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -145,7 +122,6 @@ export class App extends Component<{}, AppState> {
           <Main
             letters={this.state.letters}
             deleteSelected={this.deleteSelected}
-            toggleLetter={this.toggleLetter}
             toggleAll={this.toggleAll}
             allSelected={this.allSelected()}
           />
