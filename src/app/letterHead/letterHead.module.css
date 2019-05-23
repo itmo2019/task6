@@ -1,0 +1,145 @@
+.myCheckbox {
+  width: 16px;
+  height: 16px;
+  margin-top: 11px;
+  margin-left: 20px;
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  border-radius: 3px;
+  composes: myInput from '../page/page.module.css';
+}
+
+.myCheckbox:checked {
+  background-clip: content-box;
+  background-color: white;
+  background-image: url('../../images/check.png');
+  background-size: 14px;
+  background-repeat: no-repeat;
+}
+
+.letterHead {
+  min-width: 574px;
+  height: 40px;
+}
+
+.hidden {
+  display: none;
+}
+
+.link {
+  outline: none;
+  text-decoration: none;
+}
+.unread {
+  font-weight: bold;
+  composes: link;
+}
+
+.authorImage {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+  margin-left: 10px;
+  border-radius: 50%;
+  vertical-align: top;
+}
+
+.authorName {
+  display: inline-block;
+  width: 160px;
+  height: 40px;
+  margin-left: 10px;
+  color: #000000;
+  font-size: 13px;
+  vertical-align: top;
+}
+
+.authorNameDark {
+  composes: authorName;
+  color: #ffffff;
+}
+
+.read {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  vertical-align: super;
+}
+
+.unread > .read {
+  background-color: #6287bd;
+}
+
+.unreadDark {
+  composes: unread;
+}
+
+.unreadDark > .read {
+  background-color: #cccccc;
+}
+
+.text {
+  display: inline-block;
+  overflow: hidden;
+  width: calc(100% - 322px);
+  min-width: 240px;
+  height: 40px;
+  margin-left: 10px;
+  color: #000000;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  composes: myText from '../page/page.module.css';
+}
+
+.textDark {
+  color: #ffffff;
+  composes: text;
+}
+
+.date {
+  display: inline-block;
+  height: 40px;
+  margin-right: 10px;
+  color: #9b9b9b;
+  font-size: 13px;
+  font-weight: normal;
+  text-align: right;
+  vertical-align: bottom;
+}
+
+
+.dateDark {
+  color: #bbbbbb;
+  composes: date;
+}
+
+.animatedAddLine {
+  animation: add 1.5s linear;
+  composes: letterHead;
+}
+
+.animatedDeleteLine {
+  animation: delete 1.5s linear;
+  composes: letterHead;
+}
+
+@keyframes add {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes delete {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

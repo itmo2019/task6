@@ -1,0 +1,39 @@
+.footer {
+  width: 100%;
+  min-width: 574px;
+
+  border-top: solid 2px #e2e2e2;
+  font-family: HelveticaNeue, serif;
+}
+
+.footerDark {
+  border-top: solid 2px #222222;
+  composes: footer;
+}
+
+.menuText {
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.menuLink {
+  composes: menuText;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.menu {
+  padding: 0;
+  margin: 0;
+  float: right;
+  list-style-type: none;
+}
+
+.link {
+  color: #bbbbbb;
+  composes: myLink from '../page/page.module.css';
+}
+
+.myCopy {
+  color: #bbbbbb;
+}

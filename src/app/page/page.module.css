@@ -1,0 +1,147 @@
+.page {
+  min-width: 800px;
+  min-height: 600px;
+}
+
+.myText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navigation {
+  display: inline-block;
+  width: 181px;
+
+  margin-left: 19px;
+  font-family: HelveticaNeue, serif;
+  vertical-align: top;
+}
+
+.navigationWriteButton {
+  width: 147px;
+  height: 32px;
+
+  border: none;
+  -webkit-appearance: none;
+  background-color: #6287bd;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+}
+
+.navigationWriteButtonDark {
+  background-color: #333333;
+  composes: navigationWriteButton;
+}
+
+.navigationWriteText {
+  display: inline;
+  padding-top: 7px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.navigationContent {
+  width: 147px;
+  height: 22px;
+  margin-top: 0;
+}
+
+.navigationContentDark {
+  composes: navigationContent;
+}
+
+.navigationContentCurrent {
+  background-color: #cdd6e4;
+  border-radius: 3px;
+  composes: navigationContent;
+}
+
+.navigationContentCurrentDark {
+  background-color: #666666;
+  composes: navigationContentCurrent;
+}
+
+.navigationContent:hover {
+  width: 147px;
+  height: 22px;
+  margin-top: 0;
+  background-color: #cdd6e4;
+  border-radius: 3px;
+}
+
+.navigationContentDark:hover {
+  width: 147px;
+  height: 22px;
+  margin-top: 0;
+  background-color: #666666;
+  border-radius: 3px;
+}
+
+.navigationText {
+  composes: myText;
+  display: block;
+  width: 130px;
+  padding-top: 6px;
+  padding-left: 10px;
+  color: #707070;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.navigationTextDark {
+  composes: navigationText;
+  color: #cccccc;
+}
+
+.navigationTextCurrent {
+  color: black;
+  composes: navigationText;
+  font-weight: bold;
+}
+
+.navigationTextCurrentDark {
+  color: #ffffff;
+  composes: navigationTextCurrent;
+}
+
+.myInput {
+  display: inline-block;
+  -webkit-appearance: none;
+}
+
+.line {
+  width: calc(100% - 2px);
+  min-width: 572px;
+  height: 0;
+
+  border: solid 1px #e2e2e2;
+  background-color: #e5eaf0;
+}
+
+.lineDark {
+  composes: line;
+  border: solid 1px #222222;
+  background-color: #222222;
+}
+
+.navigationList {
+  padding: 0;
+  margin: 8px 0 0;
+  list-style-type: none;
+  vertical-align: top;
+}
+
+.myLink {
+  outline: none;
+  text-decoration: none;
+}
+
+.navigationLink {
+  outline: none;
+  text-decoration: none;
+  text-overflow: ellipsis;
+}

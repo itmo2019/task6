@@ -1,0 +1,21 @@
+.link {
+  color: #cccccc;
+  composes: myLink from '../page/page.module.css';
+}
+
+.text {
+  display: inline-block;
+  height: 40px;
+  margin-left: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.messageMenu {
+  display: inline-block;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  vertical-align: top;
+}
