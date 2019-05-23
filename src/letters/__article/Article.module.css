@@ -1,0 +1,31 @@
+.article {
+  position: absolute;
+
+  overflow: hidden;
+  width: inherit;
+  max-width: 589px;
+  height: 448px;
+  max-height: 448px;
+  margin-top: 41px;
+  margin-left: 0;
+}
+
+.articleTitle {
+  margin-left: 50px;
+}
+
+.light {
+  background-color: #fff;
+}
+
+.dark {
+  background-color: #1e3543;
+}
+
+.textWhite {
+  color: #ded8d5;
+}
+
+.textBlack {
+  color: #000;
+}

@@ -3,6 +3,12 @@
 
   width: 800px;
   height: 600px;
-  /*background-color: #f0f8ff;*/
-  background-color: rgb(229, 234, 240);
+}
+
+.light {
+  background-color: #e5eaf0;
+}
+
+.dark {
+  background-color: #061f2f;
 }

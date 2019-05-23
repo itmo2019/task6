@@ -1,0 +1,125 @@
+.line {
+  position: absolute;
+
+  width: inherit;
+  height: 0;
+  margin-top: 41px;
+}
+
+.marker {
+  position: absolute;
+
+  width: 16px;
+  height: 16px;
+  margin-top: 14px;
+  margin-left: 20px;
+
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.label {
+  width: inherit;
+}
+
+/* Single letter */
+
+.authorImage {
+  position: absolute;
+
+  width: 30px;
+  height: inherit;
+  margin-top: 6px;
+  margin-left: 46px;
+}
+
+.letter {
+  width: inherit;
+  height: 43px;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.yandexOval {
+  position: absolute;
+
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.Ya {
+  position: absolute;
+
+  margin-top: 7px;
+  margin-left: 9px;
+}
+
+.author {
+  position: absolute;
+
+  max-width: 160px;
+  max-height: 13px;
+  margin-top: 17px;
+  margin-left: 86px;
+  color: #000;
+  font-size: 13px;
+}
+
+.textWhite {
+  color: #ded8d5;
+}
+
+.textBlack {
+  color: #000;
+}
+
+.unreadOval {
+  position: absolute;
+
+  margin-top: 12px;
+  margin-left: 261px;
+}
+
+.theme {
+  position: absolute;
+
+  max-width: 210px;
+  max-height: 13px;
+  margin-top: 17px;
+  margin-left: 281px;
+  font-size: 13px;
+}
+
+.theme:hover {
+  background-color: grey;
+}
+
+.read {
+  font-family: 'Helvetica Neue Light', sans-serif;
+}
+
+.unread {
+  font-family: 'Helvetica Neue Bold', sans-serif;
+}
+
+.date {
+  position: absolute;
+  right: 20px;
+
+  max-width: 50px;
+  max-height: 13px;
+  margin-top: 17px;
+  color: #9b9b9b;
+  font-family: 'Helvetica Neue Medium', sans-serif;
+  font-size: 13px;
+}
+
+.lineLight {
+  border: 1px solid #e2e2e2;
+}
+
+.lineDark {
+  border: 1px solid #555;
+}
