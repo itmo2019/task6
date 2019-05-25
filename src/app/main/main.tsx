@@ -68,8 +68,11 @@ export class Main extends Component {
     const date: string = generateDate();
 
     this.setState((state: IState) => {
-      const isVisible: boolean = state.letters.length <= MAX_LETTERS;
       const newCheckedLetterIds: { [id: string]: boolean } = state.checkedLetterIds;
+      const newLetters: LetterType[] = state.letters;
+      if (newLetters.length >= MAX_LETTERS) {
+        newLetters[MAX_LETTERS - 1].isVisible = false;
+      }
       newCheckedLetterIds[id] = false;
 
       const letter: LetterType = {
@@ -80,7 +83,7 @@ export class Main extends Component {
         subject,
         date,
         isChecked: false,
-        isVisible,
+        isVisible: true,
         classList: [letterStyles.letter, letterStyles.letter__animatedAddLetter]
       };
       return {
@@ -92,10 +95,11 @@ export class Main extends Component {
     this.setState((state: IState) => {
       return {
         letters: state.letters.map((letter: LetterType) => {
-          if (letter.classList.length > 1) {
-            letter.classList = letter.classList.slice(0, 1);
+          const newLetter: LetterType = letter;
+          if (newLetter.classList.length > 1) {
+            newLetter.classList = letter.classList.slice(0, 1);
           }
-          return letter;
+          return newLetter;
         })
       };
     });
@@ -133,10 +137,11 @@ export class Main extends Component {
         letters: state.letters
           .filter((letter: LetterType) => !state.checkedLetterIds[letter.id] || !letter.isVisible)
           .map((letter: LetterType, index: number) => {
+            const newLetter: LetterType = letter;
             if (index < MAX_LETTERS) {
-              letter.isVisible = true;
+              newLetter.isVisible = true;
             }
-            return letter;
+            return newLetter;
           }),
         isAllChecked: false
       };
