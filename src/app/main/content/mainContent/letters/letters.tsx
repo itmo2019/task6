@@ -10,6 +10,7 @@ interface IProps {
   onCheckboxChange: (id: string) => void;
   openLetter: (text: string[]) => void;
   searchText: string;
+  isDark: boolean;
 }
 
 export class Letters extends Component {
@@ -48,6 +49,7 @@ export class Letters extends Component {
                   isChecked={this.props.checkedLetterIds[letter.id]}
                   onCheckboxChange={this.props.onCheckboxChange}
                   openLetter={this.props.openLetter}
+                  isDark={this.props.isDark}
                 />
               );
             return null;

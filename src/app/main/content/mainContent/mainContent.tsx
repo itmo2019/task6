@@ -10,6 +10,7 @@ interface IProps {
   checkedLetterIds: { [id: string]: boolean };
   onCheckboxChange: (id: string) => void;
   searchText: string;
+  isDark: boolean;
 }
 
 interface IState {
@@ -62,6 +63,7 @@ export class MainContent extends Component {
           checkedLetterIds={this.props.checkedLetterIds}
           onCheckboxChange={this.props.onCheckboxChange}
           searchText={this.props.searchText}
+          isDark={this.props.isDark}
         />
       </div>
     );

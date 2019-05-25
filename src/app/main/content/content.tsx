@@ -38,12 +38,14 @@ export class Content extends Component {
           isAllChecked={this.props.isAllChecked}
           selectAll={this.props.selectAll}
           deleteLetters={this.props.deleteLetters}
+          isDark={this.props.isDark}
         />
         <MainContent
           letters={this.props.letters}
           checkedLetterIds={this.props.checkedLetterIds}
           onCheckboxChange={this.props.onCheckboxChange}
           searchText={this.props.searchText}
+          isDark={this.props.isDark}
         />
         <ContentFooter />
       </div>

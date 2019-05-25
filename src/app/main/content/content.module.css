@@ -3,13 +3,14 @@
   width: calc(100% - 170px);
   margin-left: 22px;
   border-radius: 3px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.34);
 }
 
 .content_lightTheme {
   background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.34);
 }
 
 .content_darkTheme {
-  background-color: #202020;
+  background-color: #222;
+  box-shadow: 0 2px 12px 0 rgba(255, 255, 255, 0.34);
 }

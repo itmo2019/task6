@@ -1,0 +1,16 @@
+.switcher {
+  width: 140px;
+  height: 30px;
+  margin-top: 6px;
+  margin-right: 20px;
+  float: right;
+}
+
+.switcher__lightTheme {
+  background-color: #eee;
+}
+
+.switcher__darkTheme {
+  background-color: #333;
+  color: #bbb;
+}

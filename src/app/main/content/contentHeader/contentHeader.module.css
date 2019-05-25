@@ -21,7 +21,22 @@
   float: left;
 }
 
+.contentHeader__checkbox_lightTheme {
+  border: solid 1px rgba(0, 0, 0, 0.15);
+}
+
+.contentHeader__checkbox_darkTheme {
+  border: solid 1px rgba(255, 255, 255, 0.8);
+}
+
 .contentHeader__checkbox:checked {
   background-clip: content-box;
+}
+
+.contentHeader__checkbox_lightTheme:checked {
   background-color: rgba(0, 0, 0, 0.15);
+}
+
+.contentHeader__checkbox_darkTheme:checked {
+  background-color: rgba(255, 255, 255, 0.8);
 }

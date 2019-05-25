@@ -6,5 +6,12 @@
   width: 20px;
   height: 3px;
   margin-bottom: 5px;
+}
+
+.burgerMenu__rectangle_lightTheme {
   background-color: #000;
+}
+
+.burgerMenu__rectangle_darkTheme {
+  background-color: #fff;
 }

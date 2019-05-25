@@ -14,6 +14,7 @@ interface IProps {
   author: string;
   subject: string;
   date: string;
+  isDark: boolean;
 }
 
 export class Letter extends Component {
@@ -28,7 +29,12 @@ export class Letter extends Component {
     return (
       <div className={classNames(this.props.classNames)}>
         <input
-          className={styles.letter__checkbox}
+          className={classNames(
+            styles.letter__checkbox,
+            this.props.isDark
+              ? styles.letter__checkbox_darkTheme
+              : styles.letter__checkbox_lightTheme
+          )}
           type="checkbox"
           checked={this.props.isChecked}
           onChange={() => this.props.onCheckboxChange(this.props.id)}

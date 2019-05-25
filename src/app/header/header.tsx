@@ -23,10 +23,10 @@ export class Header extends Component {
   public render() {
     return (
       <header className={styles.header}>
-        <BurgerMenu />
+        <BurgerMenu isDark={this.props.isDark} />
         <HeaderLogo isDark={this.props.isDark} />
         <SearchInput searchFunction={this.props.searchFunction} isDark={this.props.isDark} />
-        <Switcher changeTheme={this.props.switchTheme} />
+        <Switcher changeTheme={this.props.switchTheme} isDark={this.props.isDark} />
       </header>
     );
   }
