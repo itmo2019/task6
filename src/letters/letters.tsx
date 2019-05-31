@@ -206,7 +206,7 @@ export default class Letters extends Component<IProps, IState> {
   public render() {
     return (
       <div className={`${styles.letters} ${this.getTheme()}`}>
-        <input type="checkbox" className={letterStyles.marker} id="letters__first-checkbox" />
+        <input type="checkbox" className={letterStyles.marker} id="letters__first-checkbox" onChange={this.selectAll} />
         <div className={letterStyles.line} />
         <LettersOpmenu deleteOnclick={this.deleteOnclick} theme={this.props.theme} />
         {this.createView()}

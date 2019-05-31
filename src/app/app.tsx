@@ -41,12 +41,12 @@ export class App extends Component<{}, IState> {
   public render() {
     return (
       <div className={`main ${this.state.theme}`}>
-        <Logo theme={this.state.theme}/>
-        <Menu theme={this.state.theme}/>
-        <Writebox theme={this.state.theme}/>
-        <Search theme={this.state.theme}/>
+        <Logo theme={this.state.theme} />
+        <Menu theme={this.state.theme} />
+        <Writebox theme={this.state.theme} />
+        <Search theme={this.state.theme} />
         <ThemeSwitch changeTheme={this.changeTheme} />
-        <Letters theme={this.state.theme}/>
+        <Letters theme={this.state.theme} />
       </div>
     );
   }
