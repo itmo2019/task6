@@ -1,5 +1,4 @@
 export interface LetterType {
-  isVisible: boolean;
   id: string;
   text: string[];
   authorAbbr: string;

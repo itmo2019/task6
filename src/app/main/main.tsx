@@ -11,8 +11,6 @@ import {
 } from './scripts/lettterGeneratorUtils';
 import { LetterType } from '../types/types';
 
-const MAX_LETTERS = 30;
-
 interface IProps {
   searchText: string;
   isDark: boolean;
@@ -22,6 +20,7 @@ interface IState {
   letters: LetterType[];
   isAllChecked: boolean;
   checkedLetterIds: { [id: string]: boolean };
+  visibleLetterIds: { [id: string]: boolean };
 }
 
 function sleep(ms: number) {
@@ -38,7 +37,8 @@ export class Main extends Component {
     this.state = {
       letters: [],
       isAllChecked: false,
-      checkedLetterIds: {}
+      checkedLetterIds: {},
+      visibleLetterIds: {}
     };
 
     this.newMail.bind(this);
@@ -47,6 +47,7 @@ export class Main extends Component {
     this.deleteLetters.bind(this);
     this.removeAddAnimation.bind(this);
     this.removeLetter.bind(this);
+    this.setVisibility.bind(this);
 
     this.recursiveGenerateLetters();
   }
@@ -70,10 +71,6 @@ export class Main extends Component {
 
     this.setState((state: IState) => {
       const newCheckedLetterIds: { [id: string]: boolean } = state.checkedLetterIds;
-      const newLetters: LetterType[] = state.letters;
-      if (newLetters.length >= MAX_LETTERS) {
-        newLetters[MAX_LETTERS - 1].isVisible = false;
-      }
       newCheckedLetterIds[id] = false;
 
       const letter: LetterType = {
@@ -84,7 +81,6 @@ export class Main extends Component {
         subject,
         date,
         isChecked: false,
-        isVisible: true,
         hasAddAnimation: true,
         hasDeleteAnimation: false
       };
@@ -99,7 +95,7 @@ export class Main extends Component {
     this.setState((state: IState) => {
       const newCheckedLetterIds: { [id: string]: boolean } = state.checkedLetterIds;
       state.letters.forEach((letter: LetterType) => {
-        if (letter.isVisible) {
+        if (state.visibleLetterIds[letter.id]) {
           newCheckedLetterIds[letter.id] = !state.isAllChecked;
         }
       });
@@ -115,12 +111,25 @@ export class Main extends Component {
       return {
         letters: state.letters.map((letter: LetterType) => {
           const newLetter: LetterType = letter;
-          if (newLetter.isVisible && state.checkedLetterIds[letter.id]) {
+          if (state.visibleLetterIds[letter.id] && state.checkedLetterIds[letter.id]) {
             newLetter.hasDeleteAnimation = true;
           }
           return newLetter;
         }),
         isAllChecked: false
+      };
+    });
+  };
+
+  public setVisibility = (id: string, value: boolean) => {
+    if (this.state.visibleLetterIds[id] === value) {
+      return;
+    }
+    this.setState((state: IState) => {
+      const newVisibleLetterIds: { [id: string]: boolean } = state.visibleLetterIds;
+      newVisibleLetterIds[id] = value;
+      return {
+        visibleLetterIds: newVisibleLetterIds
       };
     });
   };
@@ -174,10 +183,11 @@ export class Main extends Component {
           onCheckboxChange={this.onCheckboxChange}
           isAllChecked={this.state.isAllChecked}
           selectAll={this.selectAll}
-          searchText={this.props.searchText}
           isDark={this.props.isDark}
           removeAddAnimation={this.removeAddAnimation}
           removeLetter={this.removeLetter}
+          searchText={this.props.searchText}
+          setVisibility={this.setVisibility}
         />
       </main>
     );
