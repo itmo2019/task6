@@ -11,6 +11,8 @@ interface IProps {
   openLetter: (text: string[]) => void;
   searchText: string;
   isDark: boolean;
+  removeAddAnimation: (id: string) => void;
+  removeLetter: (id: string) => void;
 }
 
 export class Letters extends Component {
@@ -39,7 +41,6 @@ export class Letters extends Component {
               return (
                 <Letter
                   key={letter.id}
-                  classNames={letter.classList}
                   id={letter.id}
                   text={letter.text}
                   authorAbbr={letter.authorAbbr}
@@ -50,6 +51,10 @@ export class Letters extends Component {
                   onCheckboxChange={this.props.onCheckboxChange}
                   openLetter={this.props.openLetter}
                   isDark={this.props.isDark}
+                  hasAddAnimation={letter.hasAddAnimation}
+                  hasDeleteAnimation={letter.hasDeleteAnimation}
+                  removeAddAnimation={this.props.removeAddAnimation}
+                  removeLetter={this.props.removeLetter}
                 />
               );
             return null;

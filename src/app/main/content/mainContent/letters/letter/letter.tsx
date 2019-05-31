@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import styles from './letter.module.css';
 
 interface IProps {
-  classNames: string[];
   isChecked: boolean;
   onCheckboxChange: (id: string) => void;
   id: string;
@@ -15,6 +14,10 @@ interface IProps {
   subject: string;
   date: string;
   isDark: boolean;
+  hasAddAnimation: boolean;
+  hasDeleteAnimation: boolean;
+  removeAddAnimation: (id: string) => void;
+  removeLetter: (id: string) => void;
 }
 
 export class Letter extends Component {
@@ -23,11 +26,30 @@ export class Letter extends Component {
     this.props = props;
   }
 
+  private getClassNames = () => {
+    if (this.props.hasAddAnimation) {
+      return classNames(styles.letter, styles.letter__animatedAddLetter);
+    }
+    if (this.props.hasDeleteAnimation) {
+      return classNames(styles.letter, styles.letter__animatedDeleteLetter);
+    }
+    return styles.letter;
+  };
+
+  private handleAnimationEnd = () => {
+    if (this.props.hasAddAnimation) {
+      this.props.removeAddAnimation(this.props.id);
+    }
+    if (this.props.hasDeleteAnimation) {
+      this.props.removeLetter(this.props.id);
+    }
+  };
+
   public readonly props: IProps;
 
   public render() {
     return (
-      <div className={classNames(this.props.classNames)}>
+      <div className={this.getClassNames()} onAnimationEnd={this.handleAnimationEnd}>
         <input
           className={classNames(
             styles.letter__checkbox,

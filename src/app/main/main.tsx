@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import styles from './main.module.css';
-import letterStyles from './content/mainContent/letters/letter/letter.module.css';
 import { Menu } from './menu/menu';
 import { Content } from './content/content';
 import {
@@ -46,6 +45,8 @@ export class Main extends Component {
     this.selectAll.bind(this);
     this.onCheckboxChange.bind(this);
     this.deleteLetters.bind(this);
+    this.removeAddAnimation.bind(this);
+    this.removeLetter.bind(this);
 
     this.recursiveGenerateLetters();
   }
@@ -84,23 +85,12 @@ export class Main extends Component {
         date,
         isChecked: false,
         isVisible: true,
-        classList: [letterStyles.letter, letterStyles.letter__animatedAddLetter]
+        hasAddAnimation: true,
+        hasDeleteAnimation: false
       };
       return {
         letters: [letter, ...state.letters],
         checkedLetterIds: newCheckedLetterIds
-      };
-    });
-    await sleep(1000);
-    this.setState((state: IState) => {
-      return {
-        letters: state.letters.map((letter: LetterType) => {
-          const newLetter: LetterType = letter;
-          if (newLetter.classList.length > 1) {
-            newLetter.classList = letter.classList.slice(0, 1);
-          }
-          return newLetter;
-        })
       };
     });
   };
@@ -124,25 +114,12 @@ export class Main extends Component {
     this.setState((state: IState) => {
       return {
         letters: state.letters.map((letter: LetterType) => {
-          if (state.checkedLetterIds[letter.id] && letter.isVisible) {
-            letter.classList.push(letterStyles.letter__animatedDeleteLetter);
+          const newLetter: LetterType = letter;
+          if (newLetter.isVisible && state.checkedLetterIds[letter.id]) {
+            newLetter.hasDeleteAnimation = true;
           }
-          return letter;
-        })
-      };
-    });
-    await sleep(1000);
-    this.setState((state: IState) => {
-      return {
-        letters: state.letters
-          .filter((letter: LetterType) => !state.checkedLetterIds[letter.id] || !letter.isVisible)
-          .map((letter: LetterType, index: number) => {
-            const newLetter: LetterType = letter;
-            if (index < MAX_LETTERS) {
-              newLetter.isVisible = true;
-            }
-            return newLetter;
-          }),
+          return newLetter;
+        }),
         isAllChecked: false
       };
     });
@@ -162,12 +139,34 @@ export class Main extends Component {
     this.recursiveGenerateLetters();
   };
 
+  public removeAddAnimation = (id: string) => {
+    this.setState((state: IState) => {
+      return {
+        letters: state.letters.map((letter: LetterType) => {
+          const newLetter: LetterType = letter;
+          if (id === letter.id) {
+            newLetter.hasAddAnimation = false;
+          }
+          return newLetter;
+        })
+      };
+    });
+  };
+
+  public removeLetter = (id: string) => {
+    this.setState((state: IState) => {
+      return {
+        letters: state.letters.filter((letter: LetterType) => id !== letter.id)
+      };
+    });
+  };
+
   public readonly props: IProps;
 
   public render() {
     return (
       <main className={styles.main}>
-        <Menu newLetterButtonOnClick={this.newMail}/>
+        <Menu newLetterButtonOnClick={this.newMail} />
         <Content
           letters={this.state.letters}
           deleteLetters={this.deleteLetters}
@@ -177,6 +176,8 @@ export class Main extends Component {
           selectAll={this.selectAll}
           searchText={this.props.searchText}
           isDark={this.props.isDark}
+          removeAddAnimation={this.removeAddAnimation}
+          removeLetter={this.removeLetter}
         />
       </main>
     );

@@ -11,6 +11,8 @@ interface IProps {
   onCheckboxChange: (id: string) => void;
   searchText: string;
   isDark: boolean;
+  removeAddAnimation: (id: string) => void;
+  removeLetter: (id: string) => void;
 }
 
 interface IState {
@@ -64,6 +66,8 @@ export class MainContent extends Component {
           onCheckboxChange={this.props.onCheckboxChange}
           searchText={this.props.searchText}
           isDark={this.props.isDark}
+          removeAddAnimation={this.props.removeAddAnimation}
+          removeLetter={this.props.removeLetter}
         />
       </div>
     );
