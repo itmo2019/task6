@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './menu.css';
+import styles from './menu.module.css';
 
 const actions = [
   { title: 'Входящие', fragment: 'inbox' },
@@ -14,15 +14,15 @@ const actions = [
 export class Menu extends Component {
   render() {
     return (
-      <section className="menu">
-        <button type="button" className="menu__to-write">
+      <section className={styles.menu}>
+        <button type="button" className={styles.menu__toWrite}>
           Написать
         </button>
-        <ul className="menu__bar">
+        <ul className={styles.menu__bar}>
           {actions.map(action => {
             return (
-              <li className="menu__action" key={action.fragment}>
-                <a href={`#${action.fragment}`} className="menu__text-ref">
+              <li className={styles.menu__action} key={action.fragment}>
+                <a href={`#${action.fragment}`} className={styles.menu__textRef}>
                   {action.title}
                 </a>
               </li>

@@ -5,7 +5,7 @@
   float: left;
 }
 
-.menu__to-write {
+.menu__toWrite {
   width: 147px;
   height: 32px;
 
@@ -17,7 +17,7 @@
   font-size: 12px;
 }
 
-.menu__to-write:hover {
+.menu__toWrite:hover {
   box-shadow: 2px 2px rgba(0, 0, 0, 0.6);
 }
 
@@ -33,7 +33,7 @@
   list-style: none;
 }
 
-.menu__text-ref {
+.menu__textRef {
   display: block;
   padding-left: 10px;
   color: #555555;
@@ -48,6 +48,6 @@
   background-color: #cdd6e4;
 }
 
-.menu__text-ref:hover {
+.menu__textRef:hover {
   font-weight: 700;
 }

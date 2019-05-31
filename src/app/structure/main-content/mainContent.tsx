@@ -1,70 +1,61 @@
 import React, { Component } from 'react';
 
-import './mainContent.css';
+import styles from './mainContent.module.css';
 import { Letters } from './letters/letters';
 import { AllFunctions } from './all-functions/allFunctions';
 import { generateNewLetter, randomInt } from './scripts/generator';
 import { Footer } from './footer/footer';
+import { LetterType } from '../../app';
 
 const LETTERS_ON_PAGE = 30;
 
+interface IState {
+  isLetterOpened: false;
+  openedLetterText: string[];
+  letters: LetterType[];
+  isAllChecked: boolean;
+  checkedLetters: { [id: string]: boolean };
+}
+
 export class MainContent extends Component {
-  constructor(props) {
+  public constructor(props : any) {
     super(props);
+
     this.state = {
       isLetterOpened: false,
-      openedLetterText: null,
+      openedLetterText: [],
       letters: [],
       isAllChecked: false,
       checkedLetters: {}
     };
 
-    this.onCheckboxChange = this.onCheckboxChange.bind(this);
-    this.selectAll = this.selectAll.bind(this);
-    this.newMail = this.newMail.bind(this);
-    this.deleteLetter = this.deleteLetter.bind(this);
-    this.getRandomLetter = this.getRandomLetter.bind(this);
-    this.openLetter = this.openLetter.bind(this);
-    this.closeLetter = this.closeLetter.bind(this);
+    this.onCheckboxChange.bind(this);
+    this.selectAll.bind(this);
+    this.newMail.bind(this);
+    this.deleteLetter.bind(this);
+    this.getRandomLetter.bind(this);
+    this.openLetter.bind(this);
+    this.closeLetter.bind(this);
 
     setTimeout(this.getRandomLetter, 100);
   }
 
-  onCheckboxChange(id) {
-    this.setState(prevState => {
-      const newCheckedLetters = prevState.checkedLetters;
+  public readonly state: IState;
+
+  public onCheckboxChange = (id: string) => {
+    this.setState((prevState : IState)=> {
+      const newCheckedLetters : { [id: string]: boolean } = prevState.checkedLetters;
       newCheckedLetters[id] = !newCheckedLetters[id];
       return {
         isAllChecked: false,
         checkedLetters: newCheckedLetters
       };
     });
-  }
+  };
 
-  getRandomLetter() {
-    const t = randomInt(10, 300000) + 300000;
-    this.newMail();
-    setTimeout(this.getRandomLetter, t);
-  }
-
-  selectAll() {
-    this.setState(prevState => {
-      const newCheckedLetters = prevState.checkedLetters;
-      prevState.letters.forEach(letter => {
-        if (letter.isVisible) {
-          newCheckedLetters[letter.key] = !prevState.isAllChecked;
-        }
-      });
-      return {
-        isAllChecked: !prevState.isAllChecked,
-        checkedLetters: newCheckedLetters
-      };
-    });
-  }
-
-  newMail() {
-    const newLetter = generateNewLetter();
-    this.setState(prevState => {
+  public newMail = () => {
+    const newLetter : LetterType = generateNewLetter();
+    this.setState((prevState : IState)=> {
       const newCheckedLetters = prevState.checkedLetters;
       const newLetters = prevState.letters;
       newCheckedLetters[newLetter.id] = false;
@@ -79,10 +70,31 @@ export class MainContent extends Component {
         isAllChecked: false
       };
     });
-  }
+  };
 
-  deleteLetter() {
-    this.setState(prevState => {
+  private getRandomLetter = () => {
+    const t = randomInt(10, 300000) + 300000;
+    this.newMail();
+    setTimeout(this.getRandomLetter, t);
+  };
+
+  public selectAll = () => {
+    this.setState((prevState : IState) => {
+      const newCheckedLetters = prevState.checkedLetters;
+      prevState.letters.forEach(letter => {
+        if (letter.isVisible) {
+          newCheckedLetters[letter.key] = !prevState.isAllChecked;
+        }
+      });
+      return {
+        isAllChecked: !prevState.isAllChecked,
+        checkedLetters: newCheckedLetters
+      };
+    });
+  };
+
+  public deleteLetter = () => {
+    this.setState((prevState : IState) => {
       const newLetters = prevState.letters.filter(letter => !prevState.checkedLetters[letter.key]);
       for (let i = 0; i < Math.min(newLetters.length, LETTERS_ON_PAGE); i++) {
         newLetters[i].isVisible = true;
@@ -92,25 +104,25 @@ export class MainContent extends Component {
         isAllChecked: false
       };
     });
-  }
+  };
 
-  openLetter(text) {
+  public openLetter = (text : string[]) => {
     this.setState({
       isLetterOpened: true,
       openedLetterText: text
     });
-  }
+  };
 
-  closeLetter() {
+  public closeLetter = () => {
     this.setState({
       isLetterOpened: false,
       openedLetterText: null
     });
-  }
+  };
 
   render() {
     return (
-      <div className="main-block">
+      <div className={styles.mainBlock}>
         <AllFunctions
           isLetterOpened={this.state.isLetterOpened}
           selectAll={this.selectAll}

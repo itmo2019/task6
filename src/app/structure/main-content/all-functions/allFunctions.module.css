@@ -15,22 +15,22 @@
   float: left;
 }
 
-.hidden-check {
+.hiddenCheck {
   display: none;
 }
 
-.main-block__mail-functions {
+.mainBlock__mailFunctions {
   height: 40px;
 
   border-bottom: 2px solid rgba(0, 0, 0, 0.15);
 }
 
-.main-block__all-function {
+.mainBlock__allFunctions {
   padding-top: 6px;
   margin: 0;
 }
 
-.main-block__func {
+.mainBlock__func {
   display: inline-block;
   margin-left: 20px;
   list-style: none;

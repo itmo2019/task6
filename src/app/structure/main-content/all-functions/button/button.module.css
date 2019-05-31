@@ -1,4 +1,4 @@
-.main-block__ref-func {
+.mainBlock__refFunc {
   border: none;
   background: none;
   color: #cccccc;
@@ -8,6 +8,6 @@
   text-decoration: none;
 }
 
-.main-block__ref-func:hover {
+.mainBlock__refFunc:hover {
   border-bottom: 2px solid #cccccc;
 }

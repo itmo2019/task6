@@ -1,4 +1,4 @@
-.main-block__letter-content {
+.mainBlock__letterContent {
   position: absolute;
   top: 42px;
 
@@ -14,7 +14,7 @@
   font-weight: 700;
 }
 
-.main-block__paragraph {
+.mainBlock__paragraph {
   padding: 10px;
   margin-top: 10px;
 }

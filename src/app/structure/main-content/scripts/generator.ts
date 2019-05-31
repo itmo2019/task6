@@ -55,11 +55,11 @@ const adjectives = [
 
 let counter = 0;
 
-export function randomInt(min, max) {
+export function randomInt(min: number, max : number) {
   return Math.floor((max - min) * Math.random() + min);
 }
 
-function randFromList(list) {
+function randFromList(list : any) {
   return list[randomInt(0, list.length)];
 }
 
@@ -84,7 +84,7 @@ const randomDate = () => {
   return `${String(day)} ${String(month[m - 1])}`;
 };
 
-const generateText = sender => {
+function generateText(sender:string) {
   const textContent = [
     `${randFromList(hello)} ${randFromList(word1)} ${randFromList(firstName)} ${randFromList(
       secondName
@@ -96,7 +96,7 @@ const generateText = sender => {
     )} ${randFromList(adjectives)} ${randFromList(nouns2)}.`
   );
   return textContent;
-};
+}
 
 export const generateNewLetter = () => {
   counter++;
@@ -109,10 +109,10 @@ export const generateNewLetter = () => {
   return {
     key: `id${id}`,
     id: `id${id}`,
-    text,
-    author,
-    topic,
-    date,
+    text: text,
+    author : author,
+    topic : topic,
+    date : date,
     isChecked: false,
     isVisible: true
   };
