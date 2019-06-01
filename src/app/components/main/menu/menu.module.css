@@ -1,0 +1,22 @@
+.menu {
+  display: inline-block;
+  width: 147px;
+  vertical-align: top;
+}
+
+.button {
+  width: 147px;
+  height: 35px;
+  background-color: #6287bd;
+  border-radius: 5px;
+  color: #ffffff;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.night {
+  background-color: #656565;
+  color: #ffffff;
+}

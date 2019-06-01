@@ -1,0 +1,16 @@
+.strips {
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
+.strip {
+  width: 20px;
+  height: 3px;
+  margin-top: 5px;
+  background: #000000;
+}
+
+.night {
+  background: #ffffff;
+}
