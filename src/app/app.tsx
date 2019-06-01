@@ -54,6 +54,7 @@ export class App extends Component<{}, IState> {
   }
 
   public setFilterProcessingDisplay(display: boolean) {
+    console.log('app setFilterProcessingDisplay');
     this.setState({ filterProcessingDisplay: display });
   }
 

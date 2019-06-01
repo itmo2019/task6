@@ -23,7 +23,7 @@ export default class Search extends Component<IProps, {}> {
     if (this.props.display) {
       return <div className={styles.loader} />;
     }
-    return null;
+    return <div className={styles.none}/>;
   }
 
   public render() {
@@ -33,6 +33,7 @@ export default class Search extends Component<IProps, {}> {
           theme={this.props.theme}
           handleFilterChange={this.props.handleFilterChange}
         />
+        {this.createLoader()}
         <SearchCross removeSearchTextInput={this.props.removeSearchTextInput} />
       </section>
     );

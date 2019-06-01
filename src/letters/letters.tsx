@@ -89,25 +89,37 @@ export default class Letters extends Component<IProps, IState> {
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
     this.selectAll = this.selectAll.bind(this);
+    this.processFilter = this.processFilter.bind(this);
   }
 
   public componentDidMount() {
     let sum = 0;
 
-    for (let i = 1; i < 10; i++) {
+    for (let i = 1; i < 20; i++) {
       sum += 10 * getRandomInt(1, 600);
       setTimeout(this.newLetter, sum);
     }
   }
 
-  // public shouldComponentUpdate(nextProps: Readonly<IProps>, nextState: Readonly<IState>, nextContext: any): boolean {
-  //   console.log('lol');
-  //   return this.props !== nextProps || this.state !== nextState;
-  // }
-  //
-  // public componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any): void {
-  //   this.props.setFilterProcessingDisplay(false);
-  // }
+  public shouldComponentUpdate(
+    nextProps: Readonly<IProps>,
+    nextState: Readonly<IState>,
+    nextContext: any
+  ): boolean {
+    return (
+      this.props.filter !== nextProps.filter ||
+      this.props.theme !== nextProps.theme ||
+      this.state !== nextState
+    );
+  }
+
+  public componentDidUpdate(
+    prevProps: Readonly<IProps>,
+    prevState: Readonly<IState>,
+    snapshot?: any
+  ): void {
+    this.props.setFilterProcessingDisplay(false);
+  }
 
   private processFilter(s: string) {
     if (s === '') {
@@ -215,7 +227,6 @@ export default class Letters extends Component<IProps, IState> {
     }
     return styles.dark;
   }
-
 
   private lineTheme() {
     if (this.props.theme === 'light') {
