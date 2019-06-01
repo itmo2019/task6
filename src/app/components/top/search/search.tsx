@@ -7,30 +7,37 @@ interface IProps {
   query: string
 }
 
-export class Search extends React.Component<IProps> {
+interface IState {
+  query: string;
+}
+
+export class Search extends React.Component<IProps, IState> {
   private readonly search: React.RefObject<HTMLInputElement>;
 
   public constructor(props: IProps) {
     super(props);
+    this.state = {
+      query: props.query
+    };
     this.search = React.createRef();
-    this.input = this.input.bind(this);
+    this.inputChange = this.inputChange.bind(this);
   }
 
-  private input = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const query = this.props.query;
-    if (e.keyCode == 8 || e.keyCode == 46) {
-      this.props.newQuery(query.substr(0, query.length - 1));
-    } else if (e.key >= 'а' && e.key <= 'я') {
-      this.props.newQuery(query + e.key);
-    }
-  };
+  private inputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    this.setState(
+      {
+        query: e.target.value
+      }
+    );
+    this.props.newQuery(e.target.value);
+  }
 
   public render() {
     const { nightMode } = this.props;
     const color = nightMode ? styles.night : '';
     return (
       <div className={`${styles.search} ${color}`}>
-        <input className={`${styles['entry-field']} ${color}`} placeholder="Поиск" ref={this.search} onKeyUp={this.input}/>
+        <input className={`${styles['entry-field']} ${color}`} value={this.state.query} placeholder="Поиск" ref={this.search} onChange={this.inputChange}/>
         <div className={styles['close-icon']}>𐄂</div>
       </div>
     );
