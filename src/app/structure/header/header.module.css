@@ -1,0 +1,36 @@
+/*Start SearchInput*/
+
+.header {
+  margin-top: 7px;
+  margin-bottom: 18px;
+  margin-left: 22px;
+}
+
+.header__lines,
+.header__mainLogo {
+  margin: 0;
+  float: left;
+}
+
+.header__lines {
+  margin-top: 12px;
+  float: left;
+}
+
+.header__line {
+  width: 20px;
+  height: 3px;
+  margin-top: 4px;
+  background-color: #000000;
+}
+
+.header__mainLogo {
+  margin-top: 7px;
+  margin-left: 11px;
+}
+
+.clearfix:after {
+  display: table;
+  clear: both;
+  content: '';
+}

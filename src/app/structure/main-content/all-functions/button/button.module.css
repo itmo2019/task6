@@ -1,0 +1,13 @@
+.mainBlock__refFunc {
+  border: none;
+  background: none;
+  color: #cccccc;
+  font-family: "'HelveticaNeue'", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.mainBlock__refFunc:hover {
+  border-bottom: 2px solid #cccccc;
+}

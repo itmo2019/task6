@@ -1,0 +1,29 @@
+@font-face {
+  font-family: YandexSansBold;
+  /*src: url(fonts/YandexSansDisplay-Bold.ttf);*/
+}
+
+@font-face {
+  font-family: YandexSansThin;
+  /*src: url(/src/app/fonts/YandexSansDisplay-Thin.ttf);*/
+}
+
+@font-face {
+  font-family: HelveticaNeue;
+  /*src: url(/src/app/fonts/HelveticaNeueCyr-Medium.otf);*/
+}
+
+@font-face {
+  font-family: HelveticaNeueLight;
+  /*src: url(/src/app/fonts/HelveticaNeueCyr-Light.otf);*/
+}
+
+body {
+  position: relative;
+
+  min-width: 750px;
+  max-width: 1600px;
+  padding: 0;
+  margin: 0 auto;
+  background: #e5eaf0;
+}

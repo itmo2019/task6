@@ -1,0 +1,37 @@
+.clearfix:after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+.check {
+  width: 16px;
+  height: 16px;
+  margin: 12px;
+
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  border-radius: 3px;
+  float: left;
+}
+
+.hiddenCheck {
+  display: none;
+}
+
+.mainBlock__mailFunctions {
+  height: 40px;
+
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+.mainBlock__allFunctions {
+  padding-top: 6px;
+  margin: 0;
+}
+
+.mainBlock__func {
+  display: inline-block;
+  margin-left: 20px;
+  list-style: none;
+}
