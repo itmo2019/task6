@@ -1,0 +1,11 @@
+.hamburger {
+  width: 20px;
+  margin: 15px 11px 0px 0px;
+  float: left;
+}
+
+.hamburger__div {
+  height: 3px;
+  margin: 4px 0;
+  background-color: black;
+}
