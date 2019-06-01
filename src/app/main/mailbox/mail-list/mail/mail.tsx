@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Mail as MailType } from './../../data';
 import { MailBoxState } from './../../mailbox'
 
-import './mail.css';
+import styles from './mail.module.css';
 
 interface MailProps {
   mail: MailType;
@@ -76,26 +76,26 @@ export class Mail extends Component<MailProps, any> {
         }}
       >
         <div
-          className={`mailbox__mail${!mail.old ? ' mail__new' : ''}`}
+          className={`${styles.mailbox__mail}${!mail.old ? ` ${styles.mail__new}` : ``}`}
           data-state={mail.state}
           onAnimationEnd={animationHandler}
         >
-          <label className="checkbox" htmlFor={checkboxId}>
+          <label className={styles.checkbox} htmlFor={checkboxId}>
             <input
               type="checkbox"
-              className="checkbox__input"
+              className={styles.checkbox__input}
               id={checkboxId}
               onChange={event => mail.setCheck(event.target.checked)}
             />
-            <span className="checkbox__span" />
+            <span className={styles.checkbox__span} />
           </label>
-          <div className="mailbox__mail-element mail__pic">
-            <img className="pic__img" alt="pic" src={mail.img} />
+          <div className={`${styles["mailbox__mail-element"]} ${styles.mail__pic}`}>
+            <img className={styles.pic__img} alt="pic" src={mail.img} />
           </div>
-          <div className="mailbox__mail-element mail__author">{mail.author}</div>
-          <div className="mailbox__mail-element mail__dot" />
-          <div className="mailbox__mail-element mail__title">{mail.title}</div>
-          <time className="mailbox__mail-element mail__time">{mail.date}</time>
+          <div className={`${styles["mailbox__mail-element"]} ${styles.mail__author}`}>{mail.author}</div>
+          <div className={`${styles["mailbox__mail-element"]} ${styles.mail__dot}`} />
+          <div className={`${styles["mailbox__mail-element"]} ${styles.mail__title}`}>{mail.title}</div>
+          <time className={`${styles["mailbox__mail-element"]} ${styles.mail__time}`}>{mail.date}</time>
         </div>
       </label>
     );

@@ -1,4 +1,4 @@
-main {
+.main {
   position: absolute;
   top: 0;
   right: 0;
@@ -9,9 +9,4 @@ main {
   min-height: inherit;
   box-sizing: border-box;
   padding: 56px 20px 14px 22px;
-}
-
-.article__sova {
-  float: left;
-  shape-outside: circle(160px);
 }

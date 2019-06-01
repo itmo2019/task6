@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Footer from './footer/footer';
 import MailBoxList from './mail-list/mail-list';
 
-import './mailbox.css';
+import styles from './mailbox.module.css';
 
 import { generateMail, getCurrentTime, getRandomInt } from './helper';
 import {
@@ -124,34 +124,34 @@ export class MailBox extends Component<any, MailBoxState> {
     const mailHTML = currentMail ? currentMail.text : "";
 
     return (
-      <div className="mailbox">
-        <div className="mailbox__header">
-          <label className="checkbox" htmlFor="checkbox_all">
-            <input type="checkbox" className="checkbox__input" id="checkbox_all" />
-            <span className="checkbox__span" />
+      <div className={styles["mailbox"]}>
+        <div className={styles["mailbox__header"]}>
+          <label className={styles["checkbox"]} htmlFor="checkbox_all">
+            <input type="checkbox" className={styles["checkbox__input"]} id="checkbox_all" />
+            <span className={styles["checkbox__span"]} />
           </label>
-          <button className="mailbox__header-element" type="button">
+          <button className={styles["mailbox__header-element"]} type="button">
             Переслать
           </button>
-          <button className="mailbox__header-element" onClick={this.deleteSelected} type="button">
+          <button className={styles["mailbox__header-element"]} onClick={this.deleteSelected} type="button">
             Удалить
           </button>
-          <button className="mailbox__header-element" type="button">
+          <button className={styles["mailbox__header-element"]} type="button">
             Это спам
           </button>
-          <button className="mailbox__header-element" type="button">
+          <button className={styles["mailbox__header-element"]} type="button">
             Прочитано
           </button>
         </div>
 
-        <input className="mailbox__trigger" type="checkbox" id="mailbox__trigger" />
+        <input className={styles["mailbox__trigger"]} type="checkbox" id="mailbox__trigger" />
         <MailBoxList mails={this.state.mails} updateState={this.updateState} />
-        <div className="mailbox__mail-contents">
-          <label className="mailbox__msg-close" htmlFor="mailbox__trigger">
+        <div className={styles["mailbox__mail-contents"]}>
+          <label className={styles["mailbox__msg-close"]} htmlFor="mailbox__trigger">
             <input type="hidden" />×
           </label>
           <div
-            className="mail-contents__html"
+            className={styles["mail-contents__html"]}
             // is task requirement
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{

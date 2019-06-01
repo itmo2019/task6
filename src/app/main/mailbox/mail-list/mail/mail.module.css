@@ -15,6 +15,36 @@
   vertical-align: middle;
 }
 
+.checkbox {
+  display: inline-block;
+  margin: 0px 10px 0px 20px;
+  vertical-align: middle;
+}
+
+.checkbox__input {
+  position: relative;
+
+  display: none;
+  float: left;
+}
+
+.checkbox__span {
+  width: 16px;
+  height: 16px;
+
+  border: 1px solid;
+  border-radius: 3px;
+  float: left;
+}
+
+.checkbox__input:checked + .checkbox__span:before {
+  content: '✓';
+  float: left;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 16px;
+}
+
 .mail__pic {
   margin-right: 10px;
 }

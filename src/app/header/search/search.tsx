@@ -1,12 +1,14 @@
 import React from 'react';
 
-import './search.css';
+import styles from './search.module.css';
+import headerStyles from './../header.module.css';
 
 function Search() {
+  const classes = `${styles.search} ${styles.header__search} ${headerStyles['header__inline-element']}`;
   return (
-    <div className="search header__search header__inline-element">
-      <div className="search__text">Поиск</div>
-      <div className="search__close">×</div>
+    <div className={classes}>
+      <div className={styles.search__text}>Поиск</div>
+      <div className={styles.search__close}>×</div>
     </div>
   );
 }

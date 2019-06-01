@@ -3,15 +3,15 @@ import Hamburger from './hamburger/hamburger';
 import Logo from './logo/logo';
 import Search from './search/search';
 
-import './header.css';
+import styles from './header.module.css';
 
 function Header() {
   return (
-    <header>
+    <div className={styles.header}>
       <Hamburger />
       <Logo />
       <Search />
-    </header>
+    </div>
   );
 }
 

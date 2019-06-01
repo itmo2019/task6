@@ -1,13 +1,15 @@
 import React from 'react';
 
-import './hamburger.css';
+import styles from './hamburger.module.css';
+import headerStyles from './../header.module.css';
 
 function Header() {
+  const classes = `${styles.hamburger} ${headerStyles['header__inline-element']}`;
   return (
-    <div className="hamburger header__inline-element">
-      <div className="hamburger__div" />
-      <div className="hamburger__div" />
-      <div className="hamburger__div" />
+    <div className={classes}>
+      <div className={styles.hamburger__div} />
+      <div className={styles.hamburger__div} />
+      <div className={styles.hamburger__div} />
     </div>
   );
 }

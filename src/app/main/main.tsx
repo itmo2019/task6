@@ -2,14 +2,14 @@ import React from 'react';
 import MailWrapper from './mailbox/mailbox';
 import SidePanel from './side-panel/side-panel';
 
-import './main.css';
+import styles from './main.module.css';
 
 function Main() {
   return (
-    <main>
+    <div className={styles.main}>
       <SidePanel />
       <MailWrapper />
-    </main>
+    </div>
   );
 }
 
