@@ -14,11 +14,14 @@ import { ILetter } from './__letter/letters__letter';
 interface IProps {
   theme: string;
   filter: string;
+  letters: ILetter[];
+  deleteOnclick(): void;
+  handleCheckbox(event: React.ChangeEvent<HTMLInputElement>, number: number): void;
   setFilterProcessingDisplay(display: boolean): void;
+  selectAll(checkbox: React.ChangeEvent<HTMLInputElement>): void;
 }
 
 interface IState {
-  letters: ILetter[];
   articleHeader: string;
   articleContent: string;
   mode: string;
@@ -41,137 +44,37 @@ export default class Letters extends Component<IProps, IState> {
   public constructor(props: IProps) {
     super(props);
     this.state = {
-      letters: [
-        {
-          author: 'Яндекс.Паспорт',
-          theme: 'Доступ к аккаунту восстановлен',
-          date: '6 авг',
-          authorImage: Letters.createYandexAuthorImage(),
-          read: false,
-          checked: false,
-          display: true
-        },
-        {
-          author: 'Команда Яндекс.Почты',
-          theme: 'Как читать почту с мобильного',
-          date: '6 июл',
-          authorImage: Letters.createYandexAuthorImage(),
-          read: false,
-          checked: false,
-          display: true
-        },
-        {
-          author: 'Команда Яндекс.Почты',
-          theme: 'Как читать почту с мобильного',
-          date: '6 июл',
-          authorImage: Letters.createYandexAuthorImage(),
-          read: true,
-          checked: false,
-          display: true
-        },
-        {
-          author: 'Яндекс',
-          theme: 'Соберите всю почту в этот ящик',
-          date: '6 июл',
-          authorImage: Letters.createYandexAuthorImage(),
-          read: true,
-          checked: false,
-          display: true
-        }
-      ],
       articleHeader: 'Header',
       articleContent: 'Content',
       mode: 'letters'
     };
-    this.newLetter = this.newLetter.bind(this);
-    this.deleteOnclick = this.deleteOnclick.bind(this);
-    this.handleCheckbox = this.handleCheckbox.bind(this);
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
-    this.selectAll = this.selectAll.bind(this);
-    this.processFilter = this.processFilter.bind(this);
   }
-
-  public componentDidMount() {
-    let sum = 0;
-
-    for (let i = 1; i < 20; i++) {
-      sum += 10 * getRandomInt(1, 600);
-      setTimeout(this.newLetter, sum);
-    }
-  }
-
-  public shouldComponentUpdate(
-    nextProps: Readonly<IProps>,
-    nextState: Readonly<IState>,
-    nextContext: any
-  ): boolean {
-    return (
-      this.props.filter !== nextProps.filter ||
-      this.props.theme !== nextProps.theme ||
-      this.state !== nextState
-    );
-  }
-
-  public componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-    snapshot?: any
-  ): void {
-    this.props.setFilterProcessingDisplay(false);
-  }
-
-  private processFilter(s: string) {
-    if (s === '') {
-      for (let i = 0; i < this.state.letters.length; i++) {
-        this.state.letters[i].display = true;
-      }
-      return;
-    }
-    for (let i = 0; i < this.state.letters.length; i++) {
-      this.state.letters[i].display = this.state.letters[i].theme
-        .toLowerCase()
-        .includes(s.toLowerCase());
-    }
-  }
-
-  private newLetter() {
-    const author = rndAuthor();
-    this.state.letters.unshift({
-      author,
-      theme: rndTheme(author),
-      date: '6 июл',
-      read: false,
-      checked: false,
-      authorImage: Letters.createYandexAuthorImage(),
-      display: true
-    });
-    this.setState(state => {
-      return state;
-    });
-  }
-
-  private handleCheckbox(checkbox: React.ChangeEvent<HTMLInputElement>, number: number) {
-    this.state.letters[number].checked = checkbox.target.checked;
-    this.setState(state => {
-      return state;
-    });
-  }
-
-  public open(number: number): void {
-    const articleHeader = this.state.letters[number].theme;
-    const articleContentOrUndefined = contents.get(articleHeader);
-    let articleContent = 'none';
-    if (articleContentOrUndefined !== undefined) {
-      articleContent = articleContentOrUndefined;
-    }
-    this.state.letters[number].read = true;
-    this.setState({
-      articleHeader,
-      articleContent,
-      mode: 'article'
-    });
-  }
+  //
+  // public shouldComponentUpdate(
+  //   nextProps: Readonly<IProps>,
+  //   nextState: Readonly<IState>,
+  //   nextContext: any
+  // ): boolean {
+  //
+  //   boolean
+  //
+  //   return (
+  //     this.props.filter !== nextProps.filter ||
+  //     this.props.theme !== nextProps.theme ||
+  //     this.state !== nextState ||
+  //     this.props.letters !== nextProps.letters
+  //   );
+  // }
+  //
+  // public componentDidUpdate(
+  //   prevProps: Readonly<IProps>,
+  //   prevState: Readonly<IState>,
+  //   snapshot?: any
+  // ): void {
+  //   this.props.setFilterProcessingDisplay(false);
+  // }
 
   private createView() {
     if (this.state.mode === 'article') {
@@ -186,38 +89,32 @@ export default class Letters extends Component<IProps, IState> {
     }
     return (
       <LettersList
-        letters={this.state.letters}
-        handleCheckbox={this.handleCheckbox}
+        letters={this.props.letters}
+        handleCheckbox={this.props.handleCheckbox}
         open={this.open}
         theme={this.props.theme}
       />
     );
   }
 
-  private close() {
+  public open(number: number): void {
+    const articleHeader = this.props.letters[number].theme;
+    const articleContentOrUndefined = contents.get(articleHeader);
+    let articleContent = 'none';
+    if (articleContentOrUndefined !== undefined) {
+      articleContent = articleContentOrUndefined;
+    }
+    this.props.letters[number].read = true;
     this.setState({
-      mode: 'letters'
+      articleHeader,
+      articleContent,
+      mode: 'article'
     });
   }
 
-  private deleteOnclick() {
-    let kek = 0;
-    while (kek++ < 4) {
-      let hasAny = false;
-      for (let i = 0; i < this.state.letters.length; i++) {
-        if (this.state.letters[i].checked) {
-          this.state.letters.splice(i, 1);
-          hasAny = true;
-          break;
-        }
-      }
-      if (hasAny) {
-        continue;
-      }
-      break;
-    }
-    this.setState(state => {
-      return state;
+  private close() {
+    this.setState({
+      mode: 'letters'
     });
   }
 
@@ -235,25 +132,17 @@ export default class Letters extends Component<IProps, IState> {
     return letterStyles.lineDark;
   }
 
-  private selectAll(checkbox: React.ChangeEvent<HTMLInputElement>) {
-    for (let i = 0; i < this.state.letters.length; i++) {
-      this.state.letters[i].checked = checkbox.target.checked;
-    }
-    this.setState({});
-  }
-
   public render() {
-    this.processFilter(this.props.filter);
     return (
       <div className={`${styles.letters} ${this.getTheme()}`}>
         <input
           type="checkbox"
           className={letterStyles.marker}
           id="letters__first-checkbox"
-          onChange={this.selectAll}
+          onChange={this.props.selectAll}
         />
         <div className={`${letterStyles.line} ${this.lineTheme()}`} />
-        <LettersOpmenu deleteOnclick={this.deleteOnclick} theme={this.props.theme} />
+        <LettersOpmenu deleteOnclick={this.props.deleteOnclick} theme={this.props.theme} />
         {this.createView()}
         <div className={`${letterStyles.line} ${this.lineTheme()}`} id="letters__footer-line" />
         <LettersFooter />
