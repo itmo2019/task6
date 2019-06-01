@@ -96,22 +96,19 @@
   text-align: right;
 }
 
-@keyframes collapse {
-  to {
-    height: 0px;
-
-    border: none;
-  }
-}
-
 .mailbox__mail[data-state='collapsed'] {
-  animation: collapse 0.4s 1 ease-out forwards;
+  height: 0px;
+
+  border: none;
+  transition: height 0.4s;
 }
 
-.mailbox__mail[data-state='hidden'] {
+.mailbox__mail[data-state='init'] {
   height: 0px;
 
   border-width: 0px;
+
+  animation: appearance 0.4s 1 ease-out forwards;
 }
 
 @keyframes appearance {
@@ -125,6 +122,7 @@
   }
 }
 
-.mailbox__mail[data-state='appearing'] {
-  animation: appearance 0.4s 1 ease-out forwards;
+.mailbox__mail[data-state='showed'] {
+  height: 40px;
+  transition: height 0.4s;
 }

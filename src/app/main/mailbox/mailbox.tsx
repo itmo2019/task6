@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from './footer/footer';
-import MailBoxList from './mail-list/mail-list';
+import MailItem from './mail/mail';
 
 import styles from './mailbox.module.css';
 
@@ -59,8 +59,8 @@ export class MailBox extends Component<any, MailBoxState> {
 
       if (visibleMails > 0) {
         visibleMails--;
-        if (mail.state === 'hidden' || mail.state === 'collapsed') {
-          newMail.state = 'appearing';
+        if (mail.state === 'collapsed') {
+          newMail.state = 'showed';
         }
       } else if (mail.state === 'showed') {
         newMail.state = 'collapsed';
@@ -88,7 +88,7 @@ export class MailBox extends Component<any, MailBoxState> {
 
   newMail() {
     const newMail = generateMail();
-    newMail.state = 'appearing';
+    newMail.state = 'init';
 
     this.updateState(prevState => {
       const { mails, currentMail } = prevState;
@@ -145,7 +145,38 @@ export class MailBox extends Component<any, MailBoxState> {
         </div>
 
         <input className={styles["mailbox__trigger"]} type="checkbox" id="mailbox__trigger" />
-        <MailBoxList mails={this.state.mails} updateState={this.updateState} />
+        <div className="mailbox__mail-list">
+          {this.state.mails.map((mail, index) => (
+            <MailItem
+              key={mail.id}
+              mail={mail}
+              onClick={() =>
+                this.updateState(prevState => {
+                  return {
+                    currentMail: mail.id,
+                    mails: prevState.mails
+                  };
+                })
+              }
+              onAnimationEnd={() => {
+                this.updateState(prevState => {
+                  const { currentMail, mails } = prevState;
+                  let newMails = mails;
+                  if (mail.state === 'init') {
+                    newMails[index].state = 'showed';
+                  }
+                  if (mail.deleted) {
+                    newMails = mails.filter(curMail => curMail.id !== mail.id);
+                  }
+                  return {
+                    currentMail,
+                    mails: newMails
+                  };
+                });
+              }}
+            />
+          ))}
+        </div>
         <div className={styles["mailbox__mail-contents"]}>
           <label className={styles["mailbox__msg-close"]} htmlFor="mailbox__trigger">
             <input type="hidden" />×
