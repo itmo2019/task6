@@ -1,0 +1,25 @@
+:global(small) {
+    color: #9b9b9b;
+}
+
+:global(a) {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.separator {
+    height: 1px;
+    border-top: solid 1px #e2e2e2;
+}
+
+

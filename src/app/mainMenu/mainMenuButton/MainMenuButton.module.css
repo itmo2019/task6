@@ -1,0 +1,35 @@
+.button:hover {
+    background-color: #d7e0ee;
+}
+
+.button_current {
+    background-color: #cdd6e4;
+    color: #555;
+    font-weight: bold;
+}
+
+.button_current:hover {
+    background: #d2dbe9;
+}
+
+.link {
+	display: table-cell;
+    vertical-align: middle;
+	padding-left: 10px;
+	height: 100%;
+	width: 100%;
+}
+
+.button {
+    font-size: 11px;
+    margin: 6px 0;
+    color: #707070;
+    font-weight: 500;
+    width: 147px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: unset;
+    height: 22px;
+    border-radius: 3px;
+	display: table;
+}
