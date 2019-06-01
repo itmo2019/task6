@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styles from './letterLine.module.css';
-import { ILetter } from '../../../../../letterUtils';
+import { ILetter } from '../../../letterUtils';
 
 interface IProps {
   nightMode: boolean;
@@ -10,17 +10,17 @@ interface IProps {
 }
 
 export class LetterLine extends React.Component<IProps> {
-  constructor(props: IProps) {
+  public constructor(props: IProps) {
     super(props);
     this.check = this.check.bind(this);
   }
 
-  check(e: React.ChangeEvent<HTMLInputElement>) {
+  private check(e: React.ChangeEvent<HTMLInputElement>) {
     const letterId = e.target.id;
     this.props.check(letterId);
   }
 
-  render() {
+  public render() {
     const { nightMode } = this.props;
     const color = nightMode ? styles.night : '';
     const { letterData } = this.props;

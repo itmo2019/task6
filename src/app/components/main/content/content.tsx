@@ -3,18 +3,18 @@ import styles from './content.module.css';
 import { Actions } from './actions/actions';
 import { Footer } from './footer/footer';
 import { LetterBoxAndEntryBoard } from './letter-box/letterBoxAndEntryBoard';
-import { ILetter } from '../../../letterUtils';
+import { ILetter, default as utils } from '../letterUtils';
 
 interface IProps {
   nightMode: boolean;
   letters: ILetter[];
   remove: () => void;
+  checkAll: (value: boolean) => void;
   check: (id: string) => void;
-  checkAll: (isChecked: boolean) => void;
 }
 
 export class Content extends React.Component<IProps> {
-  render() {
+  public render() {
     const { nightMode } = this.props;
     return (
       <div className={styles.content}>

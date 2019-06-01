@@ -7,26 +7,26 @@ interface IProps {
 }
 
 export class Search extends React.Component<IProps> {
+  private readonly search: React.RefObject<HTMLInputElement>;
+
   public constructor(props: IProps) {
     super(props);
     this.search = React.createRef();
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.input = this.input.bind(this);
   }
 
-  private readonly search: React.RefObject<HTMLInputElement>;
-
-  private handleInputChange() {
+  private input() {
     const inputValue: string = this.search.current ? this.search.current.value : '';
     this.props.newQuery(inputValue);
   }
 
-  render() {
+  public render() {
     const { nightMode } = this.props;
     const color = nightMode ? styles.night : '';
     return (
       <div className={`${styles.search} ${color}`}>
-        <input className={`${styles['entry-field']} ${color}`} placeholder="Поиск" ref={this.search} onChange={this.handleInputChange}/>
-        <div className={`${styles['close-icon']} ${color}`}>𐄂</div>
+        <input className={`${styles['entry-field']} ${color}`} placeholder="Поиск" ref={this.search} onChange={this.input}/>
+        <div className={styles['close-icon']}>𐄂</div>
       </div>
     );
   }

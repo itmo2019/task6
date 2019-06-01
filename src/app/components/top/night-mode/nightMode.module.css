@@ -1,21 +1,18 @@
-.button {
+.nightMode {
   position: absolute;
   top: 3%;
   right: 7%;
   border-radius: 4px;
   font-size: 15px;
+  background-color: #363c46;
+  color: #ffffff;
 }
 
-.button:focus {
+.nightMode:focus {
   outline: none;
 }
 
 .night {
   background-color: #ffffff;
   color: #656565;
-}
-
-.day {
-  background-color: #363c46;
-  color: #ffffff;
 }

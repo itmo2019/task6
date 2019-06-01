@@ -1,22 +1,9 @@
-import meduza from '../resources/images/Meduza-logo.png';
-import znak from '../resources/images/ZNAK-logo.png';
-import radioFreedom from '../resources/images/Радио Свобода-logo.png';
-import newNewspaper from '../resources/images/Новая Газета-logo.png';
-import newspaperRu from '../resources/images/газета.ru-logo.png';
-import news from '../resources/images/Известия-logo.png';
-
-export interface ILetter {
-  id: string;
-  title: string;
-  text: string;
-  logo: string;
-  sender: string;
-  date: string;
-  isChecked: boolean;
-  arrive: boolean;
-  remove: boolean;
-  display: boolean;
-}
+import meduza from '../../../resources/images/Meduza-logo.png';
+import znak from '../../../resources/images/ZNAK-logo.png';
+import radioFreedom from '../../../resources/images/Радио Свобода-logo.png';
+import newNewspaper from '../../../resources/images/Новая Газета-logo.png';
+import newspaperRu from '../../../resources/images/газета.ru-logo.png';
+import news from '../../../resources/images/Известия-logo.png';
 
 const senders = ['Meduza', 'ZNAK', 'Радио Свобода', 'Новая Газета', 'газета.ru', 'Известия'];
 const logos: { [key: string]: string } = {};
@@ -55,6 +42,24 @@ const minTextWordsNum = 70;
 const maxTextWordsNum = 200;
 const minDistPunctMarks = 5;
 const maxDistPunctMarks = 10;
+
+export interface ILetter {
+  id: string;
+  title: string;
+  text: string;
+  logo: string;
+  sender: string;
+  date: string;
+  isChecked: boolean;
+  arrive: boolean;
+  remove: boolean;
+  display: boolean;
+}
+
+export const maxLettersNumberOnPage = 30;
+export const letterTimeDist = 300000;
+export const minNewLetterTime = 10;
+export const maxNewLetterTime = 600000;
 
 export function randRange(lowBound: number, uppBound: number) {
   return Math.round(Math.random() * (uppBound - lowBound) + lowBound);
@@ -131,14 +136,12 @@ export function letter(
 }
 
 function getDate() {
-  const today = new Date();
-  const options = { month: 'long', day: 'numeric' };
-  return today.toLocaleDateString('ru-RU', options);
+  const date = new Date();
+  return date.getDate() + ' ' + months[date.getMonth()];
 }
 
 export function genLetter() {
   const id = new Date().getTime().toString();
-
   const sender = getRandomSender();
   const text = genText();
   const date = getDate();
@@ -154,4 +157,27 @@ export function genLetter() {
     false,
     true
   );
+}
+
+export function toDisplayed(letters: ILetter[]) {
+  let i = 0;
+  let cnt = 0;
+  while (cnt < maxLettersNumberOnPage && i < letters.length) {
+    if (!letters[i].remove) {
+      letters[i].display = true;
+      cnt++;
+    }
+    i++;
+  }
+  return letters;
+}
+
+export function containsQuery(letter: ILetter, q: string): boolean {
+  return letter.sender.includes(q) || letter.text.includes(q);
+}
+
+export function findLetters(letters: ILetter[], q: string) {
+  const letters_ = letters.filter(l => containsQuery(l, q));
+  letters_.forEach(l => l.display = true);
+  return letters_;
 }

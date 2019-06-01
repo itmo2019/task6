@@ -6,18 +6,18 @@ interface IProps {
 }
 
 export class Info extends React.Component<IProps> {
-  render() {
+  public render() {
     const { nightMode } = this.props;
-    const optionColor = nightMode ? styles.night : styles.option;
+    const optionColor = nightMode ? styles.night : '';
     return (
       <div className={styles.info}>
-        <a className={optionColor} href="#help">
+        <a className={`${styles.option} ${optionColor}`} href="#help">
           Помощь и обратная связь
         </a>
-        <a className={optionColor} href="#adv">
+        <a className={`${styles.option} ${optionColor}`} href="#adv">
           Реклама
         </a>
-        <a className={optionColor} href="#yandex">
+        <a className={`${styles.option} ${optionColor}`} href="#yandex">
           © 2001—2018, Яндекc
         </a>
       </div>

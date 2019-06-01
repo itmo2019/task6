@@ -7,11 +7,11 @@ interface IProps {
 }
 
 export class NightMode extends React.Component<IProps> {
-  render() {
+  public render() {
     const { nightMode } = this.props;
     const color = nightMode ? styles.night : styles.day;
     return (
-      <button className={`${styles.button} ${color}`}
+      <button className={`${styles.nightMode} ${color}`}
               onClick={this.props.switchMode}
       >
         {nightMode ? "Day" : "Night"}

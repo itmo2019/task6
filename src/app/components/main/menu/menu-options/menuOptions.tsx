@@ -6,7 +6,7 @@ interface IProps {
 }
 
 export class MenuOptions extends React.Component<IProps> {
-  createMenuOption = (name: string, color: string) => {
+  private static createMenuOption(name: string, color: string) {
     return (
       <li className={`${styles.option} ${color}`}>
         <a className={`${styles.link} ${color}`} href="#name">
@@ -16,7 +16,7 @@ export class MenuOptions extends React.Component<IProps> {
     );
   };
 
-  render() {
+  public render() {
     const { nightMode } = this.props;
     const color = nightMode ? styles.night : '';
     const menuOptions = ['Отправленные', 'Удаленные', 'Спам', 'Черновики', 'Создать папку'];
@@ -27,7 +27,7 @@ export class MenuOptions extends React.Component<IProps> {
             Входящие
           </a>
         </li>
-        {menuOptions.map(name => this.createMenuOption(name, color))}
+        {menuOptions.map(name => MenuOptions.createMenuOption(name, color))}
       </ul>
     );
   }

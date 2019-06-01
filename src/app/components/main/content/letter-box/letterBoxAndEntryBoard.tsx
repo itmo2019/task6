@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './letterBoxAndEntryBoard.module.css';
 import { LetterLine } from './letter-line/letterLine';
-import { ILetter } from '../../../../letterUtils';
+import { ILetter } from '../../letterUtils';
 
 interface IProps {
   nightMode: boolean;
@@ -30,7 +30,7 @@ export class LetterBoxAndEntryBoard extends React.Component<IProps, IState> {
     this.setState({ opened: true, letterText: text });
   }
 
-  render() {
+  public render() {
     const { nightMode } = this.props;
     const color = nightMode ? styles.night : '';
     return this.state.opened ? (

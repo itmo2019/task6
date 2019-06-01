@@ -6,7 +6,7 @@ interface IProps {
 }
 
 export class Strips extends React.Component<IProps> {
-  render() {
+  public render() {
     const { nightMode } = this.props;
     const color = nightMode ? styles.night : '';
     return (

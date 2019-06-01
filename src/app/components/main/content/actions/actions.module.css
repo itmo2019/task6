@@ -1,8 +1,14 @@
-.day {
+.actions {
   display: block;
   height: 40px;
   width: 100%;
   border-bottom: solid #d8d8d8;
+  border-bottom-width: 1px;
+}
+
+.actions_night {
+  background-color: #656565;
+  border-bottom: solid #ffffff;
   border-bottom-width: 1px;
 }
 
@@ -28,26 +34,8 @@
 }
 
 .action_night {
-  display: inline-block;
-  margin-top: 7px;
-  margin-left: 10px;
-  width: 80px;
-  vertical-align: middle;
-  font-size: 13px;
   color: #ffffff;
-  border: none;
-  opacity: 0.8;
   background-color: #656565;
-}
-
-.night {
-  display: block;
-  height: 40px;
-  width: 100%;
-  background-color: #656565;
-  color: #363c46;
-  border-bottom: solid #ffffff;
-  border-bottom-width: 1px;
 }
 
 .action:focus {

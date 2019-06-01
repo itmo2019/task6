@@ -14,7 +14,7 @@ interface IProps {
 }
 
 export class Top extends React.Component<IProps> {
-  render() {
+  public render() {
     const { nightMode } = this.props;
     return (
       <div className="top">
