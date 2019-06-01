@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './letterBoxAndEntryBoard.module.css';
 import { LetterLine } from './letter-line/letterLine';
-import { ILetter } from '../../letterUtils';
+import { ILetter } from '../../../../letterUtils';
 
 interface IProps {
   nightMode: boolean;

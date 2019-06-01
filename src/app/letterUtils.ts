@@ -1,9 +1,9 @@
-import meduza from '../../../resources/images/Meduza-logo.png';
-import znak from '../../../resources/images/ZNAK-logo.png';
-import radioFreedom from '../../../resources/images/Радио Свобода-logo.png';
-import newNewspaper from '../../../resources/images/Новая Газета-logo.png';
-import newspaperRu from '../../../resources/images/газета.ru-logo.png';
-import news from '../../../resources/images/Известия-logo.png';
+import meduza from '../resources/images/Meduza-logo.png';
+import znak from '../resources/images/ZNAK-logo.png';
+import radioFreedom from '../resources/images/Радио Свобода-logo.png';
+import newNewspaper from '../resources/images/Новая Газета-logo.png';
+import newspaperRu from '../resources/images/газета.ru-logo.png';
+import news from '../resources/images/Известия-logo.png';
 
 const senders = ['Meduza', 'ZNAK', 'Радио Свобода', 'Новая Газета', 'газета.ru', 'Известия'];
 const logos: { [key: string]: string } = {};
@@ -177,6 +177,9 @@ export function containsQuery(letter: ILetter, q: string): boolean {
 }
 
 export function findLetters(letters: ILetter[], q: string) {
+  if (q === '') {
+    return letters;
+  }
   const letters_ = letters.filter(l => containsQuery(l, q));
   letters_.forEach(l => l.display = true);
   return letters_;

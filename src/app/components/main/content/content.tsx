@@ -3,7 +3,7 @@ import styles from './content.module.css';
 import { Actions } from './actions/actions';
 import { Footer } from './footer/footer';
 import { LetterBoxAndEntryBoard } from './letter-box/letterBoxAndEntryBoard';
-import { ILetter, default as utils } from '../letterUtils';
+import { ILetter } from '../../../letterUtils';
 
 interface IProps {
   nightMode: boolean;
