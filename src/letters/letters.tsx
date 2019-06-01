@@ -13,6 +13,8 @@ import { ILetter } from './__letter/letters__letter';
 
 interface IProps {
   theme: string;
+  filter: string;
+  setFilterProcessingDisplay(display: boolean): void;
 }
 
 interface IState {
@@ -46,7 +48,8 @@ export default class Letters extends Component<IProps, IState> {
           date: '6 авг',
           authorImage: Letters.createYandexAuthorImage(),
           read: false,
-          checked: false
+          checked: false,
+          display: true
         },
         {
           author: 'Команда Яндекс.Почты',
@@ -54,7 +57,8 @@ export default class Letters extends Component<IProps, IState> {
           date: '6 июл',
           authorImage: Letters.createYandexAuthorImage(),
           read: false,
-          checked: false
+          checked: false,
+          display: true
         },
         {
           author: 'Команда Яндекс.Почты',
@@ -62,7 +66,8 @@ export default class Letters extends Component<IProps, IState> {
           date: '6 июл',
           authorImage: Letters.createYandexAuthorImage(),
           read: true,
-          checked: false
+          checked: false,
+          display: true
         },
         {
           author: 'Яндекс',
@@ -70,7 +75,8 @@ export default class Letters extends Component<IProps, IState> {
           date: '6 июл',
           authorImage: Letters.createYandexAuthorImage(),
           read: true,
-          checked: false
+          checked: false,
+          display: true
         }
       ],
       articleHeader: 'Header',
@@ -94,14 +100,27 @@ export default class Letters extends Component<IProps, IState> {
     }
   }
 
+  // public shouldComponentUpdate(nextProps: Readonly<IProps>, nextState: Readonly<IState>, nextContext: any): boolean {
+  //   console.log('lol');
+  //   return this.props !== nextProps || this.state !== nextState;
+  // }
+  //
+  // public componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any): void {
+  //   this.props.setFilterProcessingDisplay(false);
+  // }
+
   private processFilter(s: string) {
-    if (s === "") {
+    if (s === '') {
       for (let i = 0; i < this.state.letters.length; i++) {
-        
+        this.state.letters[i].display = true;
       }
       return;
     }
-
+    for (let i = 0; i < this.state.letters.length; i++) {
+      this.state.letters[i].display = this.state.letters[i].theme
+        .toLowerCase()
+        .includes(s.toLowerCase());
+    }
   }
 
   private newLetter() {
@@ -112,7 +131,8 @@ export default class Letters extends Component<IProps, IState> {
       date: '6 июл',
       read: false,
       checked: false,
-      authorImage: Letters.createYandexAuthorImage()
+      authorImage: Letters.createYandexAuthorImage(),
+      display: true
     });
     this.setState(state => {
       return state;
@@ -196,6 +216,14 @@ export default class Letters extends Component<IProps, IState> {
     return styles.dark;
   }
 
+
+  private lineTheme() {
+    if (this.props.theme === 'light') {
+      return letterStyles.lineLight;
+    }
+    return letterStyles.lineDark;
+  }
+
   private selectAll(checkbox: React.ChangeEvent<HTMLInputElement>) {
     for (let i = 0; i < this.state.letters.length; i++) {
       this.state.letters[i].checked = checkbox.target.checked;
@@ -204,13 +232,19 @@ export default class Letters extends Component<IProps, IState> {
   }
 
   public render() {
+    this.processFilter(this.props.filter);
     return (
       <div className={`${styles.letters} ${this.getTheme()}`}>
-        <input type="checkbox" className={letterStyles.marker} id="letters__first-checkbox" onChange={this.selectAll} />
-        <div className={letterStyles.line} />
+        <input
+          type="checkbox"
+          className={letterStyles.marker}
+          id="letters__first-checkbox"
+          onChange={this.selectAll}
+        />
+        <div className={`${letterStyles.line} ${this.lineTheme()}`} />
         <LettersOpmenu deleteOnclick={this.deleteOnclick} theme={this.props.theme} />
         {this.createView()}
-        <div className="letters__line" id="letters__footer-line" />
+        <div className={`${letterStyles.line} ${this.lineTheme()}`} id="letters__footer-line" />
         <LettersFooter />
       </div>
     );

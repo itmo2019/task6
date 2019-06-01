@@ -10,6 +10,7 @@ export interface ILetter {
   read: boolean;
   checked: boolean;
   authorImage: JSX.Element;
+  display: boolean;
 }
 
 interface IProps extends ILetter {

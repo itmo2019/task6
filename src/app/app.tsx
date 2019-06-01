@@ -10,13 +10,18 @@ import ThemeSwitch from '../theme-switch/theme-switch';
 
 interface IState {
   theme: string;
+  filter: string;
+  filterProcessingDisplay: boolean;
 }
 
 export class App extends Component<{}, IState> {
   public constructor(props: {}) {
     super(props);
-    this.state = { theme: 'light' };
+    this.state = { theme: 'light', filter: '', filterProcessingDisplay: false };
     this.changeTheme = this.changeTheme.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.setFilter = this.setFilter.bind(this);
+    this.setFilterProcessingDisplay = this.setFilterProcessingDisplay.bind(this);
   }
 
   public changeTheme(checkbox: React.ChangeEvent<HTMLInputElement>): void {
@@ -38,15 +43,40 @@ export class App extends Component<{}, IState> {
     console.log(this.state.theme);
   }
 
+  private handleFilterChange(event: React.ChangeEvent<HTMLInputElement>) {
+    console.log(event.target.value);
+    this.setFilterProcessingDisplay(true);
+    this.setFilter(event.target.value);
+  }
+
+  private setFilter(s: string) {
+    this.setState({ filter: s });
+  }
+
+  public setFilterProcessingDisplay(display: boolean) {
+    this.setState({ filterProcessingDisplay: display });
+  }
+
+  private removeSearchTextInput(event: React.MouseEvent<HTMLElement, MouseEvent>) {}
+
   public render() {
     return (
       <div className={`main ${this.state.theme}`}>
         <Logo theme={this.state.theme} />
         <Menu theme={this.state.theme} />
         <Writebox theme={this.state.theme} />
-        <Search theme={this.state.theme} />
+        <Search
+          theme={this.state.theme}
+          handleFilterChange={this.handleFilterChange}
+          removeSearchTextInput={this.removeSearchTextInput}
+          display={this.state.filterProcessingDisplay}
+        />
         <ThemeSwitch changeTheme={this.changeTheme} />
-        <Letters theme={this.state.theme} />
+        <Letters
+          theme={this.state.theme}
+          filter={this.state.filter}
+          setFilterProcessingDisplay={this.setFilterProcessingDisplay}
+        />
       </div>
     );
   }

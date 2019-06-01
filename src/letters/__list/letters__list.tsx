@@ -16,6 +16,9 @@ export default class LettersList extends Component<IProps, {}> {
     const letters = this.props.letters;
     for (let i = 0; i < letters.length; i++) {
       const l = letters[i];
+      if (!l.display) {
+        continue;
+      }
       jsxLetters.push(
         <Letter
           author={l.author}
@@ -28,6 +31,7 @@ export default class LettersList extends Component<IProps, {}> {
           open={this.props.open}
           styleTheme={this.props.theme}
           date={l.date}
+          display
         />
       );
     }
