@@ -58,8 +58,8 @@ export class Main extends React.Component<IProps, IState> {
 
   private newMail() {
     const newLetter = utils.genLetter();
-    this.setState(prevState => {
-      const newLetters = prevState.letters;
+    this.setState(state => {
+      const newLetters = state.letters;
       if (newLetters.length >= maxLettersNumberOnPage) {
         for (let i = maxLettersNumberOnPage - 1; i < newLetters.length; i++) {
           newLetters[i].display = false;
@@ -71,7 +71,7 @@ export class Main extends React.Component<IProps, IState> {
         this.setState({
           letters: newLetters
         });
-      }, 10);
+      }, 100);
       return { letters: newLetters };
     });
   }
