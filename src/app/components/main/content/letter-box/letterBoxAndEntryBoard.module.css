@@ -1,0 +1,38 @@
+.letter-line-box {
+  width: 100%;
+  min-height: 420px;
+  height: calc(100% - 80px);
+  overflow: scroll;
+}
+
+.letter-entry-board {
+  width: 100%;
+  min-height: 420px;
+  height: calc(100% - 80px);
+  overflow: scroll;
+}
+
+.close-icon {
+  float: right;
+  margin-right: 10px;
+  font-size: 30px;
+  color: #d8d8d8;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.close-icon:hover {
+  opacity: 1;
+}
+
+.text {
+  padding: 15px;
+  font-size: 15px;
+  text-indent: 30px;
+  white-space: normal;
+}
+
+.night {
+  background-color: #656565;
+  color: #ffffff;
+}
