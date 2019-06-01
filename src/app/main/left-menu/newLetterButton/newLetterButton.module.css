@@ -1,0 +1,21 @@
+.leftMenu__button {
+  width: 147px;
+  height: 32px;
+  margin-bottom: 8px;
+
+  border: #6287bd;
+  background-color: #6287bd;
+  border-radius: 3px;
+}
+
+.leftMenu__textWrite {
+  display: inline-block;
+  width: 56px;
+  height: 15px;
+  margin-top: 7px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-family: HelveticaNeue;
+  font-size: 12px;
+  vertical-align: center;
+}

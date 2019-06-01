@@ -1,0 +1,17 @@
+.contentFooterText__textEndline {
+  height: 12px;
+  margin-right: 45px;
+  color: #9b9b9b;
+  float: right;
+  font-family: HelveticaNeueLight;
+  font-size: 11px;
+  line-height: 40px;
+}
+
+.contentFooterTextUnhighlight {
+  color: inherit;
+}
+
+.contentFooterText__delLine {
+  text-decoration: none;
+}

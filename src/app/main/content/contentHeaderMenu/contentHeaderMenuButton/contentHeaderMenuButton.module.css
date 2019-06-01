@@ -1,0 +1,15 @@
+.contentHeaderMenuButton__textTitle {
+  display: inline-block;
+  height: 16px;
+  margin-top: 11px;
+  margin-left: 25px;
+  color: #cccccc;
+  font-family: HelveticaNeue;
+  font-size: 13px;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.contentHeaderMenuButton__delLine {
+  text-decoration: none;
+}
