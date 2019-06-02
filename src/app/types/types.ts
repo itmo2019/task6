@@ -5,6 +5,7 @@ export interface LetterType {
   author: string;
   subject: string;
   date: string;
+  isVisible: boolean;
   isChecked: boolean;
   hasAddAnimation: boolean;
   hasDeleteAnimation: boolean;

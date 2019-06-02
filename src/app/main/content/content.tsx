@@ -18,7 +18,6 @@ interface IProps {
   isDark: boolean;
   removeAddAnimation: (id: string) => void;
   removeLetter: (id: string) => void;
-  setVisibility: (id: string, value: boolean) => void;
 }
 
 export class Content extends Component {
@@ -51,7 +50,6 @@ export class Content extends Component {
           isDark={this.props.isDark}
           removeAddAnimation={this.props.removeAddAnimation}
           removeLetter={this.props.removeLetter}
-          setVisibility={this.props.setVisibility}
         />
         <ContentFooter />
       </div>

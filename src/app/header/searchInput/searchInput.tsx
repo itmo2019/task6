@@ -28,7 +28,10 @@ export class SearchInput extends Component {
           className={styles.searchInput__input}
           type="text"
           placeholder="Поиск"
-          onChange={event => this.props.searchFunction(event.target.value)}
+          onChange={event => {
+            // console.log(event.target.value);
+            this.props.searchFunction(event.target.value)
+          }}
         />
         <span
           className={classNames(
