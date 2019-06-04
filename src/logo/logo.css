@@ -1,0 +1,23 @@
+.yandex {
+    width: 153px;
+    height: 31px;
+    
+}
+.body__yandex {
+    position: absolute;
+    margin-top: 12px;
+    margin-left: 53px;
+}
+.div {
+	position: absolute;
+	height: 31px;
+    width: 153px;
+
+    /*background-color: rgba ()*/
+}
+.yandex.light {
+	filter: invert(0%);
+}
+.yandex.dark {
+	filter: invert(100%);
+}

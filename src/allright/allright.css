@@ -1,0 +1,19 @@
+.window__allright {
+	border-top: 1px solid #e2e2e2;
+	width: 100%;
+	position: absolute;
+	margin-top: 10px;
+	bottom: 0;
+}
+
+.allright__foot {
+	margin-top: 8px;
+	float: right;
+	margin-right: 20px; 
+	white-space: nowrap;
+	width: 345px;
+	height: 12px;
+	font-family: HelveticaNeue, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #9b9b9b;
+}

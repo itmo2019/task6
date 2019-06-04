@@ -1,0 +1,64 @@
+/*.Menu__WriteMail {
+    overflow-wrap: break-word;
+    cursor: pointer;
+    color: #fff;
+    background: #6287bd;
+    border-radius: 3px;
+    width: 88%;
+    min-height: 13px;
+    padding: 9px 0 10px;
+    text-align: center;
+    font-size: 12px;
+    margin: auto auto 10px 0; 
+}
+
+.Menu__Item {
+    overflow-wrap: break-word;
+    cursor: pointer;
+    margin: auto;
+    margin-left: 0;
+    width: 88%;
+    min-height: 14px;
+
+    color: #555555;
+    padding: 4px 0 4px 10px;
+    font-size: 11px;
+}
+
+.Menu__Item:hover {
+    font-weight: bold;
+    border-radius: 3px;
+    background-color: #cdd6e4;
+}*/
+.menu {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    position: absolute;
+    margin-top: 96px;
+    width: 100%;
+    margin-left: 22px;
+}
+
+.menu__item {
+    width: 137px;
+    height: 22px;
+    padding-left: 10px;
+    padding-top: 4px;
+    list-style-type: none;
+    text-overflow: ellipsis;
+    font-family: HelveticaNeue, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #707070;
+}
+.menu__item:hover {
+    background: #cdd6e4;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #555;
+}
