@@ -1,0 +1,21 @@
+.body__newbox-refl {
+	display: inline-block;
+	position: relative;
+	margin-left: 46px;
+	margin-top: 7px;
+	width: 56px; 
+	height: 15px;
+	font-family: HelveticaNeue, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: 500;
+	color: #fff; 
+}
+.newbox {
+	width: 147px;
+  	height: 32px;
+  	border-radius: 3px;
+  	background-color: #6287bd;
+	position: absolute;
+  	margin-top: 56px;
+	margin-left: 22px;
+}

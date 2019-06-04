@@ -1,27 +1,23 @@
+@font-face {
+    font-family: Yandex Sans Text Thin;
+    src: url(../source/YandexSansText-Thin/YandexSansText-Thin.woff2) format('woff2');
+    src: url(../source/YandexSansText-Thin/YandexSansText-Thin.ttf) format('truetype');
+}
+@font-face {
+    font-family: Yandex Sans Text Bold;
+    src: url(../source/YandexSansText-Bold/YandexSansText-Bold.woff2) format('woff2');
+    src: url(../source/YandexSansText-Bold/YandexSansText-Bold.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Yandex Sans Text Regular';
+    src: url('../source/YandexSansText-Regular/YandexSansText-Regular.woff') format('woff'),
+         url('../source/YandexSansText-Regular/YandexSansText-Regular.ttf') format('truetype');
+}
+
+
+
 .app {
-  text-align: center;
-}
-
-.app-header {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-  color: #fff;
-  font-size: calc(10px + 2vmin);
-}
-
-.app-link {
-  color: #61dafb;
-}
-
-@keyframes app-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  width: 100vw;
+  height: 100vh;
+  position: relative;
 }

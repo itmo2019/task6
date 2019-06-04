@@ -1,0 +1,23 @@
+.window__header {
+	margin-left: 20px; 
+	margin-top: 11px; 
+}
+
+.header__item {
+	background: none;
+	color: #ccc;
+	border: 0 none;
+}
+#delButton {
+	background: none;
+	border: none;
+	color: #ccc;
+}
+
+#spinner {
+	margin-left: 400px;
+	margin-top: -11px; 
+	/*position: relative;*/
+    position: absolute;
+    display: none;
+}

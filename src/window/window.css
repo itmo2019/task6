@@ -1,0 +1,170 @@
+@keyframes new-animation {
+    30% {
+        opacity: 0;
+        height: auto;
+        position: static;
+    }
+    to {
+        position: static;
+        height: auto;
+        opacity: 1;
+    }
+}
+
+@keyframes del-animation {
+    90% {
+        transform:  translateX(100%);
+    }
+    to {
+        height: 0;
+        width: 0;
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+    }
+}
+
+.deleted {
+    animation: del-animation linear 1s;
+    animation-fill-mode:forwards;
+    animation-duration: 0.5s;
+    opacity: 1;
+    animation-iteration-count: 1;
+}
+
+.show-letter {
+    animation: new-animation linear 1s;
+    animation-fill-mode:forwards;
+    animation-duration: 0.5s;
+    opacity: 1;
+    animation-iteration-count: 1;
+}
+
+
+.letters__emptypart {
+    width: 100%;
+    height: 30.5px;
+}
+
+.firstletter__clickme {
+    display: inline-block;
+    width: inherit;
+}
+
+.firstletter {
+    border-bottom: 1px solid #e2e2e2;
+    margin: 0px;
+    padding-bottom: 4px;
+    width: 100%;
+}
+
+.unread-letter {
+    font-weight: bold;
+}
+.dark-window {
+  background-color: #e5eaf0;
+}
+.light-window {
+    background-color: black;
+}
+.dark-window, .light-window {
+    width: 100vw;
+    height: 100vh;
+}
+.window__letters {
+    border-top: 1px solid #e2e2e2;
+    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+}
+.letter__authtor, .firstletter__authtor, .lettermove__authtor{
+    display: inline-block;
+    position: relative;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 155px;
+    margin-left: 10px;
+    font-family: HelveticaNeue, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #000;
+}
+
+.bold {
+    font-family: Yandex Sans Text Bold;
+}
+.thin {
+    font-family: Yandex Sans Text Thin;
+}
+
+.letter__textletter, .firstletter__textletter, .lettermove__textletter {
+    display: inline-block;
+    position: relative;
+    margin-left: 50px;
+    width: calc(100% - 376px);
+    height: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: HelveticaNeue, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #000;
+}
+
+.letter__date, .firstletter__date, .lettermove__date {
+    display: inline-block;
+    position: relative;
+    margin-top: 13px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 40px;
+    margin-right: 10px;
+    margin-left: auto;
+    float: right;
+    font-family: HelveticaNeue, Helvetica, sans-serif;
+    font-size: 13px;
+    text-align: right;
+    color: #9b9b9b;
+}
+
+.letter__logo-authtor, .firstletter__logo-authtor, .lettermove__logo-authtor 
+ {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    font-family: Yandex Sans Text Thin, sans-serif;
+    background-color: #f33;
+    border-radius: 50%;
+    font-size: 22px;
+    font-weight: normal;
+    color: #fff;
+    text-align: center;
+}
+
+.letters__text {
+    padding: 40px;
+    box-sizing: border-box;
+}
+.letter_checkbox{
+    width: 46px;
+    height: 40px;
+    display: inline-block;
+    position: relative;
+}
+.letter__box, .firstletter__box, .lettermove__box {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.letter__unread, .firstletter__unread  {
+    position: absolute;
+    margin-top: -25px;
+    /*margin-bottom: -20px;*/
+
+    margin-left: 261px;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #6287bd;
+}
