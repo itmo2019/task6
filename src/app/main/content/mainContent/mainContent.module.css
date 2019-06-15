@@ -1,8 +1,0 @@
-.mainContent {
-  width: 100%;
-  min-height: 524px;
-}
-
-.mainContent_show:target {
-  display: inline-block;
-}

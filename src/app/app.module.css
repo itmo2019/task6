@@ -1,13 +1,13 @@
 .app {
-  padding: 2% 3%;
+  padding: 25px 3% 2%;
 }
 
 @font-face {
   font-family: HelveticaNeue;
-  src: url(../txtStyle/HelveticaNeueCyr-Medium.otf);
+  src: url(./txtStyle/HelveticaNeueCyr-Medium.otf);
 }
 
 @font-face {
   font-family: HelveticaNeueLight;
-  src: url(../txtStyle/HelveticaNeueCyr-Light.otf);
+  src: url(./txtStyle/HelveticaNeueCyr-Light.otf);
 }

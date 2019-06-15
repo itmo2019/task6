@@ -1,12 +1,11 @@
-import * as React from 'react';
+import *as React from 'react';
 
 import styles from './app.module.css';
 import { Header } from './header';
-import { Main } from './main';
+import { MailInnerContent } from './mailInnerContent';
 
 interface IState {
   isDark: boolean;
-  searchText: string;
 }
 
 export class App extends React.Component {
@@ -14,20 +13,11 @@ export class App extends React.Component {
 
   constructor(props: {}) {
     super(props);
-
     this.state = {
-      searchText: '',
       isDark: false,
     };
     this.changeTheme = this.changeTheme.bind(this);
-    this.searchFunction.bind(this);
   }
-
-  public searchFunction = (text: string) => {
-    this.setState({
-      searchText: text
-    });
-  };
 
   private changeTheme() {
     this.setState((state: IState) => {
@@ -39,8 +29,7 @@ export class App extends React.Component {
   render() {
     return (
       <div className={styles.app}>
-        <Header searchFunction={this.searchFunction} isDark={this.state.isDark} changeTheme={this.changeTheme}/>
-        <Main searchText={this.state.searchText} isDark={this.state.isDark}/>
+        <MailInnerContent changeTheme={this.changeTheme} isDark={this.state.isDark}/>
       </div>
     );
   }

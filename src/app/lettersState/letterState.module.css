@@ -1,0 +1,8 @@
+.letterState {
+  width: 100%;
+  min-height: 524px;
+}
+
+.letterState_show:target {
+  display: inline-block;
+}
