@@ -1,0 +1,21 @@
+.suggestion {
+  position: absolute;
+
+  width: inherit;
+  height: inherit;
+
+  font-family: 'Yandex Sans Regular', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+
+.dark {
+  color: #aaa;
+  background-color: #1e3543;
+  border: 1px solid #555555;
+}
+
+.light {
+  color: #707070;
+}
