@@ -6,3 +6,7 @@ html {
 body {
   background-color: #e5eaf0;
 }
+
+body.dark {
+  background-color: #323232;
+}

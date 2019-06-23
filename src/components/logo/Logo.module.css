@@ -8,3 +8,7 @@
   width: 153px;
   height: 31px;
 }
+
+.img.dark {
+  filter: invert(1)
+}

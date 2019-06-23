@@ -1,4 +1,5 @@
 declare const styles: {
-  readonly letterList: string;
+  readonly "letterList": string;
 };
 export = styles;
+

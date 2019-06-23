@@ -13,6 +13,11 @@
   background: #fff;
 }
 
+.openLetter.dark {
+  background: #222; 
+  color: #fff;
+}
+
 .header {
   display: inline-block;
 }
@@ -35,7 +40,7 @@
 
 .content::-webkit-scrollbar {
   width: 20px;
-  background: white;
+  background: #fff;
 }
 
 .content::-webkit-scrollbar-thumb {
@@ -64,4 +69,8 @@
   height: 20px;
   margin: 5px 11px 5px 5px;
   cursor: pointer;
+}
+
+.crossImage.dark{
+  filter: invert(1);
 }

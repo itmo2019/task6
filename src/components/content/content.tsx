@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 
 import styles from './Content.module.css';
 import utilCss from '../../util/UtilCss.module.css';
-
+import { IThemeContext, ThemeContext } from '../app';
 import { LetterData } from '../../util/random/random.js';
 import { LetterHeader } from '../letter-header';
 import { LetterList } from '../letter-list';
+import classNames from 'classnames/bind'
+
+const c = classNames.bind(styles)
 
 interface IContentProps {
   masterChecked: boolean;
@@ -56,26 +59,36 @@ export class Content extends Component<IContentProps, IContentState> {
 
   public render() {
     return (
-      <main className={styles.content}>
-        <LetterHeader
-          letterOpened={this.state.letterOpened}
-          masterChecked={this.props.masterChecked}
-          toggleMasterSelection={this.props.toggleMasterSelection}
-          markDeleteSelectedLetters={this.props.markDeleteSelectedLetters}
-        />
-        <div className={utilCss.separator} />
-        <LetterList
-          letterOpened={this.state.letterOpened}
-          letterTheme={this.state.letterTheme}
-          letterText={this.state.letterText}
-          selectLetter={this.props.selectLetter}
-          openLetter={this.openLetter}
-          closeLetter={this.closeLetter}
-          removeLetter={this.props.removeLetter}
-          letterShown={this.props.letterShown}
-          letters={this.props.letters}
-        />
-      </main>
+      <ThemeContext.Consumer>
+        {(context: IThemeContext) => {
+          let mainClasses = c({
+            content: true,
+            dark: context.isDarkTheme
+          })
+          return (
+            <main className={mainClasses}>
+              <LetterHeader
+                letterOpened={this.state.letterOpened}
+                masterChecked={this.props.masterChecked}
+                toggleMasterSelection={this.props.toggleMasterSelection}
+                markDeleteSelectedLetters={this.props.markDeleteSelectedLetters}
+              />
+              <div className={utilCss.separator} />
+              <LetterList
+                letterOpened={this.state.letterOpened}
+                letterTheme={this.state.letterTheme}
+                letterText={this.state.letterText}
+                selectLetter={this.props.selectLetter}
+                openLetter={this.openLetter}
+                closeLetter={this.closeLetter}
+                removeLetter={this.props.removeLetter}
+                letterShown={this.props.letterShown}
+                letters={this.props.letters}
+              />
+            </main>
+          );
+        }}
+      </ThemeContext.Consumer>
     );
   }
 }

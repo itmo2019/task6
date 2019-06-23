@@ -4,6 +4,7 @@ import styles from './LetterHeader.module.css';
 import utilCss from '../../util/UtilCss.module.css';
 import { FancyCheckbox } from '../fancy-checkbox';
 import { ActionButton } from '../action-button';
+import classNames from 'classnames'
 
 interface ILetterHeader {
   letterOpened: boolean;
@@ -16,7 +17,7 @@ export class LetterHeader extends Component<ILetterHeader, {}> {
   public render() {
     const disabled = this.props.letterOpened;
     return (
-      <header className={[styles.header, utilCss.noselect].join(' ')}>
+      <header className={classNames(styles.header, utilCss.noselect)}>
         <FancyCheckbox
           additionalClasses={styles.headerItem}
           checked={this.props.masterChecked}

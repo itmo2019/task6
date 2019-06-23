@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 import styles from './FancyCheckbox.module.css';
+import classNames from 'classnames/bind'
+
+const c = classNames.bind(styles)
 
 interface IFancyCheckboxProps {
   checked: boolean;
@@ -11,13 +14,14 @@ interface IFancyCheckboxProps {
 
 export class FancyCheckbox extends Component<IFancyCheckboxProps, {}> {
   public render() {
-    const checkedClass = this.props.checked ? styles.checkbox_checked : '';
-    const disabledClass = this.props.disabled ? styles.checkbox_disabled : '';
+    let spanClass = c({
+      checkbox_checked: this.props.checked,
+      checkbox_disabled: this.props.disabled,
+      checkbox: true
+    }, this.props.additionalClasses)
     return (
       <span
-        className={`${styles.checkbox} ${
-          this.props.additionalClasses
-        } ${checkedClass} ${disabledClass}`}
+        className={spanClass}
         onClick={this.props.onChange}
       />
     );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import _ from 'lodash'
 import { Header } from '../header';
 import { MainMenu } from '../main-menu';
 import { Content } from '../content';
@@ -9,7 +10,18 @@ interface IAppState {
   letters: LetterData[];
   masterChecked: boolean;
   searchValue: string;
+  isDarkTheme: boolean;
 }
+
+export interface IThemeContext {
+  isDarkTheme: boolean;
+  switch: () => void;
+}
+
+export const ThemeContext = React.createContext({
+  isDarkTheme: false,
+  switch: () => {}
+});
 
 export class App extends Component<{}, IAppState> {
   private allLetters: LetterData[];
@@ -19,6 +31,7 @@ export class App extends Component<{}, IAppState> {
     this.allLetters = [];
     this.state = {
       letters: [],
+      isDarkTheme: false,
       masterChecked: false,
       searchValue: ''
     };
@@ -30,6 +43,22 @@ export class App extends Component<{}, IAppState> {
     this.createNewMail = this.createNewMail.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.clearSearchValue = this.clearSearchValue.bind(this);
+    this.switchTheme = this.switchTheme.bind(this);
+    this.handleSearchChange = _.debounce(this.handleSearchChange, 300).bind(this)
+  }
+
+  private switchTheme() {
+    console.log(this.state.isDarkTheme)
+    this.setState(state => {
+      if(!state.isDarkTheme) {
+        document.body.classList.add('dark')
+      } else {
+        document.body.classList.remove('dark')
+      }
+      return {
+        isDarkTheme: !state.isDarkTheme
+      }
+    })
   }
 
   private toggleMasterSelection(): void {
@@ -123,11 +152,19 @@ export class App extends Component<{}, IAppState> {
     // TODO: start timer
   }
 
-  private onSearchChange(s: string): void {
+  private handleSearchChange(s: string) {
     this.setState(state => {
       return {
-        searchValue: s,
         letters: this.filterLetters(s, true)
+      }
+    })
+  }
+
+  private onSearchChange(s: string): void {
+    this.setState(state => {
+      this.handleSearchChange(s)
+      return {
+        searchValue: s
       };
     });
   }
@@ -143,23 +180,25 @@ export class App extends Component<{}, IAppState> {
 
   public render() {
     return (
-      <div className="app">
-        <Header
-          onSearchChange={this.onSearchChange}
-          searchValue={this.state.searchValue}
-          clearSearchValue={this.clearSearchValue}
-        />
-        <MainMenu createNewMail={this.createNewMail} />
-        <Content
-          letters={this.state.letters}
-          masterChecked={this.state.masterChecked}
-          toggleMasterSelection={this.toggleMasterSelection}
-          markDeleteSelectedLetters={this.markDeleteSelectedLetters}
-          selectLetter={this.selectLetter}
-          letterShown={this.letterShown}
-          removeLetter={this.removeLetter}
-        />
-      </div>
+      <ThemeContext.Provider value={{isDarkTheme: this.state.isDarkTheme, switch: this.switchTheme}}>
+        <div>
+          <Header
+            onSearchChange={this.onSearchChange}
+            searchValue={this.state.searchValue}
+            clearSearchValue={this.clearSearchValue}
+          />
+          <MainMenu createNewMail={this.createNewMail} />
+          <Content
+            letters={this.state.letters}
+            masterChecked={this.state.masterChecked}
+            toggleMasterSelection={this.toggleMasterSelection}
+            markDeleteSelectedLetters={this.markDeleteSelectedLetters}
+            selectLetter={this.selectLetter}
+            letterShown={this.letterShown}
+            removeLetter={this.removeLetter}
+          />
+        </div>
+      </ThemeContext.Provider>
     );
   }
 }
