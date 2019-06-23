@@ -28,12 +28,12 @@
     "test": "react-scripts test",
     "build": "react-scripts build",
     "lint": "npm-run-all lint:*",
-    "lint:js": "eslint '**/*.{js,jsx}'",
-    "lint:css": "stylelint '**/*.css'",
+    "lint:js": "eslint \"**/*.{ts,tsx}\"",
+    "lint:css": "stylelint \"**/*.css\"",
     "lint-fix": "npm-run-all lint-fix:*",
-    "lint-fix:js": "eslint --fix '**/*.{js,jsx}'",
-    "lint-fix:css": "stylelint --fix '**/*.css'",
-    "format": "prettier --write '**/*.{js,jsx,css,json,md}'",
+    "lint-fix:js": "eslint --fix \"**/*.{ts,tsx}\"",
+    "lint-fix:css": "stylelint --fix \"**/*.css\"",
+    "format": "prettier --write '**/*.{ts,tsx,css,json,md}'",
     "now-build": "npm run build"
   },
   "browserslist": [

@@ -1,0 +1,23 @@
+.mainMenu {
+  margin: 1px 22px;
+  float: left;
+}
+
+.sendButton {
+  width: 147px;
+  height: 32px;
+  margin-bottom: 2px;
+
+  border: 0;
+  background-color: #6287bd;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  outline: 0;
+  vertical-align: top;
+}
+
+.sendButton:hover {
+  background-color: #6b90c7;
+}

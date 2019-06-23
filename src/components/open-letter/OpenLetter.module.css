@@ -1,0 +1,67 @@
+.content {
+  height: 1000px;
+}
+
+.openLetter {
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  left: 200px;
+
+  display: block;
+  padding: 5px 10px 0 10px;
+  background: #fff;
+}
+
+.header {
+  display: inline-block;
+}
+
+.headerText {
+  display: inline-block;
+  padding-right: 30px;
+  margin: 0;
+}
+
+.crossButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 20px;
+  height: 20px;
+  margin: 5px 11px 5px 5px;
+}
+
+.content::-webkit-scrollbar {
+  width: 20px;
+  background: white;
+}
+
+.content::-webkit-scrollbar-thumb {
+  min-height: 20px;
+
+  border-width: 1px 3px;
+  background-clip: content-box;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.article {
+  float: inherit;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+.crossImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 20px;
+  height: 20px;
+  margin: 5px 11px 5px 5px;
+  cursor: pointer;
+}
