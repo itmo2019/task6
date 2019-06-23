@@ -1,0 +1,19 @@
+.window-letters__article {
+  /*background: url("../../../src/background.jpg");*/
+  background-attachment: fixed;
+  background-size: 15%;
+  /*background-repeat: space;*/
+  /*background-color: #FFFFDD;*/
+  margin-left: -40px;
+  height: inherit;
+}
+
+.window-letters__article-cancel-sign {
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.qqq {
+  display: none;
+}

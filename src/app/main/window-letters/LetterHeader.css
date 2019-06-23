@@ -1,0 +1,25 @@
+.window-letters__header {
+  font-size: 13px;
+  border-style: solid;
+  border-color: #9b9b9b;
+  border-width: 0 0 0.5px 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  height: 50px;
+}
+
+.window-letters__header-buttons {
+  margin-left: 26px;
+  margin-top: -10px;
+  border: none;
+  outline: none;
+  background-color: inherit;
+  font-weight: 500;
+  color: #cccccc;
+}
+
+.window-letters__header-part {
+  display: inline-block;
+  margin-top: 18px;
+}
+

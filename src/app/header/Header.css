@@ -1,0 +1,61 @@
+.high-part__before-lines {
+  margin-top: 11px;
+  margin-left: 22px;
+  height: 19px;
+}
+
+.high-part__one-line {
+  width: 20px;
+  height: 2px;
+  margin-top: 4px;
+  background-color: #000000;
+}
+
+.dark-side {
+  background-color: #ffffff;
+}
+
+.high-part__search {
+  margin-top: 11px;
+  margin-left: 114px;
+  width: 301px;
+  height: 32px;
+  line-height: 100%;
+  background-color: #ffffff;
+}
+
+.high-part__search-cancel-sign {
+  float: right;
+  background-color: inherit;
+  border: none;
+  padding-right: 15px;
+  margin-top: -25px;
+  /*opacity: 0.15;*/
+}
+
+.high-part__search-word {
+  border: none;
+  display: inline-block;
+  padding-left: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  font-size: 15px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.high-part__yandex-mail_picture {
+  margin-left: 11px;
+  margin-top: 10px;
+}
+
+.high-part__yandex-mail_unstressed-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.high-part {
+  display: inline-block;
+  vertical-align: middle;
+}
