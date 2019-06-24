@@ -1,0 +1,119 @@
+.letter {
+  width: 100%;
+  border-bottom: solid 1px #e2e2e2;
+  font-size: 13px;
+}
+
+.night {
+  border-bottom: solid 1px #222;
+  color: rgb(221, 210, 210);
+}
+
+.letter__checkbox {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  margin-top: 11px;
+  margin-left: 20px;
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  vertical-align: top;
+}
+
+.letter__pic {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+  margin-bottom: 4px;
+  margin-left: 7px;
+  background-color: red;
+  border-radius: 15px;
+  color: white;
+  font-family: 'YSText', serif;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: top;
+}
+
+.letter__date-msg {
+  position: absolute;
+  right: 20px;
+
+  margin-top: 13px;
+  margin-left: 10px;
+  color: #9b9b9b;
+  font-family: 'HelveticaNeue', serif;
+  font-size: 13px;
+  vertical-align: top;
+}
+
+.letter__sender {
+  display: inline-block;
+  overflow: hidden;
+  width: 28%;
+  max-width: 28%;
+  box-sizing: border-box;
+  margin-top: 11px;
+  margin-left: 10px;
+  font-family: 'HelveticaNeue', serif;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.letter__unread {
+  font-weight: bold;
+}
+
+.letter__message {
+  display: inline-block;
+  overflow: hidden;
+  width: 38%;
+  max-width: 38%;
+  box-sizing: border-box;
+  margin-top: 12px;
+  margin-left: 10px;
+  font-family: 'HelveticaNeue', serif;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+#letter__choose {
+  top: 0;
+  bottom: 0;
+  display: block;
+}
+
+.letter__mail-opened {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 20px 20px 30px;
+  background-color: white;
+  font-size: 14px;
+}
+
+.letter__msg-mark {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-top: 14px;
+  border-radius: 10px;
+  vertical-align: top;
+}
+
+.letter__mark-unread {
+  background-color: #6287bd;
+}
+
+.letter__choose {
+  display: none;
+}

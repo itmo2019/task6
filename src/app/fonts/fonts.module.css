@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'YSText';
+  src: url('./YandexSansDisplay.ttf');
+}
+
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('./HelveticaNeueCyr.otf');
+}

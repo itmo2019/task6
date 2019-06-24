@@ -1,0 +1,23 @@
+.mail-opened__snowman {
+  float: right;
+  shape-outside: circle();
+}
+
+.mail-opened__close2 {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  margin: 5px;
+  font-size: 25px;
+}
+
+.mail-opened__text {
+  padding: 20px;
+  font-family: 'HelveticaNeue', serif;
+  font-size: 15px;
+  white-space: normal;
+}
+
+.night {
+  background-color: #424242;
+}

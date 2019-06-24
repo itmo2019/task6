@@ -9,6 +9,15 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "@types/classnames": "2.2.6",
+    "@types/jest": "24.0.15",
+    "@types/node": "12.0.10",
+    "@types/react": "16.8.22",
+    "@types/react-dom": "16.8.4",
+    "@types/react-window": "1.8.0",
+    "classnames": "2.2.6",
+    "csstype": "2.6.5",
+    "node-sass": "4.12.0",
     "react": "16.8.6",
     "react-dom": "16.8.6"
   },
@@ -27,12 +36,12 @@
     "test": "react-scripts test",
     "build": "react-scripts build",
     "lint": "npm-run-all lint:*",
-    "lint:js": "eslint '**/*.{js,jsx}'",
-    "lint:css": "stylelint '**/*.css'",
+    "lint:js": "eslint \"**/*.{js,jsx}\"",
+    "lint:css": "stylelint \"**/*.css\"",
     "lint-fix": "npm-run-all lint-fix:*",
-    "lint-fix:js": "eslint --fix '**/*.{js,jsx}'",
-    "lint-fix:css": "stylelint --fix '**/*.css'",
-    "format": "prettier --write '**/*.{js,jsx,css,json,md}'",
+    "lint-fix:js": "eslint --fix \"**/*.{js,jsx}\"",
+    "lint-fix:css": "stylelint --fix \"**/*.css\"",
+    "format": "prettier --write \"**/*.{js,jsx,css,json,md}\"",
     "now-build": "npm run build"
   }
 }

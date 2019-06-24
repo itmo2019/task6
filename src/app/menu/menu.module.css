@@ -1,0 +1,21 @@
+.menu {
+  display: inline-block;
+  box-sizing: border-box;
+  margin-top: 8px;
+  margin-left: 22px;
+  vertical-align: top;
+}
+
+.menu__line {
+  width: 20px;
+  height: 2px;
+  background-color: #000;
+}
+
+.menu__line-mrgn {
+  margin-top: 5px;
+}
+
+.menu__line_night {
+  background-color: rgb(206, 197, 197);
+}
