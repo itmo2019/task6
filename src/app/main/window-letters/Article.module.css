@@ -1,4 +1,4 @@
-.window-letters__article {
+.article {
   /*background: url("../../../src/background.jpg");*/
   background-attachment: fixed;
   background-size: 15%;
@@ -8,12 +8,12 @@
   height: inherit;
 }
 
-.window-letters__article-cancel-sign {
+.articleCancelSign {
   float: right;
   margin-top: 20px;
   margin-right: 20px;
 }
 
-.qqq {
+.inp {
   display: none;
 }

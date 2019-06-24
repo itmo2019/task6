@@ -40,5 +40,13 @@ export function genLetterText() {
   const letterDate = `${curDate.getDate()  } ${  curDate.toLocaleString('ru', { month: 'short' })}`;
   const senderOne = senders[getRandomInt(0, senders.length)];
   const colorLetter = `#${  genColor()  }${genColor()  }${genColor()}`;
-  return {deleted: false, letterText: answer, sender: senderOne, date: letterDate, color: colorLetter };
+  return {
+    deleted: false,
+    letterText: answer,
+    sender: senderOne,
+    date: letterDate,
+    color: colorLetter,
+    chose: false,
+    isVisible: true
+  };
 }

@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
+import { genLetterText, getRandomFromRange } from '../functions/Functions';
 import { Header } from '../header/Header';
 import { Menu } from './menu/Menu';
 import { LettersList } from './window-letters/LettersList';
-import { genLetterText, getRandomFromRange } from '../functions/Functions';
-import './Main.css';
+import { ILetter } from './window-letters/ILetter';
+import cn from 'classnames';
+import styles from './Main.module.css';
 
+interface IState {
+  isDark: boolean; // false
+  letters: ILetter[];
+  openId: number; // -1
+  template: string;
+}
 
-export class Main extends Component {
-  constructor(props) {
+export class Main extends Component<{}, IState> {
+  public constructor(props: {}) {
     super(props);
-    this.state = { isDark: false, letters: [], openId: -1, searchedLetters: [], template: ""};
+    this.state = {
+      isDark: false,
+      letters: [],
+      openId: -1,
+      template: ''
+    };
     this.letterAdded = this.letterAdded.bind(this);
     this.lettersDeleted = this.lettersDeleted.bind(this);
     this.letterChose = this.letterChose.bind(this);
@@ -26,19 +39,15 @@ export class Main extends Component {
     this.diff = getRandomFromRange(10, 30000);
   }
 
-  openArticle(index) {
-    this.setState(state => {
-      return { openId: index };
-    });
-  }
+  public openArticle = (index: number) => {
+    this.setState({ openId: index });
+  };
 
-  openLetters() {
-    this.setState(state => {
-      return { openId: -1 };
-    });
-  }
+  public openLetters = () => {
+    this.setState({ openId: -1 });
+  };
 
-  allLettersChose(status) {
+  public allLettersChose = (status: boolean) => {
     const newLetters = this.state.letters.map(letter => {
       if (letter.isVisible) {
         return { ...letter, chose: status };
@@ -46,57 +55,40 @@ export class Main extends Component {
         return letter;
       }
     });
-    this.setState(state => {
-      return { letters: newLetters };
-    });
-  }
+    this.setState({ letters: newLetters });
+  };
 
-  lettersDeleted() {
+  public lettersDeleted = () => {
     const newLetters = this.state.letters.map(letter => {
       if (letter.chose) {
         letter.classS = 'delete';
       }
       return letter;
     });
+    this.setState({ letters: newLetters });
 
-    const newLettersS = this.state.searchedLetters.map(letter => {
-      if (letter.chose) {
-        letter.classS = 'delete';
-      }
-      return letter;
-    });
-
-    this.setState(state => {
-      return {
-        letters: newLetters,
-        searchedLetters: newLettersS
-      };
-    });
-    window.setTimeout(function(letters) {
+    window.setTimeout(
+      (letters: ILetter[]) => {
         const lettersS = letters.filter(letter => {
           return letter.classS !== 'delete';
         });
-        this.setState(state => {
-          return { letters: lettersS };
-        });
-      }.bind(this),
+        this.setState({ letters: lettersS });
+      }, // .bind(this)
       1300,
       newLetters
     );
-  }
+  };
 
-  letterChose(index) {
+  public letterChose = (index: number) => {
     const newLetters = this.state.letters.map(letter => {
       if (letter.id !== index) return letter;
       return { ...letter, chose: !letter.chose };
     });
-    this.setState(state => {
-      return { letters: newLetters };
-    });
-  }
+    this.setState({ letters: newLetters });
+  };
 
-  setLetters() {
-    let newLetters = [];
+  public setLetters = () => {
+    const newLetters = [];
     for (let j = 0; j < 10000; j += 1000) {
       console.log(j);
       for (let i = j; i < j + 999; i++) {
@@ -114,15 +106,13 @@ export class Main extends Component {
         });
       }
     }
-    this.setState(state => {
-      return { letters: newLetters };
-    });
-  }
+    this.setState({ letters: newLetters });
+  };
 
-  letterAdded(index) {
+  public letterAdded = (index: number) => {
     const newLetter = genLetterText();
     this.setState(state => {
-      let newLetterS = {
+      const newLetterS = {
         id: index,
         letterText: newLetter.letterText,
         sender: newLetter.sender,
@@ -138,14 +128,12 @@ export class Main extends Component {
       }
       return {
         letters: [newLetterS, ...state.letters],
-        openId: -1,
-        searchedLetters: state.letters
+        openId: -1
       };
     });
     let delay = 0;
     let itsTime = false;
     let newMax = this.curMax;
-    // console.log(newMax);
     let currGen = 0;
     while (!itsTime) {
       let genDelay = getRandomFromRange(this.curMin, newMax);
@@ -160,45 +148,45 @@ export class Main extends Component {
     this.diff = delay;
     console.log(delay);
     window.setTimeout(this.letterAdded, delay + 1000, index + 1);
-  }
+  };
 
-  markNotNew(id) {
+  public markNotNew = (id: number) => {
     const lettersS = this.state.letters;
     for (let i = 0; i < lettersS.length; i++) {
       if (lettersS[i].id === id) {
         lettersS[i].classS = "notNew";
       }
     }
-    this.setState(state => {
-      return { letters: lettersS };
-    });
-  }
+    this.setState({ letters: lettersS });
+  };
 
-  searchLetters(template) {
+  public searchLetters = (template: string) => {
     const lettersS = this.state.letters;
     for (let i = 0; i < lettersS.length; i++) {
-      if (lettersS[i].letterText.includes(template) || lettersS[i].sender.includes(template)) {
-        lettersS[i].isVisible = true;
-      } else {
-        lettersS[i].isVisible = false;
-      }
+      lettersS[i].isVisible =
+        lettersS[i].letterText.includes(template) || lettersS[i].sender.includes(template);
     }
-    this.setState(state => {
-      return { template: template, letters: lettersS };
-    });
-  }
+    this.setState({ template: template, letters: lettersS });
+  };
 
-  changeColor() {
+  public changeColor = () => {
     this.setState(state => {
       return { isDark: !state.isDark };
     });
-  }
+  };
 
-  render() {
-    let darkClass;
-    if (this.state.isDark) {
-      darkClass = 'black-side';
-    }
+  private readonly curMin: number;
+
+  private readonly curMax: number;
+
+  private readonly fiveMin: number;
+
+  private diff: number;
+
+  public render() {
+    const darkClass = cn({
+      [styles.blackSide]: this.state.isDark
+    });
     return (
       <div className={darkClass}>
         <Header searchLetters={this.searchLetters} isDark={this.state.isDark} />
