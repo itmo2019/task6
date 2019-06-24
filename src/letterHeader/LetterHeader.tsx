@@ -1,6 +1,6 @@
 import React, { Component, RefObject } from 'react';
 import cn from 'classnames';
-import styles from './Letter.module.css';
+import styles from '../letter/Letter.module.css';
 import stylesHead from './LetterHeader.module.css';
 
 interface IProps {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import cn from 'classnames';
-import { Article } from './Article';
-import { Letter } from './Letter';
-import { LetterHeader } from './LetterHeader';
-import { ILetter } from './ILetter';
-import styles from './Letter.module.css';
+import { Article } from '../article/Article';
+import { Letter } from '../letter/Letter';
+import { LetterHeader } from '../letterHeader/LetterHeader';
+import { ILetter } from '../letter/ILetter';
+import styles from '../letter/Letter.module.css';
 
 interface IProps {
   isDark: boolean;

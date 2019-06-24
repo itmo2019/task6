@@ -3,8 +3,8 @@ import cn from 'classnames';
 
 import stylesMain from '../main/Main.module.css';
 import styles from './Header.module.css';
-import logo from '../../sourse/YandexMail.png';
-import darkLogo from '../../sourse/YandexMail-dark.png';
+import logo from '../sourse/YandexMail.png';
+import darkLogo from '../sourse/YandexMail-dark.png';
 
 interface IProps {
   searchLetters: (a: string) => void;

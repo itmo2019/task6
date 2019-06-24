@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import cn from 'classnames';
 import { genLetterText, getRandomFromRange } from '../functions/Functions';
 import { Header } from '../header/Header';
-import { Menu } from './menu/Menu';
-import { LettersList } from './window-letters/LettersList';
-import { ILetter } from './window-letters/ILetter';
-import cn from 'classnames';
+import { Menu } from '../menu/Menu';
+import { LettersList } from '../lettersList/LettersList';
+import { ILetter } from '../letter/ILetter';
 import styles from './Main.module.css';
 
 interface IState {
