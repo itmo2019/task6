@@ -7,7 +7,6 @@
   position: absolute;
   top: 7px;
   right: 7px;
-
   margin: 5px;
   font-size: 25px;
 }
@@ -17,4 +16,8 @@
   font-family: 'HelveticaNeue', serif;
   font-size: 15px;
   white-space: normal;
+}
+
+.night {
+  background-color: #424242;
 }

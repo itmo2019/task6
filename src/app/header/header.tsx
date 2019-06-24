@@ -1,10 +1,12 @@
 import React, { Component, useContext } from 'react';
 
 import styles from './header.module.css';
-import yandexLogo from './Yandex.png';
-import nightMode from './Night.png';
+import yandexLogoLight from './Yandex.png';
+import nightModeTheme from './sun.png';
+import lightModeTheme from './moon.png';
+import yandexLogoNight from './logo-dark.png'
 import { Menu } from '../menu/menu';
-import { ThemeContext } from '../theme-context';
+import { ThemeContext, Theme } from '../theme-context';
 
 interface IHeaderProps {
   changeMode: () => void
@@ -17,31 +19,34 @@ export class Header extends Component<IHeaderProps> {
   }
 
   changeMode() {
-    // console.log("header", this);
     this.props.changeMode();
   }
 
   render() {
-    let theme = this.context
-    console.log(theme)
+    let theme = this.context;
+    let fl = false;
+    if (theme === Theme.night) {
+      fl = true;
+    }
     return (
-    <header className={styles.header}>
-      <Menu />
-      <img
-        className={styles['header__pic-yandex']}
-        src={yandexLogo}
-        alt="Яндекс Почта"
-        height="31px"
-      />
-      <input className={styles.header__search} type="text" placeholder="Поиск" />
-      <div className={styles.header__close}>×</div>
-      <img
-        className={styles['header__mode-night']}
-        src={nightMode}
-        alt="Ночной режим"
-        height="30px"
-        onClick={this.changeMode}
-      />
+      <header className={styles.header}>
+        <Menu />
+        <img
+          className={styles['header__pic-yandex']}
+          src={fl ? yandexLogoNight : yandexLogoLight}
+          alt="Яндекс Почта"
+          height="31px"
+          width="162px"
+        />
+        <input className={styles.header__search} type="text" placeholder="Поиск" />
+        <div className={styles.header__close}>×</div>
+        <img
+          className={styles['header__mode-night']}
+          src={fl ? nightModeTheme : lightModeTheme}
+          alt="Ночной режим"
+          height="35px"
+          onClick={this.changeMode}
+        />
     </header>
     );
   }

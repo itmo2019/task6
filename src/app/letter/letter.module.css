@@ -4,6 +4,11 @@
   font-size: 13px;
 }
 
+.night {
+  border-bottom: solid 1px #222;
+  color: rgb(221, 210, 210);
+}
+
 .letter__checkbox {
   display: inline-block;
   width: 16px;
@@ -88,7 +93,6 @@
 .letter__mail-opened {
   position: absolute;
   z-index: 1;
-
   display: none;
   width: 100%;
   box-sizing: border-box;

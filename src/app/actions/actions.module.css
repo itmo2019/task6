@@ -14,7 +14,6 @@
   width: 147px;
   height: 32px;
   box-sizing: border-box;
-
   border-width: 0;
   background-color: #6287bd;
   border-radius: 3px;
@@ -27,6 +26,11 @@
   letter-spacing: normal;
   line-height: normal;
   vertical-align: top;
+}
+
+.actions__button-write_night {
+  background-color: rgb(53, 39, 39) !important;
+  color: rgb(241, 212, 212)  !important;
 }
 
 .actions__msgs-income {
@@ -52,7 +56,6 @@
   box-sizing: border-box;
   padding-top: 4px;
   padding-left: 10px;
-
   border: 0;
   color: #707070;
   text-overflow: ellipsis;
@@ -60,4 +63,8 @@
 
 .actions__not-writing:hover {
   background-color: #cdd6e4;
+}
+
+.actions__not-writing_night:hover {
+  background-color: rgb(66, 41, 41);
 }

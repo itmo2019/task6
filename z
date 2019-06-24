@@ -1,0 +1,37 @@
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   .eslintrc.js
+	modified:   .prettierrc.json
+	modified:   README.md
+	modified:   now.json
+	modified:   package-lock.json
+	deleted:    package.json
+	modified:   src/app/actions/actions.tsx
+	modified:   src/app/app.jsx
+	modified:   src/app/app.test.jsx
+	modified:   src/app/app.tsx
+	modified:   src/app/can-do/can-do.module.css
+	modified:   src/app/css/animation.module.css
+	modified:   src/app/fonts/fonts.module.css
+	modified:   src/app/footer/footer.module.css
+	modified:   src/app/genLetter.jsx
+	modified:   src/app/header/header.tsx
+	modified:   src/app/index.js
+	modified:   src/app/letter/mail-opened.module.css
+	modified:   src/app/menu/menu.tsx
+	modified:   src/app/theme-context.tsx
+	modified:   src/index.jsx
+	modified:   src/react-app-env.d.ts
+	modified:   tsconfig.json
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	z
+
+no changes added to commit (use "git add" and/or "git commit -a")

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { ThemeContext, Theme } from '../theme-context';
 
 import styles from './can-do.module.css';
 
@@ -24,8 +25,13 @@ export class CanDo extends Component<ICanDoProps> {
   }
 
   render() {
+    let theme = this.context;
+    let fl = false;
+    if (theme === Theme.night) {
+      fl = true;
+    }
     return (
-      <ul className={classNames(`block-inner__can-do`, styles['can-do'])}>
+      <ul className={classNames(`block-inner__can-do`, styles['can-do'], fl ? styles.night : '')}>
         <input type="checkbox" id={styles['can-do__highlight']} onClick={this.selectAll} />
         <li className={styles['can-do__resend']}>
           <a href="." className={styles['can-do__links']}>
@@ -55,3 +61,5 @@ export class CanDo extends Component<ICanDoProps> {
     );
   }
 }
+
+CanDo.contextType = ThemeContext;

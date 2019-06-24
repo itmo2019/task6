@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import letter from './letter.module.css';
 import opened from './mail-opened.module.css';
 import animation from '../css/animation.module.css';
+import { ThemeContext, Theme } from '../theme-context';
 
 interface ILetterProps {
   sender: string;
@@ -93,11 +94,17 @@ export class Letter extends Component<ILetterProps, ILetterState> {
   }
 
   render() {
+    let theme = this.context;
+    let fl = false;
+    if (theme === Theme.night) {
+      fl = true;
+    }
     return (
       <label>
         <div
           className={classNames(
-            letter.letters__Letter,
+            fl ? letter.night : '',
+            letter.letters__letter,
             letter.letter,
             animation['msg-adding-start'],
             this.props.displayed.has(this.id) ? '' : 'hidden',
@@ -108,7 +115,7 @@ export class Letter extends Component<ILetterProps, ILetterState> {
         >
           <input className={letter.letter__choose} type="checkbox" onClick={this.openLetter} />
           <div
-            className={classNames(letter['letter__mail-opened'], opened.OpenedMail)}
+            className={classNames(letter['letter__mail-opened'], fl ? opened.night : '')}
             id={`${this.props.openedId === this.id ? letter.letter__choose : ''}`}
           >
             <label className={opened['mail-opened__close2']} onClick={this.closeLetter}>
@@ -140,3 +147,5 @@ export class Letter extends Component<ILetterProps, ILetterState> {
     );
   }
 }
+
+Letter.contextType = ThemeContext;

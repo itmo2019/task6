@@ -1,10 +1,12 @@
 import React, { Component, Ref } from 'react';
+import classNames from 'classnames';
 
 import { Actions } from '../actions/actions';
 import { CanDo } from '../can-do/can-do';
 import { Footer } from '../footer/footer';
 import { Letter } from '../letter/letter';
 import { GenerateLetter } from '../genLetter';
+import { ThemeContext, Theme } from '../theme-context';
 
 import style from './block-inner.module.css';
 
@@ -167,10 +169,15 @@ export class BlockInner extends Component<{}, IBlockInnerState> {
   }
 
   render() {
+    let theme = this.context
+    let fl = false;
+    if (theme === Theme.night) {
+      fl = true;
+    }
     return (
       <div>
         <Actions addLetter={this.addLetter} />
-        <div className={style['block-inner']}>
+        <div className={classNames(style['block-inner'], fl ? style['night'] : '')}>
           <CanDo selectAll={this.selectAll} deleteLetter={this.deleteLetter} />
           <div className={style['block-inner__letters']}>
             {this.state.letters.map(letter => (
@@ -198,3 +205,5 @@ export class BlockInner extends Component<{}, IBlockInnerState> {
     );
   }
 }
+
+BlockInner.contextType = ThemeContext;

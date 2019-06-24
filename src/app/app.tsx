@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 import { Header } from './header/header';
 import { BlockInner } from './block-inner/block-inner';
 import { Theme, ThemeProvider } from './theme-context'
 
-import './app.css';
+import app from './app.module.css';
 
 interface IAppState {
   theme: Theme
@@ -27,13 +28,16 @@ export class App extends Component<{}, IAppState> {
           ? Theme.light
           : Theme.night
     }));
-    // console.log(this.state);
   }
 
   render() {
+    let fl = false;
+    if (this.state.theme === Theme.night) {
+      fl = true;
+    }
     return (
       <ThemeProvider value={this.state.theme}>
-        <div className="app">
+        <div className={classNames(fl ? app['night'] : app['light'])}>
           <header className="app-header">
             <Header changeMode={this.changeMode} />
             <BlockInner />
