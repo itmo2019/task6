@@ -24,6 +24,7 @@ export class CanDo extends Component<ICanDoProps> {
     this.props.deleteLetter();
   }
 
+
   render() {
     let theme = this.context;
     let fl = false;
@@ -31,7 +32,7 @@ export class CanDo extends Component<ICanDoProps> {
       fl = true;
     }
     return (
-      <ul className={classNames(`block-inner__can-do`, styles['can-do'], fl ? styles.night : '')}>
+      <ul className={classNames(`window__can-do`, styles['can-do'], fl ? styles.night : '')}>
         <input type="checkbox" id={styles['can-do__highlight']} onClick={this.selectAll} />
         <li className={styles['can-do__resend']}>
           <a href="." className={styles['can-do__links']}>

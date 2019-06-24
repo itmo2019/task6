@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import classNames from 'classnames';
 
 import styles from './footer.module.css';
-import innerBlock from '../block-inner/block-inner.module.css';
+import window from '../window/window.module.css';
 import { ThemeContext, Theme } from '../theme-context';
 
 export function Footer() {
@@ -13,9 +13,9 @@ export function Footer() {
   }
   return (
     <footer className={classNames(
-      innerBlock['block-inner__footer'],
+      window['window__footer'],
       `footer`,
-      fl ? innerBlock['block-inner__footer-night'] : '')}>
+      fl ? window['window__footer-night'] : '')}>
       <a href="." className={styles.footer__links}>
         Помощь и обратная связь
       </a>

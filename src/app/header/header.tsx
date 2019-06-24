@@ -9,10 +9,12 @@ import { Menu } from '../menu/menu';
 import { ThemeContext, Theme } from '../theme-context';
 
 interface IHeaderProps {
-  changeMode: () => void
+  changeMode: () => void,
+  changeToFilterText: (toFilterText: string) => void
 }
 
 export class Header extends Component<IHeaderProps> {
+
   constructor(props: IHeaderProps) {
     super(props);
     this.changeMode = this.changeMode.bind(this);
@@ -38,7 +40,12 @@ export class Header extends Component<IHeaderProps> {
           height="31px"
           width="162px"
         />
-        <input className={styles.header__search} type="text" placeholder="Поиск" />
+        <input
+          className={styles.header__search}
+          type="text"
+          placeholder="Поиск"
+          onChange={event => this.props.changeToFilterText(event.target.value)}
+        />
         <div className={styles.header__close}>×</div>
         <img
           className={styles['header__mode-night']}

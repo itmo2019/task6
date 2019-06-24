@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 
 import { Header } from './header/header';
-import { BlockInner } from './block-inner/block-inner';
+import { Window } from './window/window';
 import { Theme, ThemeProvider } from './theme-context'
 
 import app from './app.module.css';
 
 interface IAppState {
-  theme: Theme
+  theme: Theme,
+  toFilterText: string
 }
 
 export class App extends Component<{}, IAppState> {
@@ -16,9 +17,11 @@ export class App extends Component<{}, IAppState> {
   constructor(props: IAppState) {
     super(props);
     this.state = {
-      theme: Theme.light
+      theme: Theme.light,
+      toFilterText: ''
     }
     this.changeMode = this.changeMode.bind(this);
+    this.changeToFilterText = this.changeToFilterText.bind(this);
   }
 
   changeMode() {
@@ -30,6 +33,12 @@ export class App extends Component<{}, IAppState> {
     }));
   }
 
+  changeToFilterText(toFilterText: string) {
+    this.setState(() => ({
+      toFilterText: toFilterText
+    }))
+  }
+
   render() {
     let fl = false;
     if (this.state.theme === Theme.night) {
@@ -39,8 +48,8 @@ export class App extends Component<{}, IAppState> {
       <ThemeProvider value={this.state.theme}>
         <div className={classNames(fl ? app['night'] : app['light'])}>
           <header className="app-header">
-            <Header changeMode={this.changeMode} />
-            <BlockInner />
+            <Header changeMode={this.changeMode} changeToFilterText={this.changeToFilterText} />
+            <Window toFilterText={this.state.toFilterText}/>
           </header>
         </div>
       </ThemeProvider>
