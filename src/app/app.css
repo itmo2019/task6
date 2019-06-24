@@ -1,27 +1,39 @@
-.app {
-  text-align: center;
+@import url(./fonts/fonts.module.css);
+@import url(./css/animation.module.css);
+@import url(./css/common-styles.module.css);
+
+body {
+  min-width: 800px;
+  margin: 0;
+  background-color: #e5eaf0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* .app {
+    text-align: center;
 }
 
 .app-header {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-  color: #fff;
-  font-size: calc(10px + 2vmin);
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #282c34;
+    color: #fff;
+    font-size: calc(10px + 2vmin);
 }
 
 .app-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes app-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+} */

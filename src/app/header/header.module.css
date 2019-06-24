@@ -1,0 +1,39 @@
+.header {
+  margin-top: 11px;
+}
+
+.header__pic-yandex {
+  box-sizing: border-box;
+  margin-top: 1px;
+  margin-left: 15px;
+  vertical-align: top;
+}
+
+.header__mode-night {
+  display: inline-block;
+  margin-left: calc(100% - 720px);
+  vertical-align: top;
+}
+
+.header__search {
+  display: inline-block;
+  width: 301px;
+  height: 32px;
+  box-sizing: border-box;
+  padding-left: 16px;
+  margin-left: 114px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  font-family: 'YSText', serif;
+  font-size: 15px;
+  line-height: 2.13;
+  opacity: 0.5;
+  vertical-align: top;
+}
+
+.header__close {
+  position: absolute;
+  top: 15px;
+  left: 600px;
+  color: #555;
+  font-size: 20px;
+}

@@ -1,0 +1,63 @@
+.actions {
+  display: inline-block;
+  box-sizing: border-box;
+  margin-top: 13px;
+  vertical-align: top;
+}
+
+.actions > ul {
+  display: inline-block;
+  padding-inline-start: 22px;
+}
+
+#actions__button-write {
+  width: 147px;
+  height: 32px;
+  box-sizing: border-box;
+
+  border-width: 0;
+  background-color: #6287bd;
+  border-radius: 3px;
+  color: white;
+  font-family: 'HelveticaNeue', serif;
+  font-size: 12px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: normal;
+  vertical-align: top;
+}
+
+.actions__msgs-income {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.actions__acts {
+  color: #707070;
+  font-family: 'HelveticaNeue', serif;
+  font-size: 11px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: normal;
+}
+
+.actions__not-writing {
+  overflow: hidden;
+  width: 147px;
+  min-height: 22px;
+  box-sizing: border-box;
+  padding-top: 4px;
+  padding-left: 10px;
+
+  border: 0;
+  color: #707070;
+  text-overflow: ellipsis;
+}
+
+.actions__not-writing:hover {
+  background-color: #cdd6e4;
+}
