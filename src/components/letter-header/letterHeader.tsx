@@ -4,13 +4,14 @@ import styles from './LetterHeader.module.css';
 import utilCss from '../../util/UtilCss.module.css';
 import { FancyCheckbox } from '../fancy-checkbox';
 import { ActionButton } from '../action-button';
-import classNames from 'classnames'
+import classNames from 'classnames';
 
 interface ILetterHeader {
   letterOpened: boolean;
   masterChecked: boolean;
   toggleMasterSelection: () => void;
   markDeleteSelectedLetters: () => void;
+  markRestoreSelectedLetters: () => void;
 }
 
 export class LetterHeader extends Component<ILetterHeader, {}> {
@@ -32,6 +33,11 @@ export class LetterHeader extends Component<ILetterHeader, {}> {
         />
         <ActionButton name="Это спам!" disabled={disabled} />
         <ActionButton name="Прочитано" disabled={disabled} />
+        <ActionButton
+          name="Восстановить"
+          disabled={disabled}
+          onClick={this.props.markRestoreSelectedLetters}
+        />
       </header>
     );
   }

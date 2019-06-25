@@ -80,9 +80,13 @@ export class LetterData {
 
   public key: number;
 
+  public isRestoring: boolean;
+
+  public originalDir: string;
+
   public static nextId = 0;
 
-  public constructor(sender: string, text: string, day: number, month: string) {
+  public constructor(sender: string, text: string, day: number, month: string, originalDir: string) {
     this.sender = sender;
     this.text = text;
     this.day = day;
@@ -90,8 +94,10 @@ export class LetterData {
     this.checked = false;
     this.visible = true;
     this.shown = false;
+    this.isRestoring = false;
     this.id = LetterData.nextId++;
     this.key = this.id;
+    this.originalDir = originalDir;
     console.log(this.id);
   }
 }
@@ -119,7 +125,7 @@ function randomDate(): [number, string] {
   return [Math.floor(Math.random() * 28) + 1, months[Math.floor(Math.random() * 12)]];
 }
 
-export function randomLetterData(): LetterData {
+export function randomLetterData(originalDir: string): LetterData {
   const [day, month] = randomDate();
-  return new LetterData(randomSender(), randomSentence(), day, month);
+  return new LetterData(randomSender(), randomSentence(), day, month, originalDir);
 }

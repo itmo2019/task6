@@ -14,6 +14,7 @@ interface IContentProps {
   masterChecked: boolean;
   toggleMasterSelection: () => void;
   markDeleteSelectedLetters: () => void;
+  markRestoreSelectedLetters: () => void;
   selectLetter: (a: number) => void;
   removeLetter: (a: number) => void;
   letterShown: (a: number) => void;
@@ -72,6 +73,7 @@ export class Content extends Component<IContentProps, IContentState> {
                 masterChecked={this.props.masterChecked}
                 toggleMasterSelection={this.props.toggleMasterSelection}
                 markDeleteSelectedLetters={this.props.markDeleteSelectedLetters}
+                markRestoreSelectedLetters={this.props.markRestoreSelectedLetters}
               />
               <div className={utilCss.separator} />
               <LetterList
