@@ -1,0 +1,58 @@
+.header {
+  display: inline-block;
+  width: 100%;
+  min-width: 800px;
+  height: 5%;
+  margin-bottom: 12px;
+}
+
+.header__ypLogo {
+  display: inline-block;
+  width: 200px;
+  margin-left: 11px;
+  font-size: 170%;
+  vertical-align: text-bottom;
+}
+
+.header__burgerMenu {
+  display: inline-block;
+  margin-top: 7px;
+}
+
+.header__line {
+  width: 20px;
+  height: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #000000;
+}
+
+.header__line_dark {
+  width: 20px;
+  height: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+.header__button {
+  width: 80px;
+  height: 35px;
+  margin-bottom: 8px;
+
+  border: #6287bd;
+  background-color: #6287bd;
+  border-radius: 3px;
+  float: right;
+}
+
+.header__textWrite {
+  display: inline-block;
+  width: 56px;
+  height: 15px;
+  margin-top: 7px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-family: HelveticaNeue;
+  font-size: 12px;
+  vertical-align: center;
+}

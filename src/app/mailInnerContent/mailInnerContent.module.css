@@ -1,0 +1,7 @@
+.mailInnerContent {
+  display: inline-block;
+  width: 100%;
+  min-width: 800px;
+  height: 90%;
+  padding-top: 13px;
+}

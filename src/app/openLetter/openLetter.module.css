@@ -1,0 +1,48 @@
+.openLetter__close {
+  margin-top: 10px;
+  margin-right: 10px;
+  float: right;
+}
+
+.allLetters {
+  display: inline-block;
+  width: 40%;
+}
+
+.width {
+  width: 60%;
+  float: right;
+}
+
+.openLetter__delLine {
+  text-decoration: none;
+}
+
+.openLetter__cross {
+  width: 15px;
+  height: 15px;
+  margin-top: 20px;
+  margin-right: 10px;
+  float: right;
+  opacity: 0.15;
+}
+
+.openLetter__textLetter {
+  margin: 30px;
+}
+
+.openLetter__cross_dark {
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  margin-right: 10px;
+  background-color: #cccccc;
+  border-radius: 50%;
+  float: right;
+  opacity: 0.15;
+}
+
+.openLetter__textLetter_dark {
+  margin: 30px;
+  color: #cccccc;
+}
