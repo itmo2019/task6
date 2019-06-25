@@ -5,11 +5,13 @@ import styles from './letterState.module.css';
 import { OpenLetter } from '../openLetter';
 import { AllLetters } from '../allLetters';
 import { ILetter } from '../letterTypes/letterTypes';
+import cross from '../images/cross.png';
 
 interface IProps {
+  create: boolean;
   deleteChosenLetter: (id: number) => void;
   visibleLetters: ILetter[];
-  markedLetters: {[id: string]: boolean};
+  markedLetters: { [id: string]: boolean };
   switchLetterCheckbox: (id: number) => void;
   isDark: boolean;
 }
@@ -30,7 +32,7 @@ export class LetterState extends React.Component {
     this.openLetter = this.openLetter.bind(this);
     this.closeLetter = this.closeLetter.bind(this);
   }
-  
+
   public readonly props: IProps;
   public readonly state: IState;
 
@@ -48,13 +50,31 @@ export class LetterState extends React.Component {
   }
 
   render() {
-    return this.state.openLetter ? (
+    return this.props.create ? (
       <div className={classnames(styles.letterState, styles.letterState_show)}>
-        <OpenLetter contentLetter={this.state.contentLetter} closeLetter={this.closeLetter} isDark={this.props.isDark}/>
+        <div className={styles.search}>
+          <input className={styles.search__textSearch} type="text" placeholder="Ввведите тему письма"/>
+        </div>
+        <div className={styles.search}>
+          <input className={styles.search__textSearch} type="text" placeholder="Ввведите текст письма"/>
+        </div>
+      </div>
+    ) : (this.state.openLetter ? (
+      <div className={classnames(styles.letterState, styles.letterState_show)}>
+        <OpenLetter
+          deleteChosenLetter={this.props.deleteChosenLetter}
+          switchLetterCheckbox={this.props.switchLetterCheckbox}
+          visibleLetters={this.props.visibleLetters}
+          openLetter={this.openLetter}
+          markedLetters={this.props.markedLetters}
+          contentLetter={this.state.contentLetter}
+          closeLetter={this.closeLetter}
+          isDark={this.props.isDark}/>
       </div>
     ) : (
       <div className={classnames(styles.letterState, styles.letterState_show)}>
         <AllLetters
+          create={this.props.create}
           isDark={this.props.isDark}
           deleteChosenLetter={this.props.deleteChosenLetter}
           switchLetterCheckbox={this.props.switchLetterCheckbox}
@@ -63,6 +83,6 @@ export class LetterState extends React.Component {
           markedLetters={this.props.markedLetters}
         />
       </div>
-    );
+    ));
   }
 }

@@ -1,6 +1,6 @@
 import *as React from 'react';
 
-import styles from './letter.module.css';
+import styles from './letterSmall.module.css';
 import classnames from 'classnames';
 
 interface IProps {
@@ -17,7 +17,7 @@ interface IProps {
   date: string;
 }
 
-export class Letter extends React.Component {
+export class LetterSmall extends React.Component {
   constructor(props: IProps) {
     super(props);
     this.props = props;

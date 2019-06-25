@@ -13,6 +13,7 @@ import { ILetter } from '../letterTypes/letterTypes';
 import { Header } from '../header/header';
 
 interface IState {
+  create: boolean;
   isClearInput: boolean;
   counter: number;
   letters: ILetter[];
@@ -45,6 +46,7 @@ export class MailInnerContent extends React.Component {
     super(props);
     this.props = props;
     this.state = {
+      create: false,
       isClearInput: false,
       text: '',
       counter: 0,
@@ -60,6 +62,16 @@ export class MailInnerContent extends React.Component {
     this.chooseAllLetters = this.chooseAllLetters.bind(this);
     this.newMail = this.newMail.bind(this);
     this.GenerateNewLetter();
+    this.createNewLetter = this.createNewLetter.bind(this);
+  }
+
+  createNewLetter() {
+    console.log(this.state.create);
+    this.setState((state: IState) => {
+      return {
+        create: !state.create
+      };
+    });
   }
 
   search(text: string) {
@@ -217,6 +229,8 @@ export class MailInnerContent extends React.Component {
         <Header isClearInput={this.state.isClearInput} search={this.search} isDark={this.props.isDark} changeTheme={this.props.changeTheme}/>
         <LeftMenu newMail={this.newMail}/>
         <Content
+          create={this.state.create}
+          createNewLetter={this.createNewLetter}
           isDark={this.props.isDark}
           deleteChosenLetter={this.deleteChosenLetter}
           markLettersToDelete={this.markLettersToDelete}

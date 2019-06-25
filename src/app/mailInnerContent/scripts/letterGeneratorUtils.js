@@ -81,7 +81,7 @@ export const generateName = () => {
 };
 
 export const generateContent = async () => {
-  const paragraphsCount = generateRandomCount(3, 10);
+  const paragraphsCount = generateRandomCount(1, 2);
 
   const text = await fetch(
     `https://baconipsum.com/api/?type=meat&formaat=json&paras=${paragraphsCount}`

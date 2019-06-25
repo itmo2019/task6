@@ -6,6 +6,7 @@ import classnames from 'classnames';
 interface IProps {
   selectAll: boolean;
   chooseAllLetters: () => void;
+  createNewLetter: () => void;
   markLettersToDelete: () => void;
   isDark: boolean;
 }
@@ -39,6 +40,15 @@ export class LettersMenu extends React.Component {
             onClick={this.props.markLettersToDelete}
           >
             Удалить
+          </button>
+        </li>
+
+        <li className={styles.lettersMenu__horizontalPosition}>
+          <button
+            className={classnames(styles.lettersMenu__button__textTitle, styles.lettersMenu__button__delLine)}
+            onClick={this.props.createNewLetter}
+          >
+            Написать новое
           </button>
         </li>
 

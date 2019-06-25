@@ -7,6 +7,7 @@ import { Footer } from '../footer';
 import { ILetter } from '../letterTypes/letterTypes';
 
 interface IProps {
+  create: boolean;
   selectAll: boolean;
   chooseAllLetters: () => void;
   markLettersToDelete: () => void;
@@ -15,6 +16,7 @@ interface IProps {
   markedLetters: {[id: string]: boolean};
   switchLetterCheckbox: (id: number) => void;
   isDark: boolean;
+  createNewLetter: () => void;
 }
 
 export class Content extends React.Component {
@@ -28,12 +30,14 @@ export class Content extends React.Component {
     return (
       <div className={this.props.isDark ? styles.content_dark : styles.content}>
         <LettersMenu
+          createNewLetter={this.props.createNewLetter}
           isDark={this.props.isDark}
           markLettersToDelete={this.props.markLettersToDelete}
           selectAll={this.props.selectAll}
           chooseAllLetters={this.props.chooseAllLetters}
         />
         <LetterState
+          create={this.props.create}
           isDark={this.props.isDark}
           deleteChosenLetter={this.props.deleteChosenLetter}
           switchLetterCheckbox={this.props.switchLetterCheckbox}

@@ -5,6 +5,7 @@ import { Letter } from '../letter';
 import {ILetter} from '../letterTypes/letterTypes';
 
 interface IProps {
+  create: boolean;
   visibleLetters: ILetter[];
   markedLetters: {[id: string]: boolean};
   switchLetterCheckbox: (id: number) => void;
