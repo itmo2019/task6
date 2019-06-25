@@ -1,0 +1,128 @@
+.mailbox__mail {
+  width: 100%;
+  height: 40px;
+
+  border-bottom: 1px solid #e2e2e2;
+  color: #cccccc;
+  font-size: 13px;
+  line-height: 40px;
+  overflow-y: hidden;
+}
+
+.mailbox__mail-element {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.checkbox {
+  display: inline-block;
+  margin: 0px 10px 0px 20px;
+  vertical-align: middle;
+}
+
+.checkbox__input {
+  position: relative;
+
+  display: none;
+  float: left;
+}
+
+.checkbox__span {
+  width: 16px;
+  height: 16px;
+
+  border: 1px solid;
+  border-radius: 3px;
+  float: left;
+}
+
+.checkbox__input:checked + .checkbox__span:before {
+  content: '✓';
+  float: left;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 16px;
+}
+
+.mail__pic {
+  margin-right: 10px;
+}
+
+.pic__img {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.mail__author {
+  width: 155px;
+  color: black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mail__title {
+  width: calc(100% - 355px);
+  box-sizing: border-box;
+  padding-left: 10px;
+  color: black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mail__new {
+  font-weight: 700;
+}
+
+.mail__dot {
+  width: 10px;
+  height: 10px;
+  background-color: #6287bd;
+  border-radius: 50%;
+  visibility: hidden;
+}
+
+.mail__new .mail__dot {
+  visibility: visible;
+}
+
+.mail__time {
+  width: 50px;
+  margin-right: 20px;
+  color: #969799;
+  float: right;
+  font-weight: 500;
+  text-align: right;
+}
+
+.mailbox__mail[data-state='collapsed'] {
+  height: 0px;
+
+  border: none;
+  transition: height 0.4s;
+}
+
+.mailbox__mail[data-state='init'] {
+  height: 0px;
+
+  border-width: 0px;
+
+  animation: appearance 0.4s 1 ease-out forwards;
+}
+
+@keyframes appearance {
+  from {
+    height: 0px;
+    background-color: #6287bd;
+  }
+  to {
+    height: 40px;
+    background-color: white;
+  }
+}
+
+.mailbox__mail[data-state='showed'] {
+  height: 40px;
+  transition: height 0.4s;
+}
