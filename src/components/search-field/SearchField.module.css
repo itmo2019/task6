@@ -1,0 +1,39 @@
+.searchField {
+  display: inline-block;
+  padding-right: 10px;
+  padding-left: 16px;
+  margin-top: 1px;
+  margin-left: 124px;
+
+  border: thin solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
+  outline: none;
+  vertical-align: top;
+}
+
+.input {
+  width: 260px;
+  height: 31px;
+
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 15px;
+  opacity: 0.5;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #000;
+}
+
+.input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.closeImage {
+  height: 15px;
+  cursor: pointer;
+  opacity: 0.3;
+  vertical-align: middle;
+}

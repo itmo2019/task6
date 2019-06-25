@@ -1,0 +1,21 @@
+.disabled {
+  pointer-events: none;
+}
+
+.disabled:hover {
+  color: #ccc;
+}
+
+.actionButton {
+  display: inline-block;
+  height: 16px;
+  margin-right: 26px;
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 500;
+  vertical-align: top;
+}
+
+.actionButton:hover {
+  color: #555;
+}

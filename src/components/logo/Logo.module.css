@@ -1,0 +1,14 @@
+.logo {
+  display: inline-block;
+  margin-left: 20px;
+  color: #010101;
+}
+
+.img {
+  width: 153px;
+  height: 31px;
+}
+
+.img.dark {
+  filter: invert(1)
+}

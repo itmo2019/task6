@@ -1,0 +1,11 @@
+.img {
+  width: 31px;
+}
+
+.img.dark {
+  filter: invert(1);
+}
+
+.menuIcon {
+  display: inline-block;
+}
