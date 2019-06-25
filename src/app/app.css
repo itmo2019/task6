@@ -1,27 +1,18 @@
-.app {
-  text-align: center;
+body {
+  height: 600px;
+  background-color: #e5eaf0;
+  margin: 0;
+  /*background-color: black;*/
 }
 
-.app-header {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-  color: #fff;
-  font-size: calc(10px + 2vmin);
-}
-
-.app-link {
-  color: #61dafb;
-}
-
-@keyframes app-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/*@font-face {*/
+/*  font-family: 'HelveticaNeueCyr-Medium';*/
+/*  src: url('./src/sourse/fonts/HelveticaNeueCyr-Medium.eot');*/
+/*  src: url('sourse/fonts/HelveticaNeueCyr-Medium.eot?#iefix') format('embedded-opentype'),*/
+/*  url('./sourse/fonts/HelveticaNeueCyr-Medium.svg#HelveticaNeueCyr-Medium') format('svg'),*/
+/*  url('./sourse/fonts/HelveticaNeueCyr-Medium.ttf') format('truetype'),*/
+/*  url('./sourse/fonts/HelveticaNeueCyr-Medium.woff') format('woff'),*/
+/*  url('./sourse/fonts/HelveticaNeueCyr-Medium.woff2') format('woff2');*/
+/*  font-weight: normal;*/
+/*  font-style: normal;*/
+/*}*/
