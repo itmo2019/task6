@@ -19,15 +19,15 @@ export class Mail {
   checked: boolean;
   deleted: boolean;
 
-  constructor(img: string, author: string, title: string, date: string, text: string, old: boolean, state: string = 'hidden') {
+  constructor({img, author, title, date, text, old, state = 'hidden'}: {img: string, author: string, title: string, date: string, text: string, old: boolean, state?: string}) {
     this.img = img;
     this.author = author;
     this.title = title;
     this.date = date;
     this.text = text;
     this.old = old;
-    this.id = mailCnt++;
     this.state = state;
+    this.id = mailCnt++;
     this.checked = false;
     this.deleted = false;
   }
@@ -42,12 +42,12 @@ export class Mail {
 }
 
 export const PRELOADED_MAILS = [
-  new Mail(
-    'images/owl-face.jpg',
-    'Сова',
-    'От совы',
-    'Mar 9',
-    `<h1>Как падают кошки</h1>
+  new Mail({
+    img: 'images/owl-face.jpg',
+    author: 'Сова',
+    title: 'От совы',
+    date: 'Mar 9',
+    text: `<h1>Как падают кошки</h1>
       <article>
           <section>
               Большинство представителей семейства кошачьих имеет склонность к обзору местности с высоты. Крупные лесные кошки-рыси вообше значительную часть времени проводят на деревьях, находясь в засаде или погоне за добычей. А львы и леопарды в саваннах Африки приспособились в жаркое время отдыхать на деревьях, распластавшись на ветках и опустив вниз лапы. Случается, однако, что кошки не удерживаются на высоте и падают. Но и в падении у них есть свои особенности. Многим приходилось наблюдать, как падает обыкновенная кошка, сорвавшись с карниза дома, с дерева или с забора. Сначала она падает к земле головой, спиной или боком, но затем, сделав резкий поворот в воздухе, вывертывается и становится на лапки. И так всегда. Как бы ни падала кошка, приземляется она всегда на лапки и тотчас же может бежать дальше. Такое мгновенное выравнивание положения тела у кошек обеспечивается действием ее вестибулярного аппарата.
@@ -61,27 +61,27 @@ export const PRELOADED_MAILS = [
               </section>
           <p>Текст статьи взят с сайта <a href="https://petsi.net/articles/cats/how-cat-comes-down">petsi.net</a></p>
       </article>`,
-    false,
-    'showed'
-  ),
-  new Mail(
-    'images/cat-face.png',
-    'Кот',
-    'Старое сообщение',
-    'Feb 23',
-    'Какое-то старое сообщение',
-    true,
-    'showed'
-  ),
-  new Mail(
-    'images/spam.png',
-    'Неспамнеспамнеспамнеспам',
-    'Легкий способ зарабатывать 10000000000 в секунду, нужно всего-лишь...',
-    'Jan 1',
-    '[Читать продолжение в источнике]',
-    false,
-    'showed'
-  )
+    old: false,
+    state: 'showed'
+  }),
+  new Mail({
+    img: 'images/cat-face.png',
+    author: 'Кот',
+    title: 'Старое сообщение',
+    date: 'Feb 23',
+    text: 'Какое-то старое сообщение',
+    old: true,
+    state: 'showed'
+  }),
+  new Mail({
+    img: 'images/spam.png',
+    author: 'Неспамнеспамнеспамнеспам',
+    title: 'Легкий способ зарабатывать 10000000000 в секунду, нужно всего-лишь...',
+    date: 'Jan 1',
+    text: '[Читать продолжение в источнике]',
+    old: false,
+    state: 'showed'
+  }),
 ];
 
 export const CAT_NAMES = [

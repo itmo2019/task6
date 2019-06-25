@@ -11,7 +11,7 @@ interface MailProps {
   onAnimationEnd: () => void;
 }
 
-export class Mail extends Component<MailProps, any> {
+export class Mail extends Component<MailProps> {
   trigger: React.RefObject<HTMLLabelElement>;
 
   constructor(props: Readonly<MailProps>) {
@@ -49,6 +49,7 @@ export class Mail extends Component<MailProps, any> {
               type="checkbox"
               className={styles.checkbox__input}
               id={checkboxId}
+              checked={mail.checked}
               onChange={event => mail.setCheck(event.target.checked)}
             />
             <span className={styles.checkbox__span} />

@@ -53,7 +53,14 @@ function getText() {
 }
 
 function generateMail() {
-  return new Mail(getImg(), getAuthor(), getTitle(), getDate(), getText(), false);
+  return new Mail({
+    img: getImg(),
+    author: getAuthor(),
+    title: getTitle(),
+    date: getDate(),
+    text: getText(),
+    old: false,
+  });
 }
 
 export { generateMail, getCurrentTime, getRandomInt };

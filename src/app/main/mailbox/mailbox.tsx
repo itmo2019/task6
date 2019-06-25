@@ -19,7 +19,7 @@ export interface MailBoxState {
   mails: Array<Mail>;
 }
 
-export class MailBox extends Component<any, MailBoxState> {
+export class MailBox extends Component<{}, MailBoxState> {
   // local non-concurrent data
   private previousMailTime: number = 0;
   private penultimateMailTime: number = 0;
@@ -31,6 +31,7 @@ export class MailBox extends Component<any, MailBoxState> {
     this.newMail = this.newMail.bind(this);
     this.autoMails = this.autoMails.bind(this);
     this.deleteSelected = this.deleteSelected.bind(this);
+    this.allCheck = this.allCheck.bind(this);
 
     this.state = {
       currentMail: 0,
@@ -119,6 +120,21 @@ export class MailBox extends Component<any, MailBoxState> {
     });
   }
 
+  allCheck(value: boolean) {
+    this.updateState(prevState => {
+      const { mails, currentMail } = prevState;
+      const newMails = mails.map(mail => {
+        const newMail = mail;
+        newMail.setCheck(value);
+        return newMail;
+      });
+      return {
+        currentMail,
+        mails: this.updateVisibility(newMails)
+      };
+    });
+  }
+
   render() {
     const currentMail = this.state.mails.find(mail => mail.id === this.state.currentMail);
     const mailHTML = currentMail ? currentMail.text : "";
@@ -127,7 +143,7 @@ export class MailBox extends Component<any, MailBoxState> {
       <div className={styles["mailbox"]}>
         <div className={styles["mailbox__header"]}>
           <label className={styles["checkbox"]} htmlFor="checkbox_all">
-            <input type="checkbox" className={styles["checkbox__input"]} id="checkbox_all" />
+            <input type="checkbox" className={styles["checkbox__input"]} id="checkbox_all" onChange={event => this.allCheck(event.target.checked)}/>
             <span className={styles["checkbox__span"]} />
           </label>
           <button className={styles["mailbox__header-element"]} type="button">
