@@ -27,7 +27,7 @@ export class LettersList extends Component<IProps> {
       code = (<Article
           id={this.props.openId.toString()}
           key={this.props.openId.toString()}
-          letterText={this.props.letters[this.props.openId].letterText}
+          letterText={this.props.letters[this.props.letters.length - 1 - this.props.openId].letterText}
           openLetters={this.props.openLetters}
         />
       );

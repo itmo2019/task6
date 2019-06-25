@@ -8,9 +8,9 @@ import { ILetter } from '../letter/ILetter';
 import styles from './Main.module.css';
 
 interface IState {
-  isDark: boolean; // false
+  isDark: boolean;
   letters: ILetter[];
-  openId: number; // -1
+  openId: number;
   template: string;
 }
 
